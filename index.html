@@ -1,1056 +1,597 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ko">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>유지환 — Portfolio</title>
 <meta name="description" content="유지환 — 신입 백엔드 개발자 포트폴리오 (Java · Spring Boot)" />
 
-<!-- ──────────────────────────────────────────────
-  FONTS
-  Display : Clash Display (variable, Fontshare)
-  Body    : Satoshi (Fontshare)
-  Utility : JetBrains Mono (Google)
-─────────────────────────────────────────────── -->
-<link rel="preconnect" href="https://api.fontshare.com" crossorigin>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://api.fontshare.com/v2/css?f[]=clash-display@200,300,400,500,600,700&f[]=satoshi@300,400,500,700&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&family=Nanum+Myeongjo:wght@400;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 
 <style>
-/* ═══════════════════════════════════════════════
-   DESIGN TOKENS
-   Palette family : cool-monochrome + cobalt pop (single accent, locked)
-   Radius rule    : containers 14px / interactive pill / chips pill
-   Type roles     : Clash Display (display) / Satoshi (body) / JetBrains Mono (utility)
-═══════════════════════════════════════════════ */
 :root{
-  --paper:        #F3F5F4;
-  --paper-2:      #EBEEED;
-  --ink:          #12161B;
-  --ink-2:        #4A525C;
-  --ink-3:        #7C8590;
-  --line:         rgba(18,22,27,.12);
-  --line-strong:  rgba(18,22,27,.28);
-  --accent:       #2D5BFF;
-  --accent-ink:   #FFFFFF;
-  --accent-soft:  rgba(45,91,255,.09);
-  --card:         #FFFFFF;
-  --shadow:       0 24px 60px -24px rgba(23,32,46,.18);
+  --bg:        #FBFBFA;
+  --surface:   #FFFFFF;
+  --ink:       #22252A;
+  --ink-2:     #5B6068;
+  --ink-3:     #8A8F97;
+  --line:      #EAEAEA;
+  --line-2:    rgba(0,0,0,.06);
+  --accent:    #1F6C9F;
+  --accent-bg: #E1F3FE;
+  --gold-bg:   #FBF3DB;
+  --gold-ink:  #956400;
+  --green-bg:  #EDF3EC;
+  --green-ink: #346538;
 
-  --font-display: "Clash Display", "Pretendard", sans-serif;
-  --font-body:    "Satoshi", "Pretendard", -apple-system, sans-serif;
-  --font-mono:    "JetBrains Mono", ui-monospace, monospace;
+  --serif: "Newsreader", "Nanum Myeongjo", Georgia, serif;
+  --sans:  -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Malgun Gothic", "Helvetica Neue", Arial, sans-serif;
+  --mono:  "JetBrains Mono", "SF Mono", ui-monospace, monospace;
 
-  --rail-w: 84px;
-  --gutter: clamp(20px, 4.5vw, 72px);
-  --r-card: 14px;
-
-  --ease-out: cubic-bezier(.16,1,.3,1);
+  --maxw: 1080px;
+  --ease: cubic-bezier(.16,1,.3,1);
 }
 
-:root[data-theme="dark"]{
-  --paper:        #0E1114;
-  --paper-2:      #14181D;
-  --ink:          #E9ECEF;
-  --ink-2:        #A6AEB8;
-  --ink-3:        #6C7581;
-  --line:         rgba(233,236,239,.12);
-  --line-strong:  rgba(233,236,239,.3);
-  --accent:       #4D74FF;
-  --accent-ink:   #0B0F1F;
-  --accent-soft:  rgba(77,116,255,.12);
-  --card:         #14181D;
-  --shadow:       0 24px 60px -24px rgba(0,0,0,.55);
-}
-
-/* ── Base ─────────────────────────────────────── */
 *{ margin:0; padding:0; box-sizing:border-box; }
 html{ scroll-behavior:smooth; }
 body{
-  background:var(--paper);
+  background:var(--bg);
   color:var(--ink);
-  font-family:var(--font-body);
+  font-family:var(--sans);
   font-size:16px;
-  line-height:1.65;
+  line-height:1.6;
   -webkit-font-smoothing:antialiased;
-  transition:background .35s ease, color .35s ease;
+  text-rendering:optimizeLegibility;
 }
-::selection{ background:var(--accent); color:var(--accent-ink); }
-img{ display:block; max-width:100%; }
 a{ color:inherit; text-decoration:none; }
-button{ font:inherit; color:inherit; background:none; border:none; cursor:pointer; }
+img{ display:block; max-width:100%; }
+::selection{ background:var(--accent-bg); }
 
-:focus-visible{
-  outline:2px solid var(--accent);
-  outline-offset:3px;
-  border-radius:4px;
+.wrap{ max-width:var(--maxw); margin:0 auto; padding:0 clamp(20px,5vw,40px); }
+
+.mono{
+  font-family:var(--mono); font-size:.72rem;
+  letter-spacing:.08em; text-transform:uppercase; color:var(--ink-3);
 }
 
-.mono{ font-family:var(--font-mono); font-size:.72rem; letter-spacing:.08em; text-transform:uppercase; }
+/* ── NAV ─────────────────────────────────── */
+.nav{
+  position:sticky; top:0; z-index:50;
+  background:rgba(251,251,250,.82);
+  backdrop-filter:saturate(160%) blur(10px);
+  -webkit-backdrop-filter:saturate(160%) blur(10px);
+  border-bottom:1px solid var(--line);
+}
+.nav__inner{
+  max-width:var(--maxw); margin:0 auto;
+  padding:16px clamp(20px,5vw,40px);
+  display:flex; align-items:center; justify-content:space-between;
+}
+.nav__mark{ font-family:var(--serif); font-size:1.3rem; font-weight:600; letter-spacing:-.02em; }
+.nav__links{ display:flex; gap:26px; }
+.nav__links a{
+  font-size:.85rem; color:var(--ink-2);
+  transition:color .2s ease; position:relative;
+}
+.nav__links a:hover{ color:var(--ink); }
+@media (max-width:720px){ .nav__links{ display:none; } }
 
-/* ═══════════════════════════════════════════════
-   LEFT RAIL  (index navigation)
-═══════════════════════════════════════════════ */
-.rail{
-  position:fixed; inset:0 auto 0 0;
-  width:var(--rail-w);
-  border-right:1px solid var(--line);
-  display:flex; flex-direction:column; align-items:center;
-  justify-content:space-between;
-  padding:22px 0;
-  z-index:50;
-  background:color-mix(in srgb, var(--paper) 88%, transparent);
-  backdrop-filter:blur(10px);
-  -webkit-backdrop-filter:blur(10px);
-}
-.rail__mark{
-  font-family:var(--font-display);
-  font-weight:600; font-size:1.15rem; letter-spacing:-.02em;
-  width:44px; height:44px; border-radius:999px;
-  display:grid; place-items:center;
-  border:1px solid var(--line-strong);
-  transition:background .25s ease, color .25s ease, border-color .25s ease;
-}
-.rail__mark:hover{ background:var(--ink); color:var(--paper); border-color:var(--ink); }
-
-.rail__nav{ display:flex; flex-direction:column; gap:26px; }
-.rail__link{
-  writing-mode:vertical-rl;
-  font-family:var(--font-mono);
-  font-size:.66rem; letter-spacing:.22em; text-transform:uppercase;
-  color:var(--ink-3);
-  position:relative;
-  padding:2px 0;
-  transition:color .25s ease;
-}
-.rail__link .idx{ color:var(--accent); margin-bottom:6px; }
-.rail__link:hover,
-.rail__link[aria-current="true"]{ color:var(--ink); }
-.rail__link[aria-current="true"]::before{
-  content:""; position:absolute; left:-14px; top:0; bottom:0; width:2px;
-  background:var(--accent);
-}
-
-.rail__bottom{ display:flex; flex-direction:column; gap:14px; align-items:center; }
-.theme-btn{
-  width:38px; height:38px; border-radius:999px;
-  border:1px solid var(--line-strong);
-  display:grid; place-items:center;
-  transition:transform .2s var(--ease-out), background .25s ease;
-}
-.theme-btn:hover{ background:var(--paper-2); }
-.theme-btn:active{ transform:scale(.92); }
-.theme-btn svg{ width:16px; height:16px; stroke:currentColor; fill:none; stroke-width:1.6; }
-:root[data-theme="dark"] .theme-btn .sun{ display:block; }
-:root[data-theme="dark"] .theme-btn .moon{ display:none; }
-.theme-btn .sun{ display:none; }
-
-/* Mobile top bar variant */
-@media (max-width:860px){
-  .rail{
-    inset:0 0 auto 0; width:100%; height:58px;
-    flex-direction:row; padding:0 18px;
-    border-right:none; border-bottom:1px solid var(--line);
-  }
-  .rail__nav{ flex-direction:row; gap:18px; }
-  .rail__link{ writing-mode:horizontal-tb; }
-  .rail__link .idx{ margin-bottom:0; margin-right:5px; }
-  .rail__link[aria-current="true"]::before{
-    left:0; right:0; top:auto; bottom:-6px; width:auto; height:2px;
-  }
-  .rail__bottom{ flex-direction:row; }
-  .rail__mark{ width:36px; height:36px; font-size:1rem; }
-}
-
-/* ═══════════════════════════════════════════════
-   PAGE FRAME
-═══════════════════════════════════════════════ */
-.page{ margin-left:var(--rail-w); }
-@media (max-width:860px){ .page{ margin-left:0; padding-top:58px; } }
-
-section{ padding:0 var(--gutter); }
-
-/* Section header pattern — index number is a real TOC device */
-.sec-head{
-  display:flex; align-items:baseline; gap:18px;
-  padding:28px 0 22px;
-  border-bottom:1px solid var(--line-strong);
-  margin-bottom:clamp(32px,5vw,64px);
-}
-.sec-head .num{
-  font-family:var(--font-mono); font-size:.75rem;
-  color:var(--accent); letter-spacing:.1em;
-}
+/* ── SECTION SCAFFOLD ─────────────────────── */
+section{ padding:clamp(72px,11vw,140px) 0; }
+.sec-head{ margin-bottom:clamp(36px,5vw,64px); }
+.sec-head .kicker{ display:block; margin-bottom:14px; }
 .sec-head h2{
-  font-family:var(--font-display);
-  font-weight:500; font-size:clamp(1.6rem,3.2vw,2.4rem);
-  letter-spacing:-.02em; line-height:1;
+  font-family:var(--serif); font-weight:500;
+  font-size:clamp(1.9rem,4vw,2.9rem);
+  letter-spacing:-.02em; line-height:1.1;
 }
-.sec-head .hint{
-  margin-left:auto;
-  font-family:var(--font-mono); font-size:.68rem;
-  color:var(--ink-3); letter-spacing:.12em; text-transform:uppercase;
-}
-@media (max-width:640px){ .sec-head .hint{ display:none; } }
+.sec-head p{ color:var(--ink-2); margin-top:12px; max-width:52ch; }
 
-/* Scroll reveal */
-.reveal{ opacity:0; transform:translateY(26px); }
-.reveal.in{
-  opacity:1; transform:none;
-  transition:opacity .7s var(--ease-out), transform .7s var(--ease-out);
-}
-@media (prefers-reduced-motion: reduce){
-  .reveal{ opacity:1; transform:none; }
-  html{ scroll-behavior:auto; }
-}
+/* Reveal */
+.reveal{ opacity:0; transform:translateY(12px); }
+.reveal.in{ opacity:1; transform:none; transition:opacity .6s var(--ease), transform .6s var(--ease); }
+@media (prefers-reduced-motion:reduce){ .reveal{ opacity:1; transform:none; } html{ scroll-behavior:auto; } }
 
-/* ═══════════════════════════════════════════════
-   01 · HERO
-═══════════════════════════════════════════════ */
-.hero{
-  min-height:100dvh;
-  display:flex; flex-direction:column; justify-content:flex-end;
-  position:relative;
-  padding-bottom:clamp(36px,6vh,72px);
-  overflow:hidden;
-}
-
-/* crosshair grid backdrop — engineering-drawing motif */
+/* ── HERO ─────────────────────────────────── */
+.hero{ padding-top:clamp(64px,10vw,120px); position:relative; overflow:hidden; }
 .hero::before{
-  content:""; position:absolute; inset:0;
-  background-image:
-    linear-gradient(var(--line) 1px, transparent 1px),
-    linear-gradient(90deg, var(--line) 1px, transparent 1px);
-  background-size:72px 72px;
-  mask-image:radial-gradient(ellipse 90% 70% at 60% 30%, #000 0%, transparent 78%);
-  -webkit-mask-image:radial-gradient(ellipse 90% 70% at 60% 30%, #000 0%, transparent 78%);
+  content:""; position:absolute; inset:-20% -10% auto auto;
+  width:640px; height:640px; border-radius:50%;
+  background:radial-gradient(circle at 50% 50%, rgba(31,108,159,.05), transparent 62%);
   pointer-events:none;
 }
-
 .hero__status{
-  display:inline-flex; align-items:center; gap:10px;
-  font-family:var(--font-mono); font-size:.7rem;
-  letter-spacing:.16em; text-transform:uppercase;
-  color:var(--ink-2);
-  margin-bottom:clamp(20px,3vh,36px);
+  display:inline-flex; align-items:center; gap:9px;
+  margin-bottom:26px;
 }
-.hero__status .dot{
-  width:7px; height:7px; border-radius:999px; background:var(--accent);
-  box-shadow:0 0 0 0 var(--accent-soft);
-  animation:pulse 2.4s infinite;
-}
-@keyframes pulse{
-  0%{ box-shadow:0 0 0 0 rgba(45,91,255,.35); }
-  70%{ box-shadow:0 0 0 10px rgba(45,91,255,0); }
-  100%{ box-shadow:0 0 0 0 rgba(45,91,255,0); }
-}
-@media (prefers-reduced-motion: reduce){ .hero__status .dot{ animation:none; } }
-
-/* Kinetic headline — SIGNATURE ELEMENT
-   Each character's variable weight responds to cursor proximity. */
+.hero__status .dot{ width:7px; height:7px; border-radius:50%; background:var(--green-ink); }
 .hero h1{
-  font-family:var(--font-display);
-  font-size:clamp(3.1rem, 11.5vw, 10.5rem);
-  line-height:.94;
-  letter-spacing:-.035em;
-  font-weight:300;
-  text-transform:uppercase;
-  user-select:none;
-  margin-bottom:clamp(24px,4vh,44px);
+  font-family:var(--serif); font-weight:500;
+  font-size:clamp(2.7rem,7.5vw,5.4rem);
+  line-height:1.04; letter-spacing:-.03em;
+  max-width:16ch;
 }
-.hero h1 .row{ display:block; white-space:nowrap; }
-.hero h1 .row--accent{ color:var(--accent); }
-.hero h1 .ch{
-  display:inline-block;
-  font-variation-settings:"wght" 300;
-  will-change:font-variation-settings;
-}
-.hero h1 .sp{ display:inline-block; width:.28em; }
-
-/* Load-in sequence */
-.hero h1 .row{ overflow:hidden; }
-.hero h1 .row > span{ display:inline-block; transform:translateY(110%); animation:rise .9s var(--ease-out) forwards; }
-.hero h1 .row:nth-child(2) > span{ animation-delay:.09s; }
-@keyframes rise{ to{ transform:none; } }
-@media (prefers-reduced-motion: reduce){
-  .hero h1 .row > span{ transform:none; animation:none; }
-}
-
-.hero__grid{
-  display:grid;
-  grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);
-  gap:clamp(24px,4vw,64px);
-  align-items:end;
-  border-top:1px solid var(--line-strong);
-  padding-top:clamp(20px,3vh,32px);
-}
+.hero h1 em{ font-style:italic; color:var(--accent); }
 .hero__lede{
-  font-size:clamp(1rem,1.4vw,1.2rem);
+  margin-top:28px; max-width:56ch;
+  font-size:clamp(1.02rem,1.5vw,1.18rem);
   color:var(--ink-2);
-  max-width:46ch;
-  font-weight:400;
 }
 .hero__lede strong{ color:var(--ink); font-weight:600; }
 
-.hero__meta{
-  display:grid; grid-template-columns:1fr 1fr; gap:14px 22px;
-  justify-self:end; width:100%; max-width:380px;
-}
-.meta-item{ border-left:2px solid var(--line-strong); padding-left:12px; }
-.meta-item .k{
-  font-family:var(--font-mono); font-size:.62rem;
-  letter-spacing:.16em; text-transform:uppercase; color:var(--ink-3);
-  display:block; margin-bottom:2px;
-}
-.meta-item .v{ font-size:.9rem; font-weight:500; }
-
-.hero__cta{
-  margin-top:clamp(24px,4vh,40px);
-  display:flex; align-items:center; gap:22px; flex-wrap:wrap;
-}
-.btn-primary{
-  display:inline-flex; align-items:center; gap:10px;
-  background:var(--ink); color:var(--paper);
-  font-weight:600; font-size:.92rem;
-  padding:15px 30px; border-radius:999px;
-  transition:transform .2s var(--ease-out), background .25s ease;
-}
-.btn-primary:hover{ background:var(--accent); color:var(--accent-ink); }
-.btn-primary:active{ transform:scale(.97); }
-.btn-primary svg{ width:15px; height:15px; stroke:currentColor; fill:none; stroke-width:2; transition:transform .25s var(--ease-out); }
-.btn-primary:hover svg{ transform:translateY(3px); }
-
-.hero__scroll{
-  font-family:var(--font-mono); font-size:.66rem;
-  letter-spacing:.2em; text-transform:uppercase; color:var(--ink-3);
-}
-
-@media (max-width:860px){
-  .hero__grid{ grid-template-columns:1fr; }
-  .hero__meta{ justify-self:start; max-width:none; }
-}
-
-/* ═══════════════════════════════════════════════
-   02 · SELECTED WORK
-═══════════════════════════════════════════════ */
-.work{ padding-top:clamp(56px,9vh,120px); }
-
-/* Featured project — asymmetric split */
-.feature{
-  display:grid;
-  grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);
-  gap:clamp(24px,4vw,56px);
-  margin-bottom:clamp(48px,7vw,88px);
-}
-.feature__visual{
-  aspect-ratio:16/11;
-  border-radius:var(--r-card);
-  border:1px solid var(--line);
-  background:
-    radial-gradient(120% 120% at 15% 10%, var(--accent-soft) 0%, transparent 55%),
-    var(--paper-2);
-  position:relative; overflow:hidden;
-}
-/* placeholder frame — replace with a real screenshot later */
-.feature__visual .ph{
-  position:absolute; inset:14%;
-  border:1px dashed var(--line-strong);
-  border-radius:10px;
-  display:grid; place-items:center;
-  color:var(--ink-3);
-  font-family:var(--font-mono); font-size:.68rem;
-  letter-spacing:.14em; text-transform:uppercase;
-  text-align:center; padding:12px;
-}
-.feature__body{ display:flex; flex-direction:column; justify-content:space-between; gap:20px; }
-.feature__tag{
-  font-family:var(--font-mono); font-size:.68rem; color:var(--accent);
-  letter-spacing:.16em; text-transform:uppercase;
-}
-.feature h3{
-  font-family:var(--font-display);
-  font-size:clamp(1.7rem,3.4vw,2.7rem);
-  font-weight:500; letter-spacing:-.02em; line-height:1.1;
-  margin:10px 0 14px;
-}
-.feature p{ color:var(--ink-2); max-width:52ch; }
-.feature__facts{
-  display:flex; gap:26px; flex-wrap:wrap;
-  padding-top:18px; border-top:1px solid var(--line);
-}
-.fact .k{ font-family:var(--font-mono); font-size:.6rem; letter-spacing:.14em; text-transform:uppercase; color:var(--ink-3); display:block; }
-.fact .v{ font-weight:600; font-size:.95rem; }
-.link-arrow{
+.hero__cta{ margin-top:36px; display:flex; gap:12px; flex-wrap:wrap; }
+.btn{
   display:inline-flex; align-items:center; gap:8px;
-  font-weight:600; font-size:.9rem;
-  border-bottom:1.5px solid var(--ink);
-  padding-bottom:2px; width:fit-content;
-  transition:color .2s ease, border-color .2s ease;
-}
-.link-arrow:hover{ color:var(--accent); border-color:var(--accent); }
-.link-arrow svg{ width:13px; height:13px; stroke:currentColor; fill:none; stroke-width:2; }
-
-@media (max-width:860px){ .feature{ grid-template-columns:1fr; } }
-
-/* Repo grid — schema mirrors the GitHub REST API for later wiring */
-.repo-grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fill, minmax(300px,1fr));
-  gap:18px;
-}
-.repo{
-  background:var(--card);
+  font-size:.9rem; font-weight:500;
+  padding:12px 22px; border-radius:6px;
   border:1px solid var(--line);
-  border-radius:var(--r-card);
-  padding:26px 26px 22px;
-  display:flex; flex-direction:column; gap:14px;
-  transition:transform .3s var(--ease-out), box-shadow .3s var(--ease-out), border-color .25s ease;
+  background:var(--surface); color:var(--ink);
+  transition:transform .15s ease, border-color .2s ease, background .2s ease;
 }
-.repo:hover{
-  transform:translateY(-4px);
-  box-shadow:var(--shadow);
-  border-color:var(--line-strong);
+.btn:hover{ border-color:var(--ink-3); }
+.btn:active{ transform:scale(.98); }
+.btn--dark{ background:var(--ink); color:#fff; border-color:var(--ink); }
+.btn--dark:hover{ background:#33373d; border-color:#33373d; }
+
+.hero__meta{
+  margin-top:clamp(48px,7vw,88px);
+  display:grid; grid-template-columns:repeat(4,1fr);
+  gap:1px; background:var(--line);
+  border:1px solid var(--line); border-radius:12px; overflow:hidden;
 }
-.repo__top{ display:flex; align-items:center; justify-content:space-between; }
-.repo__name{
-  font-family:var(--font-mono); font-weight:500; font-size:.92rem;
-  letter-spacing:-.01em;
+.hero__meta .cell{ background:var(--bg); padding:22px 24px; }
+.hero__meta .k{ display:block; margin-bottom:6px; }
+.hero__meta .v{ font-size:.98rem; font-weight:500; }
+@media (max-width:720px){ .hero__meta{ grid-template-columns:repeat(2,1fr); } }
+
+/* ── FEATURED ─────────────────────────────── */
+.feature{
+  display:grid; grid-template-columns:1.1fr 1fr;
+  gap:clamp(24px,4vw,56px); align-items:stretch;
+  border:1px solid var(--line); border-radius:12px;
+  background:var(--surface); overflow:hidden;
 }
-.repo__stars{
-  display:inline-flex; align-items:center; gap:5px;
-  font-family:var(--font-mono); font-size:.72rem; color:var(--ink-3);
+.feature__media{
+  background:
+    radial-gradient(120% 120% at 20% 15%, var(--accent-bg), transparent 60%),
+    #F4F4F2;
+  min-height:320px; position:relative;
+  display:grid; place-items:center;
+  border-right:1px solid var(--line);
 }
-.repo__stars svg{ width:12px; height:12px; fill:currentColor; }
-.repo__desc{ color:var(--ink-2); font-size:.9rem; flex:1; min-height:3.2em; }
-.repo__langbar{
-  height:5px; border-radius:999px; overflow:hidden;
-  display:flex; background:var(--paper-2);
+.feature__media .ph{
+  font-family:var(--mono); font-size:.7rem; letter-spacing:.14em;
+  text-transform:uppercase; color:var(--ink-3); text-align:center;
+  padding:0 24px;
 }
-.repo__langbar span{ height:100%; }
-.repo__foot{ display:flex; align-items:center; justify-content:space-between; }
-.repo__lang{
+.feature__body{ padding:clamp(28px,4vw,44px); display:flex; flex-direction:column; }
+.feature__body h3{
+  font-family:var(--serif); font-weight:500;
+  font-size:clamp(1.5rem,2.8vw,2.1rem); letter-spacing:-.02em;
+  margin:14px 0 16px; line-height:1.15;
+}
+.feature__body p{ color:var(--ink-2); font-size:.98rem; }
+.feature__facts{
+  margin-top:auto; padding-top:24px;
+  display:flex; gap:28px; flex-wrap:wrap;
+  border-top:1px solid var(--line);
+}
+.feature__facts .k{ display:block; margin-bottom:4px; }
+.feature__facts .v{ font-weight:600; font-size:.92rem; }
+.link-arrow{
   display:inline-flex; align-items:center; gap:7px;
-  font-family:var(--font-mono); font-size:.68rem; color:var(--ink-2);
+  margin-top:22px; font-size:.9rem; font-weight:500; color:var(--accent);
+  width:fit-content;
 }
-.repo__lang .swatch{ width:9px; height:9px; border-radius:999px; }
-.chips{ display:flex; gap:6px; flex-wrap:wrap; }
-.chip{
-  font-family:var(--font-mono); font-size:.62rem;
-  letter-spacing:.06em;
-  padding:4px 10px; border-radius:999px;
-  background:var(--accent-soft); color:var(--accent);
-}
-
-.work__more{
-  margin-top:34px;
-  display:flex; justify-content:center;
+.link-arrow svg{ width:14px; height:14px; transition:transform .2s ease; }
+.link-arrow:hover svg{ transform:translateX(3px); }
+@media (max-width:820px){
+  .feature{ grid-template-columns:1fr; }
+  .feature__media{ border-right:none; border-bottom:1px solid var(--line); min-height:200px; }
 }
 
-/* ═══════════════════════════════════════════════
-   03 · CAPABILITIES  (structured rows, no badge wall)
-═══════════════════════════════════════════════ */
-.stack{ padding-top:clamp(64px,10vh,140px); }
-.cap-row{
-  display:grid;
-  grid-template-columns:minmax(0,.9fr) minmax(0,1.4fr) minmax(0,1fr);
+/* Tags */
+.tags{ display:flex; gap:7px; flex-wrap:wrap; }
+.tag{
+  font-family:var(--mono); font-size:.64rem; letter-spacing:.05em; text-transform:uppercase;
+  padding:5px 11px; border-radius:9999px;
+  background:var(--accent-bg); color:var(--accent);
+}
+.tag--gold{ background:var(--gold-bg); color:var(--gold-ink); }
+.tag--green{ background:var(--green-bg); color:var(--green-ink); }
+.tag--plain{ background:#F1F1EF; color:var(--ink-2); }
+
+/* ── PROJECT GRID ─────────────────────────── */
+.grid{
+  margin-top:24px;
+  display:grid; grid-template-columns:repeat(3,1fr); gap:18px;
+}
+@media (max-width:900px){ .grid{ grid-template-columns:repeat(2,1fr); } }
+@media (max-width:600px){ .grid{ grid-template-columns:1fr; } }
+.card{
+  display:flex; flex-direction:column; gap:14px;
+  padding:26px; border:1px solid var(--line); border-radius:12px;
+  background:var(--surface);
+  transition:box-shadow .2s ease, transform .2s ease, border-color .2s ease;
+}
+.card:hover{ box-shadow:0 2px 12px rgba(0,0,0,.045); transform:translateY(-2px); border-color:var(--line); }
+.card__top{ display:flex; align-items:center; justify-content:space-between; gap:12px; }
+.card__name{ font-family:var(--mono); font-size:.9rem; font-weight:500; letter-spacing:-.01em; color:var(--ink); }
+.card__lang{ font-family:var(--mono); font-size:.7rem; color:var(--ink-3); }
+.card__desc{ color:var(--ink-2); font-size:.9rem; flex:1; }
+
+/* ── SKILLS ───────────────────────────────── */
+.cap{
+  display:grid; grid-template-columns:220px 1fr;
   gap:clamp(16px,3vw,48px);
-  padding:clamp(24px,3.4vw,40px) 0;
-  border-bottom:1px solid var(--line);
-  align-items:start;
+  padding:clamp(24px,3vw,36px) 0;
+  border-top:1px solid var(--line);
 }
-.cap-row:hover .cap-row__title{ color:var(--accent); }
-.cap-row__title{
-  font-family:var(--font-display);
-  font-size:clamp(1.25rem,2.2vw,1.7rem);
-  font-weight:500; letter-spacing:-.015em;
-  transition:color .25s ease;
+.cap:last-child{ border-bottom:1px solid var(--line); }
+.cap__title{ font-family:var(--serif); font-size:1.25rem; font-weight:500; letter-spacing:-.01em; }
+.cap__title .mono{ display:block; margin-bottom:8px; }
+.cap__tools{ display:flex; flex-wrap:wrap; gap:8px; align-content:start; margin-bottom:14px; }
+.chip{
+  font-family:var(--mono); font-size:.74rem;
+  padding:7px 13px; border-radius:6px;
+  border:1px solid var(--line); background:var(--surface); color:var(--ink-2);
 }
-.cap-row__title .mono{ display:block; color:var(--ink-3); margin-bottom:6px; font-size:.62rem; }
-.cap-row__tools{
-  display:flex; flex-wrap:wrap; gap:8px; align-content:start;
-}
-.tool{
-  font-family:var(--font-mono); font-size:.74rem;
-  padding:7px 14px; border-radius:999px;
-  border:1px solid var(--line-strong);
-  transition:background .2s ease, color .2s ease, border-color .2s ease;
-}
-.tool:hover{ background:var(--ink); color:var(--paper); border-color:var(--ink); }
-.cap-row__note{ color:var(--ink-2); font-size:.92rem; }
-@media (max-width:860px){
-  .cap-row{ grid-template-columns:1fr; gap:14px; }
-}
+.cap__note{ color:var(--ink-2); font-size:.92rem; max-width:60ch; }
+@media (max-width:720px){ .cap{ grid-template-columns:1fr; gap:14px; } }
 
-/* ═══════════════════════════════════════════════
-   04 · TIMELINE
-═══════════════════════════════════════════════ */
-.timeline{ padding-top:clamp(64px,10vh,140px); }
-.tl-item{
-  display:grid;
-  grid-template-columns:120px minmax(0,1fr);
-  gap:clamp(18px,3vw,44px);
-  padding:clamp(22px,3vw,34px) 0;
+/* ── TIMELINE ─────────────────────────────── */
+.tl{ border-top:1px solid var(--line); }
+.tl__item{
+  display:grid; grid-template-columns:150px 1fr;
+  gap:clamp(16px,3vw,44px);
+  padding:clamp(22px,3vw,32px) 0;
   border-bottom:1px solid var(--line);
-  position:relative;
 }
-.tl-item__year{
-  font-family:var(--font-mono); font-size:.78rem;
-  color:var(--ink-3); letter-spacing:.08em;
-  padding-top:5px;
+.tl__year{ font-family:var(--mono); font-size:.78rem; color:var(--ink-3); padding-top:4px; }
+.tl__item h3{ font-family:var(--serif); font-weight:500; font-size:1.2rem; letter-spacing:-.01em; }
+.tl__item .org{ display:block; margin:5px 0 10px; font-size:.82rem; color:var(--accent); font-weight:500; }
+.tl__item p{ color:var(--ink-2); font-size:.92rem; max-width:64ch; }
+.tl__item p strong{ color:var(--ink); font-weight:600; }
+@media (max-width:600px){ .tl__item{ grid-template-columns:1fr; gap:6px; } }
+
+/* ── AWARDS ───────────────────────────────── */
+.award{
+  display:grid; grid-template-columns:120px 1fr auto;
+  gap:clamp(14px,2.5vw,36px); align-items:center;
+  padding:22px 0; border-bottom:1px solid var(--line);
 }
-.tl-item h3{
-  font-family:var(--font-display); font-weight:500;
-  font-size:clamp(1.15rem,2vw,1.5rem); letter-spacing:-.01em;
-}
-.tl-item .org{
-  font-family:var(--font-mono); font-size:.72rem;
-  color:var(--accent); letter-spacing:.1em; text-transform:uppercase;
-  display:block; margin:4px 0 10px;
-}
-.tl-item p{ color:var(--ink-2); max-width:64ch; font-size:.94rem; }
+.award:first-of-type{ border-top:1px solid var(--line); }
+.award__year{ font-family:var(--mono); font-size:.78rem; color:var(--ink-3); }
+.award__title{ font-size:.98rem; font-weight:500; }
+.award__title .org{ color:var(--ink-3); font-weight:400; font-size:.85rem; }
 @media (max-width:640px){
-  .tl-item{ grid-template-columns:1fr; gap:6px; }
+  .award{ grid-template-columns:1fr auto; }
+  .award__year{ grid-column:1 / -1; }
 }
+.certs{ margin-top:36px; }
+.certs .mono{ display:block; margin-bottom:16px; }
 
-/* ═══════════════════════════════════════════════
-   05 · CONTACT / FOOTER
-═══════════════════════════════════════════════ */
-.contact{
-  margin-top:clamp(72px,12vh,160px);
-  background:var(--ink);
-  color:var(--paper);
-  padding:clamp(64px,10vh,120px) var(--gutter) 34px;
-  position:relative;
-  overflow:hidden;
-}
-:root[data-theme="dark"] .contact{ background:var(--paper-2); color:var(--ink); }
-.contact::before{
-  content:""; position:absolute; inset:0;
-  background-image:
-    linear-gradient(rgba(255,255,255,.05) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,.05) 1px, transparent 1px);
-  background-size:72px 72px;
-  mask-image:radial-gradient(ellipse 80% 90% at 80% 100%, #000, transparent 75%);
-  -webkit-mask-image:radial-gradient(ellipse 80% 90% at 80% 100%, #000, transparent 75%);
-  pointer-events:none;
-}
-:root[data-theme="dark"] .contact::before{
-  background-image:
-    linear-gradient(var(--line) 1px, transparent 1px),
-    linear-gradient(90deg, var(--line) 1px, transparent 1px);
-}
-.contact .mono{ color:var(--accent); }
+/* ── CONTACT ──────────────────────────────── */
+.contact{ border-top:1px solid var(--line); }
 .contact h2{
-  font-family:var(--font-display);
-  font-size:clamp(2.4rem,7vw,6rem);
-  font-weight:400; letter-spacing:-.03em; line-height:1.02;
-  margin:18px 0 34px;
-  position:relative;
+  font-family:var(--serif); font-weight:500;
+  font-size:clamp(2rem,5.5vw,3.6rem); letter-spacing:-.03em; line-height:1.08;
 }
 .contact__mail{
-  display:inline-flex; align-items:center; gap:12px;
-  font-family:var(--font-mono);
-  font-size:clamp(.95rem,1.8vw,1.25rem);
-  border-bottom:1.5px solid currentColor;
-  padding-bottom:4px;
-  transition:color .2s ease;
-  position:relative;
+  display:inline-block; margin-top:26px;
+  font-family:var(--serif); font-size:clamp(1.3rem,3vw,2rem);
+  color:var(--accent); border-bottom:1px solid var(--accent-bg);
+  padding-bottom:3px; transition:border-color .2s ease;
 }
-.contact__mail:hover{ color:var(--accent); }
-.contact__foot{
-  margin-top:clamp(56px,9vh,100px);
-  padding-top:24px;
-  border-top:1px solid rgba(255,255,255,.14);
-  display:flex; align-items:center; justify-content:space-between;
-  gap:16px; flex-wrap:wrap;
-  position:relative;
+.contact__mail:hover{ border-color:var(--accent); }
+.footer{
+  border-top:1px solid var(--line);
+  padding:32px 0;
+  display:flex; align-items:center; justify-content:space-between; gap:16px; flex-wrap:wrap;
 }
-:root[data-theme="dark"] .contact__foot{ border-color:var(--line); }
-.socials{ display:flex; gap:22px; }
-.socials a{
-  font-family:var(--font-mono); font-size:.7rem;
-  letter-spacing:.14em; text-transform:uppercase;
-  opacity:.75; transition:opacity .2s ease, color .2s ease;
-}
-.socials a:hover{ opacity:1; color:var(--accent); }
-.copyright{ font-family:var(--font-mono); font-size:.66rem; opacity:.55; letter-spacing:.1em; }
+.footer .socials{ display:flex; gap:20px; }
+.footer .socials a{ font-family:var(--mono); font-size:.72rem; color:var(--ink-2); transition:color .2s ease; }
+.footer .socials a:hover{ color:var(--ink); }
 </style>
 </head>
 
 <body>
 
-<!-- ══════════ LEFT RAIL ══════════ -->
-<header class="rail">
-  <a class="rail__mark" href="#top" aria-label="맨 위로">유</a>
-
-  <nav class="rail__nav" aria-label="주요 섹션">
-    <a class="rail__link" href="#work"><span class="idx">01</span>Work</a>
-    <a class="rail__link" href="#stack"><span class="idx">02</span>Stack</a>
-    <a class="rail__link" href="#timeline"><span class="idx">03</span>Path</a>
-    <a class="rail__link" href="#awards"><span class="idx">04</span>Awards</a>
-    <a class="rail__link" href="#contact"><span class="idx">05</span>Contact</a>
-  </nav>
-
-  <div class="rail__bottom">
-    <button class="theme-btn" id="themeBtn" aria-label="테마 전환">
-      <svg class="moon" viewBox="0 0 24 24"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
-      <svg class="sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M4.9 4.9l1.4 1.4m11.4 11.4 1.4 1.4M2 12h2m16 0h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
-    </button>
+<nav class="nav">
+  <div class="nav__inner">
+    <a class="nav__mark" href="#top">유지환</a>
+    <div class="nav__links">
+      <a href="#work">Work</a>
+      <a href="#skills">Skills</a>
+      <a href="#path">Path</a>
+      <a href="#awards">Awards</a>
+      <a href="#contact">Contact</a>
+    </div>
   </div>
-</header>
+</nav>
 
-<main class="page" id="top">
+<main id="top">
 
-  <!-- ══════════ 01 · HERO ══════════ -->
-  <section class="hero">
-    <p class="hero__status"><span class="dot"></span>신입 백엔드 개발자 · 인덕대학교 컴퓨터소프트웨어학과</p>
-
-    <!-- SIGNATURE: 커서 근접도로 글자 굵기가 변하는 키네틱 헤드라인 -->
-    <h1 id="kinetic" aria-label="Backend Developer">
-      <span class="row"><span data-kinetic>BACKEND</span></span>
-      <span class="row row--accent"><span data-kinetic>DEVELOPER</span></span>
-    </h1>
-
-    <div class="hero__grid">
-      <p class="hero__lede">
-        안녕하세요, 사용자의 요구사항을 안정적인 서비스로 구현하는 <strong>백엔드 개발자 유지환</strong>입니다.
+  <!-- HERO -->
+  <header class="hero">
+    <div class="wrap">
+      <p class="hero__status reveal"><span class="dot"></span><span class="mono">신입 백엔드 개발자 · 구직 중</span></p>
+      <h1 class="reveal">안정적인 서비스를 만드는 <em>백엔드 개발자</em>, 유지환</h1>
+      <p class="hero__lede reveal">
         Java·Spring Boot를 중심으로 REST API 설계, JPA 기반 데이터 처리, 데이터베이스 설계 역량을 쌓아왔습니다.
-        문제가 생기면 데이터 흐름과 구조를 분석해 근본 원인부터 해결하는 방식을 지향합니다.
+        문제가 생기면 <strong>데이터 흐름과 구조를 분석해 근본 원인부터 해결</strong>하는 방식을 지향합니다.
       </p>
+      <div class="hero__cta reveal">
+        <a class="btn btn--dark" href="#work">프로젝트 보기
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14m0 0 6-6m-6 6-6-6"/></svg>
+        </a>
+        <a class="btn" href="https://github.com/Jihwan0210" target="_blank" rel="noopener">GitHub</a>
+        <a class="btn" href="mailto:202212020@gsuite.induk.ac.kr">이메일</a>
+      </div>
 
-      <div class="hero__meta">
-        <div class="meta-item">
-          <span class="k">GitHub</span>
-          <span class="v">@Jihwan0210</span>
-        </div>
-        <div class="meta-item">
-          <span class="k">Focus</span>
-          <span class="v">Java · Spring Boot</span>
-        </div>
-        <div class="meta-item">
-          <span class="k">Location</span>
-          <span class="v">서울, 대한민국</span>
-        </div>
-        <div class="meta-item">
-          <span class="k">Currently</span>
-          <span class="v">신입 · 구직 중</span>
-        </div>
+      <div class="hero__meta reveal">
+        <div class="cell"><span class="k mono">GitHub</span><span class="v">@Jihwan0210</span></div>
+        <div class="cell"><span class="k mono">Focus</span><span class="v">Java · Spring Boot</span></div>
+        <div class="cell"><span class="k mono">Education</span><span class="v">인덕대 컴퓨터SW</span></div>
+        <div class="cell"><span class="k mono">Location</span><span class="v">서울, 대한민국</span></div>
       </div>
     </div>
+  </header>
 
-    <div class="hero__cta">
-      <a class="btn-primary" href="#work">
-        프로젝트 보기
-        <svg viewBox="0 0 24 24"><path d="M12 5v14m0 0 6-6m-6 6-6-6"/></svg>
-      </a>
-      <span class="hero__scroll">Scroll — 스크롤하여 탐색</span>
-    </div>
-  </section>
-
-  <!-- ══════════ 02 · SELECTED WORK ══════════ -->
-  <section class="work" id="work">
-    <div class="sec-head reveal">
-      <span class="num">01</span>
-      <h2>Selected Work</h2>
-      <span class="hint">github.com/Jihwan0210</span>
-    </div>
-
-    <!-- Featured project -->
-    <article class="feature reveal">
-      <div class="feature__visual">
-        <div class="ph">읽고 (Ilgo)<br>스크린샷을 넣어보세요</div>
+  <!-- WORK -->
+  <section id="work">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <span class="kicker mono">01 — Selected Work</span>
+        <h2>대표 프로젝트</h2>
+        <p>수상작 한 편과 팀·개인 프로젝트들. 자세한 내용은 각 저장소에서 볼 수 있습니다.</p>
       </div>
-      <div class="feature__body">
-        <div>
-          <span class="feature__tag">Featured · AI 해커톤 수상작 🏆</span>
-          <h3>읽고 (Ilgo)</h3>
-          <p>
-            "어려운 글, 대신 읽고 알려드릴게요." 종이 고지서·안내문·문자처럼 이해하기 어려운
-            생활 문서를 사진으로 찍으면 AI가 쉬운 한국어/영어로 풀어주는 배리어프리 서비스입니다.
-            저는 <strong>백엔드 API 서버</strong>를 맡아 JWT 기반 인증·인가(토큰 검증 필터·Stateless·경로별 접근 제어),
-            AI 게이트웨이를 연동한 문서 분석 API(설명·위험도·핵심 카드·할 일 구조로 파싱), multipart/JSON 업로드,
-            커서 기반 페이지네이션, 전역 예외 처리·레이트 리밋, Swagger 문서화, 테스트까지 설계·구현했습니다.
-          </p>
+
+      <!-- Featured -->
+      <article class="feature reveal">
+        <div class="feature__media">
+          <span class="ph">읽고 (Ilgo)<br>스크린샷을 넣어보세요</span>
         </div>
-        <div>
-          <div class="feature__facts">
-            <div class="fact"><span class="k">Role</span><span class="v">Backend (팀)</span></div>
-            <div class="fact"><span class="k">Stack</span><span class="v">Spring Boot · JWT · JPA</span></div>
-            <div class="fact"><span class="k">Award</span><span class="v">해커톤 3등 · 전국 27명</span></div>
+        <div class="feature__body">
+          <div class="tags">
+            <span class="tag tag--gold">AI 해커톤 3등 · 선도상</span>
+            <span class="tag">Backend</span>
           </div>
-          <p style="margin-top:18px;">
-            <a class="link-arrow" href="https://github.com/Jihwan0210/Ilgo-backend" target="_blank" rel="noopener">
-              Repository 보기
-              <svg viewBox="0 0 24 24"><path d="M7 17 17 7m0 0H8m9 0v9"/></svg>
-            </a>
+          <h3>읽고 (Ilgo) — AI 배리어프리 문서 해석</h3>
+          <p>
+            "어려운 글, 대신 읽고 알려드릴게요." 종이 고지서·안내문·문자처럼 이해하기 어려운 생활 문서를
+            사진으로 찍으면 AI가 쉬운 한국어/영어로 풀어주는 서비스입니다. 저는 백엔드 API 서버를 맡아
+            JWT 기반 인증·인가(토큰 검증 필터·Stateless·경로별 접근 제어), AI 게이트웨이를 연동한 문서 분석 API
+            (설명·위험도·핵심 카드·할 일 구조 파싱), multipart/JSON 업로드, 커서 기반 페이지네이션,
+            전역 예외 처리·레이트 리밋, Swagger 문서화와 테스트까지 설계·구현했습니다.
           </p>
+          <div class="feature__facts">
+            <div><span class="k mono">Role</span><span class="v">Backend (팀)</span></div>
+            <div><span class="k mono">Stack</span><span class="v">Spring Boot · JWT · JPA</span></div>
+            <div><span class="k mono">Award</span><span class="v">전국 5개 대학 27명 중 3등</span></div>
+          </div>
+          <a class="link-arrow" href="https://github.com/Jihwan0210/Ilgo-backend" target="_blank" rel="noopener">
+            Repository 보기
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7m0 0H8m9 0v9"/></svg>
+          </a>
+        </div>
+      </article>
+
+      <!-- Grid -->
+      <div class="grid">
+        <a class="card reveal" href="https://github.com/Jihwan0210/PotatoChip" target="_blank" rel="noopener">
+          <div class="card__top"><span class="card__name">PotatoChip</span><span class="card__lang">Java</span></div>
+          <p class="card__desc">못난이 농산물 마켓플레이스. 팀장·상품 도메인 오너로 상품 CRUD·판매자 권한 제어, 가격 스냅샷 기반 장바구니, Kakao Map 픽업 위치, 기간별 판매 랭킹을 구현하고 develop/feature 브랜치·PR 리뷰 협업을 운영했습니다.</p>
+          <div class="tags"><span class="tag tag--plain">팀장</span><span class="tag tag--plain">Spring Boot</span></div>
+        </a>
+
+        <a class="card reveal" href="https://github.com/Leeuswa/COGI" target="_blank" rel="noopener">
+          <div class="card__top"><span class="card__name">COGI</span><span class="card__lang">Java · React</span></div>
+          <p class="card__desc">AI 기반 코드 리뷰·PR 분석 및 팀 성장 대시보드 서비스. 이슈 승인 흐름, 약점 패턴 통계, 성장 추이 대시보드, 주간 리포트 자동 메일, 소셜 로그인·결제(Toss)를 팀으로 개발 중입니다.</p>
+          <div class="tags"><span class="tag tag--plain">팀 프로젝트</span><span class="tag tag--plain">AI</span></div>
+        </a>
+
+        <a class="card reveal" href="https://github.com/Jihwan0210/React_CampusLink" target="_blank" rel="noopener">
+          <div class="card__top"><span class="card__name">CampusLink</span><span class="card__lang">TypeScript</span></div>
+          <p class="card__desc">대학 동아리·스터디·공모전 모집 플랫폼(SPA). Context API로 전역 로그인 상태를 관리하고 sessionStorage로 새로고침 세션 유지, 작성자 권한 분기를 구현해 Amplify로 배포했습니다.</p>
+          <div class="tags"><span class="tag tag--plain">React 18</span><span class="tag tag--plain">AWS</span></div>
+        </a>
+
+        <a class="card reveal" href="https://github.com/Jihwan0210/PHP_ShopProject" target="_blank" rel="noopener">
+          <div class="card__top"><span class="card__name">침착맨 굿즈샵</span><span class="card__lang">PHP</span></div>
+          <p class="card__desc">PHP·Bootstrap 쇼핑몰. 쿠키 기반 로그인·비회원 장바구니, 옵션·수량·할인·배송비 주문 프로세스, 관리자 상품 관리를 구현했습니다.</p>
+          <div class="tags"><span class="tag tag--gold">교내 경진대회 은상</span></div>
+        </a>
+
+        <a class="card reveal" href="https://github.com/Jihwan0210/laravel-hotel-reservation" target="_blank" rel="noopener">
+          <div class="card__top"><span class="card__name">호텔 예약 서비스</span><span class="card__lang">Laravel</span></div>
+          <p class="card__desc">Laravel MVC 호텔 예약 서비스. 숙소·예약·후기·공지 기능, Eloquent ORM 기반 MariaDB 연동, 사용자/관리자 페이지 분리를 구현했습니다.</p>
+          <div class="tags"><span class="tag tag--gold">교내 경진대회 금상</span></div>
+        </a>
+
+        <a class="card reveal" href="https://github.com/Jihwan0210/Spring-TodoList" target="_blank" rel="noopener">
+          <div class="card__top"><span class="card__name">Spring-TodoList</span><span class="card__lang">Java</span></div>
+          <p class="card__desc">Spring Boot MVC 기반 일정 관리 웹 애플리케이션. 할 일 CRUD와 MariaDB 연동·SQL 데이터 처리를 구현했습니다.</p>
+          <div class="tags"><span class="tag tag--plain">Spring Boot</span><span class="tag tag--plain">CRUD</span></div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <span class="kicker mono">02 — Capabilities</span>
+        <h2>기술 스택</h2>
+        <p>도구 나열이 아니라, 실제 프로젝트에서 어떻게 썼는지를 기준으로 정리했습니다.</p>
+      </div>
+
+      <div class="cap reveal">
+        <div class="cap__title"><span class="mono">A — Backend</span>Java &amp; Spring</div>
+        <div>
+          <div class="cap__tools">
+            <span class="chip">Java</span><span class="chip">Spring Boot</span>
+            <span class="chip">Spring Security</span><span class="chip">Spring Data JPA</span>
+            <span class="chip">Spring MVC</span><span class="chip">REST API</span>
+            <span class="chip">JWT</span><span class="chip">Spring AI</span>
+          </div>
+          <p class="cap__note">Controller·Service·Repository 계층 구조를 직접 설계하고, JWT 인증·인가와 JPA 연관관계 매핑(@OneToMany·@ManyToOne)·RESTful API를 구현합니다.</p>
         </div>
       </div>
-    </article>
 
-    <!-- Repo cards — JS가 PLACEHOLDER_REPOS(또는 GitHub API)로 렌더링 -->
-    <div class="repo-grid reveal" id="repoGrid" aria-live="polite"></div>
-
-    <div class="work__more reveal">
-      <a class="link-arrow" href="https://github.com/Jihwan0210" target="_blank" rel="noopener">
-        GitHub에서 전체 보기
-        <svg viewBox="0 0 24 24"><path d="M7 17 17 7m0 0H8m9 0v9"/></svg>
-      </a>
-    </div>
-  </section>
-
-  <!-- ══════════ 03 · CAPABILITIES ══════════ -->
-  <section class="stack" id="stack">
-    <div class="sec-head reveal">
-      <span class="num">02</span>
-      <h2>Capabilities</h2>
-      <span class="hint">도구가 아니라 판단 기준</span>
-    </div>
-
-    <div class="cap-row reveal">
-      <div class="cap-row__title"><span class="mono">A — Backend</span>Java &amp; Spring</div>
-      <div class="cap-row__tools">
-        <span class="tool">Java</span><span class="tool">Spring Boot</span>
-        <span class="tool">Spring Security</span><span class="tool">Spring Data JPA</span>
-        <span class="tool">Spring MVC</span><span class="tool">REST API</span>
-        <span class="tool">JWT</span><span class="tool">Spring AI</span>
+      <div class="cap reveal">
+        <div class="cap__title"><span class="mono">B — Database</span>데이터 설계</div>
+        <div>
+          <div class="cap__tools">
+            <span class="chip">MariaDB</span><span class="chip">MySQL</span>
+            <span class="chip">Oracle</span><span class="chip">SQL</span>
+            <span class="chip">MyBatis</span>
+          </div>
+          <p class="cap__note">테이블·연관관계 설계와 JOIN·GROUP BY·서브쿼리를 다룹니다. 가격 스냅샷 구조처럼 데이터 설계가 서비스 품질을 좌우한다고 보고 구조부터 설계합니다. (SQLD · 정보처리산업기사)</p>
+        </div>
       </div>
-      <p class="cap-row__note">
-        Controller·Service·Repository 계층 구조를 직접 설계하고, JWT 인증·인가와
-        JPA 연관관계 매핑(@OneToMany·@ManyToOne)·RESTful API를 구현합니다.
-      </p>
-    </div>
 
-    <div class="cap-row reveal">
-      <div class="cap-row__title"><span class="mono">B — Database</span>데이터 설계</div>
-      <div class="cap-row__tools">
-        <span class="tool">MariaDB</span><span class="tool">MySQL</span>
-        <span class="tool">Oracle</span><span class="tool">SQL</span>
-        <span class="tool">MyBatis</span>
-      </div>
-      <p class="cap-row__note">
-        테이블·연관관계 설계와 JOIN·GROUP BY·서브쿼리를 다룹니다. 가격 스냅샷 구조처럼
-        데이터 설계가 서비스 품질을 좌우한다고 보고 구조부터 설계합니다. (SQLD·정보처리산업기사)
-      </p>
-    </div>
-
-    <div class="cap-row reveal">
-      <div class="cap-row__title"><span class="mono">C — Frontend &amp; DevOps</span>화면 &amp; 협업</div>
-      <div class="cap-row__tools">
-        <span class="tool">JavaScript</span><span class="tool">TypeScript</span>
-        <span class="tool">React</span><span class="tool">Thymeleaf</span>
-        <span class="tool">Git · GitHub</span><span class="tool">AWS</span>
-        <span class="tool">Docker</span>
-      </div>
-      <p class="cap-row__note">
-        Thymeleaf 서버사이드 렌더링과 React SPA를 모두 다루고, develop/feature 브랜치 전략과
-        PR 기반 코드 리뷰로 협업합니다. AWS(EC2·S3·Amplify)와 Docker로 배포를 경험했습니다.
-      </p>
-    </div>
-  </section>
-
-  <!-- ══════════ 04 · TIMELINE ══════════ -->
-  <section class="timeline" id="timeline">
-    <div class="sec-head reveal">
-      <span class="num">03</span>
-      <h2>Path</h2>
-      <span class="hint">최근 → 과거</span>
-    </div>
-
-    <article class="tl-item reveal">
-      <span class="tl-item__year">2025.11 — 2026.08</span>
-      <div>
-        <h3>웹 애플리케이션 개발자 양성과정</h3>
-        <span class="org">대우능력개발원</span>
-        <p>웹 표준·Java·RDBMS·Spring·Spring Boot·AWS·Spring AI·보안 코딩·리눅스 기반 과정 수료.
-           팀 프로젝트 <strong>PotatoChip에서 팀장·상품 도메인 담당</strong>으로 상품 관리·권한 제어·장바구니를 설계·구현했습니다.</p>
-      </div>
-    </article>
-
-    <article class="tl-item reveal">
-      <span class="tl-item__year">2022 — 현재</span>
-      <div>
-        <h3>컴퓨터소프트웨어학과 재학</h3>
-        <span class="org">인덕대학교 (2·3년제)</span>
-        <p>백엔드 중심으로 웹 개발을 학습하며 INDEV 창업동아리·DevUp·IFP 등에서 팀 프로젝트와 CS 스터디를 진행하고,
-           데이터베이스·운영체제 전공 멘토로 위촉되었습니다.</p>
-      </div>
-    </article>
-
-    <article class="tl-item reveal">
-      <span class="tl-item__year">2023.05 — 2024.11</span>
-      <div>
-        <h3>병역 · 육군 병장 만기전역</h3>
-        <span class="org">대한민국 육군</span>
-        <p>군 복무를 마치고 전역했습니다.</p>
-      </div>
-    </article>
-
-    <article class="tl-item reveal">
-      <span class="tl-item__year">2019.03 — 2021.02</span>
-      <div>
-        <h3>이과계열 졸업</h3>
-        <span class="org">영훈고등학교</span>
-        <p>이과계열로 졸업했습니다.</p>
-      </div>
-    </article>
-  </section>
-
-  <!-- ══════════ 04 · AWARDS & CERTIFICATIONS ══════════ -->
-  <section class="timeline" id="awards">
-    <div class="sec-head reveal">
-      <span class="num">04</span>
-      <h2>Awards &amp; Certs</h2>
-      <span class="hint">수상 · 자격</span>
-    </div>
-
-    <article class="tl-item reveal">
-      <span class="tl-item__year">2026</span>
-      <div>
-        <h3>AI Re-Local 해커톤 — 3등 · 선도상 🏆</h3>
-        <span class="org">전국 5개 대학 27명 참가</span>
-        <p>AI 배리어프리 문서 해석 서비스 '읽고'로 수상. 백엔드 API를 담당했습니다.</p>
-      </div>
-    </article>
-
-    <article class="tl-item reveal">
-      <span class="tl-item__year">2025.12</span>
-      <div>
-        <h3>Laravel 웹 솔루션 경진대회 — 금상 🥇</h3>
-        <span class="org">인덕대학교</span>
-      </div>
-    </article>
-
-    <article class="tl-item reveal">
-      <span class="tl-item__year">2025.12</span>
-      <div>
-        <h3>2025 Analyze Festa 데이터 분석 경진대회 — 최우수상 🥇</h3>
-        <span class="org">인덕대학교</span>
-      </div>
-    </article>
-
-    <article class="tl-item reveal">
-      <span class="tl-item__year">2026.06</span>
-      <div>
-        <h3>React 경진대회 — 우수상</h3>
-        <span class="org">인덕대학교</span>
-      </div>
-    </article>
-
-    <article class="tl-item reveal">
-      <span class="tl-item__year">2025.06</span>
-      <div>
-        <h3>PHP 온라인 쇼핑몰 개발 경진대회 — 은상 🥈</h3>
-        <span class="org">인덕대학교</span>
-      </div>
-    </article>
-
-    <div class="reveal" style="padding:clamp(22px,3vw,34px) 0;">
-      <p class="mono" style="color:var(--ink-3);margin-bottom:14px;">자격증 · Certifications</p>
-      <div class="cap-row__tools">
-        <span class="tool">SQLD (SQL개발자)</span>
-        <span class="tool">정보처리산업기사</span>
-        <span class="tool">ITQ 아래한글·엑셀·파워포인트 A</span>
-        <span class="tool">GTQ 2급</span>
-        <span class="tool">전공멘토 위촉 (DB·운영체제)</span>
+      <div class="cap reveal">
+        <div class="cap__title"><span class="mono">C — Frontend &amp; DevOps</span>화면 &amp; 협업</div>
+        <div>
+          <div class="cap__tools">
+            <span class="chip">JavaScript</span><span class="chip">TypeScript</span>
+            <span class="chip">React</span><span class="chip">Thymeleaf</span>
+            <span class="chip">HTML5 · CSS3</span><span class="chip">Git · GitHub</span>
+            <span class="chip">AWS</span><span class="chip">Docker</span>
+          </div>
+          <p class="cap__note">Thymeleaf 서버사이드 렌더링과 React SPA를 모두 다루고, develop/feature 브랜치 전략과 PR 기반 코드 리뷰로 협업합니다. AWS(EC2·S3·Amplify)와 Docker로 배포를 경험했습니다.</p>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- ══════════ 05 · CONTACT ══════════ -->
-  <footer class="contact" id="contact">
-    <span class="mono">05 — Contact</span>
-    <h2 class="reveal">함께 만들 것이<br>있다면, 지금.</h2>
-    <a class="contact__mail" href="mailto:202212020@gsuite.induk.ac.kr">202212020@gsuite.induk.ac.kr</a>
-
-    <div class="contact__foot">
-      <nav class="socials" aria-label="소셜 링크">
-        <a href="https://github.com/Jihwan0210" target="_blank" rel="noopener">GitHub</a>
-        <a href="mailto:202212020@gsuite.induk.ac.kr">Email</a>
-      </nav>
-      <span class="copyright">© 2026 유지환</span>
+  <!-- PATH -->
+  <section id="path">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <span class="kicker mono">03 — Path</span>
+        <h2>경력 &amp; 학력</h2>
+      </div>
+      <div class="tl">
+        <article class="tl__item reveal">
+          <span class="tl__year">2025.11 — 2026.08</span>
+          <div>
+            <h3>웹 애플리케이션 개발자 양성과정</h3>
+            <span class="org">대우능력개발원</span>
+            <p>웹 표준·Java·RDBMS·Spring·Spring Boot·AWS·Spring AI·보안 코딩·리눅스 기반 과정 수료. 팀 프로젝트 <strong>PotatoChip에서 팀장·상품 도메인 담당</strong>으로 상품 관리·권한 제어·장바구니를 설계·구현했습니다.</p>
+          </div>
+        </article>
+        <article class="tl__item reveal">
+          <span class="tl__year">2022 — 현재</span>
+          <div>
+            <h3>컴퓨터소프트웨어학과 재학</h3>
+            <span class="org">인덕대학교 (2·3년제)</span>
+            <p>백엔드 중심으로 웹 개발을 학습하며 INDEV 창업동아리·DevUp·IFP에서 팀 프로젝트와 CS 스터디를 진행하고, 데이터베이스·운영체제 전공 멘토로 위촉되었습니다.</p>
+          </div>
+        </article>
+        <article class="tl__item reveal">
+          <span class="tl__year">2023.05 — 2024.11</span>
+          <div>
+            <h3>병역 · 육군 병장 만기전역</h3>
+            <span class="org">대한민국 육군</span>
+            <p>군 복무를 마치고 만기전역했습니다.</p>
+          </div>
+        </article>
+        <article class="tl__item reveal">
+          <span class="tl__year">2019.03 — 2021.02</span>
+          <div>
+            <h3>이과계열 졸업</h3>
+            <span class="org">영훈고등학교</span>
+            <p>이과계열로 졸업했습니다.</p>
+          </div>
+        </article>
+      </div>
     </div>
-  </footer>
+  </section>
+
+  <!-- AWARDS -->
+  <section id="awards">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <span class="kicker mono">04 — Awards &amp; Certifications</span>
+        <h2>수상 &amp; 자격</h2>
+      </div>
+
+      <div class="reveal">
+        <div class="award">
+          <span class="award__year">2026</span>
+          <span class="award__title">AI Re-Local 해커톤 <span class="org">— 전국 5개 대학 27명 참가</span></span>
+          <span class="tag tag--gold">3등 · 선도상</span>
+        </div>
+        <div class="award">
+          <span class="award__year">2025.12</span>
+          <span class="award__title">Laravel 웹 솔루션 경진대회 <span class="org">— 인덕대학교</span></span>
+          <span class="tag tag--gold">금상</span>
+        </div>
+        <div class="award">
+          <span class="award__year">2025.12</span>
+          <span class="award__title">2025 Analyze Festa 데이터 분석 경진대회 <span class="org">— 인덕대학교</span></span>
+          <span class="tag tag--gold">최우수상</span>
+        </div>
+        <div class="award">
+          <span class="award__year">2026.06</span>
+          <span class="award__title">React 경진대회 <span class="org">— 인덕대학교</span></span>
+          <span class="tag tag--green">우수상</span>
+        </div>
+        <div class="award">
+          <span class="award__year">2025.06</span>
+          <span class="award__title">PHP 온라인 쇼핑몰 개발 경진대회 <span class="org">— 인덕대학교</span></span>
+          <span class="tag tag--green">은상</span>
+        </div>
+      </div>
+
+      <div class="certs reveal">
+        <span class="mono">자격증 · Certifications</span>
+        <div class="tags">
+          <span class="tag tag--plain">SQLD (SQL개발자)</span>
+          <span class="tag tag--plain">정보처리산업기사</span>
+          <span class="tag tag--plain">ITQ 아래한글·엑셀·파워포인트 A</span>
+          <span class="tag tag--plain">GTQ 2급</span>
+          <span class="tag tag--plain">전공멘토 위촉 (DB · 운영체제)</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="contact">
+    <div class="wrap">
+      <span class="kicker mono reveal">05 — Contact</span>
+      <h2 class="reveal">함께 만들 것이 있다면,<br>편하게 연락 주세요.</h2>
+      <a class="contact__mail reveal" href="mailto:202212020@gsuite.induk.ac.kr">202212020@gsuite.induk.ac.kr</a>
+    </div>
+  </section>
 
 </main>
 
+<footer class="footer">
+  <div class="wrap" style="display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;">
+    <span class="mono">© 2026 유지환</span>
+    <nav class="socials">
+      <a href="https://github.com/Jihwan0210" target="_blank" rel="noopener">GitHub</a>
+      <a href="mailto:202212020@gsuite.induk.ac.kr">Email</a>
+    </nav>
+  </div>
+</footer>
+
 <script>
-/* ════════════════════════════════════════════════
-   CONFIG — 나중에 이 값만 바꾸면 GitHub이 연동됩니다.
-════════════════════════════════════════════════ */
-const CONFIG = {
-  githubUsername: "Jihwan0210",   // 본인 GitHub 아이디
-  useGitHubAPI: false,            // true로 바꾸면 실제 레포를 자동으로 불러옵니다 (설명이 없는 레포는 비어 보일 수 있음)
-  maxRepos: 6,
-};
-
-/* GitHub 언어 색상 일부 (github/linguist 관례 색) */
-const LANG_COLORS = {
-  TypeScript:"#3178c6", JavaScript:"#f1e05a", Java:"#b07219",
-  Python:"#3572A5", Go:"#00ADD8", Rust:"#dea584",
-  Kotlin:"#A97BFF", C:"#555555", "C++":"#f34b7d", PHP:"#4F5D95",
-  HTML:"#e34c26", CSS:"#563d7c", Shell:"#89e051", Default:"#8b949e",
-};
-
-/* 디자인 확인용 플레이스홀더 — GitHub API 응답과 동일한 필드명 사용 */
-const PLACEHOLDER_REPOS = [
-  { name:"PotatoChip",               description:"못난이 농산물 마켓플레이스. 팀장·상품 도메인 오너로 상품 CRUD와 판매자 권한 제어, 가격 스냅샷 기반 장바구니, Kakao Map 픽업 위치, 기간별 판매 랭킹을 구현하고 develop/feature 브랜치·PR 리뷰 협업을 운영했습니다.", language:"Java", stargazers_count:0, topics:["spring-boot","팀장"], html_url:"https://github.com/Jihwan0210/PotatoChip" },
-  { name:"COGI",                     description:"AI 기반 코드 리뷰·PR 분석 및 팀 성장 대시보드 서비스. 이슈 승인 흐름, 약점 패턴 통계, 성장 추이 대시보드, 주간 리포트 자동 메일, 소셜 로그인·결제(Toss)를 팀으로 개발 중입니다. (Java · React)", language:"Java", stargazers_count:0, topics:["team","ai"], html_url:"https://github.com/Leeuswa/COGI" },
-  { name:"React_CampusLink",         description:"대학 동아리·스터디·공모전 모집 플랫폼(SPA). Context API로 전역 로그인 상태를 관리하고 sessionStorage로 새로고침 세션 유지, 작성자 권한 분기를 구현해 Amplify로 배포했습니다.", language:"TypeScript", stargazers_count:0, topics:["react","aws"], html_url:"https://github.com/Jihwan0210/React_CampusLink" },
-  { name:"PHP_ShopProject",          description:"PHP·Bootstrap 쇼핑몰 '침착맨 굿즈샵'. 쿠키 기반 로그인·비회원 장바구니, 옵션·수량·할인·배송비 주문 프로세스, 관리자 상품 관리를 구현했습니다. (교내 PHP 쇼핑몰 경진대회 은상)", language:"PHP", stargazers_count:0, topics:["php","은상"], html_url:"https://github.com/Jihwan0210/PHP_ShopProject" },
-  { name:"laravel-hotel-reservation", description:"Laravel MVC 호텔 예약 서비스. 숙소·예약·후기·공지 기능, Eloquent ORM 기반 MariaDB 연동, 사용자/관리자 페이지 분리를 구현했습니다. (교내 Laravel 경진대회 금상)", language:"PHP", stargazers_count:0, topics:["laravel","금상"], html_url:"https://github.com/Jihwan0210/laravel-hotel-reservation" },
-  { name:"Spring-TodoList",          description:"Spring Boot MVC 기반 일정 관리 웹 애플리케이션. 할 일 CRUD와 MariaDB 연동·SQL 데이터 처리를 구현했습니다.", language:"Java", stargazers_count:0, topics:["spring-boot","crud"], html_url:"https://github.com/Jihwan0210/Spring-TodoList" },
-];
-
-/* ── 레포 카드 렌더링 ── */
-function renderRepos(repos){
-  const grid = document.getElementById("repoGrid");
-  grid.innerHTML = "";
-  repos.slice(0, CONFIG.maxRepos).forEach(r => {
-    const color = LANG_COLORS[r.language] || LANG_COLORS.Default;
-    const el = document.createElement("a");
-    el.className = "repo";
-    el.href = r.html_url;
-    el.target = "_blank";
-    el.rel = "noopener";
-    el.innerHTML = `
-      <div class="repo__top">
-        <span class="repo__name">${escapeHTML(r.name)}</span>
-        <span class="repo__stars">
-          <svg viewBox="0 0 16 16"><path d="M8 .25a.75.75 0 0 1 .673.418l1.882 3.815 4.21.612a.75.75 0 0 1 .416 1.279l-3.046 2.97.719 4.192a.75.75 0 0 1-1.088.791L8 12.347l-3.766 1.98a.75.75 0 0 1-1.088-.79l.72-4.194L.818 6.374a.75.75 0 0 1 .416-1.28l4.21-.611L7.327.668A.75.75 0 0 1 8 .25z"/></svg>
-          ${r.stargazers_count ?? 0}
-        </span>
-      </div>
-      <p class="repo__desc">${escapeHTML(r.description || "설명이 아직 없습니다.")}</p>
-      <div class="repo__langbar"><span style="width:100%;background:${color};"></span></div>
-      <div class="repo__foot">
-        <span class="repo__lang"><span class="swatch" style="background:${color};"></span>${escapeHTML(r.language || "—")}</span>
-        <span class="chips">${(r.topics || []).slice(0,2).map(t=>`<span class="chip">${escapeHTML(t)}</span>`).join("")}</span>
-      </div>`;
-    grid.appendChild(el);
-  });
-}
-
-function escapeHTML(s){
-  return String(s).replace(/[&<>"']/g, c => (
-    {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]
-  ));
-}
-
-/* ── GitHub API 연동 (CONFIG.useGitHubAPI = true 일 때) ──
-   비인증 요청은 시간당 60회 제한이 있습니다. 정적 페이지에는 충분합니다. */
-async function loadFromGitHub(){
-  try{
-    const res = await fetch(
-      `https://api.github.com/users/${CONFIG.githubUsername}/repos?sort=updated&per_page=${CONFIG.maxRepos}`,
-      { headers:{ "Accept":"application/vnd.github+json" } }
-    );
-    if(!res.ok) throw new Error(`GitHub API ${res.status}`);
-    const data = await res.json();
-    renderRepos(data.filter(r => !r.fork));
-  }catch(err){
-    console.warn("GitHub API 실패 — 플레이스홀더로 대체:", err);
-    renderRepos(PLACEHOLDER_REPOS);
-  }
-}
-
-CONFIG.useGitHubAPI ? loadFromGitHub() : renderRepos(PLACEHOLDER_REPOS);
-
-/* ════════════════════════════════════════════════
-   SIGNATURE — 키네틱 가변 폰트 헤드라인
-   커서와의 거리로 각 글자의 wght(200–700)를 보간
-════════════════════════════════════════════════ */
-(function kineticHeadline(){
-  const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  const finePointer = window.matchMedia("(pointer: fine)").matches;
-  const targets = document.querySelectorAll("[data-kinetic]");
-
-  // 글자 분해
-  targets.forEach(t => {
-    const text = t.textContent;
-    t.textContent = "";
-    [...text].forEach(ch => {
-      const span = document.createElement("span");
-      if(ch === " "){ span.className = "sp"; }
-      else{ span.className = "ch"; span.textContent = ch; }
-      t.appendChild(span);
-    });
-  });
-
-  if(reduce || !finePointer) return; // 모바일/저모션: 정적 유지
-
-  const chars = document.querySelectorAll("#kinetic .ch");
-  const MIN_W = 200, MAX_W = 700, RADIUS = 220;
-  let mx = -9999, my = -9999, ticking = false;
-
-  function update(){
-    ticking = false;
-    chars.forEach(ch => {
-      const r = ch.getBoundingClientRect();
-      const dx = mx - (r.left + r.width/2);
-      const dy = my - (r.top + r.height/2);
-      const d = Math.hypot(dx, dy);
-      const t = Math.max(0, 1 - d / RADIUS);
-      const w = MIN_W + (MAX_W - MIN_W) * (t * t); // ease-in falloff
-      ch.style.fontVariationSettings = `"wght" ${Math.round(w)}`;
-    });
-  }
-
-  window.addEventListener("pointermove", e => {
-    mx = e.clientX; my = e.clientY;
-    if(!ticking){ ticking = true; requestAnimationFrame(update); }
-  }, { passive:true });
-
-  window.addEventListener("pointerleave", () => {
-    mx = -9999; my = -9999;
-    requestAnimationFrame(update);
-  });
-})();
-
-/* ── 스크롤 리빌 (IntersectionObserver) ── */
-(function scrollReveal(){
-  const io = new IntersectionObserver(entries => {
-    entries.forEach(en => {
+/* 스크롤 진입 애니메이션 (IntersectionObserver) */
+(function(){
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(en){
       if(en.isIntersecting){ en.target.classList.add("in"); io.unobserve(en.target); }
     });
-  }, { threshold:.14 });
-  document.querySelectorAll(".reveal").forEach(el => io.observe(el));
-})();
-
-/* ── 현재 섹션 하이라이트 ── */
-(function activeNav(){
-  const links = [...document.querySelectorAll(".rail__link")];
-  const map = new Map(links.map(l => [l.getAttribute("href").slice(1), l]));
-  const io = new IntersectionObserver(entries => {
-    entries.forEach(en => {
-      if(en.isIntersecting){
-        links.forEach(l => l.removeAttribute("aria-current"));
-        const link = map.get(en.target.id);
-        if(link) link.setAttribute("aria-current","true");
-      }
-    });
-  }, { rootMargin:"-40% 0px -55% 0px" });
-  ["work","stack","timeline","awards","contact"].forEach(id => {
-    const el = document.getElementById(id);
-    if(el) io.observe(el);
-  });
-})();
-
-/* ── 테마 토글 (시스템 설정 기본, 저장은 가능할 때만) ── */
-(function theme(){
-  const root = document.documentElement;
-  let saved = null;
-  try{ saved = localStorage.getItem("theme"); }catch(_){}
-  const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-  root.dataset.theme = saved || (prefersDark ? "dark" : "light");
-
-  document.getElementById("themeBtn").addEventListener("click", () => {
-    const next = root.dataset.theme === "dark" ? "light" : "dark";
-    root.dataset.theme = next;
-    try{ localStorage.setItem("theme", next); }catch(_){}
-  });
+  }, { threshold:.12 });
+  document.querySelectorAll(".reveal").forEach(function(el){ io.observe(el); });
 })();
 </script>
 </body>
