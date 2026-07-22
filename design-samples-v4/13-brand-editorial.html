@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JH Editorial — 유지환 브랜드 아이덴티티 가이드</title>
+<meta name="description" content="유지환(신입 백엔드 개발자) 포트폴리오 — 에디토리얼 브랜드 아이덴티티 가이드">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;500;600;700;900&family=Noto+Sans+KR:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #f6f3ec;
+    --surface: #fffdf8;
+    --surface-2: #ece6d7;
+    --line: #ddd6c4;
+    --ink: #1c1f1b;
+    --ink-soft: #5c5d51;
+    --ink-faint: #96917f;
+    --accent: #1f4d3a;
+    --accent-tint: #e3ebe1;
+    --accent-ink: #143627;
+    --radius: 2px;
+    --radius-chip: 2px;
+    --maxw: 1160px;
+  }
+
+  *{ box-sizing: border-box; }
+
+  body{
+    margin:0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Noto Sans KR', sans-serif;
+    line-height: 1.68;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1,h2,h3,h4{ font-family:'Noto Serif KR', serif; margin:0; font-weight:600; }
+
+  a{ color: var(--accent); text-decoration:none; }
+  a:hover{ color: var(--accent-ink); text-decoration: underline; }
+
+  .mono{ font-family:'JetBrains Mono', monospace; }
+
+  .wrap{ max-width: var(--maxw); margin:0 auto; padding: 0 24px; }
+
+  /* ---------- nav ---------- */
+  header.topnav{
+    position: sticky; top:0; z-index: 20;
+    background: rgba(246,243,236,0.92);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line);
+  }
+  .topnav .wrap{
+    height: 66px;
+    display:flex; align-items:center; justify-content:space-between;
+    gap: 20px;
+  }
+  .brandmark-mini{ display:flex; align-items:center; gap:11px; }
+  .brandmark-mini svg{ width:28px; height:28px; }
+  .brandmark-mini span{
+    font-family:'Noto Serif KR', serif;
+    font-weight:600; letter-spacing:0.01em; font-size:15px;
+  }
+
+  .topnav nav{ display:flex; gap: 24px; }
+  .topnav nav a{
+    color: var(--ink-soft); font-size: 12.5px; font-weight:500;
+    letter-spacing: 0.04em;
+    white-space:nowrap;
+  }
+  .topnav nav a:hover{ color: var(--accent); text-decoration:none; }
+
+  @media (max-width: 760px){
+    .topnav nav{ display:none; }
+  }
+
+  /* ---------- shared section chrome ---------- */
+  section{ padding: 76px 0; border-bottom: 1px solid var(--line); }
+  section:last-of-type{ border-bottom:none; }
+
+  .chapter{
+    display:flex; align-items:baseline; gap:14px;
+    margin-bottom: 38px;
+    padding-bottom: 18px;
+    border-bottom: 1px solid var(--ink);
+  }
+  .chapter .num{
+    font-family:'Noto Serif KR', serif;
+    font-weight:700;
+    font-size: 15px; color: var(--accent);
+  }
+  .chapter h2{ font-size: clamp(1.5rem, 3vw, 2.05rem); font-weight:600; }
+  .chapter .of{
+    font-family:'JetBrains Mono', monospace;
+    font-size: 11px; letter-spacing:0.06em;
+    color: var(--ink-faint);
+    margin-left:auto;
+  }
+
+  /* ---------- cover ---------- */
+  .cover{ padding-top: 60px; }
+  .cover .doc-label{
+    font-family:'JetBrains Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    color: var(--ink-faint);
+    margin-bottom: 30px;
+  }
+  .cover-grid{
+    display:grid;
+    grid-template-columns: 1.05fr 0.95fr;
+    gap: 44px;
+    align-items:center;
+  }
+  .cover-mark{
+    background: var(--surface);
+    border: 1px solid var(--line);
+    aspect-ratio: 1.3 / 1;
+    display:flex; align-items:center; justify-content:center;
+    position:relative;
+  }
+  .cover-mark svg{ width: 42%; height:42%; }
+  .cover-mark .corner{
+    position:absolute; font-family:'JetBrains Mono', monospace;
+    font-size: 10.5px; letter-spacing:0.04em; color: var(--ink-faint);
+  }
+  .cover-mark .corner.tl{ top:16px; left:18px; }
+  .cover-mark .corner.br{ bottom:16px; right:18px; }
+
+  .cover-copy h1{
+    font-size: clamp(2.3rem, 5vw, 3.5rem);
+    line-height: 1.12;
+    letter-spacing: -0.005em;
+  }
+  .cover-copy .role{
+    margin-top: 15px;
+    font-size: 14.5px;
+    font-family:'JetBrains Mono', monospace;
+    letter-spacing: 0.03em;
+    color: var(--accent-ink);
+  }
+  .cover-copy .tagline{
+    margin-top: 24px;
+    font-size: 16px;
+    color: var(--ink);
+    max-width: 44ch;
+    padding-left: 16px;
+    border-left: 2px solid var(--accent);
+  }
+  .cover-copy .meta-row{
+    margin-top: 28px;
+    display:flex; gap: 20px; flex-wrap:wrap;
+    font-family:'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: var(--ink-soft);
+  }
+
+  @media (max-width: 760px){
+    .cover-grid{ grid-template-columns: 1fr; }
+    .cover-mark{ order:-1; max-width: 260px; margin: 0 auto; }
+  }
+
+  /* ---------- logo section ---------- */
+  .logo-grid{
+    display:grid;
+    grid-template-columns: 1.1fr 1fr;
+    gap: 28px;
+  }
+  .panel{
+    background: var(--surface);
+    border: 1px solid var(--line);
+    padding: 28px;
+  }
+  .panel h3{
+    font-size: 12px; font-weight:500;
+    text-transform:uppercase; letter-spacing:0.09em;
+    color: var(--ink-soft);
+    margin-bottom: 20px;
+    font-family:'JetBrains Mono', monospace;
+  }
+
+  .construction-box{
+    aspect-ratio: 4/3;
+    display:flex; align-items:center; justify-content:center;
+    background: var(--surface-2);
+    background-image:
+      linear-gradient(var(--line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--line) 1px, transparent 1px);
+    background-size: 20px 20px;
+  }
+  .construction-box svg{ width: 38%; height:38%; }
+
+  .clearspace-demo{
+    display:flex; align-items:center; justify-content:center;
+    background: var(--accent-tint);
+    border: 1px dashed var(--ink-faint);
+    padding: 30px;
+    margin-top: 20px;
+  }
+  .clearspace-demo svg{ width:54px; height:54px; }
+
+  .lockup-row{
+    display:flex; align-items:center; gap:16px;
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid var(--line);
+  }
+  .lockup-row svg{ width:34px; height:34px; }
+  .lockup-row .word{
+    font-family:'Noto Serif KR', serif;
+    font-weight:700; font-size: 1.15rem; letter-spacing:0.01em;
+  }
+  .lockup-row .word small{
+    display:block; font-family:'JetBrains Mono', monospace;
+    font-weight:400; font-size: 10.5px; color: var(--ink-faint); letter-spacing:0.08em;
+    margin-top: 2px;
+  }
+
+  .rule-list{ list-style:none; margin: 20px 0 0; padding:0; font-size: 13.5px; color: var(--ink-soft); }
+  .rule-list li{ padding: 9px 0; border-top: 1px solid var(--line); }
+  .rule-list li:first-child{ border-top:none; }
+  .rule-list li b{ color: var(--ink); }
+
+  .size-row{ display:flex; align-items:flex-end; gap:24px; margin-top: 18px; }
+  .size-row .item{ text-align:center; }
+  .size-row .item svg{ display:block; margin:0 auto 9px; }
+  .size-row .item span{ font-family:'JetBrains Mono', monospace; font-size:10.5px; color: var(--ink-faint); }
+
+  @media (max-width: 760px){ .logo-grid{ grid-template-columns: 1fr; } }
+
+  /* ---------- color system ---------- */
+  .swatch-grid{
+    display:grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 14px;
+  }
+  .swatch{ border: 1px solid var(--line); overflow:hidden; }
+  .swatch .fill{ height: 86px; }
+  .swatch .label{
+    background: var(--surface); padding: 11px 12px;
+    font-family:'JetBrains Mono', monospace; font-size: 11px;
+  }
+  .swatch .label b{
+    display:block; font-size:12px; margin-bottom:3px; color:var(--ink);
+    font-family:'Noto Sans KR', sans-serif; font-weight:600;
+  }
+  .swatch .label span{ color: var(--ink-faint); }
+
+  .usage-note{
+    margin-top: 28px;
+    font-size: 14px;
+    color: var(--ink-soft);
+    max-width: 68ch;
+  }
+
+  @media (max-width: 900px){ .swatch-grid{ grid-template-columns: repeat(4,1fr);} }
+  @media (max-width: 560px){ .swatch-grid{ grid-template-columns: repeat(2,1fr);} }
+
+  /* ---------- typography ---------- */
+  .type-scale .row{
+    display:flex; align-items:baseline; gap: 24px;
+    padding: 22px 0;
+  }
+  .type-scale .row + .row{ border-top: 1px solid var(--line); }
+  .type-scale .tag{
+    font-family:'JetBrains Mono', monospace;
+    font-size: 11px; color: var(--accent-ink);
+    width: 168px; flex-shrink:0;
+  }
+  .type-scale .sample{ font-weight:600; }
+  .display-sample{ font-family:'Noto Serif KR', serif; font-weight:700; font-size: clamp(1.9rem, 4.6vw, 3rem); line-height:1.15; }
+  .h1-sample{ font-family:'Noto Serif KR', serif; font-weight:600; font-size: clamp(1.5rem, 3.2vw, 2.05rem); }
+  .h2-sample{ font-family:'Noto Sans KR', sans-serif; font-weight:600; font-size: 1.3rem; }
+  .body-sample{ font-family:'Noto Sans KR', sans-serif; font-weight:400; font-size:1rem; color:var(--ink); }
+  .caption-sample{ font-family:'JetBrains Mono', monospace; font-weight:400; font-size:0.79rem; color:var(--ink-soft); letter-spacing:0.02em; }
+
+  /* ---------- grid system ---------- */
+  .grid-demo{
+    background: var(--surface);
+    border: 1px solid var(--line);
+    padding: 26px;
+  }
+  .grid-demo .cols{
+    display:grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  .grid-demo .cols div{
+    background: var(--accent-tint);
+    color: var(--accent-ink);
+    font-family:'JetBrains Mono', monospace;
+    font-size: 10px;
+    text-align:center;
+    padding: 15px 0;
+  }
+  .grid-spec{
+    display:grid; grid-template-columns: repeat(3, 1fr); gap: 20px;
+    font-family:'JetBrains Mono', monospace; font-size: 12px; color: var(--ink-soft);
+  }
+  .grid-spec b{ display:block; color:var(--ink); font-size:13.5px; margin-bottom:5px; font-family:'Noto Sans KR', sans-serif; font-weight:600; }
+  @media (max-width: 760px){
+    .grid-demo .cols{ grid-template-columns: repeat(4,1fr); }
+    .grid-demo .cols div:nth-child(n+5){ display:none; }
+    .grid-spec{ grid-template-columns: 1fr; }
+  }
+
+  /* ---------- projects ---------- */
+  .case-grid{
+    display:grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: auto auto;
+    gap: 22px;
+  }
+  .case{
+    background: var(--surface);
+    border: 1px solid var(--line);
+    padding: 26px;
+    display:flex; flex-direction:column;
+  }
+  .case.featured{ grid-column: span 3; }
+  @media (min-width: 761px){
+    .case.featured:nth-of-type(1){ grid-column: span 2; }
+  }
+  .case .idx{
+    font-family:'Noto Serif KR', serif;
+    font-weight:700;
+    font-size: 12.5px; color: var(--accent); margin-bottom:12px;
+  }
+  .case h3{ font-size: 1.22rem; margin-bottom: 9px; }
+  .case p.desc{ font-size: 13.5px; color: var(--ink-soft); margin: 0 0 14px; flex-grow:1; }
+  .case .role{ font-size:12.5px; color: var(--ink-faint); margin-bottom:12px; font-family:'JetBrains Mono', monospace; }
+  .case .award{
+    display:inline-block;
+    font-family:'JetBrains Mono', monospace;
+    font-size: 11px; color: var(--accent-ink);
+    background: var(--accent-tint);
+    padding: 5px 10px;
+    margin-bottom: 12px;
+    width: fit-content;
+    border-left: 2px solid var(--accent);
+  }
+  .chip-row{ display:flex; flex-wrap:wrap; gap:7px; margin-bottom: 14px; }
+  .chip{
+    font-family:'JetBrains Mono', monospace;
+    font-size: 11px; color: var(--ink-soft);
+    border: 1px solid var(--line);
+    padding: 3px 9px;
+  }
+  .case a.repo{
+    font-size: 13px; font-weight:600; margin-top:auto;
+  }
+
+  @media (max-width: 760px){
+    .case-grid{ grid-template-columns: 1fr; }
+    .case.featured, .case.featured:nth-of-type(1){ grid-column: span 1; }
+  }
+
+  /* ---------- stack section ---------- */
+  .stack-groups{
+    display:grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 26px;
+  }
+  .stack-groups h4{
+    font-family:'JetBrains Mono', monospace;
+    font-size: 11px; letter-spacing:0.07em; text-transform:uppercase;
+    color: var(--ink-faint); margin-bottom: 13px;
+    padding-bottom: 10px; border-bottom: 1px solid var(--line);
+  }
+  .stack-groups .chip-row .chip{ background: var(--surface); }
+  @media (max-width: 760px){ .stack-groups{ grid-template-columns: repeat(2,1fr); } }
+
+  /* ---------- footer ---------- */
+  footer{ padding: 50px 0 62px; }
+  .footer-grid{
+    display:flex; justify-content:space-between; align-items:flex-end; flex-wrap:wrap; gap:24px;
+  }
+  .footer-mark{ display:flex; align-items:center; gap:11px; }
+  .footer-mark svg{ width:26px; height:26px; }
+  .footer-mark span{ font-family:'Noto Serif KR', serif; font-weight:600; }
+  .footer-links{
+    display:flex; gap:22px; flex-wrap:wrap;
+    font-size: 13.5px;
+  }
+  .footer-fine{
+    width:100%;
+    margin-top: 30px;
+    padding-top: 22px;
+    border-top: 1px solid var(--ink);
+    font-family:'JetBrains Mono', monospace;
+    font-size: 11px; letter-spacing:0.03em; color: var(--ink-faint);
+    display:flex; justify-content:space-between; flex-wrap:wrap; gap:8px;
+  }
+</style>
+</head>
+<body>
+
+  <header class="topnav">
+    <div class="wrap">
+      <div class="brandmark-mini">
+        <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="20" cy="20" r="19" fill="#1f4d3a"/>
+          <circle cx="20" cy="20" r="14.5" fill="none" stroke="#f6f3ec" stroke-width="0.6" opacity="0.45" stroke-dasharray="1.4 2.1"/>
+          <path d="M15 13 V23.4" stroke="#f6f3ec" stroke-width="2" stroke-linecap="round"/>
+          <path d="M25 13 V23.4" stroke="#f6f3ec" stroke-width="2" stroke-linecap="round"/>
+          <path d="M15 18.4 H25" stroke="#f6f3ec" stroke-width="2" stroke-linecap="round"/>
+          <path d="M20 23.4 V27" stroke="#f6f3ec" stroke-width="2" stroke-linecap="round"/>
+          <circle cx="20" cy="28.6" r="1.15" fill="#f6f3ec"/>
+        </svg>
+        <span>JH ED.02</span>
+      </div>
+      <nav aria-label="지면 안내">
+        <a href="#logo">로고</a>
+        <a href="#color">컬러</a>
+        <a href="#type">타이포</a>
+        <a href="#grid">그리드</a>
+        <a href="#work">프로젝트</a>
+        <a href="#stack">기술</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="wrap">
+
+    <!-- COVER -->
+    <section class="cover">
+      <p class="doc-label mono">IDENTITY GUIDE — EDITION 02 &nbsp; / &nbsp; EDITORIAL BRAND SYSTEM</p>
+      <div class="cover-grid">
+        <div class="cover-copy">
+          <h1>유지환</h1>
+          <p class="role mono">BACKEND DEVELOPER — JAVA · SPRING BOOT</p>
+          <p class="tagline">군더더기를 걷어낸 구조가 오래 간다. 인증, 데이터, API의 경계를 정확히 긋는 일에 집중한다.</p>
+          <div class="meta-row">
+            <span>GITHUB · JIHWAN0210</span>
+            <span>SEOUL, KR</span>
+            <span>ED. 02 / 2026</span>
+          </div>
+        </div>
+        <div class="cover-mark">
+          <span class="corner tl mono">JH — 02</span>
+          <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="20" cy="20" r="19" fill="#1f4d3a"/>
+            <circle cx="20" cy="20" r="14.5" fill="none" stroke="#f6f3ec" stroke-width="0.6" opacity="0.45" stroke-dasharray="1.4 2.1"/>
+            <path d="M15 13 V23.4" stroke="#f6f3ec" stroke-width="2" stroke-linecap="round"/>
+            <path d="M25 13 V23.4" stroke="#f6f3ec" stroke-width="2" stroke-linecap="round"/>
+            <path d="M15 18.4 H25" stroke="#f6f3ec" stroke-width="2" stroke-linecap="round"/>
+            <path d="M20 23.4 V27" stroke="#f6f3ec" stroke-width="2" stroke-linecap="round"/>
+            <circle cx="20" cy="28.6" r="1.15" fill="#f6f3ec"/>
+          </svg>
+          <span class="corner br mono">SEAL / 인장</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- LOGO -->
+    <section id="logo">
+      <div class="chapter">
+        <span class="num">01</span>
+        <h2>로고 시스템</h2>
+        <span class="of mono">MARK &amp; LOCKUP</span>
+      </div>
+
+      <div class="logo-grid">
+        <div class="panel">
+          <h3>구성 원리</h3>
+          <div class="construction-box">
+            <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="20" cy="20" r="19" fill="#1f4d3a"/>
+              <circle cx="20" cy="20" r="14.5" fill="none" stroke="#f6f3ec" stroke-width="0.6" opacity="0.45" stroke-dasharray="1.4 2.1"/>
+              <path d="M15 13 V23.4" stroke="#f6f3ec" stroke-width="2" stroke-linecap="round"/>
+              <path d="M25 13 V23.4" stroke="#f6f3ec" stroke-width="2" stroke-linecap="round"/>
+              <path d="M15 18.4 H25" stroke="#f6f3ec" stroke-width="2" stroke-linecap="round"/>
+              <path d="M20 23.4 V27" stroke="#f6f3ec" stroke-width="2" stroke-linecap="round"/>
+              <circle cx="20" cy="28.6" r="1.15" fill="#f6f3ec"/>
+            </svg>
+          </div>
+          <ul class="rule-list">
+            <li>두 기둥과 가로선이 이루는 다리(H)는 인증·데이터·API 여러 층을 잇는 구조를 나타낸다.</li>
+            <li>다리 아래로 내려와 찍힌 점은 검증을 마친 자리에 남기는 마침표 — 백엔드가 데이터를 최종 확정 짓는 지점이라는 뜻이다.</li>
+            <li>점선으로 두른 이중 원은 서류에 찍는 인장(檢印)의 형식을 빌려, 검토를 통과했다는 인상을 준다.</li>
+          </ul>
+        </div>
+
+        <div class="panel">
+          <h3>여백 규칙 · 최소 크기</h3>
+          <div class="clearspace-demo">
+            <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="20" cy="20" r="19" fill="#1f4d3a"/>
+              <circle cx="20" cy="20" r="14.5" fill="none" stroke="#f6f3ec" stroke-width="0.6" opacity="0.45" stroke-dasharray="1.4 2.1"/>
+              <path d="M15 13 V23.4" stroke="#f6f3ec" stroke-width="2" stroke-linecap="round"/>
+              <path d="M25 13 V23.4" stroke="#f6f3ec" stroke-width="2" stroke-linecap="round"/>
+              <path d="M15 18.4 H25" stroke="#f6f3ec" stroke-width="2" stroke-linecap="round"/>
+              <path d="M20 23.4 V27" stroke="#f6f3ec" stroke-width="2" stroke-linecap="round"/>
+              <circle cx="20" cy="28.6" r="1.15" fill="#f6f3ec"/>
+            </svg>
+          </div>
+          <div class="size-row">
+            <div class="item">
+              <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="20" cy="20" r="19" fill="#1f4d3a"/>
+                <path d="M15 13 V23.4" stroke="#f6f3ec" stroke-width="2" stroke-linecap="round"/>
+                <path d="M25 13 V23.4" stroke="#f6f3ec" stroke-width="2" stroke-linecap="round"/>
+                <path d="M15 18.4 H25" stroke="#f6f3ec" stroke-width="2" stroke-linecap="round"/>
+                <path d="M20 23.4 V27" stroke="#f6f3ec" stroke-width="2" stroke-linecap="round"/>
+                <circle cx="20" cy="28.6" r="1.15" fill="#f6f3ec"/>
+              </svg>
+              <span>40px</span>
+            </div>
+            <div class="item">
+              <svg width="26" height="26" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="20" cy="20" r="19" fill="#1f4d3a"/>
+                <path d="M15 13 V23.4" stroke="#f6f3ec" stroke-width="2" stroke-linecap="round"/>
+                <path d="M25 13 V23.4" stroke="#f6f3ec" stroke-width="2" stroke-linecap="round"/>
+                <path d="M15 18.4 H25" stroke="#f6f3ec" stroke-width="2" stroke-linecap="round"/>
+                <path d="M20 23.4 V27" stroke="#f6f3ec" stroke-width="2" stroke-linecap="round"/>
+                <circle cx="20" cy="28.6" r="1.15" fill="#f6f3ec"/>
+              </svg>
+              <span>26px</span>
+            </div>
+            <div class="item">
+              <svg width="16" height="16" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="20" cy="20" r="19" fill="#1f4d3a"/>
+                <path d="M15 13 V23.4" stroke="#f6f3ec" stroke-width="2" stroke-linecap="round"/>
+                <path d="M25 13 V23.4" stroke="#f6f3ec" stroke-width="2" stroke-linecap="round"/>
+                <path d="M15 18.4 H25" stroke="#f6f3ec" stroke-width="2" stroke-linecap="round"/>
+                <path d="M20 23.4 V27" stroke="#f6f3ec" stroke-width="2" stroke-linecap="round"/>
+                <circle cx="20" cy="28.6" r="1.15" fill="#f6f3ec"/>
+              </svg>
+              <span>16px, 최소</span>
+            </div>
+          </div>
+          <div class="lockup-row">
+            <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="20" cy="20" r="19" fill="#1f4d3a"/>
+              <circle cx="20" cy="20" r="14.5" fill="none" stroke="#f6f3ec" stroke-width="0.6" opacity="0.45" stroke-dasharray="1.4 2.1"/>
+              <path d="M15 13 V23.4" stroke="#f6f3ec" stroke-width="2" stroke-linecap="round"/>
+              <path d="M25 13 V23.4" stroke="#f6f3ec" stroke-width="2" stroke-linecap="round"/>
+              <path d="M15 18.4 H25" stroke="#f6f3ec" stroke-width="2" stroke-linecap="round"/>
+              <path d="M20 23.4 V27" stroke="#f6f3ec" stroke-width="2" stroke-linecap="round"/>
+              <circle cx="20" cy="28.6" r="1.15" fill="#f6f3ec"/>
+            </svg>
+            <span class="word">유지환<small>BACKEND DEVELOPER</small></span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- COLOR -->
+    <section id="color">
+      <div class="chapter">
+        <span class="num">02</span>
+        <h2>컬러 시스템</h2>
+        <span class="of mono">1 ACCENT · WARM NEUTRAL BASE</span>
+      </div>
+
+      <div class="swatch-grid">
+        <div class="swatch">
+          <div class="fill" style="background:#1f4d3a"></div>
+          <div class="label"><b>Deep Forest</b><span>#1F4D3A</span></div>
+        </div>
+        <div class="swatch">
+          <div class="fill" style="background:#e3ebe1"></div>
+          <div class="label"><b>Sage Tint</b><span>#E3EBE1</span></div>
+        </div>
+        <div class="swatch">
+          <div class="fill" style="background:#1c1f1b"></div>
+          <div class="label"><b>Ink</b><span>#1C1F1B</span></div>
+        </div>
+        <div class="swatch">
+          <div class="fill" style="background:#5c5d51"></div>
+          <div class="label"><b>Ink Soft</b><span>#5C5D51</span></div>
+        </div>
+        <div class="swatch">
+          <div class="fill" style="background:#f6f3ec"></div>
+          <div class="label"><b>Ivory</b><span>#F6F3EC</span></div>
+        </div>
+        <div class="swatch">
+          <div class="fill" style="background:#fffdf8; border-bottom:1px solid #ddd6c4"></div>
+          <div class="label"><b>Surface</b><span>#FFFDF8</span></div>
+        </div>
+        <div class="swatch">
+          <div class="fill" style="background:#ddd6c4"></div>
+          <div class="label"><b>Line</b><span>#DDD6C4</span></div>
+        </div>
+      </div>
+      <p class="usage-note">Deep Forest는 마크와 링크, 인덱스 숫자, 인용 규칙선에만 사용한다. 본문과 배경은 언제나 아이보리·잉크 계열에 머물러, 어느 지면에서도 강조가 흐트러지지 않게 한다.</p>
+    </section>
+
+    <!-- TYPOGRAPHY -->
+    <section id="type">
+      <div class="chapter">
+        <span class="num">03</span>
+        <h2>타이포그래피 스케일</h2>
+        <span class="of mono">SERIF DISPLAY → MONO CAPTION</span>
+      </div>
+      <div class="type-scale">
+        <div class="row">
+          <span class="tag">Display / Serif 700</span>
+          <span class="sample display-sample">정확함이 스타일이다</span>
+        </div>
+        <div class="row">
+          <span class="tag">Heading / Serif 600</span>
+          <span class="sample h1-sample">인증부터 배포까지</span>
+        </div>
+        <div class="row">
+          <span class="tag">Subhead / Sans 600</span>
+          <span class="sample h2-sample">API는 하나의 약속이다</span>
+        </div>
+        <div class="row">
+          <span class="tag">Body / Sans 400</span>
+          <span class="sample body-sample">본문은 Noto Sans KR을 사용하며, 문단은 항상 최대 65자 폭 안에서 읽힌다.</span>
+        </div>
+        <div class="row">
+          <span class="tag">Caption / Mono 400</span>
+          <span class="sample caption-sample">JETBRAINS MONO — 인덱스 번호, 라벨, 메타 정보 전용</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- GRID -->
+    <section id="grid">
+      <div class="chapter">
+        <span class="num">04</span>
+        <h2>그리드 규칙</h2>
+        <span class="of mono">12 COL · 8PX BASELINE</span>
+      </div>
+      <div class="grid-demo">
+        <div class="cols">
+          <div>01</div><div>02</div><div>03</div><div>04</div><div>05</div><div>06</div>
+          <div>07</div><div>08</div><div>09</div><div>10</div><div>11</div><div>12</div>
+        </div>
+        <div class="grid-spec">
+          <div><b>컬럼</b>12컬럼, 거터 24px, 최대 폭 1160px</div>
+          <div><b>베이스라인</b>8px 단위로 모든 여백 산정</div>
+          <div><b>모서리</b>모든 패널·칩은 각지게 2px, 곡선 대신 규칙선으로 구획</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section id="work">
+      <div class="chapter">
+        <span class="num">05</span>
+        <h2>프로젝트 적용</h2>
+        <span class="of mono">CASE 01 → 06</span>
+      </div>
+
+      <div class="case-grid">
+
+        <article class="case featured">
+          <span class="idx">CASE / 01</span>
+          <h3>읽고</h3>
+          <p class="desc">어려운 생활 문서를 사진으로 찍으면 AI가 쉬운 한국어와 영어로 풀어 설명하는 배리어프리 서비스. 백엔드 전 구간 — 인증, AI 게이트웨이 연동 문서 분석 API, 업로드, 커서 페이지네이션, 전역 예외 처리와 레이트리밋을 맡았다.</p>
+          <p class="role">역할 · 백엔드 개발</p>
+          <span class="award">AI RE-LOCAL 해커톤 3등 · 선도상 (전국 5개 대학 27명)</span>
+          <div class="chip-row">
+            <span class="chip">Java</span><span class="chip">Spring Boot</span><span class="chip">Spring Security</span><span class="chip">JPA</span><span class="chip">JWT</span><span class="chip">PostgreSQL</span><span class="chip">Swagger</span>
+          </div>
+          <a class="repo" href="https://github.com/Jihwan0210/Ilgo-backend">저장소 보기 →</a>
+        </article>
+
+        <article class="case featured">
+          <span class="idx">CASE / 02</span>
+          <h3>PotatoChip</h3>
+          <p class="desc">못난이 농산물 마켓플레이스. 팀장이자 상품 도메인 오너로 CRUD와 판매자 권한 제어, 가격 스냅샷 장바구니, Kakao Map 픽업 위치, 기간별 판매 랭킹을 설계했다.</p>
+          <p class="role">역할 · 팀장 / 상품 도메인 오너</p>
+          <div class="chip-row">
+            <span class="chip">Java 21</span><span class="chip">Spring Boot</span><span class="chip">JPA</span><span class="chip">Thymeleaf</span><span class="chip">MariaDB</span>
+          </div>
+          <a class="repo" href="https://github.com/Jihwan0210/PotatoChip">저장소 보기 →</a>
+        </article>
+
+        <article class="case">
+          <span class="idx">CASE / 03</span>
+          <h3>COGI</h3>
+          <p class="desc">AI 코드 리뷰와 PR 분석으로 팀의 성장을 보여주는 대시보드. 이슈 승인, 약점 패턴 통계, 주간 리포트 자동 메일을 진행 중.</p>
+          <p class="role">진행 중 · 팀 프로젝트</p>
+          <div class="chip-row"><span class="chip">Java</span><span class="chip">React</span></div>
+          <a class="repo" href="https://github.com/Leeuswa/COGI">저장소 보기 →</a>
+        </article>
+
+        <article class="case">
+          <span class="idx">CASE / 04</span>
+          <h3>CampusLink</h3>
+          <p class="desc">대학 동아리·스터디·공모전 모집 SPA. Context API 로그인, sessionStorage 세션 유지, 작성자 권한 분기, Amplify 배포.</p>
+          <p class="role">개인 프로젝트</p>
+          <div class="chip-row"><span class="chip">React 18</span><span class="chip">TypeScript</span><span class="chip">Vite</span></div>
+          <a class="repo" href="https://github.com/Jihwan0210/React_CampusLink">저장소 보기 →</a>
+        </article>
+
+        <article class="case">
+          <span class="idx">CASE / 05</span>
+          <h3>침착맨 굿즈샵</h3>
+          <p class="desc">쿠키 로그인과 비회원 장바구니, 옵션·수량·할인·배송비 주문, 관리자 상품 관리를 갖춘 PHP 쇼핑몰.</p>
+          <p class="role">교내 경진대회 은상</p>
+          <div class="chip-row"><span class="chip">PHP</span><span class="chip">Bootstrap</span></div>
+          <a class="repo" href="https://github.com/Jihwan0210/PHP_ShopProject">저장소 보기 →</a>
+        </article>
+
+        <article class="case">
+          <span class="idx">CASE / 06</span>
+          <h3>호텔 예약</h3>
+          <p class="desc">숙소·예약·후기·공지를 다루는 Laravel MVC 서비스. Eloquent ORM, 사용자·관리자 화면 분리.</p>
+          <p class="role">교내 경진대회 금상</p>
+          <div class="chip-row"><span class="chip">Laravel</span></div>
+          <a class="repo" href="https://github.com/Jihwan0210/laravel-hotel-reservation">저장소 보기 →</a>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- STACK -->
+    <section id="stack">
+      <div class="chapter">
+        <span class="num">06</span>
+        <h2>기술 컴포넌트</h2>
+        <span class="of mono">STACK LIBRARY</span>
+      </div>
+      <div class="stack-groups">
+        <div>
+          <h4>백엔드</h4>
+          <div class="chip-row">
+            <span class="chip">Java</span><span class="chip">Spring Boot</span><span class="chip">Spring Security</span><span class="chip">Spring Data JPA</span><span class="chip">REST API</span><span class="chip">JWT</span>
+          </div>
+        </div>
+        <div>
+          <h4>데이터베이스</h4>
+          <div class="chip-row">
+            <span class="chip">MariaDB</span><span class="chip">MySQL</span><span class="chip">Oracle</span><span class="chip">SQL</span>
+          </div>
+        </div>
+        <div>
+          <h4>프론트엔드</h4>
+          <div class="chip-row">
+            <span class="chip">JavaScript</span><span class="chip">TypeScript</span><span class="chip">React</span><span class="chip">Thymeleaf</span>
+          </div>
+        </div>
+        <div>
+          <h4>협업 · 인프라</h4>
+          <div class="chip-row">
+            <span class="chip">Git</span><span class="chip">GitHub</span><span class="chip">AWS</span><span class="chip">Docker</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <div class="footer-grid">
+        <div class="footer-mark">
+          <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="20" cy="20" r="19" fill="#1f4d3a"/>
+            <circle cx="20" cy="20" r="14.5" fill="none" stroke="#f6f3ec" stroke-width="0.6" opacity="0.45" stroke-dasharray="1.4 2.1"/>
+            <path d="M15 13 V23.4" stroke="#f6f3ec" stroke-width="2" stroke-linecap="round"/>
+            <path d="M25 13 V23.4" stroke="#f6f3ec" stroke-width="2" stroke-linecap="round"/>
+            <path d="M15 18.4 H25" stroke="#f6f3ec" stroke-width="2" stroke-linecap="round"/>
+            <path d="M20 23.4 V27" stroke="#f6f3ec" stroke-width="2" stroke-linecap="round"/>
+            <circle cx="20" cy="28.6" r="1.15" fill="#f6f3ec"/>
+          </svg>
+          <span>유지환</span>
+        </div>
+        <div class="footer-links">
+          <a href="https://github.com/Jihwan0210">GitHub · @Jihwan0210</a>
+          <a href="mailto:202212020@gsuite.induk.ac.kr">202212020@gsuite.induk.ac.kr</a>
+        </div>
+        <div class="footer-fine">
+          <span>JH EDITORIAL SYSTEM — ED. 02</span>
+          <span>SEOUL, KOREA</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

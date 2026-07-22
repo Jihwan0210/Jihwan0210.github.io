@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>브랜드 시스템 시안 (v4) — 유지환 포트폴리오</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500&family=Noto+Sans+KR:wght@400;500;700&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:"Noto Sans KR",-apple-system,sans-serif;background:#F5F4F0;color:#23252B;line-height:1.6;padding:clamp(28px,6vw,80px)}
+.wrap{max-width:860px;margin:0 auto}
+h1{font-family:"Newsreader",serif;font-weight:500;font-size:clamp(1.9rem,4vw,2.8rem);letter-spacing:-.02em}
+.sub{color:#6B7079;margin-top:10px;margin-bottom:40px;max-width:62ch}
+.mono{font-family:"JetBrains Mono",monospace;font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;color:#9AA0A8}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+@media(max-width:720px){.grid{grid-template-columns:1fr}}
+.card{display:block;border:1px solid #E3E0D8;border-radius:14px;background:#fff;overflow:hidden;transition:transform .2s,box-shadow .2s;color:inherit;text-decoration:none}
+.card:hover{transform:translateY(-3px);box-shadow:0 10px 30px -16px rgba(0,0,0,.22)}
+.card .band{height:8px;display:flex}.card .band i{flex:1}
+.card .body{padding:22px 24px}
+.card h2{font-size:1.15rem;margin:6px 0 6px;letter-spacing:-.01em}
+.card p{color:#6B7079;font-size:.88rem}
+.note{margin-top:36px;padding:18px 20px;border:1px solid #E3E0D8;border-radius:12px;background:#fff;color:#5A6070;font-size:.9rem}
+.foot{margin-top:24px;color:#8A8F97;font-size:.85rem}
+code{font-family:"JetBrains Mono",monospace;font-size:.82em;background:#EDEBE4;padding:2px 6px;border-radius:5px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <p class="mono">유지환 · Portfolio Design — v4 (브랜드 시스템 계열)</p>
+  <h1>브랜드 시스템 시안 3종</h1>
+  <p class="sub">마음에 들어 하신 10번(Brand System) 방향을 계승해, 팔레트·성격만 다르게 만든 3가지입니다. 모두 모노그램·컬러 스와치·타이포 스케일·그리드 규칙을 드러낸 아이덴티티 시스템 + 프로젝트 케이스 구조.</p>
+  <div class="grid">
+    <a class="card" href="11-brand-warm.html">
+      <div class="band"><i style="background:#EFE9DF"></i><i style="background:#C1512B"></i><i style="background:#2A2622"></i></div>
+      <div class="body"><span class="mono">Option 11</span><h2>Warm Studio</h2><p>샌드/웜그레이 + 테라코타 단색. 그로테스크. 차분한 스튜디오 톤.</p></div>
+    </a>
+    <a class="card" href="12-brand-mono.html">
+      <div class="band"><i style="background:#F4F4F3"></i><i style="background:#234B3A"></i><i style="background:#1A1A1A"></i></div>
+      <div class="body"><span class="mono">Option 12</span><h2>Mono Premium</h2><p>거의 무채색 + 딥 그린 단색. 넓은 여백. 고요한 프리미엄 에이전시 톤.</p></div>
+    </a>
+    <a class="card" href="13-brand-editorial.html">
+      <div class="band"><i style="background:#F6F3EC"></i><i style="background:#1F4D3A"></i><i style="background:#1C1F1B"></i></div>
+      <div class="body"><span class="mono">Option 13</span><h2>Editorial Brand</h2><p>아이보리+잉크+포레스트 그린. 세리프 워드마크 페어링. 정갈한 현대 브랜드 가이드.</p></div>
+    </a>
+  </div>
+  <div class="note">기준이 된 <strong>10번(Brand System)</strong>도 후보로 함께 두세요 → <code>../design-samples-v3/10-brand-system.html</code></div>
+  <p class="foot">이전 시안(참고용, 선호하지 않으심): <code>../design-samples/</code> · <code>../design-samples-v2/</code> · <code>../design-samples-v3/</code></p>
+</div>
+</body>
+</html>
