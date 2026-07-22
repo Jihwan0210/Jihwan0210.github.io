@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>유지환 — Backend Developer</title>
+<meta name="description" content="유지환의 개발 포트폴리오. Java, Spring Boot 중심의 백엔드 프로젝트.">
+<link rel="preconnect" href="https://cdn.jsdelivr.net">
+<link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    color-scheme: light;
+    --bg:#fbfbfc;
+    --surface:#ffffff;
+    --ink:#15151b;
+    --ink-soft:#6b6b78;
+    --ink-faint:#9797a3;
+    --line:#e8e8ee;
+    --line-soft:#f0f0f4;
+    --accent:#5b46f5;
+    --accent-ink:#ffffff;
+    --accent-soft:#f1eeff;
+    --accent-soft-line:#e2ddff;
+    --radius-lg:22px;
+    --radius-md:14px;
+    --radius-sm:9px;
+    --shadow-sm: 0 1px 2px rgba(20,20,30,.05);
+    --shadow-md: 0 1px 1px rgba(20,20,30,.03), 0 16px 40px -16px rgba(20,20,30,.14);
+    --shadow-lg: 0 2px 4px rgba(20,20,30,.04), 0 32px 64px -24px rgba(20,20,30,.18);
+    --ease: cubic-bezier(.32,.72,0,1);
+  }
+
+  *{ box-sizing:border-box; margin:0; padding:0; }
+  html{ scroll-behavior:smooth; }
+  body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family:'Pretendard Variable','Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+    font-feature-settings:"tnum" 1;
+    -webkit-font-smoothing:antialiased;
+    line-height:1.5;
+    overflow-x:hidden;
+  }
+  img{ max-width:100%; display:block; }
+  a{ color:inherit; text-decoration:none; }
+  .mono{ font-family:'JetBrains Mono',ui-monospace,monospace; }
+
+  .wrap{ max-width:1120px; margin:0 auto; padding:0 32px; }
+  @media (max-width:640px){ .wrap{ padding:0 20px; } }
+
+  /* ---------- Nav ---------- */
+  .nav-outer{
+    position:fixed; top:18px; left:0; right:0; z-index:100;
+    display:flex; justify-content:center; pointer-events:none;
+    padding:0 20px;
+  }
+  .nav{
+    pointer-events:auto;
+    display:flex; align-items:center; gap:8px;
+    background:rgba(255,255,255,.72);
+    backdrop-filter:blur(20px) saturate(180%);
+    -webkit-backdrop-filter:blur(20px) saturate(180%);
+    border:1px solid rgba(20,20,30,.07);
+    border-radius:100px;
+    padding:8px 8px 8px 20px;
+    box-shadow:0 1px 1px rgba(20,20,30,.02), 0 12px 28px -14px rgba(20,20,30,.18);
+    transition:box-shadow .4s var(--ease);
+  }
+  .nav-name{
+    font-weight:700; font-size:14.5px; letter-spacing:-.01em; margin-right:6px;
+    white-space:nowrap;
+  }
+  .nav-name .dot{ color:var(--accent); }
+  .nav-links{ display:flex; align-items:center; gap:2px; }
+  .nav-links a{
+    font-size:13.5px; color:var(--ink-soft); padding:8px 13px; border-radius:100px;
+    transition:color .25s var(--ease), background .25s var(--ease);
+    font-weight:500;
+  }
+  .nav-links a:hover{ color:var(--ink); background:var(--line-soft); }
+  .nav-cta{
+    background:var(--ink); color:#fff; font-size:13px; font-weight:600;
+    padding:9px 18px; border-radius:100px; margin-left:6px; white-space:nowrap;
+    transition:transform .3s var(--ease), background .3s var(--ease);
+  }
+  .nav-cta:hover{ background:var(--accent); transform:translateY(-1px); }
+  @media (max-width:640px){
+    .nav-links{ display:none; }
+    .nav{ padding:8px 8px 8px 18px; }
+  }
+
+  /* ---------- Reveal ---------- */
+  .reveal{ opacity:0; transform:translateY(18px); transition:opacity .8s var(--ease), transform .8s var(--ease); }
+  .reveal.in{ opacity:1; transform:translateY(0); }
+
+  /* ---------- Hero ---------- */
+  .hero{
+    padding:196px 0 120px;
+    position:relative;
+  }
+  .hero::before{
+    content:"";
+    position:absolute; top:-120px; right:-160px; width:520px; height:520px;
+    background:radial-gradient(circle at center, var(--accent-soft) 0%, rgba(241,238,255,0) 70%);
+    z-index:-1; pointer-events:none;
+  }
+  .eyebrow{
+    display:inline-flex; align-items:center; gap:8px;
+    font-family:'JetBrains Mono',monospace;
+    font-size:11.5px; font-weight:500; letter-spacing:.14em; text-transform:uppercase;
+    color:var(--accent);
+    background:var(--accent-soft);
+    border:1px solid var(--accent-soft-line);
+    padding:7px 14px 7px 12px; border-radius:100px;
+    margin-bottom:26px;
+  }
+  .eyebrow .pip{ width:6px; height:6px; border-radius:50%; background:var(--accent); flex:none; }
+  .hero h1{
+    font-size:clamp(34px, 5.4vw, 60px);
+    font-weight:700; letter-spacing:-.03em; line-height:1.18;
+    max-width:820px;
+    color:var(--ink);
+  }
+  .hero h1 em{ font-style:normal; color:var(--accent); }
+  .hero p.lead{
+    margin-top:26px; font-size:17.5px; color:var(--ink-soft); max-width:560px;
+    line-height:1.7; font-weight:450;
+  }
+  .hero-actions{ display:flex; align-items:center; gap:14px; margin-top:42px; flex-wrap:wrap; }
+
+  .btn{
+    display:inline-flex; align-items:center; gap:10px;
+    font-size:14.5px; font-weight:600;
+    padding:6px 6px 6px 22px; border-radius:100px;
+    transition:transform .35s var(--ease), box-shadow .35s var(--ease), background .35s var(--ease);
+  }
+  .btn-primary{ background:var(--accent); color:#fff; box-shadow:0 10px 24px -10px rgba(91,70,245,.55); }
+  .btn-primary:hover{ transform:translateY(-2px); box-shadow:0 16px 32px -12px rgba(91,70,245,.6); }
+  .btn-icon{
+    width:34px; height:34px; border-radius:50%; background:rgba(255,255,255,.18);
+    display:flex; align-items:center; justify-content:center; flex:none;
+    transition:transform .35s var(--ease), background .35s var(--ease);
+  }
+  .btn-primary:hover .btn-icon{ transform:translate(2px,-2px); background:rgba(255,255,255,.28); }
+
+  .btn-ghost{
+    background:var(--surface); color:var(--ink); border:1px solid var(--line);
+    padding:12px 22px; box-shadow:var(--shadow-sm);
+  }
+  .btn-ghost:hover{ border-color:#d6d6de; transform:translateY(-2px); box-shadow:var(--shadow-md); }
+  .btn-ghost svg{ width:17px; height:17px; }
+
+  .hero-meta{
+    margin-top:64px; display:flex; gap:36px; flex-wrap:wrap;
+    padding-top:28px; border-top:1px solid var(--line-soft);
+    max-width:640px;
+  }
+  .hero-meta div{ font-size:13px; }
+  .hero-meta .k{ color:var(--ink-faint); font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.05em; text-transform:uppercase; margin-bottom:6px; }
+  .hero-meta .v{ font-weight:600; color:var(--ink); }
+
+  /* ---------- Section heads ---------- */
+  .section{ padding:96px 0; }
+  .section-head{ margin-bottom:56px; max-width:640px; }
+  .section-head h2{
+    font-size:clamp(26px,3vw,34px); font-weight:700; letter-spacing:-.025em; color:var(--ink);
+    margin-top:14px;
+  }
+  .section-head p{ margin-top:14px; color:var(--ink-soft); font-size:15.5px; line-height:1.7; }
+
+  /* ---------- Featured project cards ---------- */
+  .featured-grid{ display:flex; flex-direction:column; gap:22px; }
+  .f-card{
+    background:var(--surface);
+    border:1px solid var(--line);
+    border-radius:var(--radius-lg);
+    padding:44px;
+    box-shadow:var(--shadow-sm);
+    display:grid; grid-template-columns:1.1fr 1fr; gap:48px;
+    transition:box-shadow .4s var(--ease), transform .4s var(--ease), border-color .4s var(--ease);
+    position:relative; overflow:hidden;
+  }
+  .f-card:hover{ box-shadow:var(--shadow-lg); transform:translateY(-3px); border-color:#dcdce6; }
+  .f-card::after{
+    content:""; position:absolute; top:0; left:0; width:4px; height:100%;
+    background:var(--accent); opacity:0; transition:opacity .4s var(--ease);
+  }
+  .f-card:hover::after{ opacity:1; }
+
+  .f-tag-row{ display:flex; align-items:center; gap:10px; margin-bottom:18px; }
+  .f-index{
+    font-family:'JetBrains Mono',monospace; font-size:12px; color:var(--ink-faint);
+    border:1px solid var(--line); border-radius:100px; padding:4px 10px;
+  }
+  .f-award{
+    font-size:11.5px; font-weight:600; color:#9a6b00; background:#fff6e0; border:1px solid #f5e5b8;
+    padding:4px 11px; border-radius:100px;
+  }
+  .f-card h3{ font-size:25px; font-weight:700; letter-spacing:-.02em; margin-bottom:6px; }
+  .f-card .f-sub{ font-size:13.5px; color:var(--ink-faint); font-weight:500; margin-bottom:16px; }
+  .f-card .f-desc{ font-size:15px; color:var(--ink-soft); line-height:1.75; margin-bottom:24px; }
+  .f-links{ display:flex; gap:10px; }
+  .f-links a{
+    font-size:13px; font-weight:600; display:inline-flex; align-items:center; gap:7px;
+    padding:9px 16px; border-radius:100px; border:1px solid var(--line); background:var(--bg);
+    transition:all .3s var(--ease);
+  }
+  .f-links a:hover{ background:var(--ink); color:#fff; border-color:var(--ink); }
+  .f-links svg{ width:14px; height:14px; }
+
+  .f-role-title{
+    font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.08em; text-transform:uppercase;
+    color:var(--ink-faint); margin-bottom:14px;
+  }
+  .f-role-list{ list-style:none; display:flex; flex-direction:column; gap:10px; margin-bottom:24px; }
+  .f-role-list li{
+    font-size:13.8px; color:var(--ink-soft); line-height:1.6; position:relative; padding-left:16px;
+  }
+  .f-role-list li::before{
+    content:""; position:absolute; left:0; top:8px; width:5px; height:5px; border-radius:50%;
+    background:var(--accent);
+  }
+  .f-stack{ display:flex; flex-wrap:wrap; gap:8px; }
+  .pill{
+    font-size:12px; font-weight:500; color:var(--ink-soft); background:var(--line-soft);
+    border:1px solid var(--line); padding:5px 12px; border-radius:100px;
+  }
+
+  @media (max-width:860px){
+    .f-card{ grid-template-columns:1fr; gap:26px; padding:32px 26px; }
+  }
+
+  /* ---------- Other projects grid ---------- */
+  .other-grid{ display:grid; grid-template-columns:1fr 1fr; gap:20px; }
+  @media (max-width:760px){ .other-grid{ grid-template-columns:1fr; } }
+  .o-card{
+    background:var(--surface); border:1px solid var(--line); border-radius:var(--radius-md);
+    padding:30px; box-shadow:var(--shadow-sm);
+    transition:box-shadow .35s var(--ease), transform .35s var(--ease), border-color .35s var(--ease);
+    display:flex; flex-direction:column;
+  }
+  .o-card:hover{ box-shadow:var(--shadow-md); transform:translateY(-3px); border-color:#dcdce6; }
+  .o-head{ display:flex; align-items:center; justify-content:space-between; margin-bottom:14px; }
+  .o-head h4{ font-size:18px; font-weight:700; letter-spacing:-.01em; }
+  .o-badge{
+    font-size:10.5px; font-weight:600; padding:3px 10px; border-radius:100px;
+    background:var(--accent-soft); color:var(--accent); border:1px solid var(--accent-soft-line);
+    white-space:nowrap;
+  }
+  .o-badge.gray{ background:var(--line-soft); color:var(--ink-faint); border-color:var(--line); }
+  .o-desc{ font-size:13.8px; color:var(--ink-soft); line-height:1.7; margin-bottom:18px; flex:1; }
+  .o-foot{ display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap; }
+  .o-stack{ display:flex; flex-wrap:wrap; gap:6px; }
+  .o-stack .pill{ font-size:11px; padding:4px 10px; }
+  .o-link{
+    font-size:12.5px; font-weight:600; display:inline-flex; align-items:center; gap:6px;
+    color:var(--ink-soft); flex:none;
+  }
+  .o-link:hover{ color:var(--accent); }
+  .o-link svg{ width:13px; height:13px; }
+
+  /* ---------- Stack ---------- */
+  .stack-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:0; border:1px solid var(--line); border-radius:var(--radius-md); overflow:hidden; background:var(--surface); }
+  @media (max-width:760px){ .stack-grid{ grid-template-columns:1fr 1fr; } }
+  @media (max-width:480px){ .stack-grid{ grid-template-columns:1fr; } }
+  .stack-col{ padding:28px 24px; border-right:1px solid var(--line); }
+  .stack-col:last-child{ border-right:none; }
+  @media (max-width:760px){
+    .stack-col:nth-child(2){ border-right:none; }
+    .stack-col:nth-child(odd){ border-right:1px solid var(--line); }
+    .stack-col{ border-bottom:1px solid var(--line); }
+    .stack-col:nth-last-child(-n+2){ border-bottom:none; }
+  }
+  @media (max-width:480px){
+    .stack-col{ border-right:none !important; }
+  }
+  .stack-col h5{
+    font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.08em; text-transform:uppercase;
+    color:var(--accent); margin-bottom:16px; font-weight:600;
+  }
+  .stack-col ul{ list-style:none; display:flex; flex-direction:column; gap:9px; }
+  .stack-col li{ font-size:13.8px; color:var(--ink); font-weight:500; }
+
+  /* ---------- Contact ---------- */
+  .contact-card{
+    background:var(--ink); color:#fff; border-radius:28px;
+    padding:72px 56px; text-align:center; position:relative; overflow:hidden;
+  }
+  .contact-card::before{
+    content:""; position:absolute; inset:0;
+    background:radial-gradient(600px 300px at 50% -10%, rgba(91,70,245,.35), rgba(91,70,245,0) 70%);
+    pointer-events:none;
+  }
+  .contact-card .eyebrow{ background:rgba(255,255,255,.08); border-color:rgba(255,255,255,.14); color:#c9c2ff; }
+  .contact-card .eyebrow .pip{ background:#8b7bff; }
+  .contact-card h2{ font-size:clamp(26px,4vw,38px); font-weight:700; letter-spacing:-.025em; margin-top:14px; }
+  .contact-card p{ margin-top:16px; color:rgba(255,255,255,.6); font-size:15.5px; max-width:460px; margin-left:auto; margin-right:auto; }
+  .contact-actions{ display:flex; justify-content:center; gap:14px; margin-top:36px; flex-wrap:wrap; position:relative; }
+  .contact-card .btn-ghost{ background:rgba(255,255,255,.06); border-color:rgba(255,255,255,.16); color:#fff; }
+  .contact-card .btn-ghost:hover{ background:rgba(255,255,255,.12); border-color:rgba(255,255,255,.24); box-shadow:none; }
+
+  /* ---------- Footer ---------- */
+  footer{ padding:40px 0 60px; }
+  .footer-row{
+    display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:14px;
+    padding-top:32px; border-top:1px solid var(--line-soft);
+    font-size:12.5px; color:var(--ink-faint);
+  }
+  .footer-row a{ color:var(--ink-soft); font-weight:500; }
+  .footer-row a:hover{ color:var(--accent); }
+  .footer-links{ display:flex; gap:20px; }
+</style>
+</head>
+<body>
+
+<div class="nav-outer">
+  <nav class="nav">
+    <span class="nav-name">유지환<span class="dot">.</span></span>
+    <div class="nav-links">
+      <a href="#work">Work</a>
+      <a href="#stack">Stack</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <a class="nav-cta" href="mailto:202212020@gsuite.induk.ac.kr">이메일 보내기</a>
+  </nav>
+</div>
+
+<header class="hero">
+  <div class="wrap">
+    <span class="eyebrow reveal in"><span class="pip"></span>Backend Developer</span>
+    <h1 class="reveal in">백엔드에서 <em>안정적으로 동작하는</em><br>서비스를 만드는 유지환입니다.</h1>
+    <p class="lead reveal in">Java와 Spring Boot로 인증, API, 데이터베이스 설계를 다루며,
+      실제로 돌아가는 서비스를 만드는 데 집중합니다.</p>
+    <div class="hero-actions reveal in">
+      <a class="btn btn-primary" href="mailto:202212020@gsuite.induk.ac.kr">
+        이메일로 연락하기
+        <span class="btn-icon">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M17 7H8M17 7V16"/></svg>
+        </span>
+      </a>
+      <a class="btn btn-ghost" href="https://github.com/Jihwan0210" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.09 3.29 9.39 7.86 10.91.57.1.79-.25.79-.55 0-.27-.01-1.17-.02-2.12-3.2.7-3.87-1.36-3.87-1.36-.53-1.34-1.29-1.7-1.29-1.7-1.05-.72.08-.7.08-.7 1.16.08 1.78 1.2 1.78 1.2 1.03 1.77 2.71 1.26 3.37.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.68 0-1.26.45-2.28 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11 11 0 0 1 5.8 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.83 1.19 3.09 0 4.41-2.69 5.38-5.25 5.67.41.36.78 1.06.78 2.14 0 1.54-.01 2.79-.01 3.17 0 .3.21.66.8.55A10.53 10.53 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z"/></svg>
+        GitHub
+      </a>
+    </div>
+    <div class="hero-meta reveal in">
+      <div><div class="k">Github</div><div class="v">@Jihwan0210</div></div>
+      <div><div class="k">Email</div><div class="v">202212020@gsuite.induk.ac.kr</div></div>
+      <div><div class="k">Location</div><div class="v">서울, 대한민국</div></div>
+    </div>
+  </div>
+</header>
+
+<section class="section" id="work">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow"><span class="pip"></span>Featured Work</span>
+      <h2>직접 설계하고 끝까지 만든 프로젝트</h2>
+      <p>기획부터 배포까지 참여한 두 프로젝트입니다. 백엔드 API 설계와 도메인 로직을 직접 맡았습니다.</p>
+    </div>
+
+    <div class="featured-grid">
+
+      <article class="f-card reveal">
+        <div>
+          <div class="f-tag-row">
+            <span class="f-index mono">01</span>
+            <span class="f-award">AI Re-Local 해커톤 3등 · 선도상</span>
+          </div>
+          <h3>읽고 <span style="color:var(--ink-faint); font-weight:500;">Ilgo</span></h3>
+          <div class="f-sub">AI 배리어프리 문서 해석 서비스</div>
+          <p class="f-desc">계약서, 안내문 같은 어려운 생활 문서를 사진으로 찍으면 AI가
+            쉬운 한국어와 영어로 풀어서 설명해주는 서비스입니다. 전국 5개 대학 27명이 참가한
+            해커톤에서 3등(선도상)을 받았습니다.</p>
+          <div class="f-links">
+            <a href="https://github.com/Jihwan0210/Ilgo-backend" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.09 3.29 9.39 7.86 10.91.57.1.79-.25.79-.55 0-.27-.01-1.17-.02-2.12-3.2.7-3.87-1.36-3.87-1.36-.53-1.34-1.29-1.7-1.29-1.7-1.05-.72.08-.7.08-.7 1.16.08 1.78 1.2 1.78 1.2 1.03 1.77 2.71 1.26 3.37.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.68 0-1.26.45-2.28 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11 11 0 0 1 5.8 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.83 1.19 3.09 0 4.41-2.69 5.38-5.25 5.67.41.36.78 1.06.78 2.14 0 1.54-.01 2.79-.01 3.17 0 .3.21.66.8.55A10.53 10.53 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z"/></svg>
+              Repo 보기
+            </a>
+          </div>
+        </div>
+        <div>
+          <div class="f-role-title mono">My Role — Backend API</div>
+          <ul class="f-role-list">
+            <li>JWT 기반 인증·인가 및 접근 제어 구현</li>
+            <li>AI 게이트웨이 연동 문서 분석 API 개발</li>
+            <li>multipart·JSON 업로드 처리 및 커서 기반 페이지네이션 설계</li>
+            <li>전역 예외처리, 레이트리밋, Swagger 문서화 및 테스트 작성</li>
+          </ul>
+          <div class="f-stack">
+            <span class="pill">Java</span>
+            <span class="pill">Spring Boot</span>
+            <span class="pill">Spring Security</span>
+            <span class="pill">JPA</span>
+            <span class="pill">JWT</span>
+            <span class="pill">PostgreSQL</span>
+            <span class="pill">Swagger</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="f-card reveal">
+        <div>
+          <div class="f-tag-row">
+            <span class="f-index mono">02</span>
+          </div>
+          <h3>PotatoChip</h3>
+          <div class="f-sub">못난이 농산물 마켓플레이스</div>
+          <p class="f-desc">규격 외라는 이유로 버려지는 농산물을 거래할 수 있는 마켓플레이스입니다.
+            팀장으로서 프로젝트를 이끌었고, 상품 도메인 전체를 맡아 개발했습니다.</p>
+          <div class="f-links">
+            <a href="https://github.com/Jihwan0210/PotatoChip" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.09 3.29 9.39 7.86 10.91.57.1.79-.25.79-.55 0-.27-.01-1.17-.02-2.12-3.2.7-3.87-1.36-3.87-1.36-.53-1.34-1.29-1.7-1.29-1.7-1.05-.72.08-.7.08-.7 1.16.08 1.78 1.2 1.78 1.2 1.03 1.77 2.71 1.26 3.37.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.68 0-1.26.45-2.28 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11 11 0 0 1 5.8 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.83 1.19 3.09 0 4.41-2.69 5.38-5.25 5.67.41.36.78 1.06.78 2.14 0 1.54-.01 2.79-.01 3.17 0 .3.21.66.8.55A10.53 10.53 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z"/></svg>
+              Repo 보기
+            </a>
+          </div>
+        </div>
+        <div>
+          <div class="f-role-title mono">My Role — 팀장 · 상품 도메인</div>
+          <ul class="f-role-list">
+            <li>상품 CRUD 및 판매자 권한 제어 설계</li>
+            <li>가격 스냅샷 기반 장바구니 로직 구현</li>
+            <li>Kakao Map 연동 픽업 위치 기능, 기간별 판매 랭킹 구현</li>
+            <li>develop / feature 브랜치 전략 수립 및 PR 리뷰 협업 리드</li>
+          </ul>
+          <div class="f-stack">
+            <span class="pill">Java 21</span>
+            <span class="pill">Spring Boot</span>
+            <span class="pill">JPA</span>
+            <span class="pill">Thymeleaf</span>
+            <span class="pill">MariaDB</span>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <h2 style="margin-top:0;">그 밖의 프로젝트</h2>
+      <p>학교 수업과 팀 활동을 통해 진행한 프로젝트들입니다.</p>
+    </div>
+
+    <div class="other-grid">
+
+      <div class="o-card reveal">
+        <div class="o-head">
+          <h4>COGI</h4>
+          <span class="o-badge">진행 중 · 팀</span>
+        </div>
+        <p class="o-desc">AI 기반 코드 리뷰와 PR 분석으로 팀의 성장을 추적하는 대시보드입니다.
+          이슈 승인 플로우, 약점 패턴 통계, 주간 리포트 자동 메일 발송, 소셜 로그인과
+          Toss 결제 연동을 함께 개발하고 있습니다.</p>
+        <div class="o-foot">
+          <div class="o-stack">
+            <span class="pill">Java</span>
+            <span class="pill">React</span>
+          </div>
+          <a class="o-link" href="https://github.com/Leeuswa/COGI" target="_blank" rel="noopener">
+            Repo
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M17 7H8M17 7V16"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <div class="o-card reveal">
+        <div class="o-head">
+          <h4>CampusLink</h4>
+          <span class="o-badge gray">개인</span>
+        </div>
+        <p class="o-desc">대학 동아리, 스터디, 공모전 모집 정보를 모아보는 SPA입니다.
+          Context API로 로그인 상태를 관리하고 sessionStorage로 세션을 유지하며,
+          작성자 권한에 따라 화면을 분기했습니다. AWS Amplify로 배포했습니다.</p>
+        <div class="o-foot">
+          <div class="o-stack">
+            <span class="pill">React 18</span>
+            <span class="pill">TypeScript</span>
+            <span class="pill">Vite</span>
+          </div>
+          <a class="o-link" href="https://github.com/Jihwan0210/React_CampusLink" target="_blank" rel="noopener">
+            Repo
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M17 7H8M17 7V16"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <div class="o-card reveal">
+        <div class="o-head">
+          <h4>침착맨 굿즈샵</h4>
+          <span class="o-badge gray">교내 경진대회 은상</span>
+        </div>
+        <p class="o-desc">PHP와 Bootstrap으로 만든 쇼핑몰입니다. 쿠키 기반 로그인과
+          비회원 장바구니, 옵션·수량·할인·배송비를 반영한 주문 처리, 관리자 상품 관리
+          기능을 구현했습니다.</p>
+        <div class="o-foot">
+          <div class="o-stack">
+            <span class="pill">PHP</span>
+            <span class="pill">Bootstrap</span>
+          </div>
+          <a class="o-link" href="https://github.com/Jihwan0210/PHP_ShopProject" target="_blank" rel="noopener">
+            Repo
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M17 7H8M17 7V16"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <div class="o-card reveal">
+        <div class="o-head">
+          <h4>호텔 예약 시스템</h4>
+          <span class="o-badge gray">교내 경진대회 금상</span>
+        </div>
+        <p class="o-desc">Laravel MVC 구조로 만든 호텔 예약 시스템입니다. 숙소, 예약,
+          후기, 공지 기능을 Eloquent ORM으로 구현하고 사용자와 관리자 권한을
+          분리했습니다.</p>
+        <div class="o-foot">
+          <div class="o-stack">
+            <span class="pill">Laravel</span>
+            <span class="pill">MySQL</span>
+          </div>
+          <a class="o-link" href="https://github.com/Jihwan0210/laravel-hotel-reservation" target="_blank" rel="noopener">
+            Repo
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M17 7H8M17 7V16"/></svg>
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="section" id="stack">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow"><span class="pip"></span>Stack</span>
+      <h2>주로 사용하는 기술</h2>
+    </div>
+
+    <div class="stack-grid reveal">
+      <div class="stack-col">
+        <h5>Backend</h5>
+        <ul>
+          <li>Java</li>
+          <li>Spring Boot</li>
+          <li>Spring Security</li>
+          <li>Spring Data JPA</li>
+          <li>REST API</li>
+          <li>JWT</li>
+        </ul>
+      </div>
+      <div class="stack-col">
+        <h5>Database</h5>
+        <ul>
+          <li>MariaDB</li>
+          <li>MySQL</li>
+          <li>Oracle</li>
+          <li>SQL</li>
+        </ul>
+      </div>
+      <div class="stack-col">
+        <h5>Frontend</h5>
+        <ul>
+          <li>JavaScript</li>
+          <li>TypeScript</li>
+          <li>React</li>
+          <li>Thymeleaf</li>
+        </ul>
+      </div>
+      <div class="stack-col">
+        <h5>Tools</h5>
+        <ul>
+          <li>Git / GitHub</li>
+          <li>AWS</li>
+          <li>Docker</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="contact">
+  <div class="wrap">
+    <div class="contact-card reveal">
+      <span class="eyebrow"><span class="pip"></span>Contact</span>
+      <h2>같이 일할 기회를 기다립니다</h2>
+      <p>궁금한 점이 있으시면 편하게 이메일로 연락 주세요.</p>
+      <div class="contact-actions">
+        <a class="btn btn-primary" href="mailto:202212020@gsuite.induk.ac.kr">
+          이메일 보내기
+          <span class="btn-icon">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M17 7H8M17 7V16"/></svg>
+          </span>
+        </a>
+        <a class="btn btn-ghost" href="https://github.com/Jihwan0210" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.09 3.29 9.39 7.86 10.91.57.1.79-.25.79-.55 0-.27-.01-1.17-.02-2.12-3.2.7-3.87-1.36-3.87-1.36-.53-1.34-1.29-1.7-1.29-1.7-1.05-.72.08-.7.08-.7 1.16.08 1.78 1.2 1.78 1.2 1.03 1.77 2.71 1.26 3.37.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.68 0-1.26.45-2.28 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11 11 0 0 1 5.8 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.83 1.19 3.09 0 4.41-2.69 5.38-5.25 5.67.41.36.78 1.06.78 2.14 0 1.54-.01 2.79-.01 3.17 0 .3.21.66.8.55A10.53 10.53 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z"/></svg>
+          GitHub
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-row">
+      <span>© 2026 Jihwan Yoo. 서울, 대한민국</span>
+      <div class="footer-links">
+        <a href="mailto:202212020@gsuite.induk.ac.kr">Email</a>
+        <a href="https://github.com/Jihwan0210" target="_blank" rel="noopener">GitHub</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  (function(){
+    var els = document.querySelectorAll('.reveal');
+    if(!('IntersectionObserver' in window)){
+      els.forEach(function(el){ el.classList.add('in'); });
+      return;
+    }
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if(entry.isIntersecting){
+          entry.target.classList.add('in');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+    els.forEach(function(el){ io.observe(el); });
+  })();
+</script>
+
+</body>
+</html>

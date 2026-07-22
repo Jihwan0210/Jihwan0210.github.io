@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>유지환 — 백엔드 개발자</title>
+<meta name="description" content="유지환(신입 백엔드 개발자) 포트폴리오 — Java, Spring Boot 중심">
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #ffffff;
+    --surface: #fafafa;
+    --line: #eaeaea;
+    --ink: #16171a;
+    --ink-soft: #57595e;
+    --ink-faint: #94969c;
+    --accent: #3730e0;
+    --accent-soft: #eeecfd;
+    --maxw: 880px;
+  }
+  *{ box-sizing:border-box; }
+  html{ scroll-behavior:smooth; }
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--ink);
+    font-family:'Pretendard Variable','Pretendard',-apple-system,sans-serif;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    font-size:16px;
+  }
+  .mono{ font-family:'JetBrains Mono',monospace; }
+  a{ color:inherit; text-decoration:none; }
+  .wrap{ max-width:var(--maxw); margin:0 auto; padding:0 24px; }
+
+  /* nav */
+  header.nav{
+    position:sticky; top:0; z-index:30;
+    background:rgba(255,255,255,0.86);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav .wrap{ height:60px; display:flex; align-items:center; justify-content:space-between; }
+  .nav .brand{ font-weight:600; font-size:14.5px; letter-spacing:-0.01em; }
+  .nav ul{ list-style:none; display:flex; gap:28px; margin:0; padding:0; }
+  .nav a{ font-size:13.5px; color:var(--ink-soft); }
+  .nav a:hover{ color:var(--ink); }
+  .nav .cta{
+    font-size:13px; padding:7px 14px; border:1px solid var(--line); border-radius:6px;
+    color:var(--ink); transition:border-color .15s, background .15s;
+  }
+  .nav .cta:hover{ border-color:#d5d5d5; background:var(--surface); }
+  @media (max-width:680px){ .nav ul{ display:none; } }
+
+  /* fade in */
+  .fade{ opacity:0; transform:translateY(10px); transition:opacity .6s cubic-bezier(.16,1,.3,1), transform .6s cubic-bezier(.16,1,.3,1); }
+  .fade.in{ opacity:1; transform:none; }
+
+  /* hero */
+  .hero{ padding:120px 0 88px; border-bottom:1px solid var(--line); }
+  .hero .eyebrow{
+    font-size:13px; color:var(--accent); font-weight:600;
+    display:flex; align-items:center; gap:8px; margin-bottom:20px;
+  }
+  .hero .eyebrow::before{ content:""; width:6px; height:6px; border-radius:50%; background:var(--accent); }
+  .hero h1{
+    font-size:clamp(2.1rem,4.6vw,3.1rem);
+    line-height:1.28; letter-spacing:-0.02em; font-weight:700;
+    margin:0 0 22px;
+  }
+  .hero p.lead{
+    font-size:17px; color:var(--ink-soft); max-width:560px; margin:0 0 32px;
+  }
+  .hero .actions{ display:flex; gap:12px; flex-wrap:wrap; }
+  .btn{
+    display:inline-flex; align-items:center; gap:8px;
+    padding:11px 20px; border-radius:7px; font-size:14.5px; font-weight:500;
+    transition:transform .15s, background .15s, border-color .15s;
+  }
+  .btn.primary{ background:var(--ink); color:#fff; }
+  .btn.primary:hover{ background:#000; }
+  .btn.ghost{ border:1px solid var(--line); color:var(--ink); }
+  .btn.ghost:hover{ border-color:#cfcfcf; background:var(--surface); }
+  .btn:active{ transform:scale(0.98); }
+
+  .meta-row{
+    display:flex; gap:24px; margin-top:44px; padding-top:28px; border-top:1px solid var(--line);
+    flex-wrap:wrap;
+  }
+  .meta-row div{ font-size:13px; color:var(--ink-faint); }
+  .meta-row div b{ display:block; color:var(--ink); font-weight:600; font-size:14px; margin-bottom:2px; }
+
+  /* section header */
+  .section{ padding:80px 0; border-bottom:1px solid var(--line); }
+  .section:last-of-type{ border-bottom:none; }
+  .section-head{ display:flex; align-items:baseline; justify-content:space-between; margin-bottom:40px; gap:16px; }
+  .section-head h2{ font-size:1.5rem; letter-spacing:-0.01em; font-weight:700; margin:0; }
+  .section-head span{ font-size:13px; color:var(--ink-faint); }
+
+  /* featured project cards */
+  .featured{ display:flex; flex-direction:column; gap:16px; margin-bottom:20px; }
+  .card{
+    border:1px solid var(--line); border-radius:12px; padding:32px;
+    transition:border-color .2s, box-shadow .2s;
+  }
+  .card:hover{ border-color:#d8d8d8; box-shadow:0 2px 12px rgba(0,0,0,0.04); }
+  .card-top{ display:flex; align-items:flex-start; justify-content:space-between; gap:16px; margin-bottom:14px; }
+  .card h3{ font-size:1.2rem; font-weight:700; letter-spacing:-0.01em; margin:0 0 4px; }
+  .card .role{ font-size:13.5px; color:var(--ink-faint); }
+  .card .arrow{
+    flex-shrink:0; width:32px; height:32px; border:1px solid var(--line); border-radius:50%;
+    display:flex; align-items:center; justify-content:center; font-size:14px; color:var(--ink-soft);
+    transition:transform .2s, border-color .2s;
+  }
+  .card:hover .arrow{ transform:rotate(45deg); border-color:#cfcfcf; }
+  .card p.desc{ font-size:14.5px; color:var(--ink-soft); margin:0 0 18px; max-width:640px; }
+  .tags{ display:flex; flex-wrap:wrap; gap:8px; margin-bottom:14px; }
+  .tag{
+    font-size:12px; padding:4px 10px; border-radius:5px; background:var(--surface);
+    color:var(--ink-soft); border:1px solid var(--line);
+  }
+  .card .badge{
+    display:inline-block; font-size:12px; padding:4px 10px; border-radius:5px;
+    background:var(--accent-soft); color:var(--accent); font-weight:600; margin-bottom:14px;
+  }
+  .card .repo-link{ font-size:13.5px; font-weight:500; color:var(--ink); border-bottom:1px solid var(--line); }
+  .card .repo-link:hover{ border-color:var(--ink); }
+
+  /* project rows (secondary projects) */
+  .rows{ border-top:1px solid var(--line); }
+  .row{
+    display:flex; align-items:center; gap:20px; padding:22px 0;
+    border-bottom:1px solid var(--line); text-decoration:none;
+  }
+  .row .idx{ font-size:13px; color:var(--ink-faint); width:22px; flex-shrink:0; }
+  .row .row-main{ flex:1; min-width:0; }
+  .row h4{ font-size:15px; font-weight:600; margin:0 0 4px; }
+  .row p{ font-size:13.5px; color:var(--ink-soft); margin:0; }
+  .row .row-stack{ font-size:12.5px; color:var(--ink-faint); white-space:nowrap; flex-shrink:0; }
+  .row .row-go{ color:var(--ink-faint); flex-shrink:0; font-size:14px; transition:transform .15s, color .15s; }
+  .row:hover .row-go{ transform:translateX(3px); color:var(--ink); }
+  .row:hover h4{ color:var(--accent); }
+  @media (max-width:640px){
+    .row{ flex-wrap:wrap; }
+    .row-stack{ order:3; width:100%; padding-left:42px; }
+  }
+
+  /* skills */
+  .skill-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:32px; }
+  .skill-col h4{ font-size:13px; color:var(--ink-faint); font-weight:600; letter-spacing:0.02em; margin:0 0 14px; text-transform:uppercase; }
+  .skill-col ul{ list-style:none; margin:0; padding:0; }
+  .skill-col li{ font-size:14.5px; padding:6px 0; color:var(--ink-soft); border-bottom:1px solid var(--line); }
+  .skill-col li:last-child{ border-bottom:none; }
+
+  /* contact / footer */
+  .contact{ text-align:left; }
+  .contact h2{ font-size:1.8rem; letter-spacing:-0.02em; margin:0 0 14px; font-weight:700; }
+  .contact p{ font-size:15px; color:var(--ink-soft); margin:0 0 28px; max-width:480px; }
+  footer{ padding:32px 0; }
+  footer .wrap{ display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px; }
+  footer p{ font-size:13px; color:var(--ink-faint); margin:0; }
+  footer .flinks{ display:flex; gap:18px; }
+  footer .flinks a{ font-size:13px; color:var(--ink-soft); }
+  footer .flinks a:hover{ color:var(--ink); }
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap">
+    <a class="brand" href="#top">유지환</a>
+    <ul>
+      <li><a href="#projects">프로젝트</a></li>
+      <li><a href="#skills">기술</a></li>
+      <li><a href="#contact">연락처</a></li>
+    </ul>
+    <a class="cta" href="https://github.com/Jihwan0210" target="_blank" rel="noopener">GitHub</a>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero wrap">
+    <div class="fade in">
+      <p class="eyebrow">신입 백엔드 개발자</p>
+      <h1>유지환입니다.<br>Java와 Spring Boot로 서버를 만듭니다.</h1>
+      <p class="lead">인증·권한, 파일 업로드, 페이지네이션, 예외처리 같은 API의 기본기를 꼼꼼히 다루는 것을 우선합니다.</p>
+      <div class="actions">
+        <a class="btn primary" href="mailto:202212020@gsuite.induk.ac.kr">이메일 보내기</a>
+        <a class="btn ghost" href="https://github.com/Jihwan0210" target="_blank" rel="noopener">GitHub 보기</a>
+      </div>
+      <div class="meta-row">
+        <div><b>위치</b>서울, 대한민국</div>
+        <div><b>GitHub</b>@Jihwan0210</div>
+        <div><b>주력</b>Java · Spring Boot · JPA</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="projects">
+    <div class="wrap">
+      <div class="section-head fade">
+        <h2>대표 프로젝트</h2>
+        <span>2 selected</span>
+      </div>
+
+      <div class="featured">
+        <div class="card fade">
+          <div class="card-top">
+            <div>
+              <h3>읽고 (Ilgo)</h3>
+              <p class="role">백엔드 API 개발</p>
+            </div>
+            <a class="arrow" href="https://github.com/Jihwan0210/Ilgo-backend" target="_blank" rel="noopener" aria-label="repo">↗</a>
+          </div>
+          <span class="badge">AI Re-Local 해커톤 3등 · 선도상</span>
+          <p class="desc">AI 배리어프리 문서 해석 서비스. 어려운 생활 문서를 사진으로 찍으면 AI가 쉬운 한국어·영어로 풀어준다. JWT 인증·인가, AI 게이트웨이 연동 문서 분석 API, multipart/JSON 업로드, 커서 페이지네이션, 전역 예외처리·레이트리밋, Swagger 문서화와 테스트를 맡았다.</p>
+          <div class="tags">
+            <span class="tag">Java</span><span class="tag">Spring Boot</span><span class="tag">Spring Security</span>
+            <span class="tag">JPA</span><span class="tag">JWT</span><span class="tag">PostgreSQL</span><span class="tag">Swagger</span>
+          </div>
+          <a class="repo-link" href="https://github.com/Jihwan0210/Ilgo-backend" target="_blank" rel="noopener">GitHub에서 코드 보기</a>
+        </div>
+
+        <div class="card fade">
+          <div class="card-top">
+            <div>
+              <h3>PotatoChip</h3>
+              <p class="role">팀장 · 상품 도메인 오너</p>
+            </div>
+            <a class="arrow" href="https://github.com/Jihwan0210/PotatoChip" target="_blank" rel="noopener" aria-label="repo">↗</a>
+          </div>
+          <p class="desc">못난이 농산물 마켓플레이스. 상품 CRUD와 판매자 권한 제어, 가격 스냅샷 장바구니, Kakao Map 기반 픽업 위치, 기간별 판매 랭킹을 구현했다. develop/feature 브랜치와 PR로 팀 협업을 진행했다.</p>
+          <div class="tags">
+            <span class="tag">Java 21</span><span class="tag">Spring Boot</span><span class="tag">JPA</span>
+            <span class="tag">Thymeleaf</span><span class="tag">MariaDB</span>
+          </div>
+          <a class="repo-link" href="https://github.com/Jihwan0210/PotatoChip" target="_blank" rel="noopener">GitHub에서 코드 보기</a>
+        </div>
+      </div>
+
+      <div class="rows fade">
+        <a class="row" href="https://github.com/Leeuswa/COGI" target="_blank" rel="noopener">
+          <span class="idx">01</span>
+          <div class="row-main">
+            <h4>COGI</h4>
+            <p>AI 코드 리뷰·PR 분석·팀 성장 대시보드. 이슈 승인, 약점 패턴 통계, 주간 리포트 자동 메일, 소셜 로그인과 결제 연동을 진행 중이다.</p>
+          </div>
+          <span class="row-stack mono">Java · React</span>
+          <span class="row-go">→</span>
+        </a>
+        <a class="row" href="https://github.com/Jihwan0210/React_CampusLink" target="_blank" rel="noopener">
+          <span class="idx">02</span>
+          <div class="row-main">
+            <h4>CampusLink</h4>
+            <p>대학 동아리·스터디·공모전 모집 SPA. Context API 로그인, sessionStorage 세션 유지, 작성자 권한 분기, Amplify 배포.</p>
+          </div>
+          <span class="row-stack mono">React · TypeScript</span>
+          <span class="row-go">→</span>
+        </a>
+        <a class="row" href="https://github.com/Jihwan0210/PHP_ShopProject" target="_blank" rel="noopener">
+          <span class="idx">03</span>
+          <div class="row-main">
+            <h4>침착맨 굿즈샵</h4>
+            <p>쿠키 로그인과 비회원 장바구니, 옵션·수량·할인·배송비 계산 주문, 관리자 상품 관리. 교내 경진대회 은상.</p>
+          </div>
+          <span class="row-stack mono">PHP · Bootstrap</span>
+          <span class="row-go">→</span>
+        </a>
+        <a class="row" href="https://github.com/Jihwan0210/laravel-hotel-reservation" target="_blank" rel="noopener">
+          <span class="idx">04</span>
+          <div class="row-main">
+            <h4>호텔 예약 시스템</h4>
+            <p>Laravel MVC 기반 숙소·예약·후기·공지 관리. Eloquent ORM, 사용자/관리자 권한 분리. 교내 경진대회 금상.</p>
+          </div>
+          <span class="row-stack mono">Laravel · MVC</span>
+          <span class="row-go">→</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="skills">
+    <div class="wrap">
+      <div class="section-head fade">
+        <h2>기술 스택</h2>
+      </div>
+      <div class="skill-grid fade">
+        <div class="skill-col">
+          <h4>Backend</h4>
+          <ul>
+            <li>Java</li><li>Spring Boot</li><li>Spring Security</li>
+            <li>Spring Data JPA</li><li>REST API</li><li>JWT</li>
+          </ul>
+        </div>
+        <div class="skill-col">
+          <h4>Database</h4>
+          <ul>
+            <li>MariaDB</li><li>MySQL</li><li>Oracle</li><li>SQL</li>
+          </ul>
+        </div>
+        <div class="skill-col">
+          <h4>Frontend</h4>
+          <ul>
+            <li>JavaScript</li><li>TypeScript</li><li>React</li><li>Thymeleaf</li>
+          </ul>
+        </div>
+        <div class="skill-col">
+          <h4>Tools</h4>
+          <ul>
+            <li>Git</li><li>GitHub</li><li>AWS</li><li>Docker</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="contact">
+    <div class="wrap contact fade">
+      <h2>연락 주세요.</h2>
+      <p>새로운 프로젝트나 채용 관련 이야기, 언제든 환영합니다.</p>
+      <div class="actions">
+        <a class="btn primary" href="mailto:202212020@gsuite.induk.ac.kr">202212020@gsuite.induk.ac.kr</a>
+        <a class="btn ghost" href="https://github.com/Jihwan0210" target="_blank" rel="noopener">github.com/Jihwan0210</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p>© 2026 유지환</p>
+    <div class="flinks">
+      <a href="https://github.com/Jihwan0210" target="_blank" rel="noopener">GitHub</a>
+      <a href="mailto:202212020@gsuite.induk.ac.kr">Email</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const els = document.querySelectorAll('.fade');
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { threshold: 0.12 });
+  els.forEach(el=> io.observe(el));
+</script>
+</body>
+</html>
