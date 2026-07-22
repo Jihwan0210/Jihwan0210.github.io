@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>유지환일보 — 백엔드 개발자 유지환</title>
+<meta name="description" content="유지환(신입 백엔드 개발자) 포트폴리오 — 신문 레이아웃으로 엮은 프로젝트 지면">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Song+Myung&family=Noto+Serif+KR:wght@400;500;600;700;900&family=Noto+Sans+KR:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper: #f1ebdc;
+    --paper-shade: #e7dec7;
+    --paper-deep: #ded3b8;
+    --ink: #1d1a14;
+    --ink-soft: #524b3d;
+    --ink-faint: #7a7161;
+    --rule: #b9ac8b;
+    --rule-strong: #1d1a14;
+    --accent: #9c2b20;
+    --accent-dark: #6f1d15;
+    --radius: 2px;
+    --maxw: 1180px;
+  }
+
+  *{ box-sizing:border-box; }
+
+  html{ scroll-behavior:smooth; }
+
+  body{
+    margin:0;
+    background:
+      radial-gradient(1px 1px at 12px 8px, rgba(29,26,20,0.05) 1px, transparent 1px),
+      radial-gradient(1px 1px at 46px 30px, rgba(29,26,20,0.04) 1px, transparent 1px),
+      var(--paper);
+    background-size: 60px 60px, 70px 70px, auto;
+    color: var(--ink);
+    font-family: 'Noto Serif KR', serif;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  a{ color: var(--accent); text-decoration: none; border-bottom: 1px solid rgba(156,43,32,0.35); }
+  a:hover{ color: var(--accent-dark); border-bottom-color: var(--accent-dark); }
+
+  .wrap{ max-width: var(--maxw); margin: 0 auto; padding: 0 22px; }
+
+  /* ---------- utility bar ---------- */
+  .utility{
+    font-family:'Noto Sans KR', sans-serif;
+    font-size: 12px;
+    letter-spacing: 0.04em;
+    color: var(--ink-faint);
+    border-bottom: 1px solid var(--rule);
+    padding: 8px 0;
+  }
+  .utility .wrap{ display:flex; justify-content:space-between; flex-wrap:wrap; gap:6px; }
+
+  /* ---------- masthead ---------- */
+  .masthead{ padding: 34px 0 18px; text-align:center; }
+  .masthead .kicker{
+    font-family:'Noto Sans KR', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.32em;
+    color: var(--ink-faint);
+    text-transform: uppercase;
+    margin: 0 0 14px;
+  }
+  .masthead h1{
+    font-family:'Song Myung', serif;
+    font-size: clamp(2.6rem, 7vw, 5rem);
+    margin: 0;
+    letter-spacing: 0.02em;
+    color: var(--ink);
+  }
+  .masthead .sub{
+    font-family:'Noto Sans KR', sans-serif;
+    font-size: 13px;
+    letter-spacing: 0.22em;
+    color: var(--ink-soft);
+    margin-top: 10px;
+    text-transform: uppercase;
+  }
+  .masthead-rule{
+    border:none;
+    border-top: 3px solid var(--ink);
+    border-bottom: 1px solid var(--ink);
+    height: 4px;
+    margin: 18px 0 0;
+  }
+
+  /* ---------- section nav (index line) ---------- */
+  .index-line{
+    font-family:'Noto Sans KR', sans-serif;
+    font-size: 13px;
+    border-bottom: 1px solid var(--rule);
+    padding: 10px 0;
+  }
+  .index-line .wrap{ display:flex; gap: 22px; flex-wrap:wrap; justify-content:center; }
+  .index-line a{ color: var(--ink-soft); border-bottom: none; font-weight:500; }
+  .index-line a:hover{ color: var(--accent); }
+
+  section{ padding: 40px 0; border-bottom: 1px solid var(--rule); }
+  section:last-of-type{ border-bottom:none; }
+
+  .section-label{
+    font-family:'Noto Sans KR', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin: 0 0 6px;
+  }
+
+  /* ---------- lead story ---------- */
+  .lead h2{
+    font-size: clamp(1.9rem, 4vw, 2.9rem);
+    line-height: 1.22;
+    margin: 0 0 6px;
+    font-weight: 700;
+  }
+  .lead .dek{
+    font-family:'Noto Sans KR', sans-serif;
+    font-size: 15px;
+    color: var(--ink-soft);
+    margin: 0 0 4px;
+  }
+  .byline{
+    font-family:'Noto Sans KR', sans-serif;
+    font-size: 12px;
+    color: var(--ink-faint);
+    margin: 0 0 20px;
+    border-bottom: 1px solid var(--rule);
+    padding-bottom: 16px;
+  }
+
+  .lead-grid{
+    display:grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 34px;
+    align-items:start;
+  }
+
+  .article-columns{
+    column-count: 2;
+    column-gap: 30px;
+    font-size: 15.5px;
+  }
+  .article-columns p{ margin: 0 0 14px; }
+  .article-columns p:first-of-type::first-letter{
+    float:left;
+    font-family:'Song Myung', serif;
+    font-size: 3.6rem;
+    line-height: 0.82;
+    padding: 4px 8px 0 0;
+    color: var(--accent);
+  }
+
+  .sidebar-box{
+    background: var(--paper-shade);
+    border: 1px solid var(--rule);
+    padding: 18px 20px;
+  }
+  .sidebar-box h3{
+    font-family:'Noto Sans KR', sans-serif;
+    font-size: 12px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    margin: 0 0 10px;
+    color: var(--ink-soft);
+    border-bottom: 1px solid var(--rule);
+    padding-bottom: 8px;
+  }
+  .sidebar-box .award{
+    font-family:'Noto Sans KR', sans-serif;
+    font-size: 13px;
+    line-height:1.6;
+    margin: 0 0 14px;
+  }
+  .sidebar-box .award strong{ display:block; font-size:14px; color:var(--accent-dark); }
+
+  .stack-tags{ display:flex; flex-wrap:wrap; gap: 6px; margin: 0; padding:0; list-style:none; }
+  .stack-tags li{
+    font-family:'Noto Sans KR', sans-serif;
+    font-size: 11.5px;
+    border: 1px solid var(--ink-faint);
+    color: var(--ink-soft);
+    padding: 3px 9px;
+  }
+
+  .repo-link{
+    display:inline-block;
+    margin-top: 14px;
+    font-family:'Noto Sans KR', sans-serif;
+    font-size: 12.5px;
+    font-weight:600;
+  }
+
+  /* ---------- secondary story ---------- */
+  .secondary{
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 34px;
+  }
+  .secondary h2{
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    margin: 0 0 8px;
+    line-height:1.25;
+  }
+  .secondary .dek{
+    font-family:'Noto Sans KR', sans-serif;
+    font-size: 13.5px;
+    color: var(--ink-soft);
+    margin: 0 0 14px;
+  }
+  .secondary .article-columns{ column-count: 1; font-size: 15px; }
+  .secondary .article-columns p:first-of-type::first-letter{ font-size: 2.8rem; }
+
+  .role-line{
+    font-family:'Noto Sans KR', sans-serif;
+    font-size: 12px;
+    color: var(--ink-faint);
+    margin: 10px 0 0;
+  }
+
+  /* ---------- briefs (small news items) ---------- */
+  .briefs-head{
+    text-align:center;
+    margin-bottom: 26px;
+  }
+  .briefs-head h2{
+    font-size: clamp(1.4rem, 3vw, 1.9rem);
+    margin: 4px 0 0;
+    display:inline-block;
+    border-top: 1px solid var(--ink);
+    border-bottom: 1px solid var(--ink);
+    padding: 6px 0;
+  }
+  .briefs-grid{
+    display:grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0 34px;
+  }
+  .brief{
+    padding: 18px 0;
+    border-top: 1px solid var(--rule);
+  }
+  .brief h3{
+    font-size: 1.15rem;
+    margin: 0 0 6px;
+    line-height:1.3;
+  }
+  .brief p{
+    font-family:'Noto Sans KR', sans-serif;
+    font-size: 13.5px;
+    color: var(--ink-soft);
+    margin: 0 0 10px;
+  }
+  .brief .meta{
+    font-family:'Noto Sans KR', sans-serif;
+    font-size: 11.5px;
+    color: var(--ink-faint);
+  }
+  .brief .meta .badge{
+    color: var(--accent-dark);
+    font-weight:600;
+  }
+  .brief a.repo-link{ margin-top: 8px; }
+
+  /* ---------- skills as classified ledger ---------- */
+  .ledger{
+    display:grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 22px;
+  }
+  .ledger .col h4{
+    font-family:'Noto Sans KR', sans-serif;
+    font-size: 11.5px;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color: var(--ink-faint);
+    margin: 0 0 10px;
+    border-bottom: 1px solid var(--rule);
+    padding-bottom: 8px;
+  }
+  .ledger ul{ list-style:none; margin:0; padding:0; font-family:'Noto Sans KR', sans-serif; font-size: 13.5px; }
+  .ledger li{ padding: 4px 0; color: var(--ink-soft); }
+
+  /* ---------- masthead emblem ---------- */
+  .emblem{ display:flex; justify-content:center; margin-bottom: 6px; }
+  .emblem svg{ width:46px; height:46px; }
+
+  /* ---------- footer / colophon ---------- */
+  footer{
+    padding: 30px 0 46px;
+    text-align:center;
+  }
+  footer .colophon{
+    font-family:'Noto Sans KR', sans-serif;
+    font-size: 12.5px;
+    color: var(--ink-faint);
+    line-height:1.9;
+  }
+  footer .colophon a{ color: var(--ink-soft); border-bottom: 1px solid var(--rule); }
+  footer .colophon a:hover{ color: var(--accent); border-bottom-color: var(--accent); }
+  footer .masthead-rule{ margin-bottom: 20px; }
+
+  /* ---------- responsive ---------- */
+  @media (max-width: 860px){
+    .lead-grid{ grid-template-columns: 1fr; }
+    .secondary{ grid-template-columns: 1fr; }
+    .article-columns{ column-count: 1; }
+    .briefs-grid{ grid-template-columns: 1fr; }
+    .ledger{ grid-template-columns: repeat(2, 1fr); }
+    .index-line .wrap{ gap: 14px; row-gap: 6px; }
+  }
+  @media (max-width: 520px){
+    .ledger{ grid-template-columns: 1fr 1fr; }
+    .utility .wrap{ flex-direction:column; gap:2px; }
+  }
+</style>
+</head>
+<body>
+
+  <div class="utility">
+    <div class="wrap">
+      <span>2026년 7월 22일 수요일 · 창간호 · 서울판</span>
+      <span>정가 무료 · 백엔드 개발자 구인구직면</span>
+    </div>
+  </div>
+
+  <header class="masthead wrap">
+    <div class="emblem" aria-hidden="true">
+      <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M14 12 L6 24 L14 36" stroke="#1d1a14" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M34 12 L42 24 L34 36" stroke="#1d1a14" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M27 8 L21 40" stroke="#9c2b20" stroke-width="2.4" stroke-linecap="round"/>
+      </svg>
+    </div>
+    <p class="kicker">Backend Developer Since 2026</p>
+    <h1>유지환일보</h1>
+    <p class="sub">The Jihwan Backend Times</p>
+    <hr class="masthead-rule">
+  </header>
+
+  <nav class="index-line" aria-label="지면 안내">
+    <div class="wrap">
+      <a href="#lead">1면 · 읽고</a>
+      <a href="#potatochip">2면 · PotatoChip</a>
+      <a href="#briefs">단신 · 그 외 작업</a>
+      <a href="#skills">기술면</a>
+      <a href="#contact">알림면</a>
+    </div>
+  </nav>
+
+  <main class="wrap">
+
+    <!-- LEAD STORY -->
+    <section id="lead" class="lead">
+      <p class="section-label">1면 헤드라인</p>
+      <h2>어려운 생활 문서, 사진 한 장이면 AI가 쉬운 말로 풀어준다</h2>
+      <p class="dek">배리어프리 문서 해석 서비스 「읽고」, 백엔드 전 구간을 설계하고 구현하다</p>
+      <p class="byline">유지환 기자 · 백엔드 개발 · <a href="https://github.com/Jihwan0210/Ilgo-backend">github.com/Jihwan0210/Ilgo-backend</a></p>
+
+      <div class="lead-grid">
+        <div class="article-columns">
+          <p>계약서, 안내문, 고지서처럼 평소에는 무심코 지나치는 문서도 누군가에게는 큰 장벽이 된다. 「읽고」는 이런 생활 문서를 사진으로 찍으면 AI가 쉬운 한국어나 영어로 다시 풀어 설명해주는 배리어프리 서비스다.</p>
+          <p>유지환은 이 서비스의 백엔드를 맡아 인증과 인가 체계를 세웠다. JWT 기반으로 로그인 상태를 관리하고, AI 게이트웨이와 연동되는 문서 분석 API를 설계해 사진과 텍스트가 뒤섞인 요청도 안정적으로 처리하도록 했다.</p>
+          <p>업로드는 multipart와 JSON 두 방식을 모두 지원하고, 목록 조회에는 커서 기반 페이지네이션을 적용해 데이터가 쌓여도 응답 속도가 흔들리지 않게 했다. 전역 예외 처리와 레이트리밋으로 서비스 안정성을 챙기고, Swagger 문서와 테스트 코드로 협업 부담을 줄였다.</p>
+        </div>
+
+        <aside class="sidebar-box">
+          <h3>지면 단신</h3>
+          <p class="award">
+            <strong>AI Re-Local 해커톤 3등 · 선도상</strong>
+            전국 5개 대학, 27명이 참가한 해커톤에서 수상.
+          </p>
+          <h3>담당 업무</h3>
+          <ul class="stack-tags">
+            <li>JWT 인증·인가</li>
+            <li>AI 게이트웨이 연동</li>
+            <li>파일 업로드 API</li>
+            <li>커서 페이지네이션</li>
+            <li>전역 예외처리</li>
+            <li>레이트리밋</li>
+          </ul>
+          <h3 style="margin-top:16px;">기술 스택</h3>
+          <ul class="stack-tags">
+            <li>Java</li><li>Spring Boot</li><li>Spring Security</li><li>JPA</li><li>JWT</li><li>PostgreSQL</li><li>Swagger</li>
+          </ul>
+          <a class="repo-link" href="https://github.com/Jihwan0210/Ilgo-backend">저장소 바로가기 →</a>
+        </aside>
+      </div>
+    </section>
+
+    <!-- SECONDARY STORY -->
+    <section id="potatochip" class="secondary-wrap">
+      <p class="section-label">2면 · 대표 프로젝트</p>
+      <div class="secondary">
+        <div>
+          <h2>못난이 농산물, 팀장이 되어 상품 도메인을 설계하다</h2>
+          <p class="dek">「PotatoChip」 마켓플레이스 개발기</p>
+          <div class="article-columns">
+            <p>규격에 맞지 않아 버려지던 농산물을 거래하는 마켓플레이스 「PotatoChip」에서 유지환은 팀장이자 상품 도메인 오너를 맡았다. 상품 등록과 수정, 삭제 전반의 CRUD와 판매자 권한 제어를 직접 설계했다.</p>
+            <p>장바구니에는 담을 당시의 가격을 그대로 저장하는 가격 스냅샷 구조를 적용해 이후 가격이 바뀌어도 주문 금액이 흔들리지 않도록 했다. Kakao Map으로 픽업 위치를 안내하고, 기간별 판매 랭킹을 집계해 인기 상품을 보여준다.</p>
+            <p>develop와 feature 브랜치를 나누고 Pull Request로 리뷰를 주고받는 방식으로 팀 협업을 이끌었다.</p>
+          </div>
+          <p class="role-line">역할 · 팀장 / 상품 도메인 오너 &nbsp;·&nbsp; Java 21, Spring Boot, JPA, Thymeleaf, MariaDB</p>
+          <a class="repo-link" href="https://github.com/Jihwan0210/PotatoChip">저장소 바로가기 →</a>
+        </div>
+
+        <aside class="sidebar-box">
+          <h3>진행 중인 프로젝트</h3>
+          <h4 style="font-family:'Noto Serif KR', serif; font-size:1.2rem; margin: 0 0 6px;">COGI</h4>
+          <p class="award" style="margin-bottom:10px;">AI가 코드 리뷰와 PR을 분석해 팀의 성장 흐름을 보여주는 대시보드. 이슈 승인, 약점 패턴 통계, 주간 리포트 자동 메일, 소셜 로그인과 Toss 결제 연동을 진행 중이다.</p>
+          <p class="role-line" style="margin:0 0 10px;">Java, React</p>
+          <a class="repo-link" href="https://github.com/Leeuswa/COGI">저장소 바로가기 →</a>
+
+          <h3 style="margin-top:22px;">기술면 예고</h3>
+          <p class="award">Java와 Spring Boot를 중심으로 인증, 데이터베이스, 프론트엔드까지 다루는 기술 스택은 지면 하단 기술면에서 확인할 수 있다.</p>
+        </aside>
+      </div>
+    </section>
+
+    <!-- BRIEFS -->
+    <section id="briefs">
+      <div class="briefs-head">
+        <p class="section-label">단신</p>
+        <h2>그 외 작업 노트</h2>
+      </div>
+      <div class="briefs-grid">
+
+        <article class="brief">
+          <h3>CampusLink, 대학 모집 공고를 한곳에</h3>
+          <p>동아리와 스터디, 공모전 모집 정보를 모아 보여주는 SPA. Context API로 로그인 상태를 관리하고 sessionStorage로 세션을 유지하며, 작성자 권한에 따라 화면을 분기했다. Amplify로 배포까지 마쳤다.</p>
+          <p class="meta">React 18 · TypeScript · Vite</p>
+          <a class="repo-link" href="https://github.com/Jihwan0210/React_CampusLink">저장소 바로가기 →</a>
+        </article>
+
+        <article class="brief">
+          <h3>침착맨 굿즈샵, PHP로 쇼핑몰을 짓다</h3>
+          <p>쿠키 기반 로그인과 비회원 장바구니를 지원하고, 옵션과 수량, 할인과 배송비까지 반영한 주문 흐름을 만들었다. 관리자 페이지에서 상품을 관리할 수 있다.</p>
+          <p class="meta"><span class="badge">교내 경진대회 은상</span> · PHP · Bootstrap</p>
+          <a class="repo-link" href="https://github.com/Jihwan0210/PHP_ShopProject">저장소 바로가기 →</a>
+        </article>
+
+        <article class="brief">
+          <h3>호텔 예약, Laravel로 짠 MVC</h3>
+          <p>숙소와 예약, 후기, 공지사항을 다루는 예약 시스템. Eloquent ORM으로 데이터를 다루고 사용자와 관리자 화면을 분리해 구성했다.</p>
+          <p class="meta"><span class="badge">교내 경진대회 금상</span> · Laravel</p>
+          <a class="repo-link" href="https://github.com/Jihwan0210/laravel-hotel-reservation">저장소 바로가기 →</a>
+        </article>
+
+        <article class="brief">
+          <h3>기자 소개</h3>
+          <p>Java와 Spring Boot를 중심으로 백엔드를 다루는 신입 개발자. 인증, 데이터 설계, 협업 프로세스에 관심을 두고 프로젝트를 이어가고 있다.</p>
+          <p class="meta">서울, 대한민국 · <a href="https://github.com/Jihwan0210">@Jihwan0210</a></p>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- SKILLS LEDGER -->
+    <section id="skills">
+      <p class="section-label">기술면</p>
+      <h2 style="font-size:1.6rem; margin:0 0 22px;">보유 기술 일람</h2>
+      <div class="ledger">
+        <div class="col">
+          <h4>백엔드</h4>
+          <ul>
+            <li>Java</li>
+            <li>Spring Boot</li>
+            <li>Spring Security</li>
+            <li>Spring Data JPA</li>
+            <li>REST API</li>
+            <li>JWT</li>
+          </ul>
+        </div>
+        <div class="col">
+          <h4>데이터베이스</h4>
+          <ul>
+            <li>MariaDB</li>
+            <li>MySQL</li>
+            <li>Oracle</li>
+            <li>SQL</li>
+          </ul>
+        </div>
+        <div class="col">
+          <h4>프론트엔드</h4>
+          <ul>
+            <li>JavaScript</li>
+            <li>TypeScript</li>
+            <li>React</li>
+            <li>Thymeleaf</li>
+          </ul>
+        </div>
+        <div class="col">
+          <h4>협업 · 인프라</h4>
+          <ul>
+            <li>Git</li>
+            <li>GitHub</li>
+            <li>AWS</li>
+            <li>Docker</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer id="contact">
+    <div class="wrap">
+      <hr class="masthead-rule">
+      <p class="colophon">
+        발행인 · 유지환 &nbsp;|&nbsp; GitHub <a href="https://github.com/Jihwan0210">@Jihwan0210</a> &nbsp;|&nbsp; 이메일 <a href="mailto:202212020@gsuite.induk.ac.kr">202212020@gsuite.induk.ac.kr</a><br>
+        서울, 대한민국 · 유지환일보는 매 프로젝트마다 새로 발행됩니다
+      </p>
+    </div>
+  </footer>
+
+</body>
+</html>
