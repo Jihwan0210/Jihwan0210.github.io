@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>유지환 - 백엔드 개발자 포트폴리오</title>
+<meta name="description" content="유지환, 신입 백엔드 개발자. Java와 Spring Boot로 만든 프로젝트 모음.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<style>
+  :root{
+    --paper:#f4f3ee;
+    --paper-2:#eceae3;
+    --ink:#17181c;
+    --ink-soft:#57585f;
+    --line:rgba(23,24,28,0.14);
+
+    --cobalt:#2b4fe0;
+    --cobalt-tint:#e3e8fd;
+    --terracotta:#c9542f;
+    --terracotta-tint:#f7e4da;
+    --olive:#54613a;
+    --olive-tint:#e6e9dc;
+    --plum:#7c3159;
+    --plum-tint:#f0dfe8;
+
+    --radius:0px;
+    --radius-pill:999px;
+    --maxw:1240px;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:"Pretendard","Space Grotesk",-apple-system,BlinkMacSystemFont,sans-serif;
+    -webkit-font-smoothing:antialiased;
+    line-height:1.5;
+  }
+  img,svg{display:block;max-width:100%;}
+  a{color:inherit;}
+  .num{font-family:"Space Grotesk","Pretendard",sans-serif;}
+
+  ::selection{background:var(--ink);color:var(--paper);}
+
+  /* ---------- layout helpers ---------- */
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 28px;}
+  @media (max-width:640px){ .wrap{padding:0 20px;} }
+
+  /* ---------- nav ---------- */
+  .nav{
+    position:sticky;top:0;z-index:40;
+    background:rgba(244,243,238,0.86);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav-inner{
+    max-width:var(--maxw);margin:0 auto;padding:0 28px;
+    height:68px;display:flex;align-items:center;justify-content:space-between;
+    gap:16px;
+  }
+  .logo{
+    font-weight:700;font-size:18px;letter-spacing:-0.01em;text-decoration:none;
+  }
+  .nav-links{display:flex;align-items:center;gap:28px;}
+  .nav-links a{font-size:14.5px;text-decoration:none;color:var(--ink-soft);transition:color .2s;}
+  .nav-links a:hover{color:var(--ink);}
+  .nav-gh{
+    font-size:14px;font-weight:600;text-decoration:none;
+    padding:9px 18px;border:1.5px solid var(--ink);border-radius:var(--radius-pill);
+    transition:transform .15s ease, background .15s ease, color .15s ease;
+    white-space:nowrap;
+  }
+  .nav-gh:hover{background:var(--ink);color:var(--paper);}
+  .nav-gh:active{transform:scale(0.97);}
+  .nav-toggle{display:none;background:none;border:1.5px solid var(--ink);border-radius:8px;width:38px;height:38px;
+    align-items:center;justify-content:center;cursor:pointer;flex:none;}
+  .nav-toggle span, .nav-toggle span::before, .nav-toggle span::after{
+    content:"";display:block;width:16px;height:2px;background:var(--ink);position:relative;
+  }
+  .nav-toggle span::before{position:absolute;top:-5px;}
+  .nav-toggle span::after{position:absolute;top:5px;}
+
+  @media (max-width:760px){
+    .nav-links{
+      position:absolute;top:68px;left:0;right:0;background:var(--paper);
+      border-bottom:1px solid var(--line);
+      flex-direction:column;align-items:flex-start;gap:0;
+      padding:8px 20px 16px;
+      display:none;
+    }
+    .nav-links.open{display:flex;}
+    .nav-links a{padding:12px 0;width:100%;border-bottom:1px solid var(--line);}
+    .nav-links a:last-of-type{border-bottom:none;}
+    .nav-toggle{display:flex;}
+  }
+
+  /* ---------- hero ---------- */
+  .hero{
+    position:relative;
+    overflow:hidden;
+    padding:88px 0 80px;
+  }
+  .hero-shape-a{
+    position:absolute;
+    right:-8vw;top:-6vw;
+    width:46vw;height:46vw;
+    max-width:560px;max-height:560px;
+    background:var(--cobalt);
+    clip-path:polygon(30% 0%, 100% 0%, 100% 70%, 70% 100%, 0% 100%, 0% 30%);
+    opacity:0.96;
+    z-index:0;
+  }
+  .hero-shape-b{
+    position:absolute;
+    right:6vw;bottom:-10vw;
+    width:16vw;height:16vw;
+    max-width:190px;max-height:190px;
+    border-radius:50%;
+    background:var(--terracotta);
+    z-index:0;
+  }
+  .hero-inner{position:relative;z-index:1;max-width:var(--maxw);margin:0 auto;padding:0 28px;}
+  .hero-role{
+    display:inline-block;
+    font-size:12.5px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;
+    color:var(--ink-soft);
+    margin:0 0 22px;
+  }
+  .hero h1{
+    font-size:clamp(34px, 6.2vw, 66px);
+    line-height:1.12;
+    letter-spacing:-0.02em;
+    font-weight:700;
+    margin:0 0 22px;
+    max-width:11ch;
+  }
+  .hero-sub{
+    font-size:17px;color:var(--ink-soft);max-width:44ch;margin:0 0 36px;
+  }
+  .hero-cta{display:flex;gap:14px;flex-wrap:wrap;}
+  .btn{
+    display:inline-flex;align-items:center;gap:8px;
+    padding:13px 24px;border-radius:var(--radius-pill);
+    font-size:14.5px;font-weight:600;text-decoration:none;
+    border:1.5px solid var(--ink);
+    transition:transform .15s ease, background .15s ease, color .15s ease;
+    white-space:nowrap;
+  }
+  .btn:active{transform:scale(0.97);}
+  .btn-primary{background:var(--ink);color:var(--paper);}
+  .btn-primary:hover{background:#000;}
+  .btn-ghost{background:transparent;color:var(--ink);}
+  .btn-ghost:hover{background:var(--ink);color:var(--paper);}
+
+  @media (max-width:640px){
+    .hero{padding:56px 0 56px;}
+    .hero-shape-a{width:70vw;height:70vw;right:-16vw;top:-10vw;}
+    .hero-shape-b{display:none;}
+  }
+
+  /* ---------- reveal ---------- */
+  .reveal{opacity:0;transform:translateY(28px);transition:opacity .7s cubic-bezier(.16,1,.3,1), transform .7s cubic-bezier(.16,1,.3,1);}
+  .reveal.in-view{opacity:1;transform:translateY(0);}
+  @media (prefers-reduced-motion: reduce){
+    .reveal{opacity:1;transform:none;transition:none;}
+    html{scroll-behavior:auto;}
+  }
+
+  /* ---------- section heading ---------- */
+  .section-head{padding:64px 0 8px;}
+  .section-head h2{
+    font-size:clamp(26px,3.6vw,36px);
+    letter-spacing:-0.015em;font-weight:700;margin:0 0 8px;
+  }
+  .section-head p{color:var(--ink-soft);font-size:15.5px;margin:0;max-width:56ch;}
+
+  /* ---------- flagship project ---------- */
+  .flagship{
+    padding:56px 0;
+    border-top:1px solid var(--line);
+  }
+  .flagship-grid{
+    display:grid;
+    grid-template-columns:5fr 7fr;
+    gap:0 56px;
+    align-items:stretch;
+  }
+  .flagship:nth-of-type(even) .flagship-grid{grid-template-columns:7fr 5fr;}
+  .flagship:nth-of-type(even) .fs-media{order:2;}
+  .flagship:nth-of-type(even) .fs-body{order:1;}
+
+  .fs-media{
+    position:relative;
+    background:var(--accent);
+    min-height:320px;
+    display:flex;align-items:flex-end;
+    padding:28px;
+    overflow:hidden;
+  }
+  .fs-media::before{
+    content:"";position:absolute;inset:0;
+    background:linear-gradient(155deg, rgba(255,255,255,0.16), transparent 55%);
+  }
+  .fs-index{
+    font-size:clamp(90px,13vw,150px);
+    font-weight:700;
+    line-height:0.8;
+    color:rgba(255,255,255,0.92);
+    letter-spacing:-0.03em;
+    position:relative;
+  }
+  .fs-tag{
+    position:absolute;top:24px;left:28px;
+    font-size:12px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;
+    color:rgba(255,255,255,0.86);
+  }
+
+  .fs-body{padding:8px 0;display:flex;flex-direction:column;justify-content:center;}
+  .fs-body h3{
+    font-size:clamp(24px,3vw,32px);font-weight:700;letter-spacing:-0.01em;margin:0 0 4px;
+    display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;
+  }
+  .fs-body h3 .en{font-size:14px;font-weight:600;color:var(--ink-soft);}
+  .fs-tagline{font-size:15.5px;font-weight:600;color:var(--accent);margin:0 0 14px;}
+  .fs-desc{font-size:15.5px;color:var(--ink-soft);max-width:58ch;margin:0 0 22px;}
+
+  .pill-row{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 16px;}
+  .pill{
+    font-size:13px;padding:6px 13px;border-radius:var(--radius-pill);
+    border:1px solid var(--line);color:var(--ink-soft);
+  }
+  .pill-role{background:var(--tint);border-color:transparent;color:var(--ink);font-weight:600;}
+  .pill-stack{color:var(--ink-soft);}
+
+  .fs-award{
+    font-size:13.5px;color:var(--ink-soft);
+    padding:10px 14px;background:var(--tint);border-radius:2px;
+    display:inline-block;margin:0 0 20px;
+  }
+  .fs-award b{color:var(--ink);}
+
+  .fs-link{
+    display:inline-flex;align-items:center;gap:7px;
+    font-size:14.5px;font-weight:700;text-decoration:none;color:var(--ink);
+    border-bottom:2px solid var(--accent);padding-bottom:2px;width:fit-content;
+    transition:gap .2s ease;
+  }
+  .fs-link:hover{gap:11px;}
+  .fs-link svg{width:14px;height:14px;flex:none;}
+
+  @media (max-width:860px){
+    .flagship-grid, .flagship:nth-of-type(even) .flagship-grid{grid-template-columns:1fr;}
+    .flagship:nth-of-type(even) .fs-media,.flagship:nth-of-type(even) .fs-body{order:initial;}
+    .fs-media{min-height:220px;}
+  }
+
+  /* ---------- secondary grid ---------- */
+  .secondary{padding:56px 0;border-top:1px solid var(--line);}
+  .secondary-grid{
+    display:grid;grid-template-columns:1fr 1fr;gap:24px;
+  }
+  .sec-card{
+    background:var(--paper-2);
+    padding:26px 26px 24px;
+    position:relative;
+    border-left:5px solid var(--accent);
+  }
+  .sec-card .sec-index{
+    font-size:13px;font-weight:700;color:var(--accent);margin:0 0 12px;letter-spacing:0.04em;
+  }
+  .sec-card h3{font-size:19px;font-weight:700;margin:0 0 6px;letter-spacing:-0.01em;}
+  .sec-card .sec-tagline{font-size:13.5px;color:var(--ink-soft);margin:0 0 12px;}
+  .sec-card .sec-desc{font-size:14px;color:var(--ink-soft);margin:0 0 16px;max-width:52ch;}
+  .sec-card .pill-row{margin-bottom:18px;}
+  .sec-card .fs-link{font-size:13.5px;}
+
+  @media (max-width:760px){ .secondary-grid{grid-template-columns:1fr;} }
+
+  /* ---------- minor list ---------- */
+  .minor{padding:56px 0;border-top:1px solid var(--line);}
+  .minor-list{display:grid;grid-template-columns:1fr 1fr;gap:0 40px;}
+  .minor-item{
+    padding:22px 0;
+    border-bottom:1px solid var(--line);
+    display:grid;grid-template-columns:auto 1fr;gap:18px;align-items:start;
+  }
+  .minor-item .num{font-size:13px;font-weight:700;color:var(--ink-soft);padding-top:3px;}
+  .minor-item h4{font-size:16.5px;font-weight:700;margin:0 0 4px;}
+  .minor-item p{font-size:13.5px;color:var(--ink-soft);margin:0 0 8px;max-width:48ch;}
+  .minor-item .minor-meta{font-size:12.5px;color:var(--ink-soft);}
+  .minor-item .minor-meta b{color:var(--ink);}
+  .minor-item a.fs-link{font-size:13px;margin-top:8px;}
+
+  @media (max-width:760px){ .minor-list{grid-template-columns:1fr;} }
+
+  /* ---------- skills ---------- */
+  .skills{padding:56px 0;border-top:1px solid var(--line);}
+  .skills-grid{
+    display:grid;grid-template-columns:repeat(4,1fr);gap:1px;
+    background:var(--line);border:1px solid var(--line);
+  }
+  .skill-cell{background:var(--paper);padding:26px 22px;}
+  .skill-cell h4{
+    font-size:12.5px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;
+    color:var(--ink-soft);margin:0 0 16px;
+  }
+  .skill-cell .pill-row{gap:7px;}
+  .skill-cell .pill{font-size:12.5px;padding:5px 11px;}
+
+  @media (max-width:860px){ .skills-grid{grid-template-columns:repeat(2,1fr);} }
+  @media (max-width:480px){ .skills-grid{grid-template-columns:1fr;} }
+
+  /* ---------- contact / footer ---------- */
+  .contact{
+    margin-top:64px;
+    background:var(--ink);
+    color:var(--paper);
+    padding:72px 0 40px;
+    position:relative;
+    overflow:hidden;
+  }
+  .contact-shape{
+    position:absolute;left:-6vw;bottom:-10vw;width:34vw;height:34vw;max-width:340px;max-height:340px;
+    background:var(--plum);border-radius:50%;opacity:0.7;
+  }
+  .contact-inner{position:relative;z-index:1;}
+  .contact h2{font-size:clamp(28px,4.4vw,44px);font-weight:700;letter-spacing:-0.02em;margin:0 0 16px;max-width:14ch;}
+  .contact p{color:rgba(244,243,238,0.72);font-size:16px;max-width:46ch;margin:0 0 36px;}
+  .contact-links{display:flex;flex-wrap:wrap;gap:14px;margin-bottom:56px;}
+  .contact-links a{
+    font-size:14.5px;font-weight:600;text-decoration:none;color:var(--paper);
+    padding:11px 20px;border:1.5px solid rgba(244,243,238,0.4);border-radius:var(--radius-pill);
+    transition:background .15s ease,border-color .15s ease;
+  }
+  .contact-links a:hover{background:rgba(244,243,238,0.12);border-color:var(--paper);}
+  .foot-row{
+    display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;
+    padding-top:24px;border-top:1px solid rgba(244,243,238,0.16);
+    font-size:12.5px;color:rgba(244,243,238,0.5);
+  }
+
+  @media (max-width:640px){ .contact{padding:52px 0 28px;} }
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="nav-inner">
+    <a href="#top" class="logo">유지환</a>
+    <nav class="nav-links" id="navLinks">
+      <a href="#work">프로젝트</a>
+      <a href="#skills">기술</a>
+      <a href="#contact">연락처</a>
+    </nav>
+    <div style="display:flex;align-items:center;gap:10px;">
+      <a class="nav-gh" href="https://github.com/Jihwan0210" target="_blank" rel="noopener">GitHub</a>
+      <button class="nav-toggle" id="navToggle" aria-label="메뉴 열기" aria-expanded="false"><span></span></button>
+    </div>
+  </div>
+</header>
+
+<section class="hero" id="top">
+  <div class="hero-shape-a" aria-hidden="true"></div>
+  <div class="hero-shape-b" aria-hidden="true"></div>
+  <div class="hero-inner">
+    <p class="hero-role">신입 백엔드 개발자</p>
+    <h1>Java와 Spring Boot로<br>서버를 만듭니다</h1>
+    <p class="hero-sub">인증, 데이터, API를 설계하고 만드는 유지환입니다. 서울에서 활동하고 있습니다.</p>
+    <div class="hero-cta">
+      <a href="#work" class="btn btn-primary">프로젝트 보기</a>
+      <a href="https://github.com/Jihwan0210" class="btn btn-ghost" target="_blank" rel="noopener">GitHub 방문</a>
+    </div>
+  </div>
+</section>
+
+<main>
+
+  <div class="wrap">
+    <div class="section-head reveal" id="work">
+      <h2>대표 프로젝트</h2>
+      <p>백엔드 개발자로서 처음부터 끝까지 책임진 두 프로젝트입니다.</p>
+    </div>
+  </div>
+
+  <!-- 읽고 -->
+  <article class="flagship reveal">
+    <div class="wrap">
+      <div class="flagship-grid">
+        <div class="fs-media" style="--accent:var(--cobalt);">
+          <span class="fs-tag">읽고 · Ilgo</span>
+          <span class="fs-index num">01</span>
+        </div>
+        <div class="fs-body" style="--accent:var(--cobalt);--tint:var(--cobalt-tint);">
+          <h3>읽고 <span class="en">Ilgo</span></h3>
+          <p class="fs-tagline">AI 배리어프리 문서 해석 서비스</p>
+          <p class="fs-desc">어려운 생활 문서를 사진으로 찍으면 AI가 쉬운 한국어와 영어로 풀어주는 서비스입니다. 백엔드 API 전체를 담당했습니다.</p>
+          <div class="pill-row">
+            <span class="pill pill-role">JWT 인증/인가</span>
+            <span class="pill pill-role">AI 게이트웨이 연동 API</span>
+            <span class="pill pill-role">멀티파트/JSON 업로드</span>
+            <span class="pill pill-role">커서 페이지네이션</span>
+            <span class="pill pill-role">전역 예외 처리, 레이트 리밋</span>
+            <span class="pill pill-role">Swagger 문서화, 테스트</span>
+          </div>
+          <div class="pill-row">
+            <span class="pill pill-stack">Java</span>
+            <span class="pill pill-stack">Spring Boot</span>
+            <span class="pill pill-stack">Spring Security</span>
+            <span class="pill pill-stack">JPA</span>
+            <span class="pill pill-stack">JWT</span>
+            <span class="pill pill-stack">PostgreSQL</span>
+            <span class="pill pill-stack">Swagger</span>
+          </div>
+          <p class="fs-award"><b>AI Re-Local 해커톤 3등, 선도상</b><br>전국 5개 대학 27명 참가</p>
+          <br>
+          <a class="fs-link" href="https://github.com/Jihwan0210/Ilgo-backend" target="_blank" rel="noopener">
+            저장소 보기
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </article>
+
+  <!-- PotatoChip -->
+  <article class="flagship reveal">
+    <div class="wrap">
+      <div class="flagship-grid">
+        <div class="fs-media" style="--accent:var(--terracotta);">
+          <span class="fs-tag">PotatoChip</span>
+          <span class="fs-index num">02</span>
+        </div>
+        <div class="fs-body" style="--accent:var(--terracotta);--tint:var(--terracotta-tint);">
+          <h3>PotatoChip</h3>
+          <p class="fs-tagline">못난이 농산물 마켓플레이스</p>
+          <p class="fs-desc">규격 미달로 버려지는 농산물을 저렴하게 거래하는 마켓플레이스입니다. 팀장이자 상품 도메인 오너로 참여했습니다.</p>
+          <div class="pill-row">
+            <span class="pill pill-role">상품 CRUD, 판매자 권한 제어</span>
+            <span class="pill pill-role">가격 스냅샷 장바구니</span>
+            <span class="pill pill-role">Kakao Map 픽업 위치</span>
+            <span class="pill pill-role">기간별 판매 랭킹</span>
+            <span class="pill pill-role">PR 리뷰 협업</span>
+          </div>
+          <div class="pill-row">
+            <span class="pill pill-stack">Java 21</span>
+            <span class="pill pill-stack">Spring Boot</span>
+            <span class="pill pill-stack">JPA</span>
+            <span class="pill pill-stack">Thymeleaf</span>
+            <span class="pill pill-stack">MariaDB</span>
+          </div>
+          <br>
+          <a class="fs-link" href="https://github.com/Jihwan0210/PotatoChip" target="_blank" rel="noopener">
+            저장소 보기
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </article>
+
+  <!-- secondary: COGI, CampusLink -->
+  <section class="secondary reveal">
+    <div class="wrap">
+      <div class="section-head" style="padding-top:0;">
+        <h2>함께 만든 프로젝트</h2>
+        <p>팀으로 진행했거나 현재 진행 중인 프로젝트입니다.</p>
+      </div>
+      <div class="secondary-grid">
+        <div class="sec-card" style="--accent:var(--olive);">
+          <p class="sec-index num">03 · 진행 중</p>
+          <h3>COGI</h3>
+          <p class="sec-tagline">AI 기반 코드 리뷰, PR 분석 팀 성장 대시보드</p>
+          <p class="sec-desc">이슈 승인 흐름, 약점 패턴 통계, 주간 리포트 자동 발송, 소셜 로그인과 Toss 결제 연동을 포함한 팀 프로젝트입니다.</p>
+          <div class="pill-row">
+            <span class="pill pill-stack">Java</span>
+            <span class="pill pill-stack">React</span>
+          </div>
+          <a class="fs-link" href="https://github.com/Leeuswa/COGI" target="_blank" rel="noopener">
+            저장소 보기
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+          </a>
+        </div>
+        <div class="sec-card" style="--accent:var(--plum);">
+          <p class="sec-index num">04</p>
+          <h3>CampusLink</h3>
+          <p class="sec-tagline">대학 동아리, 스터디, 공모전 모집 SPA</p>
+          <p class="sec-desc">Context API로 전역 로그인 상태를 관리하고 sessionStorage로 세션을 유지합니다. 작성자 권한 분기 처리, Amplify 배포까지 담당했습니다.</p>
+          <div class="pill-row">
+            <span class="pill pill-stack">React 18</span>
+            <span class="pill pill-stack">TypeScript</span>
+            <span class="pill pill-stack">Vite</span>
+          </div>
+          <a class="fs-link" href="https://github.com/Jihwan0210/React_CampusLink" target="_blank" rel="noopener">
+            저장소 보기
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- minor: 침착맨 굿즈샵, 호텔 예약 -->
+  <section class="minor reveal">
+    <div class="wrap">
+      <div class="section-head" style="padding-top:0;">
+        <h2>학교 경진대회 프로젝트</h2>
+      </div>
+      <div class="minor-list">
+        <div class="minor-item">
+          <span class="num">05</span>
+          <div>
+            <h4>침착맨 굿즈샵</h4>
+            <p>PHP와 Bootstrap으로 만든 쇼핑몰입니다. 쿠키 기반 로그인, 비회원 장바구니, 옵션/수량/할인/배송비를 반영한 주문 처리, 관리자 상품 관리 기능을 구현했습니다.</p>
+            <p class="minor-meta"><b>교내 경진대회 은상</b> · PHP, Bootstrap</p>
+            <a class="fs-link" href="https://github.com/Jihwan0210/PHP_ShopProject" target="_blank" rel="noopener">
+              저장소 보기
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+            </a>
+          </div>
+        </div>
+        <div class="minor-item">
+          <span class="num">06</span>
+          <div>
+            <h4>호텔 예약</h4>
+            <p>Laravel MVC로 만든 예약 시스템입니다. 숙소, 예약, 후기, 공지 기능을 Eloquent ORM으로 구성하고 사용자와 관리자 화면을 분리했습니다.</p>
+            <p class="minor-meta"><b>교내 경진대회 금상</b> · Laravel</p>
+            <a class="fs-link" href="https://github.com/Jihwan0210/laravel-hotel-reservation" target="_blank" rel="noopener">
+              저장소 보기
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- skills -->
+  <section class="skills reveal" id="skills">
+    <div class="wrap">
+      <div class="section-head" style="padding-top:0;">
+        <h2>기술 스택</h2>
+      </div>
+      <div class="skills-grid">
+        <div class="skill-cell">
+          <h4>Backend</h4>
+          <div class="pill-row">
+            <span class="pill">Java</span><span class="pill">Spring Boot</span>
+            <span class="pill">Spring Security</span><span class="pill">Spring Data JPA</span>
+            <span class="pill">REST API</span><span class="pill">JWT</span>
+          </div>
+        </div>
+        <div class="skill-cell">
+          <h4>Database</h4>
+          <div class="pill-row">
+            <span class="pill">MariaDB</span><span class="pill">MySQL</span>
+            <span class="pill">Oracle</span><span class="pill">SQL</span>
+          </div>
+        </div>
+        <div class="skill-cell">
+          <h4>Frontend</h4>
+          <div class="pill-row">
+            <span class="pill">JavaScript</span><span class="pill">TypeScript</span>
+            <span class="pill">React</span><span class="pill">Thymeleaf</span>
+          </div>
+        </div>
+        <div class="skill-cell">
+          <h4>Tools</h4>
+          <div class="pill-row">
+            <span class="pill">Git</span><span class="pill">GitHub</span>
+            <span class="pill">AWS</span><span class="pill">Docker</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="contact reveal" id="contact">
+  <div class="contact-shape" aria-hidden="true"></div>
+  <div class="wrap contact-inner">
+    <h2>함께 만들 팀을 찾고 있습니다</h2>
+    <p>서울에서 활동하는 신입 백엔드 개발자 유지환입니다. 편하게 연락 주세요.</p>
+    <div class="contact-links">
+      <a href="https://github.com/Jihwan0210" target="_blank" rel="noopener">GitHub · @Jihwan0210</a>
+      <a href="mailto:202212020@gsuite.induk.ac.kr">202212020@gsuite.induk.ac.kr</a>
+    </div>
+    <div class="foot-row">
+      <span>유지환 · 서울, 대한민국</span>
+      <span>Backend Developer</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // mobile nav toggle
+  var toggle = document.getElementById('navToggle');
+  var links = document.getElementById('navLinks');
+  toggle.addEventListener('click', function(){
+    var open = links.classList.toggle('open');
+    toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+  links.querySelectorAll('a').forEach(function(a){
+    a.addEventListener('click', function(){
+      links.classList.remove('open');
+      toggle.setAttribute('aria-expanded','false');
+    });
+  });
+
+  // scroll reveal
+  if ('IntersectionObserver' in window){
+    var reveals = document.querySelectorAll('.reveal');
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if (entry.isIntersecting){
+          entry.target.classList.add('in-view');
+          io.unobserve(entry.target);
+        }
+      });
+    }, {threshold:0.12});
+    reveals.forEach(function(el){ io.observe(el); });
+  } else {
+    document.querySelectorAll('.reveal').forEach(function(el){ el.classList.add('in-view'); });
+  }
+</script>
+
+</body>
+</html>

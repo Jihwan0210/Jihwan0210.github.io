@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>YOO JIHWAN — BACKEND DEVELOPER</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#f2f1ec;
+    --panel:#e8e6dd;
+    --ink:#111110;
+    --ink-soft:#5b5952;
+    --line:#111110;
+    --blue:#1c3ff2;
+    --blue-soft:#e5e9fd;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Noto Sans KR','Space Grotesk',sans-serif;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  ::selection{background:var(--blue);color:var(--paper);}
+
+  .display{font-family:'Space Grotesk','Noto Sans KR',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:-0.02em;}
+  .mono{font-family:'Space Mono',monospace;}
+
+  .tag{
+    font-family:'Space Mono',monospace;font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:var(--ink-soft);
+  }
+  .tag.accent{color:var(--blue);}
+
+  .wrap{max-width:1240px;margin:0 auto;padding:0 32px;}
+
+  /* reveal */
+  .reveal{opacity:0;transform:translateY(20px);transition:opacity .6s cubic-bezier(.16,.84,.44,1),transform .6s cubic-bezier(.16,.84,.44,1);}
+  .reveal.in{opacity:1;transform:translateY(0);}
+
+  /* ---------- top bar ---------- */
+  header.bar{
+    position:sticky;top:0;z-index:50;
+    background:var(--paper);
+    border-bottom:2px solid var(--line);
+  }
+  .bar-row{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:16px 32px;max-width:1240px;margin:0 auto;
+  }
+  .bar-brand{
+    font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:15px;letter-spacing:0.02em;
+    text-decoration:none;color:var(--ink);
+    display:flex;align-items:center;gap:8px;
+  }
+  .bar-brand .dot{width:8px;height:8px;background:var(--blue);display:inline-block;}
+  .bar-nav{display:flex;gap:0;font-family:'Space Mono',monospace;font-size:11px;letter-spacing:0.06em;text-transform:uppercase;}
+  .bar-nav a{color:var(--ink);text-decoration:none;padding:8px 16px;border-left:1px solid var(--line);}
+  .bar-nav a:hover{background:var(--blue);color:var(--paper);}
+  @media (max-width:760px){ .bar-nav{display:none;} }
+
+  /* ---------- hero ---------- */
+  .hero{
+    border-bottom:2px solid var(--line);
+    padding:0;
+  }
+  .hero-grid{
+    display:grid;grid-template-columns:1fr auto;
+    border-bottom:1px solid var(--line);
+  }
+  .hero-meta-row{
+    display:flex;
+    font-family:'Space Mono',monospace;font-size:11px;letter-spacing:0.08em;text-transform:uppercase;
+  }
+  .hero-meta-row span{
+    padding:14px 20px;border-right:1px solid var(--line);color:var(--ink-soft);
+  }
+  .hero-meta-row span:last-child{border-right:none;}
+  .hero-meta-row span b{color:var(--ink);font-weight:700;}
+
+  .hero-main{padding:64px 32px 56px;}
+  .hero-main h1{
+    font-family:'Noto Sans KR',sans-serif;font-weight:900;
+    font-size:clamp(56px,11vw,150px);
+    line-height:0.88;letter-spacing:-0.01em;
+    color:var(--ink);
+  }
+  .hero-main h1 .en{
+    font-family:'Space Grotesk',sans-serif;font-weight:700;
+    display:block;font-size:clamp(16px,2.2vw,26px);letter-spacing:0.02em;text-transform:uppercase;
+    color:var(--blue);margin-top:18px;
+  }
+  .hero-foot{
+    display:grid;grid-template-columns:2fr 1fr 1fr;border-top:2px solid var(--line);
+  }
+  .hero-foot > div{padding:24px 32px;border-right:1px solid var(--line);}
+  .hero-foot > div:last-child{border-right:none;}
+  .hero-foot p{font-size:14.5px;line-height:1.75;color:var(--ink-soft);max-width:46ch;}
+  .hero-foot .label{font-family:'Space Mono',monospace;font-size:10.5px;letter-spacing:0.1em;text-transform:uppercase;color:var(--blue);margin-bottom:10px;display:block;}
+  .hero-foot a{color:var(--ink);text-decoration:none;font-family:'Space Mono',monospace;font-size:13px;display:block;margin-bottom:4px;border-bottom:1px solid transparent;}
+  .hero-foot a:hover{border-color:var(--blue);color:var(--blue);}
+  @media (max-width:820px){
+    .hero-foot{grid-template-columns:1fr;}
+    .hero-foot > div{border-right:none;border-bottom:1px solid var(--line);}
+  }
+  @media (max-width:600px){ .hero-main{padding:44px 20px 36px;} .hero-meta-row{flex-wrap:wrap;} }
+
+  /* ---------- section head ---------- */
+  .sec{border-bottom:2px solid var(--line);}
+  .sec-head{
+    display:flex;justify-content:space-between;align-items:center;
+    padding:20px 32px;border-bottom:1px solid var(--line);
+    font-family:'Space Mono',monospace;font-size:11.5px;letter-spacing:0.08em;text-transform:uppercase;
+  }
+  .sec-head h2{
+    font-family:'Noto Sans KR',sans-serif;font-weight:900;font-size:22px;letter-spacing:-0.01em;text-transform:none;
+  }
+  .sec-head .idx{color:var(--ink-soft);}
+
+  /* ---------- featured project blocks ---------- */
+  .feat{
+    display:grid;grid-template-columns:120px 1fr;border-bottom:1px solid var(--line);
+  }
+  .feat:last-child{border-bottom:none;}
+  .feat-num{
+    border-right:1px solid var(--line);
+    display:flex;align-items:flex-start;justify-content:center;padding-top:32px;
+    font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:15px;color:var(--ink-soft);
+  }
+  .feat-body{padding:40px 36px 44px;}
+  .feat-top{
+    display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:16px;margin-bottom:28px;
+  }
+  .feat-title h3{
+    font-family:'Noto Sans KR',sans-serif;font-weight:900;font-size:clamp(30px,4.4vw,52px);letter-spacing:-0.02em;line-height:1;
+  }
+  .feat-title .role{
+    font-family:'Space Mono',monospace;font-size:11.5px;letter-spacing:0.06em;text-transform:uppercase;color:var(--blue);
+    margin-top:10px;display:block;
+  }
+  .feat-award{
+    font-family:'Space Mono',monospace;font-size:11px;letter-spacing:0.05em;text-transform:uppercase;
+    border:1px solid var(--line);padding:8px 14px;color:var(--ink);white-space:nowrap;
+  }
+  .feat-award b{color:var(--blue);}
+
+  .feat-story{
+    display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+    margin-bottom:26px;
+  }
+  .feat-story > div{padding:20px 22px;border-right:1px solid var(--line);}
+  .feat-story > div:last-child{border-right:none;}
+  .feat-story .k{font-family:'Space Mono',monospace;font-size:10.5px;letter-spacing:0.1em;color:var(--blue);text-transform:uppercase;display:block;margin-bottom:10px;}
+  .feat-story p{font-size:13.8px;line-height:1.75;color:var(--ink);}
+  @media (max-width:760px){
+    .feat-story{grid-template-columns:1fr;}
+    .feat-story > div{border-right:none;border-bottom:1px solid var(--line);}
+    .feat-story > div:last-child{border-bottom:none;}
+  }
+
+  .feat-stack{display:flex;flex-wrap:wrap;gap:0;border:1px solid var(--line);width:fit-content;margin-bottom:24px;}
+  .feat-stack span{
+    font-family:'Space Mono',monospace;font-size:11px;letter-spacing:0.04em;padding:8px 14px;border-right:1px solid var(--line);color:var(--ink-soft);
+  }
+  .feat-stack span:last-child{border-right:none;}
+
+  .feat-link{
+    display:inline-flex;align-items:center;gap:10px;
+    font-family:'Space Mono',monospace;font-size:12.5px;letter-spacing:0.04em;text-transform:uppercase;
+    color:var(--ink);text-decoration:none;border:1px solid var(--line);padding:12px 18px;
+    transition:background .3s, color .3s;
+  }
+  .feat-link:hover{background:var(--ink);color:var(--paper);}
+  .feat-link span.arrow{color:var(--blue);}
+  .feat-link:hover span.arrow{color:var(--paper);}
+  @media (max-width:600px){
+    .feat{grid-template-columns:1fr;}
+    .feat-num{border-right:none;border-bottom:1px solid var(--line);padding:14px 20px;justify-content:flex-start;}
+    .feat-body{padding:28px 20px 34px;}
+  }
+
+  /* ---------- ledger table ---------- */
+  .ledger{width:100%;border-collapse:collapse;}
+  .ledger thead th{
+    font-family:'Space Mono',monospace;font-size:10.5px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-soft);
+    text-align:left;padding:14px 20px;border-bottom:1px solid var(--line);background:var(--panel);
+  }
+  .ledger tbody td{
+    padding:22px 20px;border-bottom:1px solid var(--line);vertical-align:top;
+  }
+  .ledger tbody tr{transition:background .3s;}
+  .ledger tbody tr:hover{background:var(--blue-soft);}
+  .ledger .rid{font-family:'Space Mono',monospace;font-size:12px;color:var(--ink-soft);width:60px;}
+  .ledger .rname{font-family:'Noto Sans KR',sans-serif;font-weight:900;font-size:19px;letter-spacing:-0.01em;}
+  .ledger .rname .badge{
+    display:block;font-family:'Space Mono',monospace;font-weight:400;font-size:10px;letter-spacing:0.06em;color:var(--blue);text-transform:uppercase;margin-top:6px;
+  }
+  .ledger .rdesc{font-size:13.5px;line-height:1.7;color:var(--ink-soft);max-width:48ch;}
+  .ledger .rstack{font-family:'Space Mono',monospace;font-size:11px;color:var(--ink-soft);white-space:nowrap;}
+  .ledger .rlink a{
+    font-family:'Space Mono',monospace;font-size:11.5px;color:var(--ink);text-decoration:none;text-transform:uppercase;
+    border-bottom:1px solid var(--line);
+  }
+  .ledger .rlink a:hover{color:var(--blue);border-color:var(--blue);}
+
+  /* mobile ledger -> stacked cards */
+  @media (max-width:820px){
+    .ledger, .ledger thead, .ledger tbody, .ledger th, .ledger td, .ledger tr{display:block;}
+    .ledger thead{display:none;}
+    .ledger tbody tr{border-bottom:2px solid var(--line);padding:20px 20px 24px;}
+    .ledger tbody td{border-bottom:none;padding:6px 0;}
+    .ledger .rname{margin-top:6px;}
+  }
+
+  /* ---------- stack grid (1px gap trick) ---------- */
+  .stackgrid{
+    display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);
+    border-top:1px solid var(--line);
+  }
+  .stackgrid .cell{background:var(--paper);padding:26px 22px;}
+  .stackgrid .cell .cat{
+    font-family:'Space Mono',monospace;font-size:10.5px;letter-spacing:0.1em;text-transform:uppercase;color:var(--blue);margin-bottom:14px;display:block;
+  }
+  .stackgrid .cell ul{list-style:none;}
+  .stackgrid .cell li{
+    font-family:'Space Grotesk',sans-serif;font-weight:500;font-size:16px;padding:6px 0;color:var(--ink);
+  }
+  @media (max-width:820px){ .stackgrid{grid-template-columns:1fr 1fr;} }
+  @media (max-width:520px){ .stackgrid{grid-template-columns:1fr;} }
+
+  /* ---------- footer ---------- */
+  footer{border-bottom:none;}
+  .cta{
+    padding:80px 32px;text-align:left;border-bottom:2px solid var(--line);
+  }
+  .cta h2{
+    font-family:'Noto Sans KR',sans-serif;font-weight:900;font-size:clamp(38px,7vw,84px);line-height:0.95;letter-spacing:-0.02em;margin-bottom:36px;
+  }
+  .cta h2 .blue{color:var(--blue);}
+  .cta-links{display:flex;gap:0;flex-wrap:wrap;border:1px solid var(--line);width:fit-content;}
+  .cta-links a{
+    font-family:'Space Mono',monospace;font-size:13px;letter-spacing:0.04em;text-transform:uppercase;
+    color:var(--ink);text-decoration:none;padding:16px 24px;border-right:1px solid var(--line);
+    transition:background .3s, color .3s;
+  }
+  .cta-links a:last-child{border-right:none;}
+  .cta-links a:hover{background:var(--blue);color:var(--paper);}
+
+  .foot-bar{
+    display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;
+    padding:20px 32px;
+    font-family:'Space Mono',monospace;font-size:11px;letter-spacing:0.06em;text-transform:uppercase;color:var(--ink-soft);
+  }
+
+  @media (max-width:640px){
+    .wrap{padding:0 18px;}
+    .bar-row{padding:14px 18px;}
+    .sec-head, .foot-bar, .cta{padding-left:18px;padding-right:18px;}
+  }
+</style>
+</head>
+<body>
+
+<header class="bar">
+  <div class="bar-row">
+    <a href="#top" class="bar-brand"><span class="dot"></span>YOO JIHWAN</a>
+    <nav class="bar-nav">
+      <a href="#work">WORK</a>
+      <a href="#archive">ARCHIVE</a>
+      <a href="#stack">STACK</a>
+      <a href="#contact">CONTACT</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-grid">
+      <div class="hero-meta-row" style="flex:1;">
+        <span>REV / 2026.07</span>
+        <span>UNIT / BACKEND</span>
+        <span>BASE / SEOUL, KR</span>
+      </div>
+      <div class="hero-meta-row">
+        <span><b>STATUS</b> — AVAILABLE</span>
+      </div>
+    </div>
+
+    <div class="hero-main reveal in">
+      <h1>유지환
+        <span class="en">Yoo Jihwan — Backend Developer</span>
+      </h1>
+    </div>
+
+    <div class="hero-foot">
+      <div>
+        <span class="label">PROFILE</span>
+        <p>Java와 Spring Boot로 인증, API, 데이터 흐름을 다루는 신입 백엔드 개발자입니다. 팀 프로젝트에서는 도메인 하나를 끝까지 책임지는 방식으로 일합니다.</p>
+      </div>
+      <div>
+        <span class="label">CONTACT</span>
+        <a href="mailto:202212020@gsuite.induk.ac.kr">202212020@gsuite.induk.ac.kr</a>
+        <a href="https://github.com/Jihwan0210" target="_blank" rel="noopener">github.com/Jihwan0210</a>
+      </div>
+      <div>
+        <span class="label">CORE STACK</span>
+        <a href="#stack">JAVA / SPRING BOOT</a>
+        <a href="#stack">JPA / MARIADB / MYSQL</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURED WORK -->
+  <section class="sec" id="work">
+    <div class="sec-head">
+      <h2>FEATURED WORK</h2>
+      <span class="idx">[ 02 SELECTED ]</span>
+    </div>
+
+    <div class="feat reveal">
+      <div class="feat-num">001</div>
+      <div class="feat-body">
+        <div class="feat-top">
+          <div class="feat-title">
+            <h3>읽고 / ILGO</h3>
+            <span class="role">Backend API — Auth &amp; AI Gateway</span>
+          </div>
+          <div class="feat-award">AI RE-LOCAL 해커톤 <b>3위 · 선도상</b> — 5개교 27명 참가</div>
+        </div>
+
+        <div class="feat-story">
+          <div>
+            <span class="k">Problem</span>
+            <p>고지서·안내문 같은 생활 문서는 문장이 압축적이라 정보 접근성이 낮은 사용자에게 장벽이 됩니다.</p>
+          </div>
+          <div>
+            <span class="k">Solution</span>
+            <p>JWT 인증·인가 체계를 세우고 AI 게이트웨이 연동 문서 분석 API를 구축, multipart/JSON 업로드와 커서 기반 페이지네이션을 지원했습니다.</p>
+          </div>
+          <div>
+            <span class="k">Result</span>
+            <p>전역 예외 처리와 레이트 리밋으로 안정성을 확보하고 Swagger로 문서화, 테스트까지 마쳤습니다.</p>
+          </div>
+        </div>
+
+        <div class="feat-stack">
+          <span>JAVA</span><span>SPRING BOOT</span><span>SPRING SECURITY</span><span>JPA</span><span>JWT</span><span>POSTGRESQL</span><span>SWAGGER</span>
+        </div>
+
+        <a class="feat-link" href="https://github.com/Jihwan0210/Ilgo-backend" target="_blank" rel="noopener">
+          <span class="arrow">&gt;&gt;&gt;</span> VIEW REPOSITORY
+        </a>
+      </div>
+    </div>
+
+    <div class="feat reveal">
+      <div class="feat-num">002</div>
+      <div class="feat-body">
+        <div class="feat-top">
+          <div class="feat-title">
+            <h3>POTATOCHIP</h3>
+            <span class="role">Team Lead — Product &amp; Cart Domain</span>
+          </div>
+          <div class="feat-award">역할 — <b>팀장 · 상품 도메인 오너</b></div>
+        </div>
+
+        <div class="feat-story">
+          <div>
+            <span class="k">Problem</span>
+            <p>못난이 농산물 마켓에서는 장바구니에 담은 가격이 결제 시점에 달라지면 신뢰가 무너집니다.</p>
+          </div>
+          <div>
+            <span class="k">Solution</span>
+            <p>상품 CRUD와 판매자 권한 제어, 담은 시점 가격을 유지하는 스냅샷 장바구니, Kakao Map 픽업 위치, 기간별 판매 랭킹을 설계했습니다.</p>
+          </div>
+          <div>
+            <span class="k">Result</span>
+            <p>develop/feature 브랜치 전략과 PR 리뷰로 협업 구조를 운영하며 도메인을 끝까지 책임졌습니다.</p>
+          </div>
+        </div>
+
+        <div class="feat-stack">
+          <span>JAVA 21</span><span>SPRING BOOT</span><span>JPA</span><span>THYMELEAF</span><span>MARIADB</span>
+        </div>
+
+        <a class="feat-link" href="https://github.com/Jihwan0210/PotatoChip" target="_blank" rel="noopener">
+          <span class="arrow">&gt;&gt;&gt;</span> VIEW REPOSITORY
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ARCHIVE LEDGER -->
+  <section class="sec" id="archive">
+    <div class="sec-head">
+      <h2>ARCHIVE</h2>
+      <span class="idx">[ 04 ENTRIES ]</span>
+    </div>
+
+    <table class="ledger reveal">
+      <thead>
+        <tr>
+          <th class="rid">ID</th>
+          <th>NAME</th>
+          <th>DETAIL</th>
+          <th>STACK</th>
+          <th>LINK</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="rid">003</td>
+          <td class="rname">COGI<span class="badge">In progress — team</span></td>
+          <td class="rdesc">AI 기반 코드 리뷰·PR 분석과 팀 성장 대시보드. 이슈 승인 흐름, 약점 패턴 통계, 주간 리포트 자동 메일, 소셜 로그인·Toss 결제 연동.</td>
+          <td class="rstack">JAVA / REACT</td>
+          <td class="rlink"><a href="https://github.com/Leeuswa/COGI" target="_blank" rel="noopener">REPO &gt;</a></td>
+        </tr>
+        <tr>
+          <td class="rid">004</td>
+          <td class="rname">CampusLink<span class="badge">Solo project</span></td>
+          <td class="rdesc">동아리·스터디·공모전 모집 SPA. Context API 전역 로그인, sessionStorage 세션 유지, 작성자 권한 분기, AWS Amplify 배포.</td>
+          <td class="rstack">REACT 18 / TS / VITE</td>
+          <td class="rlink"><a href="https://github.com/Jihwan0210/React_CampusLink" target="_blank" rel="noopener">REPO &gt;</a></td>
+        </tr>
+        <tr>
+          <td class="rid">005</td>
+          <td class="rname">침착맨 굿즈샵<span class="badge">교내 PHP 경진대회 은상</span></td>
+          <td class="rdesc">쿠키 로그인·비회원 장바구니, 옵션·수량·할인·배송비 주문 로직, 관리자 상품 관리를 갖춘 쇼핑몰.</td>
+          <td class="rstack">PHP / BOOTSTRAP</td>
+          <td class="rlink"><a href="https://github.com/Jihwan0210/PHP_ShopProject" target="_blank" rel="noopener">REPO &gt;</a></td>
+        </tr>
+        <tr>
+          <td class="rid">006</td>
+          <td class="rname">호텔 예약<span class="badge">교내 Laravel 경진대회 금상</span></td>
+          <td class="rdesc">Laravel MVC 기반 예약 시스템. 숙소·예약·후기·공지, Eloquent ORM(MariaDB), 사용자·관리자 화면 분리.</td>
+          <td class="rstack">LARAVEL / MARIADB</td>
+          <td class="rlink"><a href="https://github.com/Jihwan0210/laravel-hotel-reservation" target="_blank" rel="noopener">REPO &gt;</a></td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- STACK -->
+  <section class="sec" id="stack">
+    <div class="sec-head">
+      <h2>STACK</h2>
+      <span class="idx">[ TOOLS / LANGUAGES ]</span>
+    </div>
+    <div class="stackgrid reveal">
+      <div class="cell">
+        <span class="cat">Backend</span>
+        <ul><li>Java</li><li>Spring Boot</li><li>Spring Security</li><li>Spring Data JPA</li></ul>
+      </div>
+      <div class="cell">
+        <span class="cat">API / Auth</span>
+        <ul><li>REST API</li><li>JWT</li></ul>
+      </div>
+      <div class="cell">
+        <span class="cat">Database</span>
+        <ul><li>MariaDB</li><li>MySQL</li><li>Oracle</li><li>SQL</li></ul>
+      </div>
+      <div class="cell">
+        <span class="cat">Frontend / Infra</span>
+        <ul><li>JS / TypeScript</li><li>React / Thymeleaf</li><li>Git / GitHub</li><li>AWS / Docker</li></ul>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer id="contact">
+  <div class="cta reveal">
+    <h2>연락은 <span class="blue">이쪽으로</span><br>남겨주세요.</h2>
+    <div class="cta-links">
+      <a href="mailto:202212020@gsuite.induk.ac.kr">EMAIL &gt;&gt;&gt;</a>
+      <a href="https://github.com/Jihwan0210" target="_blank" rel="noopener">GITHUB &gt;&gt;&gt;</a>
+    </div>
+  </div>
+  <div class="foot-bar">
+    <span>YOO JIHWAN © 2026</span>
+    <span>BACKEND DEVELOPER / SEOUL, KR</span>
+  </div>
+</footer>
+
+<script>
+  var els = document.querySelectorAll('.reveal:not(.in)');
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+      });
+    }, { threshold: 0.1 });
+    els.forEach(function(el){ io.observe(el); });
+  } else {
+    els.forEach(function(el){ el.classList.add('in'); });
+  }
+</script>
+
+</body>
+</html>
