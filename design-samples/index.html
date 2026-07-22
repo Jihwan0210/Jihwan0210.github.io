@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>디자인 시안 4종 — 유지환 포트폴리오</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,"Malgun Gothic",sans-serif;background:#F5F5F3;color:#22242A;line-height:1.6;padding:clamp(24px,6vw,72px)}
+.wrap{max-width:920px;margin:0 auto}
+h1{font-size:clamp(1.6rem,4vw,2.4rem);letter-spacing:-.02em}
+.sub{color:#6B7079;margin-top:8px;margin-bottom:36px}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+@media(max-width:640px){.grid{grid-template-columns:1fr}}
+.card{display:block;padding:26px;border:1px solid #E4E2DB;border-radius:14px;background:#fff;transition:transform .2s,box-shadow .2s}
+.card:hover{transform:translateY(-3px);box-shadow:0 8px 28px -14px rgba(0,0,0,.2)}
+.card .n{font-family:"JetBrains Mono",monospace;font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:#9A5;color:#8A8F97}
+.card h2{font-size:1.25rem;margin:8px 0 6px;letter-spacing:-.01em}
+.card p{color:#6B7079;font-size:.9rem}
+.swatch{display:flex;gap:6px;margin-top:16px}
+.swatch i{width:22px;height:22px;border-radius:6px;border:1px solid rgba(0,0,0,.08)}
+a{text-decoration:none;color:inherit}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>디자인 시안 4종</h1>
+  <p class="sub">각 카드를 클릭해 전체 화면으로 확인하세요. 마음에 드는 번호를 알려주시면 그 스타일로 <code>index.html</code>을 교체합니다.</p>
+  <div class="grid">
+    <a class="card" href="1-editorial.html">
+      <span class="n">Option 1</span><h2>Editorial</h2>
+      <p>밝은 세리프 매거진. 따뜻한 오프화이트 + 브라운 포인트. 차분하고 고급스러운 느낌.</p>
+      <div class="swatch"><i style="background:#FBFAF7"></i><i style="background:#8A5A3B"></i><i style="background:#22242A"></i><i style="background:#F2E9E1"></i></div>
+    </a>
+    <a class="card" href="2-terminal.html">
+      <span class="n">Option 2</span><h2>Terminal</h2>
+      <p>다크 개발자/터미널 감성. 모노 폰트 + 네온 그린. 백엔드 개발자다운 기술적 인상.</p>
+      <div class="swatch"><i style="background:#0C0D10"></i><i style="background:#4ADE80"></i><i style="background:#38BDF8"></i><i style="background:#131519"></i></div>
+    </a>
+    <a class="card" href="3-swiss.html">
+      <span class="n">Option 3</span><h2>Swiss Bold</h2>
+      <p>흑백 대형 타이포 + 강한 그리드 라인. 레드 포인트. 강렬하고 자신감 있는 인상.</p>
+      <div class="swatch"><i style="background:#F4F3EF"></i><i style="background:#0A0A0A"></i><i style="background:#E63A26"></i><i style="background:#fff"></i></div>
+    </a>
+    <a class="card" href="4-corporate.html">
+      <span class="n">Option 4</span><h2>Soft Corporate</h2>
+      <p>블루 톤 라운드 카드. 부드럽고 단정한 기업형. 서류심사에 가장 안전한 무난함.</p>
+      <div class="swatch"><i style="background:#F5F7FB"></i><i style="background:#2F6BF0"></i><i style="background:#1B2432"></i><i style="background:#EAF1FE"></i></div>
+    </a>
+  </div>
+</div>
+</body>
+</html>
