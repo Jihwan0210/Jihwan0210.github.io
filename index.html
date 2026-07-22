@@ -634,7 +634,7 @@ section{ padding:0 var(--gutter); }
         </div>
         <div class="meta-item">
           <span class="k">Currently</span>
-          <span class="v">팀 프로젝트 · 해커톤</span>
+          <span class="v">COGI 팀 개발 중</span>
         </div>
       </div>
     </div>
@@ -659,28 +659,27 @@ section{ padding:0 var(--gutter); }
     <!-- Featured project -->
     <article class="feature reveal">
       <div class="feature__visual">
-        <div class="ph">CampusLink<br>스크린샷을 넣어보세요</div>
+        <div class="ph">읽고 (Ilgo)<br>스크린샷을 넣어보세요</div>
       </div>
       <div class="feature__body">
         <div>
-          <span class="feature__tag">Featured · 대표 프로젝트</span>
-          <h3>CampusLink</h3>
+          <span class="feature__tag">Featured · AI 해커톤 수상작 🏆</span>
+          <h3>읽고 (Ilgo)</h3>
           <p>
-            대학 동아리·스터디·공모전 팀원을 한 곳에서 모집하고 지원하는 웹 서비스입니다.
-            모집 정보가 여기저기 흩어져 찾기 불편했던 경험에서 시작해,
-            카테고리·키워드 검색과 지원/취소 관리, 작성자 전용 마감·삭제,
-            새로고침에도 유지되는 로그인 상태까지 직접 구현했습니다.
-            React·TypeScript로 만들고 AWS Amplify로 배포했습니다.
+            "어려운 글, 대신 읽고 알려드릴게요." 종이 고지서·안내문·문자처럼 이해하기 어려운
+            생활 문서를 사진으로 찍으면 AI가 쉬운 한국어/영어로 풀어주는 배리어프리 모바일 서비스입니다.
+            외국인·고령자·저문해자가 핵심 내용과 기한, 해야 할 일을 한 화면에서 바로 확인하도록 만들었습니다.
+            저는 Spring 기반 백엔드 API를 담당했고, AI Re-Local 해커톤에서 팀이 3등(선도상)을 받았습니다.
           </p>
         </div>
         <div>
           <div class="feature__facts">
-            <div class="fact"><span class="k">Role</span><span class="v">Frontend</span></div>
-            <div class="fact"><span class="k">Stack</span><span class="v">React · TypeScript</span></div>
-            <div class="fact"><span class="k">Deploy</span><span class="v">AWS Amplify</span></div>
+            <div class="fact"><span class="k">Role</span><span class="v">Backend</span></div>
+            <div class="fact"><span class="k">Stack</span><span class="v">Java · Spring</span></div>
+            <div class="fact"><span class="k">Award</span><span class="v">해커톤 3등 · 선도상</span></div>
           </div>
           <p style="margin-top:18px;">
-            <a class="link-arrow" href="https://github.com/Jihwan0210/React_CampusLink" target="_blank" rel="noopener">
+            <a class="link-arrow" href="https://github.com/Jihwan0210/Ilgo-backend" target="_blank" rel="noopener">
               Repository 보기
               <svg viewBox="0 0 24 24"><path d="M7 17 17 7m0 0H8m9 0v9"/></svg>
             </a>
@@ -759,9 +758,10 @@ section{ padding:0 var(--gutter); }
       <span class="tl-item__year">2026 — 현재</span>
       <div>
         <h3>팀 프로젝트 · AI 해커톤</h3>
-        <span class="org">읽고(Ilgo) · CampusLink</span>
-        <p>독서 기록 앱 '읽고'의 백엔드를 Spring으로 개발하고, 대학 팀원 모집 웹 CampusLink를
-           React·TypeScript로 만들어 AWS Amplify에 배포했습니다.</p>
+        <span class="org">COGI · 읽고(Ilgo) · CampusLink</span>
+        <p>AI 코드리뷰·성장 대시보드 서비스 COGI(Java, 팀)를 개발 중이고,
+           AI 해커톤 출품작 '읽고'의 Spring 백엔드를 맡아 3등(선도상)을 수상했습니다.
+           대학 팀원 모집 웹 CampusLink는 React·TypeScript로 만들어 AWS에 배포했습니다.</p>
       </div>
     </article>
 
@@ -779,8 +779,9 @@ section{ padding:0 var(--gutter); }
       <span class="tl-item__year">2022 — 현재</span>
       <div>
         <h3>인덕대학교 재학</h3>
-        <span class="org">인덕대학교</span>
-        <p>웹 개발을 중심으로 백엔드·프론트엔드를 두루 학습하고, 개인·팀 프로젝트로 확장하고 있습니다.</p>
+        <span class="org">인덕대학교 · IFP 프로그래밍 학회</span>
+        <p>웹 개발을 중심으로 백엔드·프론트엔드를 두루 학습하고, 교내 IFP 학회에서
+           Java·JavaScript·CS 스터디에 참여하며 개인·팀 프로젝트로 확장하고 있습니다.</p>
       </div>
     </article>
   </section>
@@ -822,12 +823,12 @@ const LANG_COLORS = {
 
 /* 디자인 확인용 플레이스홀더 — GitHub API 응답과 동일한 필드명 사용 */
 const PLACEHOLDER_REPOS = [
-  { name:"Ilgo-backend",             description:"AI 해커톤 독서 기록 앱 '읽고(Ilgo)'의 백엔드. Spring 기반 API 서버로 데이터 저장과 기능 로직을 담당했습니다.", language:"Java", stargazers_count:1, topics:["spring","hackathon"], html_url:"https://github.com/Jihwan0210/Ilgo-backend" },
+  { name:"COGI",                     description:"AI 기반 코드 리뷰·PR 분석 및 팀 성장 대시보드 서비스. 이슈 승인 흐름, 약점 패턴 통계, 성장 추이 대시보드, 주간 리포트 자동 메일, 소셜 로그인·결제(Toss)를 팀으로 개발 중입니다. (Java · React, 브랜치·PR 협업)", language:"Java", stargazers_count:0, topics:["team","ai"], html_url:"https://github.com/Leeuswa/COGI" },
+  { name:"React_CampusLink",         description:"대학 동아리·스터디·공모전 팀원 모집 웹. 카테고리·키워드 검색, 지원/취소 관리, 작성자 전용 마감·삭제, 로그인 상태 유지를 구현하고 AWS Amplify로 배포했습니다.", language:"TypeScript", stargazers_count:0, topics:["react","aws"], html_url:"https://github.com/Jihwan0210/React_CampusLink" },
   { name:"PHP_ShopProject",          description:"PHP·Bootstrap으로 만든 '침착맨 굿즈샵'. 회원가입/로그인, 장바구니, 옵션·수량·배송비 계산, 관리자 상품 관리까지 구현했습니다. (MariaDB)", language:"PHP", stargazers_count:0, topics:["php","shop"], html_url:"https://github.com/Jihwan0210/PHP_ShopProject" },
   { name:"laravel-hotel-reservation", description:"Laravel 프레임워크로 구현한 호텔 예약 서비스. MVC 구조와 Blade 템플릿으로 예약 흐름을 다뤘습니다.", language:"PHP", stargazers_count:0, topics:["laravel","php"], html_url:"https://github.com/Jihwan0210/laravel-hotel-reservation" },
-  { name:"PotatoChip",               description:"'못난이 농작물' 판매 아이디어를 웹으로 구현한 프로젝트.", language:"HTML", stargazers_count:0, topics:["web"], html_url:"https://github.com/Jihwan0210/PotatoChip" },
-  { name:"SpringBoot-TodoList",      description:"Spring Boot로 구현한 Todo 애플리케이션. 기본 CRUD와 화면 연동을 실습했습니다.", language:"Java", stargazers_count:0, topics:["spring-boot","crud"], html_url:"https://github.com/Jihwan0210/SpringBoot-TodoList" },
   { name:"Spring-TodoList",          description:"Spring MVC 구조를 직접 구성해 만든 Todo 리스트. (대우능력개발원 교육 실습)", language:"Java", stargazers_count:0, topics:["spring","mvc"], html_url:"https://github.com/Jihwan0210/Spring-TodoList" },
+  { name:"PotatoChip",               description:"'못난이 농작물' 판매 아이디어를 웹으로 구현한 프로젝트.", language:"HTML", stargazers_count:0, topics:["web"], html_url:"https://github.com/Jihwan0210/PotatoChip" },
 ];
 
 /* ── 레포 카드 렌더링 ── */
