@@ -1,0 +1,262 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>유지환 · 백엔드 개발자</title>
+<meta name="description" content="유지환 - Java, Spring 백엔드 개발자. 로그인, 결제, 관리자 도메인 설계."/>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css"/>
+<style>
+:root{
+  --bg:#FCFCFB; --panel:#F3F5F4; --ink:#141A1E; --ink2:#525C63; --ink3:#8A939B;
+  --line:#E7EAE8; --line2:#D7DCDA;
+  --accent:#0E8C7C; --accent-ink:#0A5A50; --accent-soft:#E3F3F0;
+  --sans:"Pretendard Variable","Pretendard",-apple-system,"Malgun Gothic",sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,monospace;
+  --r:12px; --r-sm:6px; --ease:cubic-bezier(.16,1,.3,1);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.65;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+.mono{font-family:var(--mono);font-size:.72rem;letter-spacing:.03em}
+
+.layout{max-width:1080px;margin:0 auto;padding:0 clamp(20px,5vw,40px);display:grid;grid-template-columns:330px 1fr;gap:clamp(28px,4vw,60px)}
+@media(max-width:880px){.layout{grid-template-columns:1fr;gap:0}}
+
+/* 좌측 고정 패널 */
+.side{position:sticky;top:0;height:100vh;display:flex;flex-direction:column;justify-content:space-between;padding:72px 0 56px}
+@media(max-width:880px){.side{position:static;height:auto;padding:64px 0 24px}}
+.side__top .name{font-size:2.3rem;font-weight:800;letter-spacing:-.03em;line-height:1.05}
+.side__top .role{margin-top:8px;font-size:1.05rem;font-weight:600;color:var(--accent-ink)}
+.side__top .tagline{margin-top:16px;color:var(--ink2);font-size:.94rem;max-width:34ch}
+.side nav{margin-top:44px;display:flex;flex-direction:column;gap:14px}
+@media(max-width:880px){.side nav{display:none}}
+.side nav a{display:flex;align-items:center;gap:14px;color:var(--ink3);font-family:var(--mono);font-size:.76rem;letter-spacing:.12em;text-transform:uppercase;transition:color .2s}
+.side nav a .ln{width:26px;height:1.5px;background:var(--line2);transition:width .25s var(--ease),background .2s}
+.side nav a:hover,.side nav a.on{color:var(--ink)}
+.side nav a:hover .ln,.side nav a.on .ln{width:52px;background:var(--accent)}
+.side__foot{display:flex;gap:18px;margin-top:36px}
+.side__foot a{color:var(--ink2);transition:color .2s,transform .2s}
+.side__foot a:hover{color:var(--accent);transform:translateY(-2px)}
+.side__foot svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:1.6}
+
+/* 우측 콘텐츠 */
+.main{padding:72px 0 96px}
+@media(max-width:880px){.main{padding:8px 0 72px}}
+.rv{opacity:0;transform:translateY(16px)}
+.rv.in{opacity:1;transform:none;transition:opacity .6s var(--ease),transform .6s var(--ease)}
+@media (prefers-reduced-motion:reduce){.rv{opacity:1!important;transform:none!important}}
+
+.block{margin-bottom:clamp(56px,8vw,96px);scroll-margin-top:80px}
+.block__h{font-family:var(--mono);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--accent-ink);margin-bottom:22px}
+
+/* About */
+.about p{color:var(--ink2);margin-bottom:14px;max-width:60ch}
+.about a.inl{color:var(--ink);font-weight:600;border-bottom:1px solid var(--accent);transition:color .2s}
+.about a.inl:hover{color:var(--accent)}
+
+/* Featured (COGI) */
+.feat{border:1px solid var(--line);border-radius:var(--r);background:#fff;overflow:hidden;transition:box-shadow .25s var(--ease),transform .25s var(--ease)}
+.feat:hover{box-shadow:0 18px 40px -26px rgba(14,140,124,.35);transform:translateY(-2px)}
+.feat__shot{aspect-ratio:16/7;background:linear-gradient(135deg,var(--accent-soft),#fff);display:flex;align-items:center;justify-content:center;color:var(--accent-ink);font-family:var(--mono);font-size:.74rem;border-bottom:1px solid var(--line)}
+.feat__body{padding:clamp(22px,3vw,30px)}
+.feat__top{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
+.feat__top h3{font-size:1.5rem;font-weight:800;letter-spacing:-.02em}
+.feat__top h3 a{transition:color .2s}.feat__top h3 a:hover{color:var(--accent)}
+.feat__kind{font-family:var(--mono);font-size:.72rem;color:var(--ink3)}
+.feat__desc{color:var(--ink2);margin:12px 0 18px;font-size:.96rem;max-width:62ch}
+.feat__desc b{color:var(--ink);font-weight:700}
+.dom{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin-bottom:20px}
+@media(max-width:640px){.dom{grid-template-columns:1fr}}
+.dom__c{border:1px solid var(--line);border-radius:var(--r-sm);padding:16px;background:var(--panel)}
+.dom__c .t{font-family:var(--mono);font-size:.66rem;color:var(--accent-ink);letter-spacing:.04em;margin-bottom:6px}
+.dom__c h4{font-size:1rem;font-weight:700;margin-bottom:8px}
+.dom__c p{font-size:.85rem;color:var(--ink2);line-height:1.55}
+.dom__c code{font-family:var(--mono);font-size:.8em;background:#fff;border:1px solid var(--line);padding:1px 5px;border-radius:4px}
+.tags{display:flex;flex-wrap:wrap;gap:7px}
+.tag{font-family:var(--mono);font-size:.7rem;padding:5px 10px;border-radius:999px;background:var(--accent-soft);color:var(--accent-ink)}
+.golink{display:inline-flex;align-items:center;gap:6px;margin-top:16px;font-family:var(--mono);font-size:.76rem;color:var(--accent);font-weight:500}
+.golink svg{width:13px;height:13px;stroke:currentColor;fill:none;stroke-width:2;transition:transform .2s}
+.golink:hover svg{transform:translate(2px,-2px)}
+
+/* Project list (Brittany-style rows) */
+.plist{display:flex;flex-direction:column}
+.prow{display:grid;grid-template-columns:104px 1fr;gap:20px;padding:22px;margin:0 -22px;border-radius:var(--r);transition:background .2s,box-shadow .2s}
+.prow:hover{background:#fff;box-shadow:0 14px 34px -26px rgba(20,26,30,.35)}
+@media(max-width:640px){.prow{grid-template-columns:1fr;gap:10px;padding:18px;margin:0 -18px}}
+.prow__when{font-family:var(--mono);font-size:.72rem;color:var(--ink3);padding-top:4px}
+.prow h3{font-size:1.12rem;font-weight:700;letter-spacing:-.01em}
+.prow h3 a{transition:color .2s}.prow:hover h3 a,.prow h3 a:hover{color:var(--accent)}
+.prow .rolez{font-family:var(--mono);font-size:.68rem;color:var(--accent-ink);margin:2px 0 8px}
+.prow p{color:var(--ink2);font-size:.9rem;margin-bottom:12px;max-width:62ch}
+.prow .tag{background:var(--panel);color:var(--ink2)}
+
+/* Skills */
+.skg{display:grid;grid-template-columns:150px 1fr;gap:18px;padding:18px 0;border-top:1px solid var(--line)}
+.skg:first-of-type{border-top:none}
+.skg .g{font-family:var(--mono);font-size:.74rem;letter-spacing:.08em;text-transform:uppercase;color:var(--ink3);padding-top:5px}
+.skg .items{display:flex;flex-wrap:wrap;gap:7px}
+@media(max-width:640px){.skg{grid-template-columns:1fr;gap:8px}}
+.skg .tag{background:var(--panel);color:var(--ink2)}
+
+.foot{font-family:var(--mono);font-size:.72rem;color:var(--ink3);padding-top:20px;border-top:1px solid var(--line)}
+.foot a:hover{color:var(--accent)}
+</style>
+</head>
+<body>
+<div class="layout">
+
+  <!-- 좌측 고정 패널 -->
+  <aside class="side">
+    <div class="side__top">
+      <div class="name">유지환</div>
+      <div class="role">백엔드 개발자</div>
+      <p class="tagline">Java와 Spring으로 로그인, 결제, 관리자처럼 서비스의 뒷단을 설계하고 구현합니다.</p>
+      <nav id="nav">
+        <a href="#about" data-sec="about"><span class="ln"></span>About</a>
+        <a href="#work" data-sec="work"><span class="ln"></span>프로젝트</a>
+        <a href="#skills" data-sec="skills"><span class="ln"></span>기술</a>
+      </nav>
+    </div>
+    <div class="side__foot">
+      <a href="https://github.com/Jihwan0210" target="_blank" rel="noopener" aria-label="GitHub"><svg viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.9a3.4 3.4 0 0 0-.9-2.6c3-.3 6.2-1.5 6.2-6.7A5.2 5.2 0 0 0 20 4.8a4.9 4.9 0 0 0-.1-3.6s-1.1-.3-3.6 1.4a12.4 12.4 0 0 0-6.6 0C7.2.9 6.1 1.2 6.1 1.2A4.9 4.9 0 0 0 6 4.8a5.2 5.2 0 0 0-1.4 3.7c0 5.1 3.1 6.4 6.1 6.7a3.4 3.4 0 0 0-.9 2.6V22"/></svg></a>
+      <a href="mailto:202212020@gsuite.induk.ac.kr" aria-label="Email"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg></a>
+    </div>
+  </aside>
+
+  <!-- 우측 콘텐츠 -->
+  <main class="main">
+
+    <section class="block about" id="about">
+      <p class="rv">저는 Java와 Spring으로 서비스의 뒷단을 만드는 백엔드 개발자입니다. 지금은 팀 프로젝트 <a class="inl" href="#work">COGI</a>에서 비로그인 체험, 구독 결제, 관리자 백엔드를 맡고 있습니다.</p>
+      <p class="rv">PHP로 처음 웹을 만들고 Laravel로 구조를 익힌 뒤 Spring으로 옮겼습니다. PotatoChip에서는 팀장으로 상품 도메인을, 읽고에서는 인증과 AI 연동을 맡으며 지금에 이르렀습니다.</p>
+      <p class="rv">문제가 생기면 증상만 고치기보다 데이터 흐름과 구조를 따라가 원인을 잡습니다. 코드는 <a class="inl" href="https://github.com/Jihwan0210" target="_blank" rel="noopener">github.com/Jihwan0210</a>에 있습니다.</p>
+    </section>
+
+    <section class="block" id="work">
+      <p class="block__h rv">대표 프로젝트</p>
+
+      <article class="feat rv">
+        <div class="feat__shot">COGI 스크린샷을 여기에 넣어주세요 (권장 16:7)</div>
+        <div class="feat__body">
+          <div class="feat__top">
+            <h3><a href="https://github.com/Leeuswa/COGI" target="_blank" rel="noopener">COGI</a></h3>
+            <span class="feat__kind">AI 코드 리뷰 SaaS · 팀 · 진행 중</span>
+          </div>
+          <p class="feat__desc">GitHub PR을 가져와 AI가 코드를 리뷰하고, 이슈와 성장 추이를 팀 단위로 관리하는 서비스입니다. 저는 서비스로 들어오는 세 관문, <b>비로그인 체험, 구독 결제, 관리자</b>를 맡았습니다.</p>
+          <div class="dom">
+            <div class="dom__c">
+              <div class="t">A · GUEST</div>
+              <h4>비로그인 체험</h4>
+              <p><code>guest_token</code> 쿠키(24h)로 익명 식별하고, Redis 카운터로 체험 3회를 제한했습니다. 첫 요청에만 TTL을 걸어 첫 사용 기준으로 리셋되게 했고, 초과 시 403.</p>
+            </div>
+            <div class="dom__c">
+              <div class="t">B · PAYMENT</div>
+              <h4>구독 결제</h4>
+              <p>Toss 빌링키로 매일 자정 <b>건별 트랜잭션</b> 청구. 한 건 실패가 배치를 멈추지 않게 격리하고, 실패 건만 FREE로 강등. 소유·중복·약관을 먼저 검증합니다.</p>
+            </div>
+            <div class="dom__c">
+              <div class="t">C · ADMIN</div>
+              <h4>관리자</h4>
+              <p><code>ROLE_ADMIN</code>으로 입구를 막고, 회원·공지·약관·AI 사용량을 다룹니다. 공지는 <code>@Async</code> 메일 발송, 통계는 <code>IN</code> 조회로 N+1을 피했습니다.</p>
+            </div>
+          </div>
+          <div class="tags">
+            <span class="tag">Spring Boot</span><span class="tag">Spring Security</span><span class="tag">JWT · OAuth2</span><span class="tag">JPA</span><span class="tag">Redis</span><span class="tag">Toss Payments</span><span class="tag">React</span>
+          </div>
+          <a class="golink" href="https://github.com/Leeuswa/COGI" target="_blank" rel="noopener">github.com/Leeuswa/COGI <svg viewBox="0 0 24 24"><path d="M7 17 17 7m0 0H8m9 0v9"/></svg></a>
+        </div>
+      </article>
+
+      <p class="block__h rv" style="margin-top:52px">그 밖의 작업</p>
+      <div class="plist">
+        <div class="prow rv">
+          <div class="prow__when">2026.06 ~ 07</div>
+          <div>
+            <h3><a href="https://github.com/Jihwan0210/Ilgo-backend" target="_blank" rel="noopener">읽고 (Ilgo)</a></h3>
+            <div class="rolez">팀(백엔드) · AI 해커톤 3등</div>
+            <p>어려운 생활 문서를 사진 찍으면 AI가 쉽게 풀어주는 서비스의 백엔드 API. JWT 인증과 외부 AI 연동, Swagger 문서화와 테스트를 맡았습니다.</p>
+            <div class="tags"><span class="tag">Spring Boot</span><span class="tag">Spring Security</span><span class="tag">JWT</span><span class="tag">PostgreSQL</span></div>
+          </div>
+        </div>
+        <div class="prow rv">
+          <div class="prow__when">2026.05 ~ 06</div>
+          <div>
+            <h3><a href="https://github.com/Jihwan0210/PotatoChip" target="_blank" rel="noopener">PotatoChip</a></h3>
+            <div class="rolez">팀장 · 상품 도메인</div>
+            <p>못난이 농산물 마켓플레이스. 담은 시점 가격을 지키는 가격 스냅샷 장바구니, 판매자 권한, 판매 랭킹을 구현하고 develop/feature 브랜치와 PR 리뷰를 운영했습니다.</p>
+            <div class="tags"><span class="tag">Java 21</span><span class="tag">Spring Boot</span><span class="tag">JPA</span><span class="tag">Thymeleaf</span><span class="tag">MariaDB</span></div>
+          </div>
+        </div>
+        <div class="prow rv">
+          <div class="prow__when">2026.06</div>
+          <div>
+            <h3><a href="https://github.com/Jihwan0210/React_CampusLink" target="_blank" rel="noopener">CampusLink</a></h3>
+            <div class="rolez">개인 · 프론트엔드</div>
+            <p>대학 동아리와 스터디, 공모전 모집 SPA. Context API 로그인과 세션 유지, 작성자 권한 분기를 구현하고 AWS Amplify로 배포했습니다.</p>
+            <div class="tags"><span class="tag">React 18</span><span class="tag">TypeScript</span><span class="tag">Vite</span><span class="tag">AWS Amplify</span></div>
+          </div>
+        </div>
+        <div class="prow rv">
+          <div class="prow__when">2025.10 ~ 12</div>
+          <div>
+            <h3><a href="https://github.com/Jihwan0210/laravel-hotel-reservation" target="_blank" rel="noopener">호텔 예약</a></h3>
+            <div class="rolez">개인 · 교내 경진대회 금상</div>
+            <p>Laravel MVC와 Eloquent ORM으로 예약과 후기, 사용자와 관리자 분리를 구현했습니다. 프레임워크로 구조와 데이터 설계를 익힌 프로젝트입니다.</p>
+            <div class="tags"><span class="tag">Laravel</span><span class="tag">Bootstrap</span><span class="tag">MariaDB</span></div>
+          </div>
+        </div>
+        <div class="prow rv">
+          <div class="prow__when">2025.06</div>
+          <div>
+            <h3><a href="https://github.com/Jihwan0210/PHP_ShopProject" target="_blank" rel="noopener">침착맨 굿즈샵</a></h3>
+            <div class="rolez">개인 · 교내 경진대회 은상</div>
+            <p>처음 만든 웹 서비스. 쿠키 로그인과 비회원 장바구니, 옵션과 배송비 계산 주문, 관리자 상품 관리를 구현했습니다.</p>
+            <div class="tags"><span class="tag">PHP</span><span class="tag">Bootstrap</span><span class="tag">MariaDB</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="block" id="skills">
+      <p class="block__h rv">기술</p>
+      <div class="rv">
+        <div class="skg">
+          <div class="g">Backend</div>
+          <div class="items"><span class="tag">Java</span><span class="tag">Spring Boot</span><span class="tag">Spring Security</span><span class="tag">Spring Data JPA</span><span class="tag">JWT · OAuth2</span><span class="tag">REST API</span><span class="tag">Redis</span></div>
+        </div>
+        <div class="skg">
+          <div class="g">Database</div>
+          <div class="items"><span class="tag">MariaDB</span><span class="tag">MySQL</span><span class="tag">Oracle</span><span class="tag">SQL</span><span class="tag">MyBatis</span></div>
+        </div>
+        <div class="skg">
+          <div class="g">Front · Ops</div>
+          <div class="items"><span class="tag">JavaScript</span><span class="tag">TypeScript</span><span class="tag">React</span><span class="tag">Thymeleaf</span><span class="tag">Git · GitHub</span><span class="tag">AWS</span><span class="tag">Docker</span></div>
+        </div>
+      </div>
+    </section>
+
+    <p class="foot rv">유지환 · <a href="https://github.com/Jihwan0210" target="_blank" rel="noopener">github.com/Jihwan0210</a> · <a href="mailto:202212020@gsuite.induk.ac.kr">202212020@gsuite.induk.ac.kr</a></p>
+
+  </main>
+</div>
+
+<script>
+(function(){
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}})},{threshold:.12});
+  document.querySelectorAll('.rv').forEach(function(el){io.observe(el);});
+
+  var links=[].slice.call(document.querySelectorAll('#nav a'));
+  var map={};links.forEach(function(l){map[l.dataset.sec]=l;});
+  var navio=new IntersectionObserver(function(es){es.forEach(function(e){
+    if(e.isIntersecting){links.forEach(function(l){l.classList.remove('on');});if(map[e.target.id])map[e.target.id].classList.add('on');}
+  })},{rootMargin:'-30% 0px -60% 0px'});
+  ['about','work','skills'].forEach(function(id){var el=document.getElementById(id);if(el)navio.observe(el);});
+})();
+</script>
+</body>
+</html>
