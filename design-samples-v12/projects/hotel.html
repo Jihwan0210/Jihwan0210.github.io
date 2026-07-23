@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>호텔 예약 · 유지환</title>
+<meta name="description" content="Laravel 기반 호텔 예약 웹 서비스. 개인 프로젝트, 교내 경진대회 금상."/>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css"/>
+<link rel="stylesheet" href="../style.css"/>
+</head>
+<body>
+
+<header class="top" id="top">
+  <div class="top__in">
+    <a class="dp-back" href="../index.html"><svg viewBox="0 0 24 24"><path d="M19 12H5m0 0 7 7m-7-7 7-7"/></svg>유지환 포트폴리오</a>
+    <nav class="top__links"><a class="pill" href="https://github.com/Jihwan0210/laravel-hotel-reservation" target="_blank" rel="noopener">Repository</a></nav>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section class="dp-hero">
+    <p class="dp-kind rv">Laravel 호텔 예약 서비스 · 개인 · 교내 경진대회 금상</p>
+    <h1 class="rv">호텔 예약</h1>
+    <p class="dp-lead rv">Laravel 기반 호텔 예약 웹 서비스입니다. MVC 구조와 데이터베이스 설계를 익힌 프로젝트입니다.</p>
+    <div class="dp-meta rv">
+      <div class="m"><div class="k">구성</div><div class="v">개인</div></div>
+      <div class="m"><div class="k">기간</div><div class="v">2025.10 ~ 12</div></div>
+      <div class="m"><div class="k">스택</div><div class="v">Laravel · MariaDB</div></div>
+      <div class="m"><div class="k">수상</div><div class="v">경진대회 금상</div></div>
+    </div>
+  </section>
+
+  <div class="dp-shot rv">호텔 예약 대표 화면 스크린샷을 넣어주세요 (권장 16:8)</div>
+
+  <div class="dp-secs">
+    <section class="dp-sec rv">
+      <h2>구현 흐름</h2>
+      <div class="flow">
+        <span class="step">숙소 등록</span><span class="ar">›</span>
+        <span class="step">예약</span><span class="ar">›</span>
+        <span class="step">후기</span><span class="ar">›</span>
+        <span class="step">공지</span><span class="ar">›</span>
+        <span class="step"><b>관리자</b> 분리</span>
+      </div>
+    </section>
+
+    <section class="dp-sec rv">
+      <h2>주요 구현</h2>
+      <ul class="role-list">
+        <li>숙소 정보 등록, 예약, 후기, 공지사항 기능을 구현했습니다.</li>
+        <li>Eloquent ORM 기반으로 MariaDB와 연동했습니다.</li>
+        <li>사용자와 관리자 페이지를 분리해 설계했습니다.</li>
+        <li>관리자 CRUD와 메시지 기능을 구현했습니다.</li>
+      </ul>
+    </section>
+
+    <section class="dp-sec rv">
+      <h2>기술 스택</h2>
+      <div class="dp-tags">
+        <span class="tag">Laravel</span><span class="tag">Bootstrap</span><span class="tag">MariaDB</span>
+      </div>
+      <div class="dp-links">
+        <a class="btn btn--p" href="https://github.com/Jihwan0210/laravel-hotel-reservation" target="_blank" rel="noopener">Repository 보기</a>
+      </div>
+    </section>
+  </div>
+
+  <nav class="dp-nav">
+    <a href="campuslink.html">← CampusLink</a>
+    <a href="goods.html">다음 · 침착맨 굿즈샵 →</a>
+  </nav>
+
+</main>
+
+<script>
+(function(){
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}})},{threshold:.1});
+  document.querySelectorAll('.rv').forEach(function(el){io.observe(el);});
+  var top=document.getElementById('top');
+  var sen=document.createElement('div');sen.style.cssText='position:absolute;top:0;left:0;width:1px;height:1px';document.body.prepend(sen);
+  new IntersectionObserver(function(e){top.classList.toggle('stuck',!e[0].isIntersecting);}).observe(sen);
+})();
+</script>
+</body>
+</html>
