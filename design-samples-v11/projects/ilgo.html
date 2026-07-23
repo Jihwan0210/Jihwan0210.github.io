@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>읽고 (Ilgo) · 유지환</title>
+<meta name="description" content="읽고(Ilgo) - AI 배리어프리 문서 해석 서비스. 백엔드 API 서버 담당."/>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css"/>
+<link rel="stylesheet" href="../style.css"/>
+</head>
+<body>
+
+<header class="top" id="top">
+  <div class="top__in">
+    <a class="dp-back" href="../index.html"><svg viewBox="0 0 24 24"><path d="M19 12H5m0 0 7 7m-7-7 7-7"/></svg>유지환 포트폴리오</a>
+    <nav class="top__links"><a href="https://github.com/Jihwan0210/Ilgo-backend" target="_blank" rel="noopener">Repository</a></nav>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section class="dp-hero">
+    <p class="dp-kind rv">AI 배리어프리 문서 해석 · 팀 프로젝트 · AI 해커톤 3등</p>
+    <h1 class="rv">읽고 (Ilgo)</h1>
+    <p class="dp-lead rv">어려운 생활 문서를 사진으로 찍으면 AI가 쉬운 한국어 또는 영어로 풀어주는 배리어프리 서비스입니다. 저는 백엔드 API 서버를 담당했습니다.</p>
+    <div class="dp-meta rv">
+      <div class="m"><div class="k">역할</div><div class="v">백엔드 API</div></div>
+      <div class="m"><div class="k">팀 구성</div><div class="v">팀 프로젝트 (백엔드)</div></div>
+      <div class="m"><div class="k">기간</div><div class="v">2026.06 ~ 07</div></div>
+      <div class="m"><div class="k">수상</div><div class="v">해커톤 3등 (선도상)</div></div>
+    </div>
+  </section>
+
+  <div class="dp-shot rv">읽고 대표 화면 스크린샷을 넣어주세요 (권장 16:8)</div>
+
+  <section class="dp-sec">
+    <h2 class="rv"><span class="hash">#</span>내 역할</h2>
+    <ul class="role-list">
+      <li class="rv">JWT 기반 인증·인가 설계</li>
+      <li class="rv">외부 AI 게이트웨이 연동 문서 분석 API</li>
+      <li class="rv">API 문서화와 테스트로 안정성 확보</li>
+    </ul>
+  </section>
+
+  <section class="dp-sec">
+    <h2 class="rv"><span class="hash">#</span>구현 흐름</h2>
+    <div class="flow rv">
+      <span class="step">문서 이미지/텍스트</span><span class="ar">›</span>
+      <span class="step"><b>JWT</b> 인증</span><span class="ar">›</span>
+      <span class="step">AI 게이트웨이</span><span class="ar">›</span>
+      <span class="step">구조화 응답</span><span class="ar">›</span>
+      <span class="step">커서 페이지네이션 조회</span>
+    </div>
+  </section>
+
+  <section class="dp-sec">
+    <h2 class="rv"><span class="hash">#</span>주요 구현</h2>
+    <ul class="role-list">
+      <li class="rv">요청별 토큰 검증 필터, <b>Stateless</b> 정책, 경로별 접근 제어</li>
+      <li class="rv">문서 분석 API(응답을 설명·위험도·핵심 카드·할 일 구조로 파싱)</li>
+      <li class="rv">이미지 업로드(multipart)와 JSON 양쪽 요청 지원</li>
+      <li class="rv">커서 기반 페이지네이션</li>
+      <li class="rv">전역 예외 처리와 요청 레이트 리밋</li>
+      <li class="rv"><b>Swagger</b>(OpenAPI) 문서 자동화로 프론트와 규격 공유</li>
+      <li class="rv">인증·분석·문서 생성 테스트 작성</li>
+    </ul>
+  </section>
+
+  <section class="dp-sec">
+    <h2 class="rv"><span class="hash">#</span>기술 스택</h2>
+    <div class="dp-tags rv">
+      <span class="tag">Java</span><span class="tag">Spring Boot 3.5</span><span class="tag">Spring Security</span><span class="tag">JPA</span><span class="tag">JWT</span><span class="tag">PostgreSQL</span><span class="tag">Swagger</span>
+    </div>
+    <div class="dp-links rv" style="margin-top:22px">
+      <a class="btn btn--p" href="https://github.com/Jihwan0210/Ilgo-backend" target="_blank" rel="noopener">Repository 보기</a>
+    </div>
+  </section>
+
+  <nav class="dp-nav">
+    <a href="cogi.html">← COGI</a>
+    <a href="potatochip.html">PotatoChip →</a>
+  </nav>
+
+</main>
+
+<script>
+(function(){
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}})},{threshold:.12});
+  document.querySelectorAll('.rv').forEach(function(el){io.observe(el);});
+  var top=document.getElementById('top');
+  var sen=document.createElement('div');sen.style.cssText='position:absolute;top:0;left:0;width:1px;height:1px';document.body.prepend(sen);
+  new IntersectionObserver(function(e){top.classList.toggle('stuck',!e[0].isIntersecting);}).observe(sen);
+})();
+</script>
+</body>
+</html>
