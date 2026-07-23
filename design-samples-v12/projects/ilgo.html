@@ -39,11 +39,24 @@
   <div class="dp-secs">
     <section class="dp-sec rv">
       <h2>내 역할</h2>
+      <p class="role-lead">팀에서 <b>백엔드 API 서버 전체</b>를 맡았습니다. 인증부터 AI 문서 분석 연동, 응답 구조 설계, 문서화와 테스트까지 서버 전 구간을 담당했습니다.</p>
       <ul class="role-list">
-        <li><b>인증·인가</b> JWT 기반 인증과 인가를 설계했습니다.</li>
-        <li><b>문서 분석 API</b> 외부 AI 게이트웨이와 연동하는 문서 분석 API를 구현했습니다.</li>
-        <li><b>안정성</b> 문서화와 테스트로 API 안정성을 확보했습니다.</li>
+        <li><b>인증·인가</b> JWT 토큰 검증 필터, Stateless 정책, 경로별 접근 제어를 설계했습니다.</li>
+        <li><b>문서 분석 API</b> 외부 AI 게이트웨이와 연동하고, 응답을 설명·위험도·핵심 카드·할 일 구조로 파싱했습니다.</li>
+        <li><b>요청 처리</b> 이미지(multipart)와 JSON 요청을 모두 받고, 목록은 커서 페이지네이션으로 조회했습니다.</li>
+        <li><b>안정성</b> 전역 예외 처리와 레이트 리밋, Swagger 문서화, 인증·분석 테스트로 API를 안정화했습니다.</li>
       </ul>
+    </section>
+
+    <section class="dp-sec rv">
+      <h2>시스템 아키텍처</h2>
+      <div class="arch">
+        <div class="arch__col"><div class="lb">Client</div><div class="node">모바일 앱<small>문서 촬영 · 업로드</small></div></div>
+        <div class="arch__col"><div class="lb">Security</div><div class="node mine">JWT 필터<small>토큰 검증 · 접근 제어</small></div></div>
+        <div class="arch__col"><div class="lb">Domain</div><div class="node mine">Analysis<small>문서 분석</small></div><div class="node mine">Auth<small>인증 · 인가</small></div><div class="node mine">AI 연동</div><div class="node">User</div></div>
+        <div class="arch__col"><div class="lb">Infra</div><div class="node">PostgreSQL · JPA</div><div class="node mine">외부 AI 게이트웨이</div></div>
+      </div>
+      <p class="mono" style="margin-top:12px;color:var(--ink3)">강조된 블록이 제가 맡은 백엔드 영역입니다.</p>
     </section>
 
     <section class="dp-sec rv">

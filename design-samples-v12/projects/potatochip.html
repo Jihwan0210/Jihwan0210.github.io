@@ -39,11 +39,24 @@
   <div class="dp-secs">
     <section class="dp-sec rv">
       <h2>내 역할</h2>
+      <p class="role-lead"><b>팀장이자 상품 도메인 오너</b>로, 팀을 이끌면서 상품과 장바구니 도메인을 직접 설계하고 구현했습니다.</p>
       <ul class="role-list">
-        <li><b>상품 도메인</b> 상품 도메인 설계와 구현을 맡았습니다.</li>
-        <li><b>협업 프로세스</b> 브랜치 전략과 PR 리뷰 등 팀 협업 프로세스를 운영했습니다.</li>
-        <li><b>일정·문서</b> 일정 조율과 문서 총괄을 담당했습니다.</li>
+        <li><b>상품 도메인</b> 상품 CRUD와 판매자 전용 권한, 카테고리·키워드 필터를 설계하고 구현했습니다.</li>
+        <li><b>장바구니</b> 담은 시점의 가격을 유지하는 가격 스냅샷 <code>CartItem</code> 구조를 설계했습니다.</li>
+        <li><b>부가 기능</b> Kakao Map 픽업 위치, 즉시 구매 흐름, 기간별 판매 랭킹을 구현했습니다.</li>
+        <li><b>팀 리딩</b> develop·feature 브랜치 전략과 PR 코드 리뷰를 운영하고, 일정과 문서를 총괄했습니다.</li>
       </ul>
+    </section>
+
+    <section class="dp-sec rv">
+      <h2>시스템 아키텍처</h2>
+      <div class="arch">
+        <div class="arch__col"><div class="lb">Client</div><div class="node">Thymeleaf 화면<small>서버사이드 렌더링</small></div></div>
+        <div class="arch__col"><div class="lb">Security</div><div class="node">JWT 필터<small>인증 · 권한</small></div></div>
+        <div class="arch__col"><div class="lb">Domain</div><div class="node mine">상품<small>CRUD · 권한 · 필터</small></div><div class="node mine">장바구니<small>가격 스냅샷</small></div><div class="node">주문 · 관리자</div><div class="node">게시판 · 알림</div></div>
+        <div class="arch__col"><div class="lb">Infra</div><div class="node">MariaDB · JPA</div><div class="node mine">Kakao Map API</div><div class="node">AWS</div></div>
+      </div>
+      <p class="mono" style="margin-top:12px;color:var(--ink3)">강조된 블록이 제가 맡은 상품·장바구니 도메인입니다.</p>
     </section>
 
     <section class="dp-sec rv">
