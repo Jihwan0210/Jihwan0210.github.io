@@ -23,13 +23,13 @@
 <main class="wrap">
 
   <section class="dp-hero">
-    <p class="dp-kind rv">PHP 쇼핑몰 · 개인 · 교내 경진대회 은상</p>
+    <p class="dp-kind rv">PHP 쇼핑몰 · 개인 프로젝트 · 교내 경진대회 은상</p>
     <h1 class="rv">침착맨 굿즈샵</h1>
     <p class="dp-lead rv">PHP 기반 쇼핑몰 웹 애플리케이션입니다. 처음으로 만든 웹 서비스입니다.</p>
     <div class="dp-meta rv">
       <div class="m"><div class="k">구성</div><div class="v">개인</div></div>
       <div class="m"><div class="k">기간</div><div class="v">2025.06</div></div>
-      <div class="m"><div class="k">스택</div><div class="v">PHP · MariaDB</div></div>
+      <div class="m"><div class="k">기술 스택</div><div class="v">PHP · MariaDB</div></div>
       <div class="m"><div class="k">수상</div><div class="v">경진대회 은상</div></div>
     </div>
   </section>
@@ -38,24 +38,41 @@
 
   <div class="dp-secs">
     <section class="dp-sec rv">
-      <h2>구현 흐름</h2>
+      <h2>장바구니 · 비회원 구매</h2>
+      <div class="star">
+        <div class="star__i"><span class="k">상황</span><p>장바구니를 회원 테이블에 묶어 두다 보니 <b>로그인해야만 상품을 담을 수 있었습니다.</b> 처음 들어온 사용자는 구경만 하다 가입 화면에서 이탈했습니다.</p></div>
+        <div class="star__i"><span class="k">해결</span><p>담은 상품을 <b>쿠키에 보관</b>해 비회원도 장바구니를 쓸 수 있게 하고, 주문 단계에서만 회원 정보를 요구하도록 흐름을 나눴습니다.</p></div>
+        <div class="star__i res"><span class="k">결과</span><p>가입 없이도 담기부터 주문까지 이어지게 됐습니다. 이때 배운 <b>가입 전에 먼저 써보게 하는</b> 흐름을 COGI의 비로그인 체험에도 그대로 적용했습니다.</p></div>
+      </div>
+      <h3 class="sub">구현 상세</h3>
       <div class="flow">
         <span class="step">상품 목록 · 상세</span><span class="ar">›</span>
-        <span class="step">장바구니(쿠키 · 비회원)</span><span class="ar">›</span>
+        <span class="step"><b>쿠키 장바구니</b></span><span class="ar">›</span>
         <span class="step">옵션 · 수량 · 할인 · 배송비</span><span class="ar">›</span>
-        <span class="step">주문</span><span class="ar">›</span>
-        <span class="step"><b>관리자</b></span>
+        <span class="step">주문</span>
       </div>
+      <ul class="role-list" style="margin-top:20px">
+        <li>담은 상품은 로그인 전까지만 들고 있으면 되는 값이라, 서버에 임시 테이블을 만들기보다 <b>브라우저 쿠키</b>에 두는 쪽을 택했습니다.</li>
+        <li>옵션 선택, 수량, 할인율, 배송비를 반영한 주문 금액 계산 프로세스를 구현했습니다.</li>
+        <li>회원가입과 로그인, 상품 목록·상세 페이지를 만들었습니다.</li>
+      </ul>
     </section>
 
     <section class="dp-sec rv">
-      <h2>주요 구현</h2>
+      <h2>관리자</h2>
+      <p class="role-lead">운영자가 상품을 직접 올리고 고칠 수 있어야 서비스가 돌아가므로, 관리자 화면을 함께 만들었습니다.</p>
       <ul class="role-list">
-        <li>회원가입, 로그인, 상품 목록·상세 페이지를 구현했습니다.</li>
-        <li>쿠키 기반으로 로그인 정보를 저장하고, 비회원 장바구니를 지원했습니다.</li>
-        <li>옵션 선택, 수량, 할인율, 배송비를 계산하는 주문 프로세스를 구현했습니다.</li>
-        <li>관리자 페이지에서 상품, 이미지, 옵션을 관리합니다.</li>
+        <li>상품, 이미지, 옵션을 등록·수정·삭제하는 관리 기능을 구현했습니다.</li>
+        <li>프레임워크 없이 PHP로만 만들면서 요청 처리와 세션, DB 연결이 어떻게 맞물리는지 직접 겪었고, 이후 Laravel과 Spring의 계층 구조를 이해하는 바탕이 됐습니다.</li>
       </ul>
+    </section>
+
+    <section class="dp-sec rv">
+      <h2>데이터베이스 ERD</h2>
+      <div class="dp-erd empty" data-slot="images/erd-goods.png 파일을 넣으면 표시됩니다">
+        <img src="../images/erd-goods.png" alt="침착맨 굿즈샵 ERD" onerror="this.parentNode.classList.add('empty')" onload="this.parentNode.classList.remove('empty')">
+      </div>
+      <p class="cap">회원 · 상품 · 옵션 · 주문 테이블 관계</p>
     </section>
 
     <section class="dp-sec rv">

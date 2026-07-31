@@ -23,13 +23,13 @@
 <main class="wrap">
 
   <section class="dp-hero">
-    <p class="dp-kind rv">Laravel 호텔 예약 서비스 · 개인 · 교내 경진대회 금상</p>
+    <p class="dp-kind rv">Laravel 호텔 예약 서비스 · 개인 프로젝트 · 교내 경진대회 금상</p>
     <h1 class="rv">호텔 예약</h1>
     <p class="dp-lead rv">Laravel 기반 호텔 예약 웹 서비스입니다. MVC 구조와 데이터베이스 설계를 익힌 프로젝트입니다.</p>
     <div class="dp-meta rv">
       <div class="m"><div class="k">구성</div><div class="v">개인</div></div>
       <div class="m"><div class="k">기간</div><div class="v">2025.10 ~ 12</div></div>
-      <div class="m"><div class="k">스택</div><div class="v">Laravel · MariaDB</div></div>
+      <div class="m"><div class="k">기술 스택</div><div class="v">Laravel · MariaDB</div></div>
       <div class="m"><div class="k">수상</div><div class="v">경진대회 금상</div></div>
     </div>
   </section>
@@ -38,24 +38,47 @@
 
   <div class="dp-secs">
     <section class="dp-sec rv">
-      <h2>구현 흐름</h2>
-      <div class="flow">
-        <span class="step">숙소 등록</span><span class="ar">›</span>
-        <span class="step">예약</span><span class="ar">›</span>
-        <span class="step">후기</span><span class="ar">›</span>
-        <span class="step">공지</span><span class="ar">›</span>
-        <span class="step"><b>관리자</b> 분리</span>
+      <h2>사용자 · 관리자 권한 분리</h2>
+      <div class="star">
+        <div class="star__i"><span class="k">상황</span><p>관리자와 일반 사용자는 <b>접근하는 라우트만 다를 뿐</b> 실제 권한을 검증하는 로직이 없었습니다. 주소만 알면 일반 사용자도 관리자 화면에 들어갈 수 있었습니다. 화면을 나눈 것과 권한을 보호하는 것은 전혀 다른 문제였고, 근본 원인은 <b>접근 제어 계층이 없다는 것</b>이었습니다.</p></div>
+        <div class="star__i"><span class="k">해결</span><p>라우트마다 검증 코드를 흩어놓는 대신 Laravel <b>Middleware</b>를 골랐습니다. 요청이 컨트롤러에 닿기 전에 인증 여부와 역할(Role)을 한곳에서 검증하고, 관리자 전용 라우트 그룹 전체에 일괄 적용했습니다.</p></div>
+        <div class="star__i res"><span class="k">결과</span><p>화면 분리와 권한 검증이 <b>항상 함께 동작</b>하는 구조가 됐습니다. 이 경험 이후 Java와 Spring Security에서도 인증·인가를 공통 계층으로 두는 방식을 이어갔습니다.</p></div>
       </div>
+      <h3 class="sub">구현 상세</h3>
+      <div class="flow">
+        <span class="step">요청</span><span class="ar">›</span>
+        <span class="step"><b>Middleware</b> 인증 · 역할 검증</span><span class="ar">›</span>
+        <span class="step">관리자 라우트 그룹</span><span class="ar">›</span>
+        <span class="step">컨트롤러</span>
+      </div>
+      <ul class="role-list" style="margin-top:20px">
+        <li>컨트롤러마다 검증을 넣으면 <b>새 화면을 추가할 때 빠뜨리기 쉬워</b>, 요청 앞단에서 한 번에 거르는 Middleware를 택했습니다.</li>
+        <li>인증 여부와 역할(Role)을 함께 확인해, 로그인만 했을 뿐인 사용자가 관리자 라우트로 새지 않게 했습니다.</li>
+      </ul>
     </section>
 
     <section class="dp-sec rv">
-      <h2>주요 구현</h2>
-      <ul class="role-list">
-        <li>숙소 정보 등록, 예약, 후기, 공지사항 기능을 구현했습니다.</li>
-        <li>Eloquent ORM 기반으로 MariaDB와 연동했습니다.</li>
-        <li>사용자와 관리자 페이지를 분리해 설계했습니다.</li>
-        <li>관리자 CRUD와 메시지 기능을 구현했습니다.</li>
+      <h2>예약 · 후기 · 공지</h2>
+      <p class="role-lead">이용자가 숙소를 고르고 예약한 뒤 후기를 남기기까지, 운영자가 공지로 안내하기까지의 흐름을 혼자 설계했습니다.</p>
+      <div class="flow">
+        <span class="step">숙소 등록</span><span class="ar">›</span>
+        <span class="step">예약</span><span class="ar">›</span>
+        <span class="step">후기 · 평점</span><span class="ar">›</span>
+        <span class="step">공지</span><span class="ar">›</span>
+        <span class="step">관리자 CRUD</span>
+      </div>
+      <ul class="role-list" style="margin-top:20px">
+        <li>숙소 정보 등록, 예약, 후기, 공지사항, 관리자 CRUD와 메시지 기능을 구현했습니다.</li>
+        <li>숙소 · 예약 · 후기가 서로 물린 구조라, 쿼리를 직접 쓰기보다 <b>Eloquent ORM의 관계 정의</b>로 다뤘습니다.</li>
       </ul>
+    </section>
+
+    <section class="dp-sec rv">
+      <h2>데이터베이스 ERD</h2>
+      <div class="dp-erd empty" data-slot="images/erd-hotel.png 파일을 넣으면 표시됩니다">
+        <img src="../images/erd-hotel.png" alt="호텔 예약 ERD" onerror="this.parentNode.classList.add('empty')" onload="this.parentNode.classList.remove('empty')">
+      </div>
+      <p class="cap">숙소 · 예약 · 후기 · 공지 테이블 관계</p>
     </section>
 
     <section class="dp-sec rv">

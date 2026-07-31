@@ -28,7 +28,7 @@
     <p class="dp-lead rv">어려운 생활 문서를 사진으로 찍으면 AI가 쉬운 한국어 또는 영어로 풀어주는 배리어프리 서비스입니다. 백엔드 API 서버를 담당했습니다.</p>
     <div class="dp-meta rv">
       <div class="m"><div class="k">역할</div><div class="v">백엔드 API</div></div>
-      <div class="m"><div class="k">구성</div><div class="v">팀 (백엔드)</div></div>
+      <div class="m"><div class="k">구성</div><div class="v">6인 팀 · 백엔드</div></div>
       <div class="m"><div class="k">기간</div><div class="v">2026.06 ~ 07</div></div>
       <div class="m"><div class="k">수상</div><div class="v">해커톤 3등(선도상)</div></div>
     </div>
@@ -37,6 +37,10 @@
   <div class="dp-shot rv"><img src="../images/ilgo.png" alt="읽고(Ilgo) 앱 화면"></div>
 
   <div class="dp-secs">
+    <section class="dp-sec rv">
+      <h2>프로젝트 소개</h2>
+      <p class="role-lead">고지서, 안내문, 문자처럼 이해하기 어려운 생활 문서를 사진으로 찍으면 AI가 쉬운 한국어 또는 영어로 풀어 설명해 주는 배리어프리 서비스입니다. 외국인, 고령자처럼 정보 접근이 어려운 사용자를 위해 만들었고, AI Re-Local 해커톤 출품작입니다.</p>
+    </section>
     <section class="dp-sec rv">
       <h2>내 역할</h2>
       <p class="role-lead">팀에서 <b>백엔드 API 서버 전체</b>를 맡았습니다. 인증부터 AI 문서 분석 연동, 응답 구조 설계, 문서화와 테스트까지 서버 전 구간을 담당했습니다.</p>
@@ -60,27 +64,49 @@
     </section>
 
     <section class="dp-sec rv">
-      <h2>구현 흐름</h2>
+      <h2>AI 문서 분석</h2>
+      <div class="star">
+        <div class="star__i"><span class="k">상황</span><p>AI 게이트웨이가 돌려주는 해석 결과는 <b>자유 형식 텍스트</b>였습니다. 같은 고지서인데도 응답 구조가 매번 달라, 앱에서 화면을 어떤 규격으로 그릴지 정할 수 없었습니다.</p></div>
+        <div class="star__i"><span class="k">해결</span><p>응답 규격을 서버에서 고정했습니다. AI 결과를 <b>설명 · 위험도 · 핵심 카드 · 할 일</b> 네 구조로 파싱하고, 파싱이 실패해도 정해진 오류 응답으로 내려가게 묶었습니다.</p></div>
+        <div class="star__i res"><span class="k">결과</span><p>앱은 <b>응답 스키마 하나</b>만 보고 화면을 만들 수 있게 됐고, Swagger로 명세를 공유해 짧은 해커톤 기간에 서버와 앱을 병렬로 개발했습니다.</p></div>
+      </div>
+      <h3 class="sub">구현 상세</h3>
       <div class="flow">
         <span class="step">문서 이미지</span><span class="ar">›</span>
         <span class="step"><b>JWT 인증</b></span><span class="ar">›</span>
         <span class="step">AI 게이트웨이</span><span class="ar">›</span>
-        <span class="step">구조화 응답</span><span class="ar">›</span>
+        <span class="step">4구조 파싱</span><span class="ar">›</span>
         <span class="step">커서 페이지네이션 조회</span>
       </div>
+      <ul class="role-list" style="margin-top:20px">
+        <li>AI 응답을 <b>설명 · 위험도 · 핵심 카드 · 할 일</b> 네 구조로 파싱해 앱이 바로 렌더링할 수 있는 형태로 내려줍니다.</li>
+        <li>현장에서 문서를 찍어 올리는 흐름과, 이미 텍스트를 가진 요청을 모두 받아야 해 <b>이미지(multipart)와 JSON</b> 두 가지 요청 방식을 지원했습니다.</li>
+        <li>분석 기록은 계속 쌓이기만 하는 데이터라, 뒤로 갈수록 느려지는 <code>offset</code> 방식 대신 <b>커서 기반 페이지네이션</b>을 골랐습니다.</li>
+      </ul>
     </section>
 
     <section class="dp-sec rv">
-      <h2>주요 구현</h2>
+      <h2>인증 · 공통 계층</h2>
+      <div class="star">
+        <div class="star__i"><span class="k">상황</span><p>API가 늘어날수록 토큰 검증과 오류 응답 형식이 컨트롤러마다 조금씩 달라졌습니다. 외부 AI 호출도 제한 없이 열려 있어 <b>남용을 막을 방법</b>이 없었습니다.</p></div>
+        <div class="star__i"><span class="k">해결</span><p>검증을 공통 계층으로 끌어올렸습니다. JWT 필터에서 토큰을 검증하고 경로별 접근 정책을 한곳에 모았으며, 전역 예외 처리와 요청 레이트 리밋도 공통 계층에 뒀습니다.</p></div>
+        <div class="star__i res"><span class="k">결과</span><p>새 API를 추가해도 인증과 오류 응답 형식이 <b>자동으로 같아졌고</b>, 인증·분석·문서 생성 테스트로 회귀를 확인할 수 있게 됐습니다.</p></div>
+      </div>
+      <h3 class="sub">구현 상세</h3>
       <ul class="role-list">
-        <li>요청별 <code>Authorization</code> 토큰을 검증하는 필터를 두고, <b>Stateless</b> 정책과 경로별 접근 제어를 적용했습니다.</li>
-        <li>문서 분석 API에서 AI 게이트웨이의 응답을 설명·위험도·핵심 카드·할 일 구조로 파싱했습니다.</li>
-        <li>이미지 업로드(multipart)와 JSON 요청을 모두 지원하도록 설계했습니다.</li>
-        <li>목록 조회에 커서 기반 페이지네이션을 적용했습니다.</li>
-        <li>전역 예외 처리와 요청 레이트 리밋을 두었습니다.</li>
-        <li>Swagger 문서를 자동화해 프론트와 API 규격을 공유했습니다.</li>
-        <li>인증, 분석, 문서 생성에 대한 테스트를 작성했습니다.</li>
+        <li>서버가 세션을 들고 있을 수 없는 모바일 앱 클라이언트라, 요청마다 <code>Authorization</code> 토큰을 검증하는 <b>Stateless</b> 구조를 택했습니다.</li>
+        <li>전역 예외 처리로 모든 오류 응답 형식을 통일하고, 요청 레이트 리밋으로 AI 호출 남용을 막았습니다.</li>
+        <li>Swagger로 API 문서를 자동화해 프론트와 규격을 공유했습니다.</li>
+        <li>인증, 분석, 문서 생성에 대한 테스트 코드를 작성했습니다.</li>
       </ul>
+    </section>
+
+    <section class="dp-sec rv">
+      <h2>데이터베이스 ERD</h2>
+      <div class="dp-erd empty" data-slot="images/erd-ilgo.png 파일을 넣으면 표시됩니다">
+        <img src="../images/erd-ilgo.png" alt="읽고 ERD" onerror="this.parentNode.classList.add('empty')" onload="this.parentNode.classList.remove('empty')">
+      </div>
+      <p class="cap">사용자 · 문서 분석 결과 중심 테이블 관계</p>
     </section>
 
     <section class="dp-sec rv">

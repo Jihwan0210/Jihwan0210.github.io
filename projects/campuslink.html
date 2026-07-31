@@ -29,7 +29,7 @@
     <div class="dp-meta rv">
       <div class="m"><div class="k">구성</div><div class="v">개인</div></div>
       <div class="m"><div class="k">기간</div><div class="v">2026.06</div></div>
-      <div class="m"><div class="k">스택</div><div class="v">React 18 · TypeScript</div></div>
+      <div class="m"><div class="k">기술 스택</div><div class="v">React 18 · TypeScript</div></div>
       <div class="m"><div class="k">배포</div><div class="v">AWS Amplify</div></div>
     </div>
   </section>
@@ -38,24 +38,43 @@
 
   <div class="dp-secs">
     <section class="dp-sec rv">
-      <h2>구현 흐름</h2>
-      <div class="flow">
-        <span class="step">로그인(Context)</span><span class="ar">›</span>
-        <span class="step">모집글 CRUD</span><span class="ar">›</span>
-        <span class="step">지원 · 취소</span><span class="ar">›</span>
-        <span class="step">작성자 권한 분기</span><span class="ar">›</span>
-        <span class="step"><b>sessionStorage</b> 세션 유지</span>
+      <h2>인증 · 세션</h2>
+      <div class="star">
+        <div class="star__i"><span class="k">상황</span><p>로그인 상태를 Context 메모리에만 들고 있어서, <b>새로고침하거나 주소로 직접 들어오면 로그아웃 상태</b>로 돌아갔습니다. 지원 내역을 보다 새로고침 한 번에 처음부터 다시 로그인해야 했습니다.</p></div>
+        <div class="star__i"><span class="k">해결</span><p>로그인 정보를 <code>sessionStorage</code>에 함께 저장하고, <code>AuthContext</code>가 초기화될 때 저장된 값을 읽어 상태를 <b>복원</b>하도록 했습니다.</p></div>
+        <div class="star__i res"><span class="k">결과</span><p>새로고침이나 직접 URL 진입에도 세션이 유지됩니다. 브라우저를 닫으면 정리되도록 <code>localStorage</code> 대신 <code>sessionStorage</code>를 골랐습니다.</p></div>
       </div>
+      <h3 class="sub">구현 상세</h3>
+      <div class="flow">
+        <span class="step">로그인</span><span class="ar">›</span>
+        <span class="step"><b>AuthContext</b> 전역 상태</span><span class="ar">›</span>
+        <span class="step">sessionStorage 저장</span><span class="ar">›</span>
+        <span class="step">새로고침 시 복원</span>
+      </div>
+      <ul class="role-list" style="margin-top:20px">
+        <li>로그인 상태를 여러 화면이 함께 봐야 해서, 상태 관리 라이브러리를 새로 붙이는 대신 <b>React 기본 기능인 Context API</b>로 해결했습니다.</li>
+        <li>학교 공용 PC에서도 쓰는 서비스라, 브라우저를 닫으면 자동으로 지워지는 <code>sessionStorage</code>를 택했습니다.</li>
+      </ul>
     </section>
 
     <section class="dp-sec rv">
-      <h2>주요 구현</h2>
-      <ul class="role-list">
-        <li>React 18과 TypeScript 기반 SPA를 설계하고 전체 개발을 진행했습니다.</li>
-        <li>Context API(<code>AuthContext</code>)로 전역 로그인 상태를 관리했습니다.</li>
-        <li>sessionStorage와 연동해 새로고침 후에도 세션이 유지되도록 했습니다.</li>
-        <li>작성자 여부를 판별해 권한을 분기했습니다.</li>
-        <li>Vercel과 AWS Amplify로 배포했습니다.</li>
+      <h2>모집글 · 권한</h2>
+      <div class="star">
+        <div class="star__i"><span class="k">상황</span><p>모집글 상세 화면이 로그인 여부만 확인하고 있어, <b>작성자가 아닌 사용자에게도</b> 수정·삭제 버튼이 그대로 노출됐습니다.</p></div>
+        <div class="star__i"><span class="k">해결</span><p>현재 로그인 사용자와 글 작성자를 비교하는 판별을 두고, 그 결과로 <b>수정·삭제와 지원·취소 동작을 분기</b>하도록 정리했습니다.</p></div>
+        <div class="star__i res"><span class="k">결과</span><p>작성자에게는 관리 동작이, 다른 사용자에게는 지원 동작만 보입니다. 권한 판별을 한곳에 모아 화면이 늘어나도 기준이 흔들리지 않게 했습니다.</p></div>
+      </div>
+      <h3 class="sub">구현 상세</h3>
+      <div class="flow">
+        <span class="step">모집글 CRUD</span><span class="ar">›</span>
+        <span class="step"><b>작성자 판별</b></span><span class="ar">›</span>
+        <span class="step">관리 · 지원 동작 분기</span><span class="ar">›</span>
+        <span class="step">지원 · 취소</span>
+      </div>
+      <ul class="role-list" style="margin-top:20px">
+        <li>모집글 CRUD와 지원·취소 흐름을 구현했습니다.</li>
+        <li>화면이 늘어날수록 타입이 어긋날 위험이 커져, 모집글·사용자 응답 형태를 <b>TypeScript 타입으로 먼저 정의</b>하고 컴포넌트를 붙였습니다.</li>
+        <li>Vercel과 AWS Amplify로 직접 배포해 프론트엔드 배포 환경을 구성했습니다.</li>
       </ul>
     </section>
 

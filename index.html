@@ -17,8 +17,10 @@
   <div class="top__in">
     <a class="top__mark" href="#top">유지환<i></i></a>
     <nav class="top__links">
-      <a href="#work">Work</a>
-      <a href="#about">About</a>
+      <a href="#work">프로젝트</a>
+      <a href="#about">경력 활동</a>
+      <a href="#awards">수상 및 자격증</a>
+      <a href="#skills">기술 스택</a>
       <a class="pill" href="https://github.com/Jihwan0210" target="_blank" rel="noopener">GitHub</a>
     </nav>
   </div>
@@ -36,12 +38,12 @@
         <div class="hero__quick rv">
           <a class="qlink primary" href="#work">프로젝트 보기</a>
           <a class="qlink" href="https://github.com/Jihwan0210" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.9a3.4 3.4 0 0 0-.9-2.6c3-.3 6.2-1.5 6.2-6.7A5.2 5.2 0 0 0 20 4.8a4.9 4.9 0 0 0-.1-3.6s-1.1-.3-3.6 1.4a12.4 12.4 0 0 0-6.6 0C7.2.9 6.1 1.2 6.1 1.2A4.9 4.9 0 0 0 6 4.8a5.2 5.2 0 0 0-1.4 3.7c0 5.1 3.1 6.4 6.1 6.7a3.4 3.4 0 0 0-.9 2.6V22"/></svg>GitHub</a>
-          <a class="qlink" href="mailto:202212020@gsuite.induk.ac.kr"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>Email</a>
+          <a class="qlink" href="mailto:mijisoo97@naver.com"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>Email</a>
         </div>
         <div class="hero__facts rv">
           <span>신입 · <b>구직 중</b></span>
           <span>인덕대 <b>컴퓨터소프트웨어</b></span>
-          <span>Focus <b>Java · Spring</b></span>
+          <span>주력 <b>Java · Spring Boot · Spring AI</b></span>
         </div>
       </div>
       <div class="hero__photo rv">
@@ -63,11 +65,17 @@
       <a class="wcard rv" href="projects/cogi.html">
         <div class="wcard__no">01</div>
         <div class="wcard__main">
-          <div class="wcard__top"><h3>COGI</h3><span class="wcard__kind">AI 코드 리뷰 SaaS · 팀 · 진행 중</span></div>
+          <div class="wcard__top"><h3>COGI</h3><span class="wcard__kind">AI 코드 리뷰 SaaS · 4인 팀 · 진행 중</span></div>
+          <p class="wcard__sum">GitHub Pull Request를 가져와 AI가 코드를 리뷰하고, 팀과 개인의 약점 패턴을 통계로 추적하는 구독형 SaaS입니다.</p>
           <div class="wcard__rf">
             <div class="rf"><span class="lb">역할</span><span class="v">비로그인 체험 · 구독 결제 · 관리자 백엔드</span></div>
             <div class="rf"><span class="lb">흐름</span><span class="v flow">React → JWT · Guest → 결제 · 관리자 도메인 → MariaDB · Redis · Toss</span></div>
           </div>
+          <ul class="wcard__pts">
+            <li><b>결제·구독 도메인 전체를 단독 설계·구현</b>했습니다. Toss 빌링키 정기결제, 플랜 변경·해지 예약, 크레딧 차감까지 담당했습니다.</li>
+            <li>자정 배치를 <b>구독 건별 트랜잭션</b>으로 나눠, 한 건의 결제 실패가 나머지 구독자 청구를 멈추지 않도록 격리했습니다.</li>
+            <li>Redis TTL 카운터로 비로그인 체험을 열면서 <b>AI 호출 상한을 24시간 3회로 고정</b>하고, 관리자 통계의 N+1 쿼리를 IN 조회 1회로 줄였습니다.</li>
+          </ul>
           <div class="wcard__tags"><span class="tag tag--a">Spring Boot</span><span class="tag">Spring Security</span><span class="tag">Redis</span><span class="tag">Toss Payments</span></div>
         </div>
         <span class="wcard__go"><svg viewBox="0 0 24 24"><path d="M7 17 17 7m0 0H8m9 0v9"/></svg></span>
@@ -76,11 +84,17 @@
       <a class="wcard rv" href="projects/ilgo.html">
         <div class="wcard__no">02</div>
         <div class="wcard__main">
-          <div class="wcard__top"><h3>읽고 (Ilgo)</h3><span class="wcard__kind">AI 배리어프리 서비스 · 팀 · 해커톤 3등</span></div>
+          <div class="wcard__top"><h3>읽고 (Ilgo)</h3><span class="wcard__kind">AI 배리어프리 서비스 · 6인 팀 · 해커톤 3등</span></div>
+          <p class="wcard__sum">고지서·안내문처럼 어려운 생활 문서를 사진으로 찍으면 AI가 쉬운 한국어나 영어로 풀어주는 배리어프리 서비스입니다. 6인 팀에서 백엔드 API 서버 전체를 맡았습니다.</p>
           <div class="wcard__rf">
             <div class="rf"><span class="lb">역할</span><span class="v">백엔드 API · 인증과 AI 연동, 문서화</span></div>
             <div class="rf"><span class="lb">흐름</span><span class="v flow">문서 이미지 → JWT 인증 → AI 게이트웨이 → 구조화 응답</span></div>
           </div>
+          <ul class="wcard__pts">
+            <li>형태가 매번 달라지는 AI 응답을 <b>설명·위험도·핵심 카드·할 일</b>의 고정 스키마로 파싱해, 프론트가 화면 규격 하나로 붙일 수 있게 했습니다.</li>
+            <li>JWT Stateless 인증과 전역 예외 처리·레이트 리밋 <b>공통 계층</b>을 설계하고, 인증·분석 테스트 코드를 작성했습니다.</li>
+            <li>Swagger로 API 명세를 공유해 3일짜리 해커톤에서 프론트와 병렬 개발했고, <b>AI Re-Local 해커톤 3등(선도상)</b>을 받았습니다.</li>
+          </ul>
           <div class="wcard__tags"><span class="tag tag--a">Spring Boot 3.5</span><span class="tag">JWT</span><span class="tag">PostgreSQL</span><span class="tag">Swagger</span></div>
         </div>
         <span class="wcard__go"><svg viewBox="0 0 24 24"><path d="M7 17 17 7m0 0H8m9 0v9"/></svg></span>
@@ -89,12 +103,18 @@
       <a class="wcard rv" href="projects/potatochip.html">
         <div class="wcard__no">03</div>
         <div class="wcard__main">
-          <div class="wcard__top"><h3>PotatoChip</h3><span class="wcard__kind">못난이 농산물 마켓 · 팀장</span></div>
+          <div class="wcard__top"><h3>PotatoChip</h3><span class="wcard__kind">못난이 농산물 마켓 · 5인 팀 팀장</span></div>
+          <p class="wcard__sum">상품성이 떨어진다는 이유로 버려지는 못난이 농산물을 판매자와 구매자가 직접 거래하는 마켓플레이스입니다. 5인 팀의 팀장이자 상품 도메인 오너였습니다.</p>
           <div class="wcard__rf">
             <div class="rf"><span class="lb">역할</span><span class="v">팀장 · 상품 도메인 오너</span></div>
-            <div class="rf"><span class="lb">흐름</span><span class="v flow">상품 등록 → 권한 · 필터 → 가격 스냅샷 장바구니 → 주문 · 판매 랭킹</span></div>
+            <div class="rf"><span class="lb">흐름</span><span class="v flow">상품 등록(AI 초안) → 권한 · 필터 → 가격 스냅샷 장바구니</span></div>
           </div>
-          <div class="wcard__tags"><span class="tag tag--a">Java 21</span><span class="tag">Spring Boot</span><span class="tag">JPA</span><span class="tag">Thymeleaf</span></div>
+          <ul class="wcard__pts">
+            <li>상품 사진을 올리면 <b>AI가 이미지를 분석해 제목과 상세 설명 초안</b>을 채워주도록 만들어, 판매자의 등록 부담을 줄였습니다.</li>
+            <li>담은 뒤 판매자가 가격을 바꿔도 결제 금액이 흔들리지 않도록 <b>가격 스냅샷 장바구니</b> 구조를 설계했습니다.</li>
+            <li>PR을 뒤늦게 한꺼번에 올려 충돌이 쌓이던 문제를, <b>작은 단위 PR과 develop 최신화 규칙</b>으로 정리했습니다.</li>
+          </ul>
+          <div class="wcard__tags"><span class="tag tag--a">Java</span><span class="tag">Spring Boot</span><span class="tag">Spring AI</span><span class="tag">JPA</span><span class="tag">Thymeleaf</span></div>
         </div>
         <span class="wcard__go"><svg viewBox="0 0 24 24"><path d="M7 17 17 7m0 0H8m9 0v9"/></svg></span>
       </a>
@@ -102,10 +122,16 @@
       <a class="wcard rv" href="projects/campuslink.html">
         <div class="wcard__no">04</div>
         <div class="wcard__main">
-          <div class="wcard__top"><h3>CampusLink</h3><span class="wcard__kind">동아리 · 공모전 모집 SPA · 개인</span></div>
+          <div class="wcard__top"><h3>CampusLink</h3><span class="wcard__kind">동아리 · 공모전 모집 SPA · 개인 프로젝트</span></div>
+          <p class="wcard__sum">대학 안에서 동아리·스터디·공모전 팀원을 모집하고 지원하는 SPA입니다. 기획부터 배포까지 혼자 진행했습니다.</p>
           <div class="wcard__rf">
             <div class="rf"><span class="lb">흐름</span><span class="v flow">로그인(Context) → 모집글 CRUD → 지원 · 권한 분기 → 세션 유지</span></div>
           </div>
+          <ul class="wcard__pts">
+            <li>새로고침하면 로그인이 풀리던 문제를 <b>Context API + sessionStorage 복원</b>으로 해결했습니다.</li>
+            <li>작성자 여부를 판별해 수정·삭제 권한을 분기하고, 지원·취소 흐름을 구현했습니다.</li>
+            <li>Vercel과 AWS Amplify로 직접 배포해 프론트엔드 배포 환경을 구성했습니다.</li>
+          </ul>
           <div class="wcard__tags"><span class="tag tag--a">React 18</span><span class="tag">TypeScript</span><span class="tag">Vite</span></div>
         </div>
         <span class="wcard__go"><svg viewBox="0 0 24 24"><path d="M7 17 17 7m0 0H8m9 0v9"/></svg></span>
@@ -114,10 +140,16 @@
       <a class="wcard rv" href="projects/hotel.html">
         <div class="wcard__no">05</div>
         <div class="wcard__main">
-          <div class="wcard__top"><h3>호텔 예약</h3><span class="wcard__kind">Laravel 예약 서비스 · 개인 · 금상</span></div>
+          <div class="wcard__top"><h3>호텔 예약</h3><span class="wcard__kind">Laravel 예약 서비스 · 개인 프로젝트 · 금상</span></div>
+          <p class="wcard__sum">숙소 등록부터 예약·후기·공지까지, 이용자와 운영자가 함께 쓰는 예약 서비스를 혼자 설계하고 개발했습니다.</p>
           <div class="wcard__rf">
             <div class="rf"><span class="lb">흐름</span><span class="v flow">숙소 등록 → 예약 · 후기 → 관리자 분리 → 공지</span></div>
           </div>
+          <ul class="wcard__pts">
+            <li>화면만 나눠져 있고 권한 검증이 없어 <b>URL만 알면 관리자 페이지에 들어가지던 문제</b>를, Laravel Middleware 접근 제어 계층으로 해결했습니다.</li>
+            <li>인증 여부와 역할(Role)을 한 곳에서 검증해 관리자 라우트 그룹 전체에 일괄 적용했습니다.</li>
+            <li>Eloquent ORM으로 예약·후기·공지 데이터를 처리했고, 교내 Laravel 경진대회 <b>금상</b>을 받았습니다.</li>
+          </ul>
           <div class="wcard__tags"><span class="tag tag--a">Laravel</span><span class="tag">Eloquent ORM</span><span class="tag">MariaDB</span></div>
         </div>
         <span class="wcard__go"><svg viewBox="0 0 24 24"><path d="M7 17 17 7m0 0H8m9 0v9"/></svg></span>
@@ -126,10 +158,16 @@
       <a class="wcard rv" href="projects/goods.html">
         <div class="wcard__no">06</div>
         <div class="wcard__main">
-          <div class="wcard__top"><h3>침착맨 굿즈샵</h3><span class="wcard__kind">PHP 쇼핑몰 · 개인 · 은상</span></div>
+          <div class="wcard__top"><h3>침착맨 굿즈샵</h3><span class="wcard__kind">PHP 쇼핑몰 · 개인 프로젝트 · 은상</span></div>
+          <p class="wcard__sum">처음 만든 웹 서비스입니다. 회원가입부터 장바구니, 주문, 관리자까지 쇼핑몰 한 바퀴를 프레임워크 없이 PHP로 구현했습니다.</p>
           <div class="wcard__rf">
             <div class="rf"><span class="lb">흐름</span><span class="v flow">상품 → 장바구니(쿠키) → 옵션 · 배송비 주문 → 관리자</span></div>
           </div>
+          <ul class="wcard__pts">
+            <li>로그인해야만 장바구니를 쓸 수 있던 구조를 <b>쿠키 기반 비회원 장바구니</b>로 바꿔, 가입 없이도 담고 주문할 수 있게 했습니다.</li>
+            <li>옵션·수량·할인율·배송비를 반영한 주문 금액 계산 프로세스를 구현했습니다.</li>
+            <li>관리자에서 상품·이미지·옵션을 관리하도록 만들었고, 교내 PHP 쇼핑몰 경진대회 <b>은상</b>을 받았습니다.</li>
+          </ul>
           <div class="wcard__tags"><span class="tag tag--a">PHP</span><span class="tag">Bootstrap</span><span class="tag">MariaDB</span></div>
         </div>
         <span class="wcard__go"><svg viewBox="0 0 24 24"><path d="M7 17 17 7m0 0H8m9 0v9"/></svg></span>
@@ -148,6 +186,10 @@
 
   <!-- 소개 / 경력 -->
   <section class="sec wrap" id="about">
+    <div class="sec__head rv">
+      <h2>소개 · 경력 활동</h2>
+      <p>백엔드를 택한 이유와, 그동안 어디서 무엇을 했는지 정리했습니다.</p>
+    </div>
     <div class="grid2">
       <div class="panel about rv">
         <h3>소개</h3>
@@ -156,19 +198,27 @@
         <p>SQLD와 정보처리산업기사를 준비하며 데이터베이스 기초를 다졌고, AWS와 Docker로 배포도 직접 해봤습니다.</p>
       </div>
       <div class="panel rv">
-        <h3>경력 · 활동</h3>
+        <div class="panel__hd">
+          <h3>경력 · 활동</h3>
+          <span class="legend"><i></i>활동 중</span>
+        </div>
         <div class="tl">
-          <div class="tl__i hl"><span class="when">2025.11 ~ 2026.08</span><h4>대우능력개발원 · 개발자 양성과정</h4><p>Java, Spring, AWS, 보안, 리눅스 기반 과정 수료. PotatoChip 팀장.</p></div>
-          <div class="tl__i hl"><span class="when">2026.05 ~ 2026.11</span><h4>INDEV 창업동아리</h4><p>AI 소상공인 플랫폼. Spring Boot REST API, AWS 인프라, Docker 배포.</p></div>
-          <div class="tl__i"><span class="when">2025.05 ~ 2026.09</span><h4>DevUp 스터디</h4><p>코딩 테스트와 CS 이론, 정보처리산업기사 준비.</p></div>
-          <div class="tl__i"><span class="when">2023.05 ~ 2024.11</span><h4>육군 병장 만기전역</h4><p>병역을 마쳤습니다.</p></div>
+          <div class="tl__i hl"><span class="when">2025.11 ~ 2026.08</span><h4>대우능력개발원 · 웹 애플리케이션 개발자 양성과정</h4><p>웹 표준, Java, RDBMS, Spring, Spring Boot, AWS, Spring AI, 보안 코딩, 리눅스 기반 과정 수료. Spring Boot REST API 설계·구현, MariaDB 설계·SQL 활용, Git 형상관리와 팀 개발, AWS·Docker 배포, 개인·팀 프로젝트 수행.</p></div>
+          <div class="tl__i hl"><span class="when">2026.05 ~ 2026.11</span><h4>INDEV 창업동아리</h4><p>AI 소상공인 채용·스케줄 관리 플랫폼 개발. AWS 클라우드 인프라 구축·운영, Spring Boot REST API와 DB 연동, Docker 배포 환경 구성.</p></div>
+          <div class="tl__i"><span class="when">2025.05 ~ 2026.09</span><h4>DevUp 스터디</h4><p>코딩 테스트와 CS 기초 이론으로 정보처리산업기사를 준비하고 문제 해결력을 강화한 학습형 스터디.</p></div>
+          <div class="tl__i"><span class="when">2026.01 ~ 2026.02</span><h4>코드어택 동아리</h4><p>정보처리산업기사 공부로 CS 지식과 코딩 기초, 알고리즘·운영체제 개념과 코드 흐름 이해력을 다졌습니다.</p></div>
+          <div class="tl__i"><span class="when">2022.04 ~ 2023.01</span><h4>인덕대학교 IFP 동아리</h4><p>CS 기초를 학습하고 노션으로 자료를 정리·공유. 게더타운 비대면 스터디 기획·자료 준비·토론 참여.</p></div>
         </div>
       </div>
     </div>
   </section>
 
   <!-- 수상 / 자격 -->
-  <section class="sec wrap">
+  <section class="sec wrap" id="awards">
+    <div class="sec__head rv">
+      <h2>수상 · 자격증</h2>
+      <p>교내 경진대회와 해커톤 수상, 전공멘토 위촉, 취득 자격증입니다.</p>
+    </div>
     <div class="grid2">
       <div class="panel rv">
         <h3>수상 · 위촉</h3>
@@ -181,36 +231,76 @@
       </div>
       <div class="panel rv">
         <h3>자격증</h3>
-        <div class="rowline"><span class="y">2026.06</span><span class="t">정보처리산업기사<span class="o">한국산업인력공단</span></span></div>
-        <div class="rowline"><span class="y">2026.04</span><span class="t">SQL개발자 (SQLD)<span class="o">한국데이터베이스진흥센터</span></span></div>
+        <div class="rowline"><span class="y">2026.06</span><span class="t">정보처리산업기사<span class="o">한국산업인력공단</span></span><span class="rank">최종합격</span></div>
+        <div class="rowline"><span class="y">2026.04</span><span class="t">SQL개발자 (SQLD)<span class="o">한국데이터베이스진흥센터</span></span><span class="rank">최종합격</span></div>
         <div class="rowline"><span class="y">2015.10</span><span class="t">ITQ 한글엑셀<span class="o">한국생산성본부</span></span><span class="rank">A등급</span></div>
         <div class="rowline"><span class="y">2014.12</span><span class="t">ITQ 아래한글<span class="o">한국생산성본부</span></span><span class="rank">A등급</span></div>
         <div class="rowline"><span class="y">2013.10</span><span class="t">GTQ 그래픽기술자격<span class="o">한국생산성본부</span></span><span class="rank">2급</span></div>
+        <div class="rowline"><span class="y">2021.12</span><span class="t">1종 보통 운전면허<span class="o">경찰청 운전면허시험관리단</span></span><span class="rank">최종합격</span></div>
       </div>
     </div>
   </section>
 
   <!-- 기술 -->
-  <section class="sec wrap">
-    <div class="sec__head rv"><h2>기술 스택</h2></div>
-    <div class="skills-grid">
-      <div class="skill-cat rv">
-        <h4>Backend</h4>
-        <div class="chips">
-          <span class="chip">Java 21</span><span class="chip">Spring Boot</span><span class="chip">Spring Security</span><span class="chip">Spring Data JPA</span><span class="chip">JWT</span><span class="chip">OAuth2</span><span class="chip">REST API</span><span class="chip">Redis</span>
-        </div>
+  <section class="sec wrap" id="skills">
+    <div class="sec__head rv">
+      <h2>기술 스택</h2>
+      <p>어디까지 써봤는지와, 왜 그 기술을 골랐는지를 함께 적었습니다.</p>
+    </div>
+
+    <p class="sk-note rv"><span class="core">주력</span> 프로젝트에서 직접 설계·구현한 기술</p>
+
+    <div class="sk-group rv">
+      <div class="g">Backend <em>서버 · 도메인 설계</em></div>
+      <div class="sk-rows">
+        <div class="sk"><div class="n">Java <span class="core">주력</span></div><div class="d">OOP · <code>enum</code> 상태 모델링</div></div>
+        <div class="sk"><div class="n">Spring Boot <span class="core">주력</span></div><div class="d">Controller · Service · Repository</div></div>
+        <div class="sk"><div class="n">Spring Framework</div><div class="d">DI · IoC · AOP · <code>@Async</code></div></div>
+        <div class="sk"><div class="n">Spring Security <span class="core">주력</span></div><div class="d">JWT 인증 · <code>ROLE</code> 권한 제어</div></div>
+        <div class="sk"><div class="n">Spring Data JPA <span class="core">주력</span></div><div class="d">연관관계 매핑 · N+1 제거</div></div>
+        <div class="sk"><div class="n">REST API <span class="core">주력</span></div><div class="d">API 설계 · Swagger 문서화</div></div>
+        <div class="sk"><div class="n">MyBatis</div><div class="d">XML SQL Mapper · 객체 매핑</div></div>
+        <div class="sk"><div class="n">PHP · Laravel</div><div class="d">MVC · Eloquent ORM · 권한 제어</div></div>
       </div>
-      <div class="skill-cat rv">
-        <h4>Database</h4>
-        <div class="chips">
-          <span class="chip">MariaDB</span><span class="chip">MySQL</span><span class="chip">Oracle</span><span class="chip">PostgreSQL</span><span class="chip">SQL</span><span class="chip">MyBatis</span>
-        </div>
+    </div>
+
+    <div class="sk-group rv">
+      <div class="g">AI · 데이터 <em>LLM 연동</em></div>
+      <div class="sk-rows">
+        <div class="sk"><div class="n">Spring AI <span class="core">주력</span></div><div class="d">ChatModel · Vision 이미지 분석</div></div>
+        <div class="sk"><div class="n">LLM <span class="core">주력</span></div><div class="d">Claude · OpenAI · Gemini 연동</div></div>
+        <div class="sk"><div class="n">RAG</div><div class="d">문서 임베딩 · 검색 근거 보강</div></div>
+        <div class="sk"><div class="n">MCP</div><div class="d">표준 프로토콜로 외부 도구 연결</div></div>
+        <div class="sk"><div class="n">Python · R</div><div class="d">데이터 처리 · 군집 · 회귀 분석</div></div>
       </div>
-      <div class="skill-cat rv">
-        <h4>Frontend · DevOps</h4>
-        <div class="chips">
-          <span class="chip">JavaScript</span><span class="chip">TypeScript</span><span class="chip">React</span><span class="chip">Thymeleaf</span><span class="chip">Git</span><span class="chip">Docker</span><span class="chip">AWS</span>
-        </div>
+    </div>
+
+    <div class="sk-group rv">
+      <div class="g">Database <em>설계 · 조회</em></div>
+      <div class="sk-rows">
+        <div class="sk"><div class="n">MariaDB · MySQL <span class="core">주력</span></div><div class="d">테이블 설계 · SQL · JPA 연동</div></div>
+        <div class="sk"><div class="n">SQL</div><div class="d">조인 · 집계 · 서브쿼리</div></div>
+        <div class="sk"><div class="n">Redis <span class="core">주력</span></div><div class="d">TTL 카운터 · 캐시 저장소</div></div>
+        <div class="sk"><div class="n">PostgreSQL</div><div class="d">Supabase 연동 (읽고)</div></div>
+      </div>
+    </div>
+
+    <div class="sk-group rv">
+      <div class="g">Frontend <em>화면 연동</em></div>
+      <div class="sk-rows">
+        <div class="sk"><div class="n">React · TypeScript</div><div class="d">Context API · 타입 기반 연동</div></div>
+        <div class="sk"><div class="n">Thymeleaf</div><div class="d">서버사이드 렌더링</div></div>
+        <div class="sk"><div class="n">JavaScript · AJAX</div><div class="d">비동기 부분 갱신</div></div>
+        <div class="sk"><div class="n">Vite · Bootstrap</div><div class="d">SPA 빌드 · 반응형 레이아웃</div></div>
+      </div>
+    </div>
+
+    <div class="sk-group rv">
+      <div class="g">Infra · 협업 <em>배포 · 형상관리</em></div>
+      <div class="sk-rows">
+        <div class="sk"><div class="n">AWS <span class="core">주력</span></div><div class="d">EC2 · S3 · Amplify 배포</div></div>
+        <div class="sk"><div class="n">Docker</div><div class="d">개발 · 배포 환경 컨테이너화</div></div>
+        <div class="sk"><div class="n">Git · GitHub <span class="core">주력</span></div><div class="d">브랜치 전략 · PR 코드 리뷰</div></div>
       </div>
     </div>
   </section>
@@ -223,7 +313,7 @@
       <div class="foot__links rv">
         <a href="https://github.com/Jihwan0210" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.9a3.4 3.4 0 0 0-.9-2.6c3-.3 6.2-1.5 6.2-6.7A5.2 5.2 0 0 0 20 4.8a4.9 4.9 0 0 0-.1-3.6s-1.1-.3-3.6 1.4a12.4 12.4 0 0 0-6.6 0C7.2.9 6.1 1.2 6.1 1.2A4.9 4.9 0 0 0 6 4.8a5.2 5.2 0 0 0-1.4 3.7c0 5.1 3.1 6.4 6.1 6.7a3.4 3.4 0 0 0-.9 2.6V22"/></svg>github.com/Jihwan0210</a>
         <a href="#" aria-label="블로그 (velog 또는 tistory 주소를 넣어주세요)"><svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>Blog</a>
-        <a href="mailto:202212020@gsuite.induk.ac.kr"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>202212020@gsuite.induk.ac.kr</a>
+        <a href="mailto:mijisoo97@naver.com"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>mijisoo97@naver.com</a>
       </div>
       <p class="copy">© 2026 유지환</p>
     </div>

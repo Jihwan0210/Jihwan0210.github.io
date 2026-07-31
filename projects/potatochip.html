@@ -25,12 +25,12 @@
   <section class="dp-hero">
     <p class="dp-kind rv">못난이 농산물 마켓플레이스 · 팀장</p>
     <h1 class="rv">PotatoChip</h1>
-    <p class="dp-lead rv">못난이 농산물을 거래하는 마켓플레이스입니다. 팀장이자 상품 도메인 담당으로 프로젝트 전반을 주도했습니다.</p>
+    <p class="dp-lead rv">못난이 농산물을 거래하는 마켓플레이스입니다. 팀장이자 상품 도메인 담당으로, 상품 등록부터 장바구니까지를 맡았습니다.</p>
     <div class="dp-meta rv">
       <div class="m"><div class="k">역할</div><div class="v">팀장 · 상품 도메인</div></div>
-      <div class="m"><div class="k">구성</div><div class="v">팀</div></div>
+      <div class="m"><div class="k">구성</div><div class="v">5인 팀 · 팀장</div></div>
       <div class="m"><div class="k">기간</div><div class="v">2026.05 ~ 06</div></div>
-      <div class="m"><div class="k">스택</div><div class="v">Java 21 · Spring Boot</div></div>
+      <div class="m"><div class="k">기술 스택</div><div class="v">Java · Spring Boot</div></div>
     </div>
   </section>
 
@@ -38,12 +38,17 @@
 
   <div class="dp-secs">
     <section class="dp-sec rv">
+      <h2>프로젝트 소개</h2>
+      <p class="role-lead">상품성이 떨어진다는 이유로 버려지는 못난이 농산물을, 판매자와 구매자가 직접 거래하도록 잇는 마켓플레이스입니다. 대우능력개발원 교육 과정의 팀 프로젝트로 개발했습니다.</p>
+    </section>
+    <section class="dp-sec rv">
       <h2>내 역할</h2>
       <p class="role-lead"><b>팀장이자 상품 도메인 오너</b>로, 팀을 이끌면서 상품과 장바구니 도메인을 직접 설계하고 구현했습니다.</p>
       <ul class="role-list">
         <li><b>상품 도메인</b> 상품 CRUD와 판매자 전용 권한, 카테고리·키워드 필터를 설계하고 구현했습니다.</li>
-        <li><b>장바구니</b> 담은 시점의 가격을 유지하는 가격 스냅샷 <code>CartItem</code> 구조를 설계했습니다.</li>
-        <li><b>부가 기능</b> Kakao Map 픽업 위치, 즉시 구매 흐름, 기간별 판매 랭킹을 구현했습니다.</li>
+        <li><b>AI 상품 등록</b> 사진을 올리면 AI가 이미지를 분석해 상품 제목과 설명 초안을 작성해주는 기능을 붙였습니다.</li>
+        <li><b>장바구니</b> 담은 시점의 가격을 유지하는 가격 스냅샷 <code>CartItem</code> 구조를 설계했습니다. 제 구현 범위는 여기까지이고, 주문·결제는 다른 팀원이 이어받았습니다.</li>
+        <li><b>부가 기능</b> Kakao Map 픽업 위치와 기간별 판매 랭킹 집계를 구현했습니다.</li>
         <li><b>팀 리딩</b> develop·feature 브랜치 전략과 PR 코드 리뷰를 운영하고, 일정과 문서를 총괄했습니다.</li>
       </ul>
     </section>
@@ -54,39 +59,78 @@
         <div class="arch__col"><div class="lb">Client</div><div class="node">Thymeleaf 화면<small>서버사이드 렌더링</small></div></div>
         <div class="arch__col"><div class="lb">Security</div><div class="node">JWT 필터<small>인증 · 권한</small></div></div>
         <div class="arch__col"><div class="lb">Domain</div><div class="node mine">상품<small>CRUD · 권한 · 필터</small></div><div class="node mine">장바구니<small>가격 스냅샷</small></div><div class="node">주문 · 관리자</div><div class="node">게시판 · 알림</div></div>
-        <div class="arch__col"><div class="lb">Infra</div><div class="node">MariaDB · JPA</div><div class="node mine">Kakao Map API</div><div class="node">AWS</div></div>
+        <div class="arch__col"><div class="lb">Infra</div><div class="node">MariaDB · JPA</div><div class="node mine">Spring AI<small>이미지 분석</small></div><div class="node mine">Kakao Map API</div><div class="node">AWS</div></div>
       </div>
-      <p class="mono" style="margin-top:12px;color:var(--ink3)">강조된 블록이 제가 맡은 상품·장바구니 도메인입니다.</p>
+      <p class="mono" style="margin-top:12px;color:var(--ink3)">강조된 블록이 제가 맡은 상품·장바구니 도메인입니다. 주문·결제부터는 다른 팀원이 이어받았습니다.</p>
     </section>
 
     <section class="dp-sec rv">
-      <h2>구현 흐름</h2>
+      <h2>상품 도메인</h2>
+      <p class="role-lead">판매자가 상품을 올리고, 구매자가 원하는 조건으로 찾아 들어오는 구간입니다.</p>
       <div class="flow">
-        <span class="step">상품 등록</span><span class="ar">›</span>
-        <span class="step">판매자 권한 · 카테고리 필터</span><span class="ar">›</span>
-        <span class="step"><b>가격 스냅샷</b> 장바구니</span><span class="ar">›</span>
-        <span class="step">즉시구매 · 주문</span><span class="ar">›</span>
-        <span class="step">기간별 판매 랭킹</span>
+        <span class="step">사진 업로드</span><span class="ar">›</span>
+        <span class="step"><b>AI 이미지 분석</b> 제목 · 설명 초안</span><span class="ar">›</span>
+        <span class="step">상품 등록 · 판매자 권한 검증</span><span class="ar">›</span>
+        <span class="step">카테고리 · 키워드 필터</span><span class="ar">›</span>
+        <span class="step">픽업 위치 지도</span>
       </div>
+      <ul class="role-list" style="margin-top:20px">
+        <li>판매자 대부분이 농가라 상품 설명을 쓰는 단계에서 등록을 포기하는 경우가 많았습니다. 상품 사진을 올리면 <b>AI가 이미지를 분석해 제목과 상세 설명 초안</b>을 채워주고, 판매자는 확인·수정만 하면 되도록 만들었습니다.</li>
+        <li>AI 응답은 <b>초안일 뿐 최종값이 아니므로</b> 그대로 저장하지 않고 등록 폼에 채워 넣어, 판매자가 손을 댄 값이 항상 우선하도록 했습니다.</li>
+        <li>상품 CRUD에 <b>판매자 본인만 수정·삭제</b>할 수 있는 권한 제어를 붙였습니다.</li>
+        <li>못난이 농산물은 종류와 산지로 찾는 경우가 많아, 카테고리와 키워드를 함께 거는 필터를 만들었습니다.</li>
+        <li>직거래 픽업이 많은 서비스라 <b>Kakao Map API</b>를 연동해 상품별 픽업 위치를 지도로 보여줍니다.</li>
+        <li>화면 수가 적고 SEO가 필요해 SPA 대신 <b>Thymeleaf 서버사이드 렌더링</b>을 골랐습니다.</li>
+      </ul>
     </section>
 
     <section class="dp-sec rv">
-      <h2>주요 구현</h2>
-      <ul class="role-list">
-        <li>상품 CRUD와 판매자 전용 권한 제어를 구현했습니다.</li>
-        <li>카테고리·키워드 필터를 Thymeleaf 서버사이드 렌더링으로 구현했습니다.</li>
-        <li>Kakao Map API를 연동해 상품별 픽업 위치를 보여줍니다.</li>
-        <li>가격 스냅샷 기반 <code>CartItem</code> 구조로 담은 시점의 가격을 유지하도록 설계했습니다.</li>
-        <li>즉시 구매 흐름과 장바구니 요약 금액 계산을 구현했습니다.</li>
-        <li>기간별 판매 랭킹을 집계했습니다.</li>
-        <li><code>develop</code>·<code>feature</code> 브랜치 전략을 세우고 PR 코드 리뷰를 운영했습니다.</li>
+      <h2>장바구니</h2>
+      <div class="star">
+        <div class="star__i"><span class="k">상황</span><p>장바구니가 상품 테이블의 현재 가격을 그대로 참조하고 있었습니다. 판매자가 가격을 수정하면 <b>사용자가 담을 때 본 금액과 주문 금액이 달라지는</b> 구조였습니다.</p></div>
+        <div class="star__i"><span class="k">해결</span><p><code>CartItem</code>에 담은 시점의 가격을 <b>스냅샷으로 저장</b>하고, 장바구니 요약과 주문 금액을 모두 이 스냅샷 기준으로 계산하도록 바꿨습니다.</p></div>
+        <div class="star__i res"><span class="k">결과</span><p>판매자가 가격을 바꿔도 이미 담긴 항목의 금액은 유지됩니다. 장바구니에 보이는 금액과 <b>뒤이어 넘어가는 주문 금액이 어긋나지 않습니다</b>.</p></div>
+      </div>
+      <h3 class="sub">구현 상세</h3>
+      <div class="flow">
+        <span class="step">장바구니 담기</span><span class="ar">›</span>
+        <span class="step"><b>가격 스냅샷</b> 저장</span><span class="ar">›</span>
+        <span class="step">요약 금액 계산</span><span class="ar">›</span>
+        <span class="step">주문 도메인 인계</span>
+      </div>
+      <ul class="role-list" style="margin-top:20px">
+        <li>상품 가격을 참조만 하면 변경에 그대로 끌려가므로, <code>CartItem</code>이 <b>담은 시점의 값을 직접 들고 있게</b> 설계했습니다.</li>
+        <li>제가 맡은 범위는 <b>장바구니 요약 금액 계산까지</b>이고, 그 뒤 주문·결제는 스냅샷 값을 그대로 받아 쓰도록 규격을 맞춰 넘겼습니다.</li>
       </ul>
+    </section>
+
+    <section class="dp-sec rv">
+      <h2>팀 리딩 · 협업</h2>
+      <div class="star">
+        <div class="star__i"><span class="k">상황</span><p>브랜치는 나눴지만 팀원들이 기능이 다 끝날 때까지 PR을 미뤘습니다. 각자 오래 들고 있던 브랜치가 한꺼번에 올라오면서 <b>머지할 때마다 충돌이 대량으로 났고</b>, 엔티티와 공통 레이아웃처럼 여러 명이 같이 건드리는 파일에서 특히 심했습니다. 충돌을 급하게 풀다 <b>다른 팀원의 코드가 덮여 사라지는 일</b>까지 있었습니다.</p></div>
+        <div class="star__i"><span class="k">해결</span><p>팀장으로서 PR 단위를 <b>기능 하나 크기로 쪼개고</b>, <code>feature</code> 브랜치는 작업 시작 전과 PR 올리기 전에 <b><code>develop</code>을 먼저 최신화</b>하도록 규칙을 세웠습니다. 엔티티·공통 화면처럼 충돌이 잦은 파일은 담당자를 정해 변경을 한 사람에게 모으고, 올라온 PR은 그날 안에 리뷰·머지해 브랜치가 오래 묵지 않게 했습니다.</p></div>
+        <div class="star__i res"><span class="k">결과</span><p>충돌이 머지 시점이 아니라 <b>각자 작업 중에 미리 드러나</b> 해결 비용이 줄었고, 머지 후 기능이 사라지는 사고도 없어졌습니다. 이후 프로젝트에도 같은 협업 방식을 그대로 가져갔습니다.</p></div>
+      </div>
+      <h3 class="sub">구현 상세</h3>
+      <ul class="role-list">
+        <li>기능 단위로 <code>feature</code> 브랜치를 파고, <code>develop</code>에 PR로만 합치도록 규칙을 세웠습니다.</li>
+        <li>PR 전 <code>develop</code> 최신화를 원칙으로 정해, 충돌을 <b>리뷰어가 아니라 작성자가 자기 브랜치에서</b> 풀도록 했습니다.</li>
+        <li>공통 파일 변경은 담당자에게 모으고, 5인 팀의 일정과 진행 상황을 문서로 정리해 공유하며 도메인별 담당을 나눴습니다.</li>
+      </ul>
+    </section>
+
+    <section class="dp-sec rv">
+      <h2>데이터베이스 ERD</h2>
+      <div class="dp-erd empty" data-slot="images/erd-potatochip.png 파일을 넣으면 표시됩니다">
+        <img src="../images/erd-potatochip.png" alt="PotatoChip ERD" onerror="this.parentNode.classList.add('empty')" onload="this.parentNode.classList.remove('empty')">
+      </div>
+      <p class="cap">상품 · 이미지 · 장바구니 · 랭킹 엔티티 관계</p>
     </section>
 
     <section class="dp-sec rv">
       <h2>기술 스택</h2>
       <div class="dp-tags">
-        <span class="tag">Java 21</span><span class="tag">Spring Boot</span><span class="tag">JPA</span><span class="tag">Thymeleaf</span><span class="tag">MariaDB</span>
+        <span class="tag">Java</span><span class="tag">Spring Boot</span><span class="tag">Spring AI</span><span class="tag">Spring Data JPA</span><span class="tag">Thymeleaf</span><span class="tag">MariaDB</span><span class="tag">Kakao Map API</span>
       </div>
       <div class="dp-links">
         <a class="btn btn--p" href="https://github.com/Jihwan0210/PotatoChip" target="_blank" rel="noopener">Repository 보기</a>

@@ -23,20 +23,24 @@
 <main class="wrap">
 
   <section class="dp-hero">
-    <p class="dp-kind rv">AI 코드 리뷰 SaaS · 팀 프로젝트 · 진행 중</p>
+    <p class="dp-kind rv">AI 코드 리뷰 SaaS · 4인 팀 프로젝트 · 진행 중</p>
     <h1 class="rv">COGI</h1>
     <p class="dp-lead rv">GitHub PR을 가져와 AI가 코드를 리뷰하고, 이슈와 성장 추이를 팀 단위로 관리하는 서비스입니다. 저는 서비스로 들어오는 세 관문을 맡았습니다.</p>
     <div class="dp-meta rv">
       <div class="m"><div class="k">역할</div><div class="v">비로그인 · 결제 · 관리자</div></div>
-      <div class="m"><div class="k">구성</div><div class="v">팀 (백엔드)</div></div>
+      <div class="m"><div class="k">구성</div><div class="v">4인 팀 (백엔드)</div></div>
       <div class="m"><div class="k">기간</div><div class="v">2026.07 ~ 진행 중</div></div>
-      <div class="m"><div class="k">스택</div><div class="v">Spring Boot · React</div></div>
+      <div class="m"><div class="k">기술 스택</div><div class="v">Spring Boot · React</div></div>
     </div>
   </section>
 
   <div class="dp-shot rv"><img src="../images/cogi.png" alt="COGI 대표 화면"></div>
 
   <div class="dp-secs">
+    <section class="dp-sec rv">
+      <h2>프로젝트 소개</h2>
+      <p class="role-lead">GitHub Pull Request를 가져와 AI가 코드를 리뷰하고, 발견된 이슈와 팀·개인의 성장 추이를 관리하는 SaaS입니다. 리뷰 결과를 쌓아 약점 패턴을 통계로 보여주고 주간 리포트로 발송하며, 구독 결제와 관리자 운영 기능까지 갖춘 팀 프로젝트입니다.</p>
+    </section>
     <section class="dp-sec rv">
       <h2>내 역할</h2>
       <p class="role-lead">서비스로 들어오는 <b>세 개의 관문</b>을 맡았습니다. 사용자가 처음 만나는 비로그인 체험부터 구독 결제, 운영자용 관리자까지 백엔드를 담당했습니다.</p>
@@ -70,6 +74,12 @@
 
     <section class="dp-sec rv">
       <h2>비로그인 체험</h2>
+      <div class="star">
+        <div class="star__i"><span class="k">상황</span><p>가입 전에는 AI 리뷰 품질을 확인할 방법이 없었습니다. 그렇다고 계정 없이 그냥 열어두면 <b>AI 호출 비용</b>을 통제할 수 없었습니다.</p></div>
+        <div class="star__i"><span class="k">해결</span><p><code>guest_token</code> 쿠키로 비회원을 식별하고, Redis 카운터에 <b>첫 요청에만</b> TTL 24시간을 걸어 사용 횟수를 제한했습니다.</p></div>
+        <div class="star__i res"><span class="k">결과</span><p>회원가입 없이 리뷰를 체험할 수 있게 열면서도, 게스트 1인당 AI 호출을 <b>24시간 3회</b>로 상한을 고정했습니다.</p></div>
+      </div>
+      <h3 class="sub">구현 상세</h3>
       <div class="flow">
         <span class="step">게스트 요청</span><span class="ar">›</span>
         <span class="step"><b>guest_token</b> 쿠키 24h</span><span class="ar">›</span>
@@ -79,7 +89,8 @@
       </div>
       <ul class="role-list" style="margin-top:20px">
         <li><code>guest_token</code> 쿠키(24시간)로 비회원을 식별하고, 없으면 UUID를 새로 발급합니다.</li>
-        <li>Redis 카운터를 올리며 <b>첫 요청에만</b> TTL 24시간을 걸어, 슬라이딩이 아니라 첫 사용 시점 기준으로 리셋되게 했습니다. 초과 시 403.</li>
+        <li>체험 횟수는 24시간 뒤 사라져도 되는 값이라, 테이블에 쌓고 만료를 직접 지우는 대신 <b>TTL을 걸 수 있는 Redis</b>를 골랐습니다.</li>
+        <li>카운터를 올리며 <b>첫 요청에만</b> TTL 24시간을 걸어, 슬라이딩이 아니라 첫 사용 시점 기준으로 리셋되게 했습니다. 초과 시 403.</li>
         <li>게스트는 경량 모델과 FREE 프롬프트로 고정해 비용을 통제합니다.</li>
         <li>AI 사용량 로그는 <code>userId=null</code>로 남기되, 저장이 실패해도 리뷰 응답은 계속되도록 격리했습니다.</li>
       </ul>
@@ -87,6 +98,12 @@
 
     <section class="dp-sec rv">
       <h2>구독 결제</h2>
+      <div class="star">
+        <div class="star__i"><span class="k">상황</span><p>매일 자정 만료 구독을 한꺼번에 청구하는 배치라, <b>한 건의 결제 실패</b>가 배치 전체를 멈추면 나머지 구독자 청구가 밀립니다.</p></div>
+        <div class="star__i"><span class="k">해결</span><p>구독을 <b>건별 <code>@Transactional</code></b>로 청구해 실패를 격리하고, 최초 구독은 즉시 청구가 실패하면 구독 생성까지 롤백했습니다.</p></div>
+        <div class="star__i res"><span class="k">결과</span><p>실패한 구독만 FREE로 강등되고 배치는 계속 돕니다. <b>결제 없이 구독만 생성되는 상태</b>가 생기지 않습니다.</p></div>
+      </div>
+      <h3 class="sub">구현 상세</h3>
       <div class="flow">
         <span class="step">자정 배치</span><span class="ar">›</span>
         <span class="step">만료 구독 조회</span><span class="ar">›</span>
@@ -103,12 +120,26 @@
 
     <section class="dp-sec rv">
       <h2>관리자</h2>
+      <div class="star">
+        <div class="star__i"><span class="k">상황</span><p>회원·공지·약관·AI 사용량을 운영자가 직접 다뤄야 했고, 통계 화면은 회원 수만큼 닉네임 조회가 따라붙었습니다.</p></div>
+        <div class="star__i"><span class="k">해결</span><p><code>/api/admin/**</code>을 <code>ROLE_ADMIN</code>으로 잠그고, 공지 메일은 <code>@Async</code>로 뺐습니다. 닉네임은 <code>IN</code> 조회 한 번으로 채웠습니다.</p></div>
+        <div class="star__i res"><span class="k">결과</span><p>비관리자 접근은 403으로 끊기고, 통계 조회의 <b>N+1 쿼리를 1회 조회로</b> 줄였습니다. 메일 발송이 응답을 붙잡지 않습니다.</p></div>
+      </div>
+      <h3 class="sub">구현 상세</h3>
       <ul class="role-list">
         <li><code>/api/admin/**</code>은 JWT가 심은 <code>ROLE_ADMIN</code>으로만 접근하게 하고, 비관리자는 403으로 끊습니다.</li>
         <li>회원 역할과 상태 변경, 공지, 약관, 가이드라인 관리를 제공합니다.</li>
-        <li>전체 공지 메일을 <code>@Async</code>로 백그라운드 발송하고, 건별 실패를 로깅합니다.</li>
+        <li>전체 공지 메일은 회원 수만큼 발송이 걸려 응답을 붙잡을 이유가 없어, <code>@Async</code>로 백그라운드에 넘기고 건별 실패를 로깅합니다.</li>
         <li>AI 사용량 통계에서 닉네임을 <code>IN</code> 조회 한 번으로 채워 N+1을 피했습니다.</li>
       </ul>
+    </section>
+
+    <section class="dp-sec rv">
+      <h2>데이터베이스 ERD</h2>
+      <div class="dp-erd empty" data-slot="images/erd-cogi.png 파일을 넣으면 표시됩니다">
+        <img src="../images/erd-cogi.png" alt="COGI ERD" onerror="this.parentNode.classList.add('empty')" onload="this.parentNode.classList.remove('empty')">
+      </div>
+      <p class="cap">구독 · 결제 · 관리자 도메인 중심 테이블 관계</p>
     </section>
 
     <section class="dp-sec rv">
