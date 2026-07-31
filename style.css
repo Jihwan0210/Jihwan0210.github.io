@@ -66,7 +66,7 @@ img{display:block;max-width:100%}
 
 /* WORK cards */
 .work-list{display:grid;gap:16px}
-.wcard{display:grid;grid-template-columns:auto 1fr auto;gap:clamp(16px,3vw,30px);align-items:center;padding:clamp(22px,3vw,30px);border:1px solid var(--line);border-radius:var(--r);background:var(--surface);box-shadow:var(--shadow);transition:transform .25s var(--ease),box-shadow .25s var(--ease),border-color .2s}
+.wcard{display:grid;grid-template-columns:auto 1fr 236px;gap:clamp(16px,3vw,30px);align-items:center;padding:clamp(22px,3vw,30px);border:1px solid var(--line);border-radius:var(--r);background:var(--surface);box-shadow:var(--shadow);transition:transform .25s var(--ease),box-shadow .25s var(--ease),border-color .2s}
 .wcard:hover{transform:translateY(-3px);box-shadow:var(--shadow-lg);border-color:var(--line2)}
 .wcard__no{font-family:var(--mono);font-size:1.4rem;font-weight:700;color:var(--accent);align-self:flex-start;line-height:1.2}
 .wcard__main{min-width:0}
@@ -81,9 +81,18 @@ img{display:block;max-width:100%}
 .wcard__tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:15px}
 .tag{font-family:var(--mono);font-size:.68rem;padding:5px 10px;border-radius:999px;background:var(--bg);border:1px solid var(--line);color:var(--ink2)}
 .tag--a{background:var(--accent-soft);border-color:transparent;color:var(--accent-ink)}
-.wcard__go{align-self:center;width:42px;height:42px;border-radius:50%;border:1px solid var(--line2);display:grid;place-items:center;color:var(--ink2);transition:background .2s,color .2s,border-color .2s,transform .2s}
-.wcard:hover .wcard__go{background:var(--accent);border-color:var(--accent);color:#fff;transform:rotate(-45deg)}
-.wcard__go svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:2}
+/* 카드 우측: 대표 이미지 + 상세보기 버튼 */
+.wcard__aside{display:grid;gap:12px;align-self:center;min-width:0}
+.wcard__thumb{aspect-ratio:16/10;border-radius:10px;border:1px solid var(--line);background:var(--bg);overflow:hidden}
+.wcard__thumb img{width:100%;height:100%;object-fit:cover;display:block}
+.wcard__thumb.empty{display:grid;place-items:center;border-style:dashed;color:var(--ink3);font-family:var(--mono);font-size:.64rem;text-align:center;padding:0 10px;line-height:1.5}
+.wcard__thumb.empty img{display:none}
+.wcard__thumb.empty::after{content:attr(data-slot)}
+.wcard__go{display:flex;align-items:center;justify-content:center;gap:7px;height:38px;border-radius:999px;border:1px solid var(--line2);background:var(--bg);font-size:.8rem;font-weight:600;color:var(--ink2);transition:background .2s,color .2s,border-color .2s}
+.wcard__go svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2.2;transition:transform .2s}
+.wcard:hover .wcard__go{background:var(--accent);border-color:var(--accent);color:#fff}
+.wcard:hover .wcard__go svg{transform:translateX(2px)}
+@media(max-width:860px){.wcard{grid-template-columns:auto 1fr}.wcard__aside{grid-column:1/-1}}
 @media(max-width:720px){.wcard{grid-template-columns:auto 1fr;gap:14px}.wcard__go{display:none}}
 
 /* 그 외 프로젝트 박스 그리드 */
@@ -238,12 +247,12 @@ section[id]{scroll-margin-top:84px}
 .sk-group > .g{display:flex;align-items:baseline;gap:9px;font-family:var(--mono);font-size:.66rem;letter-spacing:.07em;text-transform:uppercase;color:var(--accent-ink);padding-bottom:8px;border-bottom:1px solid var(--line2);margin-bottom:2px}
 .sk-group > .g em{font-style:normal;text-transform:none;letter-spacing:0;font-size:.75rem;color:var(--ink3)}
 .sk-rows{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));column-gap:clamp(24px,4vw,56px)}
-.sk{display:grid;grid-template-columns:auto 1fr;align-items:baseline;gap:14px;padding:9px 0;border-bottom:1px solid var(--line)}
-.sk .n{display:flex;align-items:center;gap:6px;min-width:118px;font-size:.845rem;font-weight:700;letter-spacing:-.01em}
+.sk{display:grid;grid-template-columns:146px 1fr;align-items:baseline;gap:10px;padding:9px 0;border-bottom:1px solid var(--line)}
+.sk .n{display:flex;align-items:center;gap:6px;font-size:.845rem;font-weight:700;letter-spacing:-.01em}
 .sk .core,.sk-note .core{font-family:var(--mono);font-size:.55rem;font-weight:500;letter-spacing:.04em;padding:2px 6px;border-radius:999px;background:var(--accent-soft);color:var(--accent-ink)}
-.sk .d{font-size:.82rem;color:var(--ink3);line-height:1.5;text-align:right}
+.sk .d{font-size:.82rem;color:var(--ink2);line-height:1.5}
 .sk .d code{font-family:var(--mono);font-size:.9em}
-@media(max-width:560px){.sk{grid-template-columns:1fr;gap:2px}.sk .d{text-align:left}}
+@media(max-width:560px){.sk{grid-template-columns:1fr;gap:2px}}
 
 /* ERD 이미지 슬롯 (파일 없으면 안내 박스로 표시) */
 .dp-erd{margin-top:6px;border:1px solid var(--line);border-radius:var(--r);background:var(--bg);overflow:hidden}
