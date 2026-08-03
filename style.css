@@ -256,8 +256,28 @@ section[id]{scroll-margin-top:84px}
 
 /* ERD 이미지 슬롯 (파일 없으면 안내 박스로 표시) */
 .dp-erd{margin-top:6px;border:1px solid var(--line);border-radius:var(--r);background:var(--bg);overflow:hidden}
-.dp-erd img{width:100%;display:block}
+.dp-erd img{display:block;width:100%;height:auto;max-height:620px;object-fit:contain;background:var(--bg)}
+.dp-erd a.zoom{display:block}
+.cap a{color:var(--accent-ink);text-decoration:underline;text-underline-offset:2px}
 .dp-erd.empty{aspect-ratio:16/8;display:flex;align-items:center;justify-content:center;border-style:dashed;color:var(--ink3);font-family:var(--mono);font-size:.72rem;text-align:center;padding:0 20px}
 .dp-erd.empty img{display:none}
 .dp-erd.empty::after{content:attr(data-slot)}
 .dp-erd + .cap{margin-top:10px;font-family:var(--mono);font-size:.68rem;color:var(--ink3)}
+
+/* ===== v16 배포 링크 ===== */
+.wcard[data-href]{cursor:pointer}
+.wcard__live{display:flex;align-items:center;justify-content:center;gap:7px;height:38px;border-radius:999px;border:1px solid var(--line2);background:var(--bg);font-size:.8rem;font-weight:600;color:var(--ink2);transition:background .2s,color .2s,border-color .2s}
+.wcard__live svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2}
+a.wcard__live:hover{border-color:var(--accent);background:var(--accent-soft);color:var(--accent-ink)}
+.wcard__live.soon{border-style:dashed;background:transparent;color:var(--ink3);font-family:var(--mono);font-size:.68rem;font-weight:400}
+.dp-live{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-top:14px;padding:14px 18px;border:1px solid var(--line);border-radius:var(--r-sm);background:var(--surface);box-shadow:var(--shadow)}
+.dp-live .k{font-family:var(--mono);font-size:.62rem;color:var(--ink3);text-transform:uppercase;letter-spacing:.06em}
+.dp-live__btn{display:inline-flex;align-items:center;gap:8px;font-size:.9rem;font-weight:700;color:var(--accent-ink);word-break:break-all}
+.dp-live__btn svg{width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:2;flex:none}
+a.dp-live__btn:hover{text-decoration:underline;text-underline-offset:3px}
+.dp-live__btn.soon{color:var(--ink3);font-family:var(--mono);font-size:.72rem;font-weight:400}
+
+/* ===== v17 소개 영상 ===== */
+.dp-shot--video{aspect-ratio:16/9;background:#0b0e14;margin-bottom:0}
+.dp-shot--video video{width:100%;height:100%;object-fit:contain;display:block;background:#0b0e14}
+.dp-shot--video + .cap{margin:10px 0 clamp(26px,4vw,40px);font-family:var(--mono);font-size:.68rem;color:var(--ink3)}

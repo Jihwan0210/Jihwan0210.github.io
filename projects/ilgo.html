@@ -16,7 +16,7 @@
 <header class="top" id="top">
   <div class="top__in">
     <a class="dp-back" href="../index.html"><svg viewBox="0 0 24 24"><path d="M19 12H5m0 0 7 7m-7-7 7-7"/></svg>유지환 포트폴리오</a>
-    <nav class="top__links"><a class="pill" href="https://github.com/Jihwan0210/Ilgo-backend" target="_blank" rel="noopener">Repository</a></nav>
+    <nav class="top__links"><a class="pill" href="https://ilgo-app.netlify.app/" target="_blank" rel="noopener">배포 사이트</a><a class="pill" href="https://github.com/Jihwan0210/Ilgo-backend" target="_blank" rel="noopener">Repository</a></nav>
   </div>
 </header>
 
@@ -32,9 +32,19 @@
       <div class="m"><div class="k">기간</div><div class="v">2026.06 ~ 07</div></div>
       <div class="m"><div class="k">수상</div><div class="v">해커톤 3등(선도상)</div></div>
     </div>
+    <div class="dp-live rv">
+      <span class="k">배포 링크</span>
+      <a class="dp-live__btn" href="https://ilgo-app.netlify.app/" target="_blank" rel="noopener">https://ilgo-app.netlify.app/<svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><path d="M15 3h6v6"/><path d="M10 14 21 3"/></svg></a>
+    </div>
   </section>
 
-  <div class="dp-shot rv"><img src="../images/ilgo.png" alt="읽고(Ilgo) 앱 화면"></div>
+  <div class="dp-shot dp-shot--video rv">
+    <video controls playsinline preload="metadata" poster="../images/ilgo.png">
+      <source src="../videos/ilgo-intro.mp4" type="video/mp4">
+      <img src="../images/ilgo.png" alt="읽고(Ilgo) 앱 화면">
+    </video>
+  </div>
+  <p class="cap">읽고 앱 소개 영상 (1분 11초)</p>
 
   <div class="dp-secs">
     <section class="dp-sec rv">
@@ -48,6 +58,7 @@
         <li><b>인증·인가</b> JWT 토큰 검증 필터, Stateless 정책, 경로별 접근 제어를 설계했습니다.</li>
         <li><b>문서 분석 API</b> 외부 AI 게이트웨이와 연동하고, 응답을 설명·위험도·핵심 카드·할 일 구조로 파싱했습니다.</li>
         <li><b>요청 처리</b> 이미지(multipart)와 JSON 요청을 모두 받고, 목록은 커서 페이지네이션으로 조회했습니다.</li>
+        <li><b>데이터베이스</b> <b>Supabase</b>의 관리형 PostgreSQL을 JPA로 연동해, 3일짜리 해커톤에서 DB 서버를 직접 구축하지 않고 스키마와 API에 집중했습니다.</li>
         <li><b>안정성</b> 전역 예외 처리와 레이트 리밋, Swagger 문서화, 인증·분석 테스트로 API를 안정화했습니다.</li>
       </ul>
     </section>
@@ -58,7 +69,7 @@
         <div class="arch__col"><div class="lb">Client</div><div class="node">모바일 앱<small>문서 촬영 · 업로드</small></div></div>
         <div class="arch__col"><div class="lb">Security</div><div class="node mine">JWT 필터<small>토큰 검증 · 접근 제어</small></div></div>
         <div class="arch__col"><div class="lb">Domain</div><div class="node mine">Analysis<small>문서 분석</small></div><div class="node mine">Auth<small>인증 · 인가</small></div><div class="node mine">AI 연동</div><div class="node">User</div></div>
-        <div class="arch__col"><div class="lb">Infra</div><div class="node">PostgreSQL · JPA</div><div class="node mine">외부 AI 게이트웨이</div></div>
+        <div class="arch__col"><div class="lb">Infra</div><div class="node mine">Supabase PostgreSQL<small>관리형 DB · JPA 연동</small></div><div class="node mine">외부 AI 게이트웨이</div></div>
       </div>
       <p class="mono" style="margin-top:12px;color:var(--ink3)">강조된 블록이 제가 맡은 백엔드 영역입니다.</p>
     </section>
@@ -112,7 +123,7 @@
     <section class="dp-sec rv">
       <h2>기술 스택</h2>
       <div class="dp-tags">
-        <span class="tag">Java</span><span class="tag">Spring Boot 3.5</span><span class="tag">Spring Security</span><span class="tag">JPA</span><span class="tag">JWT</span><span class="tag">PostgreSQL</span><span class="tag">Swagger</span>
+        <span class="tag">Java</span><span class="tag">Spring Boot 3.5</span><span class="tag">Spring Security</span><span class="tag">JPA</span><span class="tag">JWT</span><span class="tag">Supabase</span><span class="tag">PostgreSQL</span><span class="tag">Swagger</span>
       </div>
       <div class="dp-links">
         <a class="btn btn--p" href="https://github.com/Jihwan0210/Ilgo-backend" target="_blank" rel="noopener">Repository 보기</a>

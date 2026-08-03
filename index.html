@@ -62,7 +62,7 @@
     </div>
     <div class="work-list">
 
-      <a class="wcard rv" href="projects/cogi.html">
+      <article class="wcard rv" data-href="projects/cogi.html">
         <div class="wcard__no">01</div>
         <div class="wcard__main">
           <div class="wcard__top"><h3>COGI</h3><span class="wcard__kind">AI 코드 리뷰 SaaS · 4인 팀 · 진행 중</span></div>
@@ -82,36 +82,13 @@
           <div class="wcard__thumb empty" data-slot="images/cogi.png">
             <img src="images/cogi.png" alt="COGI 대표 화면" onerror="this.parentNode.classList.add('empty')" onload="this.parentNode.classList.remove('empty')">
           </div>
-          <span class="wcard__go">상세보기<svg viewBox="0 0 24 24"><path d="M5 12h14m0 0-6-6m6 6-6 6"/></svg></span>
+          <a class="wcard__go" href="projects/cogi.html">상세보기<svg viewBox="0 0 24 24"><path d="M5 12h14m0 0-6-6m6 6-6 6"/></svg></a>
+          <a class="wcard__live" href="http://43.202.36.123/" target="_blank" rel="noopener">배포 사이트<svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><path d="M15 3h6v6"/><path d="M10 14 21 3"/></svg></a>
         </div>
-      </a>
+      </article>
 
-      <a class="wcard rv" href="projects/ilgo.html">
+      <article class="wcard rv" data-href="projects/potatochip.html">
         <div class="wcard__no">02</div>
-        <div class="wcard__main">
-          <div class="wcard__top"><h3>읽고 (Ilgo)</h3><span class="wcard__kind">AI 배리어프리 서비스 · 6인 팀 · 해커톤 3등</span></div>
-          <p class="wcard__sum">고지서·안내문처럼 어려운 생활 문서를 사진으로 찍으면 AI가 쉬운 한국어나 영어로 풀어주는 배리어프리 서비스입니다. 6인 팀에서 백엔드 API 서버 전체를 맡았습니다.</p>
-          <div class="wcard__rf">
-            <div class="rf"><span class="lb">역할</span><span class="v">백엔드 API · 인증과 AI 연동, 문서화</span></div>
-            <div class="rf"><span class="lb">흐름</span><span class="v flow">문서 이미지 → JWT 인증 → AI 게이트웨이 → 구조화 응답</span></div>
-          </div>
-          <ul class="wcard__pts">
-            <li>형태가 매번 달라지는 AI 응답을 <b>설명·위험도·핵심 카드·할 일</b>의 고정 스키마로 파싱해, 프론트가 화면 규격 하나로 붙일 수 있게 했습니다.</li>
-            <li>JWT Stateless 인증과 전역 예외 처리·레이트 리밋 <b>공통 계층</b>을 설계하고, 인증·분석 테스트 코드를 작성했습니다.</li>
-            <li>Swagger로 API 명세를 공유해 3일짜리 해커톤에서 프론트와 병렬 개발했고, <b>AI Re-Local 해커톤 3등(선도상)</b>을 받았습니다.</li>
-          </ul>
-          <div class="wcard__tags"><span class="tag tag--a">Java</span><span class="tag">Spring Boot 3.5</span><span class="tag">Spring Security</span><span class="tag">JPA</span><span class="tag">JWT</span><span class="tag">PostgreSQL</span><span class="tag">Swagger</span></div>
-        </div>
-        <div class="wcard__aside">
-          <div class="wcard__thumb empty" data-slot="images/ilgo.png">
-            <img src="images/ilgo.png" alt="읽고 대표 화면" onerror="this.parentNode.classList.add('empty')" onload="this.parentNode.classList.remove('empty')">
-          </div>
-          <span class="wcard__go">상세보기<svg viewBox="0 0 24 24"><path d="M5 12h14m0 0-6-6m6 6-6 6"/></svg></span>
-        </div>
-      </a>
-
-      <a class="wcard rv" href="projects/potatochip.html">
-        <div class="wcard__no">03</div>
         <div class="wcard__main">
           <div class="wcard__top"><h3>PotatoChip</h3><span class="wcard__kind">못난이 농산물 마켓 · 5인 팀 팀장</span></div>
           <p class="wcard__sum">상품성이 떨어진다는 이유로 버려지는 못난이 농산물을 판매자와 구매자가 직접 거래하는 마켓플레이스입니다. 5인 팀의 팀장이자 상품 도메인 오너였습니다.</p>
@@ -130,11 +107,37 @@
           <div class="wcard__thumb empty" data-slot="images/potatochip.png">
             <img src="images/potatochip.png" alt="PotatoChip 대표 화면" onerror="this.parentNode.classList.add('empty')" onload="this.parentNode.classList.remove('empty')">
           </div>
-          <span class="wcard__go">상세보기<svg viewBox="0 0 24 24"><path d="M5 12h14m0 0-6-6m6 6-6 6"/></svg></span>
+          <a class="wcard__go" href="projects/potatochip.html">상세보기<svg viewBox="0 0 24 24"><path d="M5 12h14m0 0-6-6m6 6-6 6"/></svg></a>
+          <a class="wcard__live" href="https://uglycrop.duckdns.org/" target="_blank" rel="noopener">배포 사이트<svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><path d="M15 3h6v6"/><path d="M10 14 21 3"/></svg></a>
         </div>
-      </a>
+      </article>
 
-      <a class="wcard rv" href="projects/campuslink.html">
+      <article class="wcard rv" data-href="projects/ilgo.html">
+        <div class="wcard__no">03</div>
+        <div class="wcard__main">
+          <div class="wcard__top"><h3>읽고 (Ilgo)</h3><span class="wcard__kind">AI 배리어프리 서비스 · 6인 팀 · 해커톤 3등</span></div>
+          <p class="wcard__sum">고지서·안내문처럼 어려운 생활 문서를 사진으로 찍으면 AI가 쉬운 한국어나 영어로 풀어주는 배리어프리 서비스입니다. 6인 팀에서 백엔드 API 서버 전체를 맡았습니다.</p>
+          <div class="wcard__rf">
+            <div class="rf"><span class="lb">역할</span><span class="v">백엔드 API · 인증과 AI 연동, 문서화</span></div>
+            <div class="rf"><span class="lb">흐름</span><span class="v flow">문서 이미지 → JWT 인증 → AI 게이트웨이 → 구조화 응답</span></div>
+          </div>
+          <ul class="wcard__pts">
+            <li>형태가 매번 달라지는 AI 응답을 <b>설명·위험도·핵심 카드·할 일</b>의 고정 스키마로 파싱해, 프론트가 화면 규격 하나로 붙일 수 있게 했습니다.</li>
+            <li>JWT Stateless 인증과 전역 예외 처리·레이트 리밋 <b>공통 계층</b>을 설계하고, 인증·분석 테스트 코드를 작성했습니다.</li>
+            <li>Swagger로 API 명세를 공유해 3일짜리 해커톤에서 프론트와 병렬 개발했고, <b>AI Re-Local 해커톤 3등(선도상)</b>을 받았습니다.</li>
+          </ul>
+          <div class="wcard__tags"><span class="tag tag--a">Java</span><span class="tag">Spring Boot 3.5</span><span class="tag">Spring Security</span><span class="tag">JPA</span><span class="tag">JWT</span><span class="tag">Supabase</span><span class="tag">PostgreSQL</span><span class="tag">Swagger</span></div>
+        </div>
+        <div class="wcard__aside">
+          <div class="wcard__thumb empty" data-slot="images/ilgo.png">
+            <img src="images/ilgo.png" alt="읽고 대표 화면" onerror="this.parentNode.classList.add('empty')" onload="this.parentNode.classList.remove('empty')">
+          </div>
+          <a class="wcard__go" href="projects/ilgo.html">상세보기<svg viewBox="0 0 24 24"><path d="M5 12h14m0 0-6-6m6 6-6 6"/></svg></a>
+          <a class="wcard__live" href="https://ilgo-app.netlify.app/" target="_blank" rel="noopener">배포 사이트<svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><path d="M15 3h6v6"/><path d="M10 14 21 3"/></svg></a>
+        </div>
+      </article>
+
+      <article class="wcard rv" data-href="projects/campuslink.html">
         <div class="wcard__no">04</div>
         <div class="wcard__main">
           <div class="wcard__top"><h3>CampusLink</h3><span class="wcard__kind">동아리 · 공모전 모집 SPA · 개인 프로젝트</span></div>
@@ -153,11 +156,13 @@
           <div class="wcard__thumb empty" data-slot="images/campuslink.png">
             <img src="images/campuslink.png" alt="CampusLink 대표 화면" onerror="this.parentNode.classList.add('empty')" onload="this.parentNode.classList.remove('empty')">
           </div>
-          <span class="wcard__go">상세보기<svg viewBox="0 0 24 24"><path d="M5 12h14m0 0-6-6m6 6-6 6"/></svg></span>
+          <a class="wcard__go" href="projects/campuslink.html">상세보기<svg viewBox="0 0 24 24"><path d="M5 12h14m0 0-6-6m6 6-6 6"/></svg></a>
+          <!-- 배포 후 아래 span을 <a class="wcard__live" href="배포주소" target="_blank" rel="noopener">배포 사이트<svg .../></a> 로 교체 -->
+          <span class="wcard__live soon">배포 예정</span>
         </div>
-      </a>
+      </article>
 
-      <a class="wcard rv" href="projects/hotel.html">
+      <article class="wcard rv" data-href="projects/hotel.html">
         <div class="wcard__no">05</div>
         <div class="wcard__main">
           <div class="wcard__top"><h3>호텔 예약</h3><span class="wcard__kind">Laravel 예약 서비스 · 개인 프로젝트 · 금상</span></div>
@@ -176,11 +181,11 @@
           <div class="wcard__thumb empty" data-slot="images/hotel.png">
             <img src="images/hotel.png" alt="호텔 예약 대표 화면" onerror="this.parentNode.classList.add('empty')" onload="this.parentNode.classList.remove('empty')">
           </div>
-          <span class="wcard__go">상세보기<svg viewBox="0 0 24 24"><path d="M5 12h14m0 0-6-6m6 6-6 6"/></svg></span>
+          <a class="wcard__go" href="projects/hotel.html">상세보기<svg viewBox="0 0 24 24"><path d="M5 12h14m0 0-6-6m6 6-6 6"/></svg></a>
         </div>
-      </a>
+      </article>
 
-      <a class="wcard rv" href="projects/goods.html">
+      <article class="wcard rv" data-href="projects/goods.html">
         <div class="wcard__no">06</div>
         <div class="wcard__main">
           <div class="wcard__top"><h3>침착맨 굿즈샵</h3><span class="wcard__kind">PHP 쇼핑몰 · 개인 프로젝트 · 은상</span></div>
@@ -199,9 +204,9 @@
           <div class="wcard__thumb empty" data-slot="images/goods.png">
             <img src="images/goods.png" alt="침착맨 굿즈샵 대표 화면" onerror="this.parentNode.classList.add('empty')" onload="this.parentNode.classList.remove('empty')">
           </div>
-          <span class="wcard__go">상세보기<svg viewBox="0 0 24 24"><path d="M5 12h14m0 0-6-6m6 6-6 6"/></svg></span>
+          <a class="wcard__go" href="projects/goods.html">상세보기<svg viewBox="0 0 24 24"><path d="M5 12h14m0 0-6-6m6 6-6 6"/></svg></a>
         </div>
-      </a>
+      </article>
 
     </div>
 
@@ -283,7 +288,7 @@
     <div class="sk-group rv">
       <div class="g">Backend <em>서버 · 도메인 설계</em></div>
       <div class="sk-rows">
-        <div class="sk"><div class="n">Java <span class="core">주력</span></div><div class="d">OOP · <code>enum</code> 상태 모델링</div></div>
+        <div class="sk"><div class="n">Java <span class="core">주력</span></div><div class="d">객체지향 기반 애플리케이션 개발· 상속·인터페이스·추상클래스</div></div>
         <div class="sk"><div class="n">Spring Boot <span class="core">주력</span></div><div class="d">Controller · Service · Repository</div></div>
         <div class="sk"><div class="n">Spring Framework</div><div class="d">DI · IoC · AOP · <code>@Async</code></div></div>
         <div class="sk"><div class="n">Spring Security <span class="core">주력</span></div><div class="d">JWT 인증 · <code>ROLE</code> 권한 제어</div></div>
@@ -355,6 +360,9 @@
 (function(){
   var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}})},{threshold:.12});
   document.querySelectorAll('.rv').forEach(function(el){io.observe(el);});
+  document.querySelectorAll('.wcard[data-href]').forEach(function(c){
+    c.addEventListener('click',function(e){if(!e.target.closest('a'))location.href=c.dataset.href;});
+  });
   var top=document.getElementById('top');
   var sen=document.createElement('div');sen.style.cssText='position:absolute;top:0;left:0;width:1px;height:1px';document.body.prepend(sen);
   new IntersectionObserver(function(e){top.classList.toggle('stuck',!e[0].isIntersecting);}).observe(sen);
