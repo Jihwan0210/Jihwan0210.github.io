@@ -96,13 +96,16 @@ img{display:block;max-width:100%}
 @media(max-width:720px){.wcard{grid-template-columns:auto 1fr;gap:14px}.wcard__go{display:none}}
 
 /* 그 외 프로젝트 박스 그리드 */
-.obox-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:14px}
+.obox-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px}
 .obox{padding:22px;border:1px solid var(--line);border-radius:var(--r-sm);background:var(--surface);box-shadow:var(--shadow);transition:transform .2s,box-shadow .2s}
 .obox:hover{transform:translateY(-2px);box-shadow:var(--shadow-lg)}
 .obox .when{font-family:var(--mono);font-size:.66rem;color:var(--ink3)}
 .obox h4{font-size:1.02rem;font-weight:700;margin:4px 0 7px}
 .obox p{color:var(--ink2);font-size:.85rem;margin-bottom:12px}
 .obox .tag{font-size:.62rem;padding:3px 8px}
+.obox__repo{display:inline-flex;align-items:center;gap:6px;margin-top:14px;font-family:var(--mono);font-size:.72rem;font-weight:600;color:var(--ink2);text-decoration:none;padding:6px 11px;border:1px solid var(--line);border-radius:999px;transition:color .15s,border-color .15s,background .15s}
+.obox__repo:hover{color:var(--accent);border-color:var(--accent)}
+.obox__repo svg{flex-shrink:0}
 
 /* boxed info sections */
 .grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
@@ -217,6 +220,16 @@ img{display:block;max-width:100%}
 .hero__photo .frame img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:1}
 .dp-shot{overflow:hidden;padding:0}
 .dp-shot img{width:100%;height:100%;object-fit:cover;display:block}
+/* 전체 화면 스크린샷(세로 긴 이미지)은 잘리지 않게 자연 비율로 표시 */
+.dp-shot--full{aspect-ratio:auto;overflow:visible;background:var(--bg);text-align:center;padding:0}
+.dp-shot--full img{width:auto;max-width:100%;height:auto;max-height:78vh;object-fit:contain;margin:0 auto}
+.dp-shot img,.dp-erd img{cursor:zoom-in}
+/* 이미지 확대 라이트박스 */
+.lbx{position:fixed;inset:0;z-index:9999;display:none;align-items:center;justify-content:center;background:rgba(8,12,20,.85);padding:24px;cursor:zoom-out}
+.lbx.open{display:flex}
+.lbx img{max-width:96vw;max-height:92vh;object-fit:contain;border-radius:8px;box-shadow:0 20px 60px rgba(0,0,0,.5)}
+.lbx__x{position:fixed;top:16px;right:24px;font-size:30px;line-height:1;color:#fff;background:none;border:none;cursor:pointer;opacity:.85}
+.lbx__x:hover{opacity:1}
 
 /* v12.3 anchor offset */
 section[id]{scroll-margin-top:84px}
@@ -276,6 +289,10 @@ a.wcard__live:hover{border-color:var(--accent);background:var(--accent-soft);col
 .dp-live__btn svg{width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:2;flex:none}
 a.dp-live__btn:hover{text-decoration:underline;text-underline-offset:3px}
 .dp-live__btn.soon{color:var(--ink3);font-family:var(--mono);font-size:.72rem;font-weight:400}
+
+.dp-live__acc{margin-left:auto;display:inline-flex;align-items:center;gap:7px;font-size:.78rem;color:var(--ink2)}
+.dp-live__acc code{font-family:var(--mono);font-size:.86em;background:var(--bg);border:1px solid var(--line);padding:3px 8px;border-radius:5px;color:var(--ink)}
+@media(max-width:620px){.dp-live__acc{margin-left:0}}
 
 /* ===== v17 소개 영상 ===== */
 .dp-shot--video{aspect-ratio:16/9;background:#0b0e14;margin-bottom:0}

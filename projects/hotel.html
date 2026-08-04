@@ -34,7 +34,7 @@
     </div>
   </section>
 
-  <div class="dp-shot rv">호텔 예약 대표 화면 스크린샷을 넣어주세요 (권장 16:8)</div>
+  <div class="dp-shot dp-shot--full rv"><img src="../images/hotel.png" alt="호텔 예약 대표 화면"></div>
 
   <div class="dp-secs">
     <section class="dp-sec rv">
@@ -76,7 +76,7 @@
     <section class="dp-sec rv">
       <h2>데이터베이스 ERD</h2>
       <div class="dp-erd empty" data-slot="images/erd-hotel.png 파일을 넣으면 표시됩니다">
-        <img src="../images/erd-hotel.png" alt="호텔 예약 ERD" onerror="this.parentNode.classList.add('empty')" onload="this.parentNode.classList.remove('empty')">
+        <img src="../images/erd-hotel.svg" alt="호텔 예약 ERD" onerror="this.parentNode.classList.add('empty')" onload="this.parentNode.classList.remove('empty')">
       </div>
       <p class="cap">숙소 · 예약 · 후기 · 공지 테이블 관계</p>
     </section>
@@ -108,5 +108,6 @@
   new IntersectionObserver(function(e){top.classList.toggle('stuck',!e[0].isIntersecting);}).observe(sen);
 })();
 </script>
+<script src="zoom.js"></script>
 </body>
 </html>

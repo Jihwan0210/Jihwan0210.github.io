@@ -76,7 +76,7 @@
             <li>자정 배치를 <b>구독 건별 트랜잭션</b>으로 나눠, 한 건의 결제 실패가 나머지 구독자 청구를 멈추지 않도록 격리했습니다.</li>
             <li>Redis TTL 카운터로 비로그인 체험을 열면서 <b>AI 호출 상한을 24시간 3회로 고정</b>하고, 관리자 통계의 N+1 쿼리를 IN 조회 1회로 줄였습니다.</li>
           </ul>
-          <div class="wcard__tags"><span class="tag tag--a">Spring Boot</span><span class="tag">Spring Security</span><span class="tag">JWT · OAuth2</span><span class="tag">Spring Data JPA</span><span class="tag">Redis</span><span class="tag">Toss Payments</span><span class="tag">MariaDB</span><span class="tag">React</span></div>
+          <div class="wcard__tags"><span class="tag tag--a">Spring Boot</span><span class="tag">Spring Security</span><span class="tag">JWT · OAuth2</span><span class="tag">Spring Data JPA</span><span class="tag tag--a">Spring AI</span><span class="tag">LLM 연동 (Claude · OpenAI · Gemini)</span><span class="tag">Redis</span><span class="tag">Toss Payments</span><span class="tag">MariaDB</span><span class="tag">React</span></div>
         </div>
         <div class="wcard__aside">
           <div class="wcard__thumb empty" data-slot="images/cogi.png">
@@ -101,7 +101,7 @@
             <li>담은 뒤 판매자가 가격을 바꿔도 결제 금액이 흔들리지 않도록 <b>가격 스냅샷 장바구니</b> 구조를 설계했습니다.</li>
             <li>PR을 뒤늦게 한꺼번에 올려 충돌이 쌓이던 문제를, <b>작은 단위 PR과 develop 최신화 규칙</b>으로 정리했습니다.</li>
           </ul>
-          <div class="wcard__tags"><span class="tag tag--a">Java</span><span class="tag">Spring Boot</span><span class="tag">Spring AI</span><span class="tag">Spring Data JPA</span><span class="tag">Thymeleaf</span><span class="tag">MariaDB</span><span class="tag">Kakao Map API</span></div>
+          <div class="wcard__tags"><span class="tag tag--a">Java</span><span class="tag">Spring Boot</span><span class="tag tag--a">Spring AI</span><span class="tag">LLM Vision 이미지 분석</span><span class="tag">Spring Data JPA</span><span class="tag">Thymeleaf</span><span class="tag">MariaDB</span><span class="tag">Kakao Map API</span></div>
         </div>
         <div class="wcard__aside">
           <div class="wcard__thumb empty" data-slot="images/potatochip.png">
@@ -126,7 +126,7 @@
             <li>JWT Stateless 인증과 전역 예외 처리·레이트 리밋 <b>공통 계층</b>을 설계하고, 인증·분석 테스트 코드를 작성했습니다.</li>
             <li>Swagger로 API 명세를 공유해 3일짜리 해커톤에서 프론트와 병렬 개발했고, <b>AI Re-Local 해커톤 3등(선도상)</b>을 받았습니다.</li>
           </ul>
-          <div class="wcard__tags"><span class="tag tag--a">Java</span><span class="tag">Spring Boot 3.5</span><span class="tag">Spring Security</span><span class="tag">JPA</span><span class="tag">JWT</span><span class="tag">Supabase</span><span class="tag">PostgreSQL</span><span class="tag">Swagger</span></div>
+          <div class="wcard__tags"><span class="tag tag--a">Java</span><span class="tag">Spring Boot 3.5</span><span class="tag">Spring Security</span><span class="tag">JPA</span><span class="tag">JWT</span><span class="tag tag--a">LLM 연동</span><span class="tag">AI 문서 분석 파싱</span><span class="tag">Supabase</span><span class="tag">PostgreSQL</span><span class="tag">Swagger</span></div>
         </div>
         <div class="wcard__aside">
           <div class="wcard__thumb empty" data-slot="images/ilgo.png">
@@ -214,8 +214,7 @@
     <div class="obox-grid">
       <div class="obox rv"><span class="when">2026.03~04</span><h4>Spring Boot 게시판 · TodoList</h4><p>Spring Boot MVC로 게시판과 일정 관리. CRUD REST API와 MariaDB 연동을 실습.</p><div class="wcard__tags"><span class="tag">Spring Boot</span><span class="tag">MariaDB</span></div></div>
       <div class="obox rv"><span class="when">2025.09~12</span><h4>아이폰 판매관리</h4><p>Laravel 관리자 판매관리. 매입·매출 기간별 조회, AJAX 갱신, 월별 통계.</p><div class="wcard__tags"><span class="tag">Laravel</span><span class="tag">MariaDB</span></div></div>
-      <div class="obox rv"><span class="when">2025.06</span><h4>한국 유튜브 트렌딩 분석</h4><p>Kaggle 265,754건 분석. K-Means 군집분석과 로지스틱 회귀로 인기 요인 도출.</p><div class="wcard__tags"><span class="tag">R</span><span class="tag">RStudio</span></div></div>
-      <div class="obox rv"><span class="when">2025.06</span><h4>Unity 탑다운 슈팅 게임</h4><p>Unity와 C#. 오브젝트 풀링으로 성능 최적화, 1대1 대전 모드 구현.</p><div class="wcard__tags"><span class="tag">Unity</span><span class="tag">C#</span></div></div>
+      <div class="obox rv"><span class="when">2025.06</span><h4>한국 유튜브 트렌딩 분석</h4><p>Kaggle 265,754건 분석. K-Means 군집분석과 로지스틱 회귀로 인기 요인 도출.</p><div class="wcard__tags"><span class="tag">R</span><span class="tag">RStudio</span></div><a class="obox__repo" href="https://github.com/Jihwan0210/RStdio_YoutubeTranding" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.9a3.4 3.4 0 0 0-.9-2.6c3-.3 6.2-1.5 6.2-6.7A5.2 5.2 0 0 0 20 4.8a4.9 4.9 0 0 0-.1-3.6s-1.1-.3-3.6 1.4a12.4 12.4 0 0 0-6.6 0C7.2.9 6.1 1.2 6.1 1.2A4.9 4.9 0 0 0 6 4.8a5.2 5.2 0 0 0-1.4 3.7c0 5.1 3.1 6.4 6.1 6.7a3.4 3.4 0 0 0-.9 2.6V22"/></svg>Repository</a></div>
     </div>
   </section>
 
@@ -238,7 +237,7 @@
           <span class="legend"><i></i>활동 중</span>
         </div>
         <div class="tl">
-          <div class="tl__i hl"><span class="when">2025.11 ~ 2026.08</span><h4>대우능력개발원 · 웹 애플리케이션 개발자 양성과정</h4><p>웹 표준, Java, RDBMS, Spring, Spring Boot, AWS, Spring AI, 보안 코딩, 리눅스 기반 과정 수료. Spring Boot REST API 설계·구현, MariaDB 설계·SQL 활용, Git 형상관리와 팀 개발, AWS·Docker 배포, 개인·팀 프로젝트 수행.</p></div>
+          <div class="tl__i hl"><span class="when">2025.11 ~ 2026.08</span><h4>대우능력개발원 · AI 에이전트 클라우드·보안코딩 개발자 양성 과정</h4><p>웹 표준, Java, RDBMS, Spring, Spring Boot, AWS, Spring AI, 리눅스 기반 과정 수료. <b>Spring AI로 LLM(Claude·OpenAI·Gemini)을 연동하고 RAG·MCP를 활용해 AI 에이전트 기능을 구현</b>했습니다. Spring Boot 웹 서비스와 REST API 설계·구현, Java·MariaDB 데이터베이스 설계와 SQL 활용, Git 형상관리와 팀 단위 개발, AWS·Docker 배포·운영 실습을 거쳤고, 요구사항 분석부터 화면 설계·백엔드 구현까지 AI 에이전트 개인·팀 프로젝트를 수행했습니다.</p></div>
           <div class="tl__i hl"><span class="when">2026.05 ~ 2026.11</span><h4>INDEV 창업동아리</h4><p>AI 소상공인 채용·스케줄 관리 플랫폼 개발. AWS 클라우드 인프라 구축·운영, Spring Boot REST API와 DB 연동, Docker 배포 환경 구성.</p></div>
           <div class="tl__i"><span class="when">2025.05 ~ 2026.09</span><h4>DevUp 스터디</h4><p>코딩 테스트와 CS 기초 이론으로 정보처리산업기사를 준비하고 문제 해결력을 강화한 학습형 스터디.</p></div>
           <div class="tl__i"><span class="when">2026.01 ~ 2026.02</span><h4>코드어택 동아리</h4><p>정보처리산업기사 공부로 CS 지식과 코딩 기초, 알고리즘·운영체제 개념과 코드 흐름 이해력을 다졌습니다.</p></div>

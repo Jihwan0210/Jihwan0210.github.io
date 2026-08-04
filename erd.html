@@ -1,0 +1,221 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>ERD · 호텔 예약 / 침착맨 굿즈샵</title>
+<style>
+  :root{
+    --bg:#eef0f4; --canvas:#f6f7f9; --line:#d5d9e0; --ink:#1f2430; --ink2:#5b6472; --ink3:#98a1b0;
+    --pk:#f4b400; --fk:#4f83cc; --rel:#9aa4b2; --card:#ffffff; --shadow:0 1px 3px rgba(20,30,50,.10),0 6px 18px rgba(20,30,50,.06);
+    --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+    --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Noto Sans KR",sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--bg);color:var(--ink);font-family:var(--sans);padding:32px 20px 80px}
+  .head{max-width:1200px;margin:0 auto 8px}
+  .head h1{font-size:1.4rem;font-weight:800;letter-spacing:-.02em}
+  .head p{color:var(--ink2);font-size:.9rem;margin-top:6px}
+  .legend{display:flex;gap:18px;flex-wrap:wrap;margin:16px auto 0;max-width:1200px;font-family:var(--mono);font-size:.72rem;color:var(--ink2)}
+  .legend span{display:inline-flex;align-items:center;gap:6px}
+  .dot{width:11px;height:11px;border-radius:3px;display:inline-block}
+  .erd-title{max-width:1200px;margin:44px auto 12px;display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
+  .erd-title h2{font-size:1.1rem;font-weight:800}
+  .erd-title a{font-family:var(--mono);font-size:.72rem;color:var(--fk);text-decoration:none}
+  .erd-title a:hover{text-decoration:underline}
+  .stage-wrap{overflow-x:auto;background:var(--canvas);border:1px solid var(--line);border-radius:12px;
+    background-image:radial-gradient(var(--line) 1px,transparent 1px);background-size:22px 22px}
+  .stage{position:relative}
+  svg.wires{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;overflow:visible}
+  .tbl{position:absolute;width:250px;background:var(--card);border:1px solid var(--line);border-radius:8px;box-shadow:var(--shadow);overflow:hidden}
+  .tbl__hd{padding:9px 12px;color:#fff;font-weight:700;font-size:.86rem;display:flex;align-items:center;justify-content:space-between;gap:8px}
+  .tbl__hd small{font-weight:500;opacity:.9;font-size:.66rem}
+  .row{display:grid;grid-template-columns:20px 1fr auto;align-items:center;gap:7px;padding:6px 12px;border-top:1px solid #eef1f5;font-size:.76rem;line-height:1.1}
+  .row .k{font-size:.6rem;text-align:center}
+  .row .nm{font-family:var(--mono);color:var(--ink)}
+  .row.pk .nm{font-weight:700}
+  .row .ty{font-family:var(--mono);color:var(--ink3);font-size:.68rem;white-space:nowrap}
+  .badge{font-family:var(--mono);font-size:.55rem;color:var(--ink3);margin-left:5px}
+  .kpk{color:var(--pk)}
+  .kfk{color:var(--fk)}
+</style>
+</head>
+<body>
+  <div class="head">
+    <h1>ERD · 데이터베이스 설계</h1>
+    <p>레포지토리 소스 기준으로 복원한 스키마입니다. (ERDCloud 형식 · 크로우풋 표기)</p>
+    <div class="legend">
+      <span><i class="dot" style="background:var(--pk)"></i>PK 기본키</span>
+      <span><i class="dot" style="background:var(--fk)"></i>FK 외래키</span>
+      <span>NN = NOT NULL · UQ = UNIQUE</span>
+      <span>관계선: 1 ―&lt; N (일대다)</span>
+    </div>
+  </div>
+
+  <div class="erd-title">
+    <h2>① 호텔 예약 · Laravel</h2>
+    <a href="https://github.com/Jihwan0210/Laravel-hotel-reservation" target="_blank" rel="noopener">github.com/Jihwan0210/Laravel-hotel-reservation ↗</a>
+  </div>
+  <div class="stage-wrap"><div class="stage" id="stage-hotel"><svg class="wires" id="wires-hotel"></svg></div></div>
+
+  <div class="erd-title">
+    <h2>② 침착맨 굿즈샵 · PHP</h2>
+    <a href="https://github.com/Jihwan0210/PHP_ShopProject" target="_blank" rel="noopener">github.com/Jihwan0210/PHP_ShopProject ↗</a>
+  </div>
+  <div class="stage-wrap"><div class="stage" id="stage-goods"><svg class="wires" id="wires-goods"></svg></div></div>
+
+<script>
+const HOTEL = {
+  tables: {
+    users:{x:40,y:360,color:"#4f83cc",label:"users",comment:"회원 (Laravel Auth)",cols:[
+      ["PK","id","BIGINT",["AI"]],[null,"name","VARCHAR",["NN"]],[null,"email","VARCHAR",["NN","UQ"]],
+      [null,"password","VARCHAR",["NN"]],[null,"remember_token","VARCHAR",[]],
+      [null,"created_at","TIMESTAMP",[]],[null,"updated_at","TIMESTAMP",[]]]},
+    pensions:{x:410,y:40,color:"#43a047",label:"pensions",comment:"숙소",cols:[
+      ["PK","id","BIGINT",["AI"]],["FK","user_id","BIGINT",["NULL"]],[null,"name","VARCHAR",["NN"]],
+      [null,"location","VARCHAR(50)",["NN"]],[null,"type","VARCHAR(50)",[]],[null,"price","INT",["NN"]],
+      [null,"image","VARCHAR",[]],[null,"description","TEXT",[]],[null,"min_people","INT",[]],
+      [null,"max_people","INT",[]],[null,"extra_price","INT",[]],[null,"created_at","TIMESTAMP",[]],[null,"updated_at","TIMESTAMP",[]]]},
+    reservations:{x:790,y:300,color:"#fb8c00",label:"reservations",comment:"예약",cols:[
+      ["PK","id","BIGINT",["AI"]],["FK","user_id","BIGINT",["NN"]],["FK","pension_id","BIGINT",["NN"]],
+      [null,"check_in","DATE",[]],[null,"check_out","DATE",[]],[null,"guests","INT",[]],
+      [null,"total_price","INT",[]],[null,"is_paid","TINYINT",[]],[null,"created_at","TIMESTAMP",[]],[null,"updated_at","TIMESTAMP",[]]]},
+    payments:{x:790,y:700,color:"#8e24aa",label:"payments",comment:"결제",cols:[
+      ["PK","id","BIGINT",["AI"]],["FK","reservation_id","BIGINT",["NN"]],["FK","user_id","BIGINT",["NN"]],
+      [null,"method","VARCHAR",[]],[null,"amount","INT",[]],[null,"status","VARCHAR",[]],
+      [null,"created_at","TIMESTAMP",[]],[null,"updated_at","TIMESTAMP",[]]]},
+    reviews:{x:410,y:640,color:"#00897b",label:"reviews",comment:"리뷰",cols:[
+      ["PK","id","BIGINT",["AI"]],["FK","user_id","BIGINT",["NN"]],["FK","pension_id","BIGINT",["NN"]],
+      [null,"content","TEXT",[]],[null,"rating","TINYINT",[]],
+      [null,"created_at","TIMESTAMP",[]],[null,"updated_at","TIMESTAMP",[]]]},
+    onemember:{x:40,y:720,color:"#6d4c41",label:"onemember",comment:"커스텀 로그인 회원",cols:[
+      ["PK","id","BIGINT",["AI"]],[null,"uid","VARCHAR(20)",["UQ"]],[null,"pwd","VARCHAR(60)",[]],
+      [null,"name","VARCHAR(50)",[]],[null,"tel","VARCHAR(20)",[]],[null,"rank","TINYINT",[]],
+      [null,"created_at","TIMESTAMP",[]],[null,"updated_at","TIMESTAMP",[]]]},
+    notices:{x:1160,y:40,color:"#c62828",label:"notices",comment:"공지사항",cols:[
+      ["PK","id","BIGINT",["AI"]],[null,"title","VARCHAR",["NN"]],[null,"content","TEXT",[]],
+      [null,"writer_id","VARCHAR",[]],[null,"created_at","TIMESTAMP",[]],[null,"updated_at","TIMESTAMP",[]]]}
+  },
+  rels:[
+    ["pensions","user_id","users","id"],
+    ["reservations","user_id","users","id"],
+    ["reservations","pension_id","pensions","id"],
+    ["payments","reservation_id","reservations","id"],
+    ["payments","user_id","users","id"],
+    ["reviews","user_id","users","id"],
+    ["reviews","pension_id","pensions","id"]
+  ]
+};
+
+const GOODS = {
+  tables:{
+    member:{x:40,y:470,color:"#4f83cc",label:"member",comment:"회원",cols:[
+      ["PK","uid","VARCHAR",["PK"]],[null,"pwd","VARCHAR",[]],[null,"name","VARCHAR",[]],
+      [null,"tel","VARCHAR",[]],[null,"zip","VARCHAR",[]],[null,"juso","VARCHAR",[]],
+      [null,"email","VARCHAR",[]],[null,"birthday","VARCHAR",[]]]},
+    opt:{x:40,y:40,color:"#fb8c00",label:"opt",comment:"옵션 그룹",cols:[
+      ["PK","opt_id","INT",["AI"]],[null,"name","VARCHAR",[]]]},
+    opts:{x:40,y:230,color:"#8e24aa",label:"opts",comment:"옵션 상세",cols:[
+      ["PK","id","INT",["AI"]],["FK","opt_id","INT",[]],[null,"name","VARCHAR",[]]]},
+    product:{x:410,y:40,color:"#43a047",label:"product",comment:"상품",cols:[
+      ["PK","id","INT",["AI"]],[null,"menu","INT",[]],[null,"code","VARCHAR",[]],[null,"name","VARCHAR",[]],
+      [null,"coname","VARCHAR",[]],[null,"price","INT",[]],["FK","opt1","INT",[]],["FK","opt2","INT",[]],
+      [null,"contents","TEXT",[]],[null,"status","INT",[]],[null,"icon_new","TINYINT",[]],[null,"icon_hit","TINYINT",[]],
+      [null,"icon_sale","TINYINT",[]],[null,"discount","INT",[]],[null,"regday","VARCHAR",[]],
+      [null,"image1","VARCHAR",[]],[null,"image2","VARCHAR",[]],[null,"image3","VARCHAR",[]]]},
+    jumun:{x:790,y:40,color:"#00897b",label:"jumun",comment:"주문 (주문서)",cols:[
+      ["PK","id","VARCHAR",["주문번호"]],["FK","member_id","VARCHAR",[]],[null,"jumunday","DATETIME",[]],
+      [null,"product_names","VARCHAR",[]],[null,"product_nums","INT",[]],[null,"o_name","VARCHAR",["주문자"]],
+      [null,"o_tel","VARCHAR",[]],[null,"o_email","VARCHAR",[]],[null,"o_zip","VARCHAR",[]],[null,"o_juso","VARCHAR",[]],
+      [null,"r_name","VARCHAR",["수령자"]],[null,"r_tel","VARCHAR",[]],[null,"r_email","VARCHAR",[]],
+      [null,"r_zip","VARCHAR",[]],[null,"r_juso","VARCHAR",[]],[null,"memo","VARCHAR",[]],
+      [null,"pay_kind","INT",[]],[null,"card_okno","VARCHAR",[]],[null,"card_halbu","INT",[]],
+      [null,"card_kind","INT",[]],[null,"bank_kind","INT",[]],[null,"bank_sender","VARCHAR",[]],
+      [null,"totalprice","INT",[]],[null,"state","INT",[]]]},
+    jumuns:{x:1160,y:470,color:"#c62828",label:"jumuns",comment:"주문 상세 (품목)",cols:[
+      ["FK","jumun_id","VARCHAR",[]],["FK","product_id","INT",[]],[null,"num","INT",[]],
+      [null,"price","INT",[]],[null,"prices","INT",[]],[null,"discount","INT",[]],
+      ["FK","opts_id1","INT",[]],["FK","opts_id2","INT",[]]]}
+  },
+  rels:[
+    ["opts","opt_id","opt","opt_id"],
+    ["product","opt1","opt","opt_id"],
+    ["product","opt2","opt","opt_id"],
+    ["jumun","member_id","member","uid"],
+    ["jumuns","jumun_id","jumun","id"],
+    ["jumuns","product_id","product","id"],
+    ["jumuns","opts_id1","opts","id"],
+    ["jumuns","opts_id2","opts","id"]
+  ]
+};
+
+const HEADER_H = 40, ROW_H = 30, TW = 250;
+
+function renderTable(stage, key, t){
+  const el = document.createElement("div");
+  el.className = "tbl";
+  el.style.left = t.x+"px"; el.style.top = t.y+"px";
+  let rows = "";
+  t.cols.forEach(([k,name,type,badges])=>{
+    const kc = k==="PK"?"<span class='k kpk'>🔑</span>":k==="FK"?"<span class='k kfk'>◈</span>":"<span class='k'></span>";
+    const bd = badges.length?`<span class="badge">${badges.join(" ")}</span>`:"";
+    rows += `<div class="row ${k==='PK'?'pk':''}">${kc}<span class="nm">${name}${bd}</span><span class="ty">${type}</span></div>`;
+  });
+  el.innerHTML = `<div class="tbl__hd" style="background:${t.color}">${t.label}<small>${t.comment}</small></div>${rows}`;
+  stage.appendChild(el);
+}
+
+function colCenterY(t, colName){
+  const idx = t.cols.findIndex(c=>c[1]===colName);
+  return t.y + HEADER_H + idx*ROW_H + ROW_H/2;
+}
+
+function draw(model, stageId, wiresId){
+  const stage = document.getElementById(stageId);
+  const wires = document.getElementById(wiresId);
+  Object.entries(model.tables).forEach(([k,t])=>renderTable(stage,k,t));
+  let maxX=0,maxY=0;
+  Object.values(model.tables).forEach(t=>{
+    const h = HEADER_H + t.cols.length*ROW_H;
+    maxX=Math.max(maxX,t.x+TW); maxY=Math.max(maxY,t.y+h);
+  });
+  stage.style.width=(maxX+60)+"px"; stage.style.height=(maxY+60)+"px";
+
+  const NS="http://www.w3.org/2000/svg";
+  model.rels.forEach(([ct,cc,pt,pc])=>{
+    const c=model.tables[ct], p=model.tables[pt];
+    const cCenter=c.x+TW/2, pCenter=p.x+TW/2;
+    const parentRight = pCenter > cCenter;
+    const cx = parentRight ? c.x+TW : c.x;
+    const px = parentRight ? p.x : p.x+TW;
+    const cy = colCenterY(c,cc), py = colCenterY(p,pc);
+    const dir = parentRight ? 1 : -1;
+    const midX = (cx+px)/2;
+
+    const path=document.createElementNS(NS,"path");
+    path.setAttribute("d",`M ${cx} ${cy} H ${midX} V ${py} H ${px}`);
+    path.setAttribute("fill","none");
+    path.setAttribute("stroke","var(--rel)");
+    path.setAttribute("stroke-width","1.5");
+    wires.appendChild(path);
+
+    const fx = cx + dir*16;
+    [-6,0,6].forEach(off=>{
+      const l=document.createElementNS(NS,"path");
+      l.setAttribute("d",`M ${fx} ${cy} L ${cx} ${cy+off}`);
+      l.setAttribute("stroke","var(--rel)"); l.setAttribute("stroke-width","1.5"); l.setAttribute("fill","none");
+      wires.appendChild(l);
+    });
+    const bx = px + (parentRight?12:-12);
+    const bar=document.createElementNS(NS,"line");
+    bar.setAttribute("x1",bx);bar.setAttribute("y1",py-6);bar.setAttribute("x2",bx);bar.setAttribute("y2",py+6);
+    bar.setAttribute("stroke","var(--rel)");bar.setAttribute("stroke-width","1.5");
+    wires.appendChild(bar);
+  });
+}
+
+draw(HOTEL,"stage-hotel","wires-hotel");
+draw(GOODS,"stage-goods","wires-goods");
+</script>
+</body>
+</html>
