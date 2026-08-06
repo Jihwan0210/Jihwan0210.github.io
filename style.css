@@ -293,6 +293,10 @@ a.dp-live__btn:hover{text-decoration:underline;text-underline-offset:3px}
 .dp-live__acc{margin-left:auto;display:inline-flex;align-items:center;gap:7px;font-size:.78rem;color:var(--ink2)}
 .dp-live__acc code{font-family:var(--mono);font-size:.86em;background:var(--bg);border:1px solid var(--line);padding:3px 8px;border-radius:5px;color:var(--ink)}
 @media(max-width:620px){.dp-live__acc{margin-left:0}}
+.dp-live__accs{margin-left:auto;display:flex;flex-direction:column;gap:6px;align-items:flex-end}
+.dp-live__accs .dp-live__acc{margin-left:0}
+.dp-live__acc .role{font-family:var(--mono);font-size:.62rem;color:var(--ink3);letter-spacing:.04em}
+@media(max-width:620px){.dp-live__accs{margin-left:0;align-items:flex-start}}
 
 /* ===== v17 소개 영상 ===== */
 .dp-shot--video{aspect-ratio:16/9;background:#0b0e14;margin-bottom:0}
