@@ -90,8 +90,8 @@
       <h2>비로그인 체험</h2>
       <div class="star">
         <div class="star__i"><span class="k">상황</span><p>가입 전에는 AI 리뷰 품질을 확인할 방법이 없었습니다. 그렇다고 계정 없이 그냥 열어두면 <b>AI 호출 비용</b>을 통제할 수 없었습니다.</p></div>
-        <div class="star__i"><span class="k">해결</span><p><code>guest_token</code> 쿠키로 비회원을 식별하고, Redis 카운터에 <b>첫 요청에만</b> TTL 24시간을 걸어 사용 횟수를 제한했습니다.</p></div>
-        <div class="star__i res"><span class="k">결과</span><p>회원가입 없이 리뷰를 체험할 수 있게 열면서도, 게스트 1인당 AI 호출을 <b>24시간 3회</b>로 상한을 고정했습니다.</p></div>
+        <div class="star__i"><span class="k">해결</span><p><code>guest_token</code> 쿠키로 브라우저를 식별하고, Redis 카운터에 <b>첫 요청에만</b> TTL 24시간을 걸어 사용 횟수를 제한했습니다. 사람이 아니라 쿠키 단위 식별이라 완전한 차단이 아니라 <b>비용 상한 장치</b>입니다.</p></div>
+        <div class="star__i res"><span class="k">결과</span><p>회원가입 없이 리뷰를 체험할 수 있게 열면서도, 쿠키 하나당 AI 호출을 <b>첫 요청 기준 24시간 3회</b>로 제한했습니다.</p></div>
       </div>
       <h3 class="sub">구현 상세</h3>
       <div class="flow">
@@ -102,11 +102,20 @@
         <span class="step">사용량 로그</span>
       </div>
       <ul class="role-list" style="margin-top:20px">
-        <li><code>guest_token</code> 쿠키(24시간)로 비회원을 식별하고, 없으면 UUID를 새로 발급합니다.</li>
-        <li>체험 횟수는 24시간 뒤 사라져도 되는 값이라, 테이블에 쌓고 만료를 직접 지우는 대신 <b>TTL을 걸 수 있는 Redis</b>를 골랐습니다.</li>
-        <li>카운터를 올리며 <b>첫 요청에만</b> TTL 24시간을 걸어, 슬라이딩이 아니라 첫 사용 시점 기준으로 리셋되게 했습니다. 초과 시 403.</li>
+        <li><code>guest_token</code> 쿠키(24시간)로 비회원을 식별하고, 없으면 UUID를 새로 발급합니다. 쿠키를 지우거나 다른 브라우저로 오면 새 식별자가 되므로, 이 제한은 <b>로그인 사용자 인증이 아니라 비용 통제 수단</b>입니다.</li>
+        <li>체험 횟수는 24시간 뒤 사라져도 되는 값이라, 테이블에 쌓고 만료를 직접 지우는 대신 <b>TTL을 걸 수 있는 Redis</b>를 골랐습니다. DB에 카운터 행과 만료 시각을 두는 방법도 가능했지만, 만료 데이터 정리 작업을 따로 만들어야 해 이미 쓰고 있던 Redis를 택했습니다.</li>
+        <li>카운터를 올리며 <b>첫 요청에만</b> TTL 24시간을 걸어, 슬라이딩이 아니라 첫 사용 시점 기준으로 리셋되게 했습니다(자정 초기화 아님).</li>
+        <li>한도 초과 시 현재는 403을 반환합니다. 일정 시간당 요청 제한에는 <code>429 Too Many Requests</code>가 규격에 맞아, 재시도 가능 시각 안내와 함께 바꿀 항목으로 두고 있습니다.</li>
+        <li><code>INCR</code> 자체는 원자적이지만 <b>INCR · TTL 설정 · 상한 검사를 묶은 동작 전체가 원자적이지는 않습니다.</b> 동시 요청에서 한도를 살짝 넘길 수 있는 구간이라, Lua 스크립트로 묶는 방식을 다음 개선안으로 정리해 뒀습니다.</li>
         <li>게스트는 경량 모델과 FREE 프롬프트로 고정해 비용을 통제합니다.</li>
         <li>AI 사용량 로그는 <code>userId=null</code>로 남기되, 저장이 실패해도 리뷰 응답은 계속되도록 격리했습니다.</li>
+      </ul>
+      <h3 class="sub">확인한 것과 남은 한계</h3>
+      <ul class="role-list">
+        <li><b>확인</b> 같은 쿠키로 4회째 요청 시 AI 호출이 막히고, TTL 만료 뒤 다시 허용되는 것을 직접 재현했습니다.</li>
+        <li><b>한계</b> 쿠키 삭제·시크릿 창으로 새 식별자를 받으면 우회됩니다. 체험 한정 정책이라 감수한 범위입니다.</li>
+        <li><b>한계</b> AI 호출이 실패했을 때 차감을 되돌리는 처리와 Redis 장애 시 동작은 아직 정리하지 않았습니다. 체험 기능은 막고 본 서비스는 유지하는 쪽으로 분리하는 것이 다음 과제입니다.</li>
+        <li><b>미검증</b> 동시 요청 부하에서 한도 초과 여부는 측정하지 않았습니다.</li>
       </ul>
     </section>
 
@@ -114,8 +123,8 @@
       <h2>구독 결제</h2>
       <div class="star">
         <div class="star__i"><span class="k">상황</span><p>매일 자정 만료 구독을 한꺼번에 청구하는 배치라, <b>한 건의 결제 실패</b>가 배치 전체를 멈추면 나머지 구독자 청구가 밀립니다.</p></div>
-        <div class="star__i"><span class="k">해결</span><p>구독을 <b>건별 <code>@Transactional</code></b>로 청구해 실패를 격리하고, 최초 구독은 즉시 청구가 실패하면 구독 생성까지 롤백했습니다.</p></div>
-        <div class="star__i res"><span class="k">결과</span><p>실패한 구독만 FREE로 강등되고 배치는 계속 돕니다. <b>결제 없이 구독만 생성되는 상태</b>가 생기지 않습니다.</p></div>
+        <div class="star__i"><span class="k">해결</span><p>구독을 <b>건별 <code>@Transactional</code></b>로 청구해 실패를 격리하고, 최초 구독은 즉시 청구가 실패하면 구독 생성까지 롤백했습니다. 여기서 롤백되는 것은 <b>내부 DB 상태</b>이며, 외부 결제 승인 취소와는 다른 동작입니다.</p></div>
+        <div class="star__i res"><span class="k">결과</span><p>실패한 구독만 FREE로 강등되고 나머지 구독 청구는 계속 진행됩니다. <b>결제 없이 구독만 생성되는 상태</b>가 생기지 않습니다. 단일 인스턴스 운영 기준입니다.</p></div>
       </div>
       <h3 class="sub">구현 상세</h3>
       <div class="flow">
@@ -130,6 +139,12 @@
         <li>매일 자정 만료 구독을 <b>건별 트랜잭션</b>으로 청구해, 한 건의 실패가 배치 전체를 멈추지 않게 격리했습니다.</li>
         <li>청구 실패 시 해당 구독만 FREE로 강등하고, 플랜 변경은 일할계산해 히스토리로 남깁니다.</li>
       </ul>
+      <h3 class="sub">확인한 것과 남은 한계</h3>
+      <ul class="role-list">
+        <li><b>검증 방법</b> 실제 청구가 일어나지 않는 테스트 환경에서 정상 건 사이에 실패 1건을 주입하고, 실패한 구독만 FREE로 바뀌는지와 나머지 구독의 청구 결과가 DB에 남는지를 비교합니다.</li>
+        <li><b>한계</b> 현재는 단일 인스턴스 운영입니다. 인스턴스를 늘리면 같은 배치가 중복 실행될 수 있어, 잠금(ShedLock 등)이나 실행 이력 테이블은 <b>도입 전 검토 단계</b>입니다.</li>
+        <li><b>한계</b> 외부 결제 승인은 성공했는데 이후 DB 저장이 실패하는 경우는 별도 보정이 필요합니다. 실패 알림·재시도 정책과 함께 아직 구현하지 않았습니다.</li>
+      </ul>
     </section>
 
     <section class="dp-sec rv">
@@ -137,14 +152,20 @@
       <div class="star">
         <div class="star__i"><span class="k">상황</span><p>회원·공지·약관·AI 사용량을 운영자가 직접 다뤄야 했고, 통계 화면은 회원 수만큼 닉네임 조회가 따라붙었습니다.</p></div>
         <div class="star__i"><span class="k">해결</span><p><code>/api/admin/**</code>을 <code>ROLE_ADMIN</code>으로 잠그고, 공지 메일은 <code>@Async</code>로 뺐습니다. 닉네임은 <code>IN</code> 조회 한 번으로 채웠습니다.</p></div>
-        <div class="star__i res"><span class="k">결과</span><p>비관리자 접근은 403으로 끊기고, 통계 조회의 <b>N+1 쿼리를 1회 조회로</b> 줄였습니다. 메일 발송이 응답을 붙잡지 않습니다.</p></div>
+        <div class="star__i res"><span class="k">결과</span><p>비관리자 접근은 403으로 끊기고, 회원 수만큼 늘어나던 닉네임 조회를 <b><code>IN</code> 조회 한 번</b>으로 묶었습니다. 메일 발송은 응답 이후로 넘어갑니다.</p></div>
       </div>
       <h3 class="sub">구현 상세</h3>
       <ul class="role-list">
         <li><code>/api/admin/**</code>은 JWT가 심은 <code>ROLE_ADMIN</code>으로만 접근하게 하고, 비관리자는 403으로 끊습니다.</li>
         <li>회원 역할과 상태 변경, 공지, 약관, 가이드라인 관리를 제공합니다.</li>
         <li>전체 공지 메일은 회원 수만큼 발송이 걸려 응답을 붙잡을 이유가 없어, <code>@Async</code>로 백그라운드에 넘기고 건별 실패를 로깅합니다.</li>
-        <li>AI 사용량 통계에서 닉네임을 <code>IN</code> 조회 한 번으로 채워 N+1을 피했습니다.</li>
+        <li>AI 사용량 통계에서 닉네임을 <code>IN</code> 조회 한 번으로 채워, 회원 수에 비례해 늘던 조회를 없앴습니다.</li>
+      </ul>
+      <h3 class="sub">확인한 것과 남은 한계</h3>
+      <ul class="role-list">
+        <li><b>확인</b> 실행 SQL 로그로 회원별 조회가 사라지고 <code>IN</code> 조회로 합쳐진 것을 확인했습니다.</li>
+        <li><b>미측정</b> 데이터 규모별 응답 시간은 측정하지 않았습니다. 고정 데이터셋과 페이지 크기를 정해 변경 전후를 재는 것이 다음 과제입니다.</li>
+        <li><b>한계</b> <code>@Async</code> 공지 메일은 발송 실패 시 로깅만 하고 재시도하지 않습니다. 스레드 풀이 가득 찼을 때의 동작과 발송 완료 시각도 따로 측정하지 않았습니다.</li>
       </ul>
     </section>
 
