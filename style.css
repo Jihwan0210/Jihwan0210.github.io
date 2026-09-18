@@ -238,9 +238,9 @@ section[id]{scroll-margin-top:84px}
 .star{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:20px}
 @media(max-width:760px){.star{grid-template-columns:1fr;gap:13px}}
 .star__i{border-left:2px solid var(--line2);padding-left:14px}
-.star__i.res{border-left-color:var(--accent)}
+
 .star__i .k{display:block;font-family:var(--mono);font-size:.73rem;letter-spacing:.04em;color:var(--ink3);margin-bottom:6px}
-.star__i.res .k{color:var(--accent-ink)}
+.star__i.res .k{color:var(--ink3)}
 .star__i p{font-size:.97rem;color:var(--ink2);line-height:1.65}
 .star__i p b{color:var(--ink);font-weight:700}
 .dp-sec > h3.sub{font-family:var(--mono);font-size:.76rem;letter-spacing:.04em;color:var(--ink3);font-weight:400;margin:0 0 12px}
@@ -305,7 +305,7 @@ a.dp-live__btn:hover{text-decoration:underline;text-underline-offset:3px}
 
 /* Troubleshooting eyebrow + Trade-off list */
 .dp-eyebrow{font-family:var(--mono);font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--accent-ink);background:var(--accent-soft);display:inline-block;padding:4px 10px;border-radius:999px;margin-bottom:12px}
-.tro{display:grid;gap:10px;max-width:74ch;margin-bottom:4px}
+.tro{display:grid;gap:10px;margin-bottom:4px}
 .tro li{list-style:none;display:grid;grid-template-columns:auto 1fr;gap:12px;align-items:start;padding:13px 15px;border:1px solid var(--line);border-radius:var(--r-sm);background:var(--bg)}
 .tro li.pick{border-color:var(--accent);background:var(--accent-soft)}
 .tro .mk{font-family:var(--mono);font-size:.82rem;font-weight:700;width:30px;height:30px;display:grid;place-items:center;border-radius:8px;background:var(--surface);border:1px solid var(--line2);color:var(--ink3)}
@@ -314,6 +314,6 @@ a.dp-live__btn:hover{text-decoration:underline;text-underline-offset:3px}
 .tro .h .no,.tro .h .yes{font-family:var(--mono);font-size:.78rem;margin-right:7px}
 .tro .h .no{color:#B4262A}
 .tro .h .yes{color:var(--accent-ink)}
-.tro p{margin-top:5px;font-size:.95rem;color:var(--ink2);line-height:1.6}
+.tro p{margin-top:5px;font-size:.95rem;color:var(--ink2);line-height:1.6;max-width:none}
 .tro p b{color:var(--ink);font-weight:700}
 @media(max-width:560px){.tro li{padding:12px 13px;gap:10px}}
