@@ -53,15 +53,17 @@
   <div class="dp-secs">
     <section class="dp-sec rv">
       <h2>프로젝트 소개</h2>
-      <p class="role-lead">개발자들은 코드를 완성하면 동료에게 검토를 받습니다. 이 검토를 AI가 대신 해 주는 서비스입니다. 검토 결과를 계속 쌓아 어떤 실수가 반복되는지 통계로 보여 주고, 주간 리포트를 메일로 보냅니다. 월 구독료를 받고 운영자가 회원을 관리하는 기능까지 갖춘 팀 프로젝트입니다.</p>
+      <p class="role-lead">개발자는 코드를 다 짜면 동료에게 검토를 받습니다. 이 과정이 팀에서 가장 자주 밀립니다. 검토할 사람은 바쁘고, 놓친 실수는 나중에 장애로 돌아옵니다.</p>
+      <p class="role-lead" style="margin-top:12px">COGI는 이 검토를 <b>AI가 먼저 해 주는 서비스</b>입니다. 개발자가 코드를 올리면 AI가 문제를 짚어 주고, 그 결과를 계속 쌓아 <b>어떤 실수가 반복되는지</b> 팀·개인별 통계로 보여 줍니다. 매주 리포트도 메일로 보냅니다.</p>
+      <p class="role-lead" style="margin-top:12px">여기까지는 "쓸 만한 기능"입니다. 문제는 그다음이었습니다. AI를 부를 때마다 <b>실제 비용이 나가고</b>, 월 구독료를 받으려면 <b>돈이 오가는 흐름</b>을 책임져야 합니다. 제가 맡은 부분이 정확히 이 지점이었습니다.</p>
     </section>
     <section class="dp-sec rv">
       <h2>내 역할</h2>
-      <p class="role-lead">사용자가 서비스를 <b>처음 써 보고 → 돈을 내고 → 운영자가 관리하는</b> 흐름을 맡았습니다. 화면 뒤에서 실제로 동작하는 서버 부분입니다.</p>
+      <p class="role-lead">사용자가 <b>처음 써 보고 → 돈을 내고 → 운영자가 관리하는</b> 흐름을 맡았습니다. 기능을 만드는 일보다, <b>잘못됐을 때 무슨 일이 벌어지는지</b>를 막는 일이 대부분이었습니다.</p>
       <ul class="role-list">
-        <li><b>가입 전 무료 체험</b> 회원가입 없이도 AI 검토를 써 볼 수 있게 열되, AI 사용료가 무한정 나가지 않도록 횟수를 제한했습니다.</li>
-        <li><b>구독 결제</b> 매달 카드에서 자동으로 결제되는 기능을 만들고, 한 명의 결제 실패가 다른 사람에게 번지지 않게 했습니다.</li>
-        <li><b>관리 기능</b> 운영자가 회원·공지사항·약관을 관리하고 AI 사용량을 확인하는 기능을 만들었습니다.</li>
+        <li><b>가입 전 무료 체험</b> 안 써 보면 결제하지 않고, 그냥 열어 두면 사용료가 샙니다. 둘 사이의 선을 정하는 일이었습니다.</li>
+        <li><b>구독 결제</b> 매달 자동으로 결제되게 만들고, <b>한 명의 실패가 다른 사람에게 번지지 않도록</b> 막았습니다.</li>
+        <li><b>관리 기능</b> 운영자가 회원·공지·약관을 다루고 AI 사용량을 확인하는 화면을 만들었습니다. 회원이 늘수록 느려지던 통계도 함께 손봤습니다.</li>
       </ul>
     </section>
 
@@ -89,19 +91,18 @@
     </section>
 
     <section class="dp-sec rv">
-      <span class="dp-eyebrow">Troubleshooting</span>
-      <h2>가입 전 무료 체험 — AI 사용료가 새어 나가던 문제</h2>
+      <span class="dp-eyebrow">Trouble Shooting</span>
+      <h2>가입 전 무료 체험 — 열어 두면 비용이 새고, 막으면 아무도 안 씁니다</h2>
       <div class="star">
         <div class="star__i"><span class="k">상황</span><p>가입하기 전에는 AI 검토가 쓸 만한지 확인할 방법이 없었습니다. 그렇다고 아무나 무제한으로 쓰게 두면, AI를 부를 때마다 드는 <b>사용료를 통제할 수 없었습니다.</b></p></div>
         <div class="star__i"><span class="k">해결</span><p>브라우저에 임시 표식(쿠키)을 하나 남겨 "같은 사람"인지 구분하고, 그 표식별로 사용 횟수를 세었습니다. 이 횟수는 <b>24시간이 지나면 자동으로 지워지는 저장소</b>에 보관했습니다. 사람이 아니라 브라우저를 구분하는 방식이라 완벽한 차단이 아니라 <b>비용이 새는 것을 막는 장치</b>입니다.</p></div>
         <div class="star__i res"><span class="k">결과</span><p>회원가입 없이도 체험할 수 있게 열면서, 한 브라우저당 <b>처음 쓴 시각부터 24시간 동안 3번</b>까지만 AI를 부르도록 제한했습니다.</p></div>
       </div>
-      <h3 class="sub">Trade-off · 고민한 방법</h3>
+      <h3 class="sub">Trade-off</h3>
       <ol class="tro">
-        <li><span class="mk">1</span><div><div class="h"><span class="no">X</span>제한 없이 그냥 열어 두기</div><p>만들기는 가장 쉽지만, AI를 부를 때마다 <b>비용이 그대로 나갑니다.</b> 한 사람이 계속 눌러도 막을 방법이 없어 제외했습니다.</p></div></li>
-        <li><span class="mk">2</span><div><div class="h"><span class="no">X</span>회원가입을 해야만 쓰게 하기</div><p>비용은 확실히 막히지만, <b>가입 전에 품질을 보여 준다</b>는 기능의 목적 자체가 사라집니다.</p></div></li>
-        <li><span class="mk">3</span><div><div class="h"><span class="no">X</span>데이터베이스에 사용 횟수 기록</div><p>가능한 방법입니다. 다만 하루가 지나면 필요 없는 기록이라, <b>오래된 데이터를 지우는 작업을 따로 만들어야</b> 하고 요청마다 데이터베이스를 건드립니다.</p></div></li>
-        <li class="pick"><span class="mk">4</span><div><div class="h"><span class="yes">O</span>시간이 지나면 자동으로 사라지는 저장소에 기록</div><p>정해 둔 시간이 지나면 <b>알아서 지워지므로 정리 작업이 필요 없습니다.</b> 이미 서비스에서 쓰고 있어 새로 추가할 것도 없었습니다. 24시간은 <b>처음 쓴 시각부터</b> 세고, 쓸 때마다 연장되거나 자정에 초기화되지 않습니다.</p></div></li>
+        <li><span class="mk">1</span><div><div class="h"><span class="no">X</span>회원마다 이름을 따로 조회 (기존)</div><p><b>회원이 100명이면 조회도 100번</b>, 늘수록 느려집니다.</p></div></li>
+        <li><span class="mk">2</span><div><div class="h"><span class="no">X</span>통계 표에 이름을 복사해 저장</div><p>조회는 한 번이지만 <b>이름을 바꾸면 옛 이름이 남습니다.</b></p></div></li>
+        <li class="pick"><span class="mk">3</span><div><div class="h"><span class="yes">O</span>필요한 이름을 모아 한 번에 조회</div><p><b>회원이 늘어도 조회는 한 번</b>이고, 이름은 회원 정보 한 곳에만 둡니다.</p></div></li>
       </ol>
 
       <h3 class="sub">처리 흐름</h3>
@@ -121,14 +122,14 @@
     </section>
 
     <section class="dp-sec rv">
-      <span class="dp-eyebrow">Troubleshooting</span>
-      <h2>구독 결제 — 한 명의 실패가 전체를 멈추던 문제</h2>
+      <span class="dp-eyebrow">Trouble Shooting</span>
+      <h2>구독 결제 — 한 명의 카드 실패가 전원의 결제를 되돌렸습니다</h2>
       <div class="star">
         <div class="star__i"><span class="k">상황</span><p>매일 밤 12시에 이번 달 구독료를 내야 할 사람들을 모아 한꺼번에 카드 결제를 겁니다. 이때 <b>한 사람의 카드가 한도 초과 등으로 실패하면 그 줄 전체가 멈춰</b>, 나머지 사람들의 결제까지 되돌아갔습니다.</p></div>
         <div class="star__i"><span class="k">해결</span><p>결제를 <b>사람 단위로 따로 처리</b>하도록 나눴습니다. 한 명이 실패해도 그 사람만 실패로 기록되고 나머지는 그대로 진행됩니다. 처음 구독할 때 결제가 실패하면 구독 자체를 만들지 않습니다. 여기서 되돌리는 것은 <b>우리 서비스에 저장된 기록</b>이며, 카드사에 이미 승인된 결제를 취소하는 것과는 다른 동작입니다.</p></div>
         <div class="star__i res"><span class="k">결과</span><p>결제에 실패한 사람만 무료 요금제로 내려가고, 나머지 사람들의 결제는 정상으로 진행됩니다. <b>돈은 안 냈는데 유료 회원이 되는 상태</b>도 생기지 않습니다. (서버 1대로 운영하는 기준)</p></div>
       </div>
-      <h3 class="sub">Trade-off · 고민한 방법</h3>
+      <h3 class="sub">Trade-off</h3>
       <ol class="tro">
         <li><span class="mk">1</span><div><div class="h"><span class="no">X</span>기존 방식 유지 — 전체를 한 묶음으로 처리</div><p>결제 대상 전원을 하나의 묶음으로 처리하면 코드는 단순합니다. 하지만 <b>한 사람의 카드가 실패하는 순간 그날 처리한 전원의 결과가 되돌아갑니다.</b> 실제로 이 문제가 발생해 바꾸게 됐습니다.</p></div></li>
         <li><span class="mk">2</span><div><div class="h"><span class="no">X</span>실패는 무시하고 계속 진행</div><p>중단은 막을 수 있지만, <b>누가 왜 실패했는지 남지 않습니다.</b> 돈을 못 받았는데 유료 회원으로 남는 상태가 생겨 제외했습니다.</p></div></li>
@@ -151,14 +152,14 @@
     </section>
 
     <section class="dp-sec rv">
-      <span class="dp-eyebrow">Troubleshooting</span>
-      <h2>운영자용 관리 기능 — 회원이 늘수록 느려지던 통계</h2>
+      <span class="dp-eyebrow">Trouble Shooting</span>
+      <h2>운영자 관리 — 회원이 늘수록 통계 화면이 느려졌습니다</h2>
       <div class="star">
         <div class="star__i"><span class="k">상황</span><p>운영자가 회원·공지·약관·AI 사용량을 직접 다뤄야 했습니다. 그런데 사용량 통계 화면은 <b>회원이 100명이면 이름을 100번 따로 조회</b>하는 방식이라, 회원이 늘수록 느려지는 구조였습니다.</p></div>
         <div class="star__i"><span class="k">해결</span><p>관리 기능은 운영자 권한이 있어야만 열리도록 잠갔습니다. 이름 조회는 <b>한 번에 몰아서</b> 가져오도록 바꿨고, 전체 공지 메일은 사용자를 기다리게 하지 않도록 뒤에서 따로 보내게 했습니다.</p></div>
         <div class="star__i res"><span class="k">결과</span><p>운영자가 아니면 접근이 차단되고, 회원 수만큼 늘어나던 이름 조회가 <b>한 번</b>으로 줄었습니다. 메일 발송은 화면 응답을 붙잡지 않습니다.</p></div>
       </div>
-      <h3 class="sub">Trade-off · 고민한 방법</h3>
+      <h3 class="sub">Trade-off</h3>
       <ol class="tro">
         <li><span class="mk">1</span><div><div class="h"><span class="no">X</span>기존 방식 유지 — 회원마다 이름을 따로 조회</div><p>코드는 가장 단순하지만 <b>회원이 100명이면 조회를 100번</b> 합니다. 회원이 늘수록 통계 화면이 느려지는 구조라 바꿨습니다.</p></div></li>
         <li><span class="mk">2</span><div><div class="h"><span class="no">X</span>통계 표에 이름을 복사해 함께 저장</div><p>조회는 한 번으로 끝나지만, <b>회원이 이름을 바꾸면 통계에 옛 이름이 그대로 남습니다.</b> 같은 정보를 두 곳에 두는 부담이 생겨 제외했습니다.</p></div></li>
