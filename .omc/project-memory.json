@@ -1,0 +1,74 @@
+{
+  "version": "1.0.0",
+  "lastScanned": 1786208480601,
+  "projectRoot": "C:\\Users\\mijis\\Downloads\\유지환_깃 포트폴리오",
+  "techStack": {
+    "languages": [],
+    "frameworks": [],
+    "packageManager": null,
+    "runtime": null
+  },
+  "build": {
+    "buildCommand": null,
+    "testCommand": null,
+    "lintCommand": null,
+    "devCommand": null,
+    "scripts": {}
+  },
+  "conventions": {
+    "namingStyle": null,
+    "importStyle": null,
+    "testPattern": null,
+    "fileOrganization": null
+  },
+  "structure": {
+    "isMonorepo": false,
+    "workspaces": [],
+    "mainDirectories": [],
+    "gitBranches": {
+      "defaultBranch": "main",
+      "branchingStrategy": null
+    }
+  },
+  "customNotes": [],
+  "directoryMap": {
+    "images": {
+      "path": "images",
+      "purpose": null,
+      "fileCount": 12,
+      "lastAccessed": 1786208480501,
+      "keyFiles": [
+        "campuslink.png",
+        "cogi.png",
+        "erd-cogi.png",
+        "erd-goods.svg",
+        "erd-hotel.svg"
+      ]
+    },
+    "projects": {
+      "path": "projects",
+      "purpose": null,
+      "fileCount": 7,
+      "lastAccessed": 1786208480501,
+      "keyFiles": [
+        "campuslink.html",
+        "cogi.html",
+        "goods.html",
+        "hotel.html",
+        "ilgo.html"
+      ]
+    },
+    "videos": {
+      "path": "videos",
+      "purpose": null,
+      "fileCount": 2,
+      "lastAccessed": 1786208480502,
+      "keyFiles": [
+        "cogi-intro.mp4",
+        "ilgo-intro.mp4"
+      ]
+    }
+  },
+  "hotPaths": [],
+  "userDirectives": []
+}

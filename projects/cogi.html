@@ -25,12 +25,12 @@
   <section class="dp-hero">
     <p class="dp-kind rv">AI 코드 리뷰 SaaS · 4인 팀 프로젝트</p>
     <h1 class="rv">COGI</h1>
-    <p class="dp-lead rv">GitHub PR을 가져와 AI가 코드를 리뷰하고, 이슈와 성장 추이를 팀 단위로 관리하는 서비스입니다. 저는 서비스로 들어오는 세 관문을 맡았습니다.</p>
+    <p class="dp-lead rv">개발자가 짠 코드를 AI가 대신 검토해 주고, 자주 나오는 실수를 팀·개인별로 모아 보여 주는 월 구독 서비스입니다. 저는 <b>가입 전 무료 체험, 구독 결제, 운영자용 관리 기능</b> 세 가지를 맡았습니다.</p>
     <div class="dp-meta rv">
-      <div class="m"><div class="k">역할</div><div class="v">비로그인 · 결제 · 관리자</div></div>
-      <div class="m"><div class="k">구성</div><div class="v">4인 팀 (백엔드)</div></div>
+      <div class="m"><div class="k">맡은 일</div><div class="v">무료 체험 · 구독 결제 · 관리 기능</div></div>
+      <div class="m"><div class="k">팀 구성</div><div class="v">4인 팀 · 서버 개발</div></div>
       <div class="m"><div class="k">기간</div><div class="v">2026.07 ~ 2026.08</div></div>
-      <div class="m"><div class="k">기술 스택</div><div class="v">Spring Boot · React</div></div>
+      <div class="m"><div class="k">주요 기술</div><div class="v">Spring Boot · React</div></div>
     </div>
     <div class="dp-live rv">
       <span class="k">배포 링크</span>
@@ -53,124 +53,127 @@
   <div class="dp-secs">
     <section class="dp-sec rv">
       <h2>프로젝트 소개</h2>
-      <p class="role-lead">GitHub Pull Request를 가져와 AI가 코드를 리뷰하고, 발견된 이슈와 팀·개인의 성장 추이를 관리하는 SaaS입니다. 리뷰 결과를 쌓아 약점 패턴을 통계로 보여주고 주간 리포트로 발송하며, 구독 결제와 관리자 운영 기능까지 갖춘 팀 프로젝트입니다.</p>
+      <p class="role-lead">개발자들은 코드를 완성하면 동료에게 검토를 받습니다. 이 검토를 AI가 대신 해 주는 서비스입니다. 검토 결과를 계속 쌓아 어떤 실수가 반복되는지 통계로 보여 주고, 주간 리포트를 메일로 보냅니다. 월 구독료를 받고 운영자가 회원을 관리하는 기능까지 갖춘 팀 프로젝트입니다.</p>
     </section>
     <section class="dp-sec rv">
       <h2>내 역할</h2>
-      <p class="role-lead">서비스로 들어오는 <b>세 개의 관문</b>을 맡았습니다. 사용자가 처음 만나는 비로그인 체험부터 구독 결제, 운영자용 관리자까지 백엔드를 담당했습니다.</p>
+      <p class="role-lead">사용자가 서비스를 <b>처음 써 보고 → 돈을 내고 → 운영자가 관리하는</b> 흐름을 맡았습니다. 화면 뒤에서 실제로 동작하는 서버 부분입니다.</p>
       <ul class="role-list">
-        <li><b>비로그인 체험</b> 계정 없이도 AI 리뷰를 써보게 하되 남용을 막는 관문을 설계했습니다.</li>
-        <li><b>구독 결제</b> Toss 빌링키 기반 정기결제와 실패 격리 로직을 구현했습니다.</li>
-        <li><b>관리자</b> 회원, 공지, 약관, AI 사용량을 다루는 운영자 백엔드를 맡았습니다.</li>
+        <li><b>가입 전 무료 체험</b> 회원가입 없이도 AI 검토를 써 볼 수 있게 열되, AI 사용료가 무한정 나가지 않도록 횟수를 제한했습니다.</li>
+        <li><b>구독 결제</b> 매달 카드에서 자동으로 결제되는 기능을 만들고, 한 명의 결제 실패가 다른 사람에게 번지지 않게 했습니다.</li>
+        <li><b>관리 기능</b> 운영자가 회원·공지사항·약관을 관리하고 AI 사용량을 확인하는 기능을 만들었습니다.</li>
       </ul>
     </section>
 
     <section class="dp-sec rv">
-      <h2>시스템 아키텍처</h2>
+      <h2>전체 구조</h2>
+      <p class="role-lead">왼쪽에서 오른쪽으로 요청이 흘러갑니다. 색이 들어간 칸이 제가 맡은 부분입니다.</p>
       <div class="arch">
-        <div class="arch__col"><div class="lb">Client</div><div class="node">React SPA<small>사용자 · 게스트 · 관리자</small></div></div>
-        <div class="arch__col"><div class="lb">Security</div><div class="node">JWT Filter<small>OAuth2 · ROLE 검증</small></div><div class="node mine">Guest 쿠키<small>guest_token</small></div></div>
-        <div class="arch__col"><div class="lb">Domain</div><div class="node mine">Guest</div><div class="node mine">Payment</div><div class="node mine">Admin</div><div class="node">Review · Auth</div></div>
-        <div class="arch__col"><div class="lb">Infra</div><div class="node">MariaDB · JPA</div><div class="node mine">Redis<small>체험 카운터</small></div><div class="node mine">Toss API</div><div class="node">AI Gateway · Mail</div></div>
+        <div class="arch__col"><div class="lb">사용자 화면</div><div class="node">웹 화면<small>회원 · 비회원 · 운영자</small></div></div>
+        <div class="arch__col"><div class="lb">신원 확인</div><div class="node">로그인 검증<small>소셜 로그인 · 권한 확인</small></div><div class="node mine">비회원 표식<small>브라우저 쿠키</small></div></div>
+        <div class="arch__col"><div class="lb">기능</div><div class="node mine">무료 체험</div><div class="node mine">구독 결제</div><div class="node mine">운영 관리</div><div class="node">AI 검토 · 로그인</div></div>
+        <div class="arch__col"><div class="lb">저장 · 외부</div><div class="node">데이터베이스</div><div class="node mine">임시 저장소<small>체험 횟수</small></div><div class="node mine">카드 결제사</div><div class="node">AI · 메일</div></div>
       </div>
+      <p class="role-lead" style="margin-top:20px">아래는 실제 코드가 기능별로 나뉘어 있는 폴더 구조입니다. 색이 들어간 줄이 제가 만든 부분입니다.</p>
       <div class="tree"><span class="d">backend/…/idu/sba/backend</span>
 ├─ <span class="d">domain</span>
-│  ├─ <span class="me">guest</span>        <span class="cmt"># 비로그인 리뷰 (담당)</span>
-│  ├─ <span class="me">payment</span>      <span class="cmt"># 구독 결제 · 빌링 (담당)</span>
-│  │  └─ scheduler   <span class="cmt"># BillingScheduler / Processor</span>
-│  ├─ <span class="me">admin</span>        <span class="cmt"># 회원 · 공지 · 약관 · 사용량 (담당)</span>
-│  ├─ auth         <span class="cmt"># 인증 (JWT · 소셜)</span>
-│  └─ review       <span class="cmt"># AI 리뷰</span>
+│  ├─ <span class="me">guest</span>        <span class="cmt"># 가입 전 무료 체험 (담당)</span>
+│  ├─ <span class="me">payment</span>      <span class="cmt"># 구독 결제 (담당)</span>
+│  │  └─ scheduler   <span class="cmt"># 매일 밤 자동 결제 실행</span>
+│  ├─ <span class="me">admin</span>        <span class="cmt"># 운영자 관리 기능 (담당)</span>
+│  ├─ auth         <span class="cmt"># 로그인</span>
+│  └─ review       <span class="cmt"># AI 코드 검토</span>
 └─ <span class="d">global</span>
-   ├─ security     <span class="cmt"># JwtProvider · SecurityConfig</span>
-   └─ mail         <span class="cmt"># HtmlMailSender (@Async)</span></div>
+   ├─ security     <span class="cmt"># 로그인·권한 공통 처리</span>
+   └─ mail         <span class="cmt"># 메일 발송</span></div>
     </section>
 
     <section class="dp-sec rv">
-      <h2>비로그인 체험</h2>
+      <h2>가입 전 무료 체험</h2>
       <div class="star">
-        <div class="star__i"><span class="k">상황</span><p>가입 전에는 AI 리뷰 품질을 확인할 방법이 없었습니다. 그렇다고 계정 없이 그냥 열어두면 <b>AI 호출 비용</b>을 통제할 수 없었습니다.</p></div>
-        <div class="star__i"><span class="k">해결</span><p><code>guest_token</code> 쿠키로 브라우저를 식별하고, Redis 카운터에 <b>첫 요청에만</b> TTL 24시간을 걸어 사용 횟수를 제한했습니다. 사람이 아니라 쿠키 단위 식별이라 완전한 차단이 아니라 <b>비용 상한 장치</b>입니다.</p></div>
-        <div class="star__i res"><span class="k">결과</span><p>회원가입 없이 리뷰를 체험할 수 있게 열면서도, 쿠키 하나당 AI 호출을 <b>첫 요청 기준 24시간 3회</b>로 제한했습니다.</p></div>
+        <div class="star__i"><span class="k">상황</span><p>가입하기 전에는 AI 검토가 쓸 만한지 확인할 방법이 없었습니다. 그렇다고 아무나 무제한으로 쓰게 두면, AI를 부를 때마다 드는 <b>사용료를 통제할 수 없었습니다.</b></p></div>
+        <div class="star__i"><span class="k">해결</span><p>브라우저에 임시 표식(쿠키)을 하나 남겨 "같은 사람"인지 구분하고, 그 표식별로 사용 횟수를 세었습니다. 이 횟수는 <b>24시간이 지나면 자동으로 지워지는 저장소</b>에 보관했습니다. 사람이 아니라 브라우저를 구분하는 방식이라 완벽한 차단이 아니라 <b>비용이 새는 것을 막는 장치</b>입니다.</p></div>
+        <div class="star__i res"><span class="k">결과</span><p>회원가입 없이도 체험할 수 있게 열면서, 한 브라우저당 <b>처음 쓴 시각부터 24시간 동안 3번</b>까지만 AI를 부르도록 제한했습니다.</p></div>
       </div>
       <h3 class="sub">구현 상세</h3>
       <div class="flow">
-        <span class="step">게스트 요청</span><span class="ar">›</span>
-        <span class="step"><b>guest_token</b> 쿠키 24h</span><span class="ar">›</span>
-        <span class="step">Redis 카운터 <b>3회/24h</b></span><span class="ar">›</span>
-        <span class="step">AI 리뷰</span><span class="ar">›</span>
-        <span class="step">사용량 로그</span>
+        <span class="step">비회원 요청</span><span class="ar">›</span>
+        <span class="step">브라우저 표식 확인</span><span class="ar">›</span>
+        <span class="step">남은 횟수 검사 <b>24시간 3회</b></span><span class="ar">›</span>
+        <span class="step">AI 검토 실행</span><span class="ar">›</span>
+        <span class="step">사용 기록 저장</span>
       </div>
       <ul class="role-list" style="margin-top:20px">
-        <li><code>guest_token</code> 쿠키(24시간)로 비회원을 식별하고, 없으면 UUID를 새로 발급합니다. 쿠키를 지우거나 다른 브라우저로 오면 새 식별자가 되므로, 이 제한은 <b>로그인 사용자 인증이 아니라 비용 통제 수단</b>입니다.</li>
-        <li>체험 횟수는 24시간 뒤 사라져도 되는 값이라, 테이블에 쌓고 만료를 직접 지우는 대신 <b>TTL을 걸 수 있는 Redis</b>를 골랐습니다. DB에 카운터 행과 만료 시각을 두는 방법도 가능했지만, 만료 데이터 정리 작업을 따로 만들어야 해 이미 쓰고 있던 Redis를 택했습니다.</li>
-        <li>카운터를 올리며 <b>첫 요청에만</b> TTL 24시간을 걸어, 슬라이딩이 아니라 첫 사용 시점 기준으로 리셋되게 했습니다(자정 초기화 아님).</li>
-        <li>한도 초과 시 현재는 403을 반환합니다. 일정 시간당 요청 제한에는 <code>429 Too Many Requests</code>가 규격에 맞아, 재시도 가능 시각 안내와 함께 바꿀 항목으로 두고 있습니다.</li>
-        <li><code>INCR</code> 자체는 원자적이지만 <b>INCR · TTL 설정 · 상한 검사를 묶은 동작 전체가 원자적이지는 않습니다.</b> 동시 요청에서 한도를 살짝 넘길 수 있는 구간이라, Lua 스크립트로 묶는 방식을 다음 개선안으로 정리해 뒀습니다.</li>
-        <li>게스트는 경량 모델과 FREE 프롬프트로 고정해 비용을 통제합니다.</li>
-        <li>AI 사용량 로그는 <code>userId=null</code>로 남기되, 저장이 실패해도 리뷰 응답은 계속되도록 격리했습니다.</li>
+        <li>비회원은 로그인 정보가 없으므로, 브라우저에 24시간짜리 표식(<code>guest_token</code> 쿠키)을 남겨 구분합니다. 표식이 없으면 새로 발급합니다. 다만 <b>쿠키를 지우거나 다른 브라우저로 들어오면 새 사람으로 보입니다.</b> 그래서 이 제한은 본인 확인이 아니라 비용을 막는 수단입니다.</li>
+        <li>체험 횟수는 하루만 지나면 필요 없는 값입니다. 데이터베이스에 영구 보관하면 오래된 기록을 지우는 작업을 따로 만들어야 해서, <b>시간이 지나면 알아서 사라지는 저장소(Redis)</b>를 골랐습니다. 이미 서비스에서 쓰고 있어 새로 추가할 것도 없었습니다.</li>
+        <li>24시간은 <b>처음 쓴 시각부터</b> 셉니다. 쓸 때마다 시간이 연장되지도, 매일 자정에 초기화되지도 않습니다.</li>
+        <li>횟수를 다 쓰면 현재는 "권한 없음(403)" 응답을 보냅니다. 다만 <b>"너무 자주 요청했다(429)"가 더 정확한 표현</b>이라, 언제 다시 쓸 수 있는지 안내와 함께 바꿀 항목으로 남겨 뒀습니다.</li>
+        <li>횟수를 1 올리는 동작 자체는 안전하지만, <b>"올리고 · 유효시간 걸고 · 한도를 넘었는지 본다"는 세 동작이 한 덩어리로 처리되지는 않습니다.</b> 요청이 동시에 몰리면 한도를 아주 살짝 넘길 수 있는 구간이라, 세 동작을 하나로 묶는 방법을 다음 개선안으로 정리해 뒀습니다.</li>
+        <li>비회원에게는 <b>더 저렴한 AI 모델</b>을 쓰도록 고정해 비용을 낮췄습니다.</li>
+        <li>사용 기록은 회원 정보 없이 남기고, <b>기록 저장이 실패해도 사용자가 받는 검토 결과는 정상으로 나가도록</b> 분리했습니다.</li>
       </ul>
       <h3 class="sub">확인한 것과 남은 한계</h3>
       <ul class="role-list">
-        <li><b>확인</b> 같은 쿠키로 4회째 요청 시 AI 호출이 막히고, TTL 만료 뒤 다시 허용되는 것을 직접 재현했습니다.</li>
-        <li><b>한계</b> 쿠키 삭제·시크릿 창으로 새 식별자를 받으면 우회됩니다. 체험 한정 정책이라 감수한 범위입니다.</li>
-        <li><b>한계</b> AI 호출이 실패했을 때 차감을 되돌리는 처리와 Redis 장애 시 동작은 아직 정리하지 않았습니다. 체험 기능은 막고 본 서비스는 유지하는 쪽으로 분리하는 것이 다음 과제입니다.</li>
-        <li><b>미검증</b> 동시 요청 부하에서 한도 초과 여부는 측정하지 않았습니다.</li>
+        <li><b>확인함</b> 같은 브라우저로 4번째 요청을 보내면 막히고, 24시간이 지난 뒤에는 다시 허용되는 것을 직접 재현했습니다.</li>
+        <li><b>한계</b> 쿠키를 지우거나 시크릿 창을 쓰면 새 사람으로 인식돼 제한을 피할 수 있습니다. 체험 기능에만 적용되는 정책이라 감수한 범위입니다.</li>
+        <li><b>한계</b> AI 호출이 실패했는데도 횟수가 차감되는 경우를 되돌리는 처리, 그리고 저장소가 멈췄을 때의 동작은 아직 정리하지 않았습니다. 체험만 막고 나머지 서비스는 살려 두는 방향이 다음 과제입니다.</li>
+        <li><b>미검증</b> 요청이 한꺼번에 몰릴 때 한도를 넘는지는 아직 측정하지 않았습니다.</li>
       </ul>
     </section>
 
     <section class="dp-sec rv">
-      <h2>구독 결제</h2>
+      <h2>구독 결제 — 한 명의 실패가 전체를 멈추던 문제</h2>
       <div class="star">
-        <div class="star__i"><span class="k">상황</span><p>매일 자정 만료 구독을 한꺼번에 청구하는 배치라, <b>한 건의 결제 실패</b>가 배치 전체를 멈추면 나머지 구독자 청구가 밀립니다.</p></div>
-        <div class="star__i"><span class="k">해결</span><p>구독을 <b>건별 <code>@Transactional</code></b>로 청구해 실패를 격리하고, 최초 구독은 즉시 청구가 실패하면 구독 생성까지 롤백했습니다. 여기서 롤백되는 것은 <b>내부 DB 상태</b>이며, 외부 결제 승인 취소와는 다른 동작입니다.</p></div>
-        <div class="star__i res"><span class="k">결과</span><p>실패한 구독만 FREE로 강등되고 나머지 구독 청구는 계속 진행됩니다. <b>결제 없이 구독만 생성되는 상태</b>가 생기지 않습니다. 단일 인스턴스 운영 기준입니다.</p></div>
+        <div class="star__i"><span class="k">상황</span><p>매일 밤 12시에 이번 달 구독료를 내야 할 사람들을 모아 한꺼번에 카드 결제를 겁니다. 이때 <b>한 사람의 카드가 한도 초과 등으로 실패하면 그 줄 전체가 멈춰</b>, 나머지 사람들의 결제까지 되돌아갔습니다.</p></div>
+        <div class="star__i"><span class="k">해결</span><p>결제를 <b>사람 단위로 따로 처리</b>하도록 나눴습니다. 한 명이 실패해도 그 사람만 실패로 기록되고 나머지는 그대로 진행됩니다. 처음 구독할 때 결제가 실패하면 구독 자체를 만들지 않습니다. 여기서 되돌리는 것은 <b>우리 서비스에 저장된 기록</b>이며, 카드사에 이미 승인된 결제를 취소하는 것과는 다른 동작입니다.</p></div>
+        <div class="star__i res"><span class="k">결과</span><p>결제에 실패한 사람만 무료 요금제로 내려가고, 나머지 사람들의 결제는 정상으로 진행됩니다. <b>돈은 안 냈는데 유료 회원이 되는 상태</b>도 생기지 않습니다. (서버 1대로 운영하는 기준)</p></div>
       </div>
       <h3 class="sub">구현 상세</h3>
       <div class="flow">
-        <span class="step">자정 배치</span><span class="ar">›</span>
-        <span class="step">만료 구독 조회</span><span class="ar">›</span>
-        <span class="step"><b>건별 @Transactional</b> 청구</span><span class="ar">›</span>
-        <span class="step">실패 시 FREE 강등</span>
+        <span class="step">매일 밤 12시 실행</span><span class="ar">›</span>
+        <span class="step">결제일 된 사람 조회</span><span class="ar">›</span>
+        <span class="step"><b>한 명씩 따로</b> 결제</span><span class="ar">›</span>
+        <span class="step">실패한 사람만 무료 전환</span>
       </div>
       <ul class="role-list" style="margin-top:20px">
-        <li>Toss 빌링키로 최초 구독 시 즉시 1회 청구하고, 실패하면 <code>@Transactional</code>로 구독 생성까지 롤백합니다.</li>
-        <li>중복 구독 차단, 결제수단 <b>소유자 검증</b>, 필수 약관 동의 확인으로 경계를 지킵니다.</li>
-        <li>매일 자정 만료 구독을 <b>건별 트랜잭션</b>으로 청구해, 한 건의 실패가 배치 전체를 멈추지 않게 격리했습니다.</li>
-        <li>청구 실패 시 해당 구독만 FREE로 강등하고, 플랜 변경은 일할계산해 히스토리로 남깁니다.</li>
+        <li>처음 구독할 때는 카드 정보를 등록하고 바로 1회 결제합니다. 이 결제가 실패하면 구독 기록도 만들지 않고 되돌립니다.</li>
+        <li>이미 구독 중인데 또 구독되는 것을 막고, <b>등록된 카드가 정말 본인 것인지</b> 확인하고, 필수 약관에 동의했는지 검사합니다.</li>
+        <li>매일 밤 결제할 때 <b>한 명의 처리를 하나의 묶음</b>으로 다뤄, 한 사람의 실패가 다른 사람에게 번지지 않게 했습니다.</li>
+        <li>결제에 실패하면 그 사람만 무료 요금제로 내리고, 요금제를 바꾸면 남은 일수만큼 계산해 기록으로 남깁니다.</li>
       </ul>
       <h3 class="sub">확인한 것과 남은 한계</h3>
       <ul class="role-list">
-        <li><b>검증 방법</b> 실제 청구가 일어나지 않는 테스트 환경에서 정상 건 사이에 실패 1건을 주입하고, 실패한 구독만 FREE로 바뀌는지와 나머지 구독의 청구 결과가 DB에 남는지를 비교합니다.</li>
-        <li><b>한계</b> 현재는 단일 인스턴스 운영입니다. 인스턴스를 늘리면 같은 배치가 중복 실행될 수 있어, 잠금(ShedLock 등)이나 실행 이력 테이블은 <b>도입 전 검토 단계</b>입니다.</li>
-        <li><b>한계</b> 외부 결제 승인은 성공했는데 이후 DB 저장이 실패하는 경우는 별도 보정이 필요합니다. 실패 알림·재시도 정책과 함께 아직 구현하지 않았습니다.</li>
+        <li><b>검증 방법</b> 진짜 돈이 빠져나가지 않는 테스트 환경에서 정상 결제 사이에 실패 1건을 일부러 끼워 넣고, 그 사람만 무료로 바뀌는지와 나머지 사람의 결제 기록이 그대로 남는지를 비교합니다.</li>
+        <li><b>한계</b> 지금은 서버 1대로 운영합니다. 서버를 여러 대로 늘리면 <b>같은 결제가 두 번 실행될 위험</b>이 있어, 한 대만 실행하도록 막는 장치는 아직 검토 단계입니다.</li>
+        <li><b>한계</b> 카드 결제는 승인됐는데 우리 서비스에 기록이 저장되지 않는 경우는 따로 맞춰 줘야 합니다. 실패 안내와 재시도 정책은 아직 만들지 않았습니다.</li>
       </ul>
     </section>
 
     <section class="dp-sec rv">
-      <h2>관리자</h2>
+      <h2>운영자용 관리 기능</h2>
       <div class="star">
-        <div class="star__i"><span class="k">상황</span><p>회원·공지·약관·AI 사용량을 운영자가 직접 다뤄야 했고, 통계 화면은 회원 수만큼 닉네임 조회가 따라붙었습니다.</p></div>
-        <div class="star__i"><span class="k">해결</span><p><code>/api/admin/**</code>을 <code>ROLE_ADMIN</code>으로 잠그고, 공지 메일은 <code>@Async</code>로 뺐습니다. 닉네임은 <code>IN</code> 조회 한 번으로 채웠습니다.</p></div>
-        <div class="star__i res"><span class="k">결과</span><p>비관리자 접근은 403으로 끊기고, 회원 수만큼 늘어나던 닉네임 조회를 <b><code>IN</code> 조회 한 번</b>으로 묶었습니다. 메일 발송은 응답 이후로 넘어갑니다.</p></div>
+        <div class="star__i"><span class="k">상황</span><p>운영자가 회원·공지·약관·AI 사용량을 직접 다뤄야 했습니다. 그런데 사용량 통계 화면은 <b>회원이 100명이면 이름을 100번 따로 조회</b>하는 방식이라, 회원이 늘수록 느려지는 구조였습니다.</p></div>
+        <div class="star__i"><span class="k">해결</span><p>관리 기능은 운영자 권한이 있어야만 열리도록 잠갔습니다. 이름 조회는 <b>한 번에 몰아서</b> 가져오도록 바꿨고, 전체 공지 메일은 사용자를 기다리게 하지 않도록 뒤에서 따로 보내게 했습니다.</p></div>
+        <div class="star__i res"><span class="k">결과</span><p>운영자가 아니면 접근이 차단되고, 회원 수만큼 늘어나던 이름 조회가 <b>한 번</b>으로 줄었습니다. 메일 발송은 화면 응답을 붙잡지 않습니다.</p></div>
       </div>
       <h3 class="sub">구현 상세</h3>
       <ul class="role-list">
-        <li><code>/api/admin/**</code>은 JWT가 심은 <code>ROLE_ADMIN</code>으로만 접근하게 하고, 비관리자는 403으로 끊습니다.</li>
-        <li>회원 역할과 상태 변경, 공지, 약관, 가이드라인 관리를 제공합니다.</li>
-        <li>전체 공지 메일은 회원 수만큼 발송이 걸려 응답을 붙잡을 이유가 없어, <code>@Async</code>로 백그라운드에 넘기고 건별 실패를 로깅합니다.</li>
-        <li>AI 사용량 통계에서 닉네임을 <code>IN</code> 조회 한 번으로 채워, 회원 수에 비례해 늘던 조회를 없앴습니다.</li>
+        <li>관리 기능 주소는 <b>운영자 권한을 가진 사람만</b> 열 수 있게 하고, 아니면 차단합니다. 주소를 알아내도 들어올 수 없습니다.</li>
+        <li>회원의 등급·상태 변경, 공지사항, 약관, 이용 안내를 관리하는 기능을 제공합니다.</li>
+        <li>전체 공지 메일은 회원 수만큼 발송 시간이 걸립니다. 운영자가 그동안 화면 앞에서 기다릴 이유가 없어 <b>발송은 뒤에서 따로 진행</b>하고, 실패한 건은 기록으로 남깁니다.</li>
+        <li>사용량 통계에서 필요한 이름들을 <b>목록으로 모아 한 번에</b> 가져오게 바꿔, 회원 수에 비례해 늘어나던 조회를 없앴습니다.</li>
       </ul>
       <h3 class="sub">확인한 것과 남은 한계</h3>
       <ul class="role-list">
-        <li><b>확인</b> 실행 SQL 로그로 회원별 조회가 사라지고 <code>IN</code> 조회로 합쳐진 것을 확인했습니다.</li>
-        <li><b>미측정</b> 데이터 규모별 응답 시간은 측정하지 않았습니다. 고정 데이터셋과 페이지 크기를 정해 변경 전후를 재는 것이 다음 과제입니다.</li>
-        <li><b>한계</b> <code>@Async</code> 공지 메일은 발송 실패 시 로깅만 하고 재시도하지 않습니다. 스레드 풀이 가득 찼을 때의 동작과 발송 완료 시각도 따로 측정하지 않았습니다.</li>
+        <li><b>확인함</b> 실제 실행된 데이터베이스 명령 기록을 보고, 회원별 조회가 사라지고 한 번으로 합쳐진 것을 확인했습니다.</li>
+        <li><b>미측정</b> 데이터 양에 따라 실제로 몇 초가 빨라졌는지는 재지 않았습니다. 같은 조건에서 바꾸기 전후를 재 보는 것이 다음 과제입니다.</li>
+        <li><b>한계</b> 공지 메일이 발송에 실패하면 기록만 남기고 다시 보내지는 않습니다. 발송 요청이 한꺼번에 몰렸을 때의 동작도 확인하지 않았습니다.</li>
       </ul>
     </section>
 
     <section class="dp-sec rv">
-      <h2>데이터베이스 ERD</h2>
+      <h2>데이터 구조 (ERD)</h2>
+      <p class="role-lead">어떤 정보를 어떤 표에 나눠 담고, 표끼리 어떻게 연결되는지 그린 설계도입니다.</p>
       <div class="dp-erd empty" data-slot="images/erd-cogi.png 파일을 넣으면 표시됩니다">
         <img src="../images/erd-cogi.png" alt="COGI ERD" onerror="this.parentNode.classList.add('empty')" onload="this.parentNode.classList.remove('empty')">
       </div>
@@ -178,7 +181,7 @@
     </section>
 
     <section class="dp-sec rv">
-      <h2>기술 스택</h2>
+      <h2>사용한 기술</h2>
       <div class="dp-tags">
         <span class="tag">Spring Boot</span><span class="tag">Spring Security</span><span class="tag">JWT · OAuth2</span><span class="tag">Spring Data JPA</span><span class="tag">Spring AI</span><span class="tag">LLM 연동 (Claude · OpenAI · Gemini)</span><span class="tag">Redis</span><span class="tag">Toss Payments</span><span class="tag">MariaDB</span><span class="tag">React</span>
       </div>
