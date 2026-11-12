@@ -4,7 +4,7 @@
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>COGI · 유지환</title>
-<meta name="description" content="COGI - AI 코드 리뷰 SaaS. 비로그인, 결제, 관리자 백엔드 담당."/>
+<meta name="description" content="COGI - AI 코드 리뷰 구독 서비스. 결제·구독, 비로그인 체험, 관리자 콘솔 백엔드 담당."/>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
@@ -16,25 +16,25 @@
 <header class="top" id="top">
   <div class="top__in">
     <a class="dp-back" href="../index.html"><svg viewBox="0 0 24 24"><path d="M19 12H5m0 0 7 7m-7-7 7-7"/></svg>유지환 포트폴리오</a>
-    <nav class="top__links"><a class="pill" href="http://43.202.36.123/" target="_blank" rel="noopener">배포 사이트</a><a class="pill" href="https://github.com/Leeuswa/COGI" target="_blank" rel="noopener">Repository</a></nav>
+    <nav class="top__links"><a class="pill" href="https://cogi.r-e.kr/" target="_blank" rel="noopener">배포 사이트</a><a class="pill" href="https://github.com/Jihwan0210/COGI" target="_blank" rel="noopener">Repository</a></nav>
   </div>
 </header>
 
 <main class="wrap">
 
   <section class="dp-hero">
-    <p class="dp-kind rv">AI 코드 리뷰 SaaS · 4인 팀 프로젝트</p>
+    <p class="dp-kind rv">AI 코드 리뷰 구독 서비스 · 4인 팀 프로젝트</p>
     <h1 class="rv">COGI</h1>
-    <p class="dp-lead rv">개발자가 짠 코드를 AI가 대신 검토해 주고, 자주 나오는 실수를 팀·개인별로 모아 보여 주는 월 구독 서비스입니다. 저는 <b>가입 전 무료 체험, 구독 결제, 운영자용 관리 기능</b> 세 가지를 맡았습니다.</p>
+    <p class="dp-lead rv">코드나 GitHub PR을 올리면 AI가 대신 리뷰하고, 반복해서 지적된 약점을 통계로 되돌려주는 구독형 서비스입니다. 저는 <b>돈이 오가는 결제·구독</b>과, 가입 전 체험을 열어두면서 <b>AI 호출 비용이 새지 않게 막는 부분</b>, 그리고 관리자 콘솔을 맡았습니다.</p>
     <div class="dp-meta rv">
-      <div class="m"><div class="k">맡은 일</div><div class="v">무료 체험 · 구독 결제 · 관리 기능</div></div>
-      <div class="m"><div class="k">팀 구성</div><div class="v">4인 팀 · 서버 개발</div></div>
+      <div class="m"><div class="k">맡은 일</div><div class="v">결제·구독 · 비로그인 체험 · 관리자 콘솔</div></div>
+      <div class="m"><div class="k">팀 구성</div><div class="v">4인 팀 · 백엔드 API 서버</div></div>
       <div class="m"><div class="k">기간</div><div class="v">2026.07 ~ 2026.08</div></div>
-      <div class="m"><div class="k">주요 기술</div><div class="v">Spring Boot · React</div></div>
+      <div class="m"><div class="k">주요 기술</div><div class="v">Spring Boot · MariaDB · Redis</div></div>
     </div>
     <div class="dp-live rv">
       <span class="k">배포 링크</span>
-      <a class="dp-live__btn" href="http://43.202.36.123/" target="_blank" rel="noopener">http://43.202.36.123/<svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><path d="M15 3h6v6"/><path d="M10 14 21 3"/></svg></a>
+      <a class="dp-live__btn" href="https://cogi.r-e.kr/" target="_blank" rel="noopener">cogi.r-e.kr<svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><path d="M15 3h6v6"/><path d="M10 14 21 3"/></svg></a>
       <div class="dp-live__accs">
         <span class="dp-live__acc"><span class="role">팀원</span> <code>user@a.a</code> · <code>1234</code></span>
         <span class="dp-live__acc"><span class="role">팀장·관리자</span> <code>admin@a.a</code> · <code>1234</code></span>
@@ -53,17 +53,16 @@
   <div class="dp-secs">
     <section class="dp-sec rv">
       <h2>프로젝트 소개</h2>
-      <p class="role-lead">개발자는 코드를 다 짜면 동료에게 검토를 받습니다. 이 과정이 팀에서 가장 자주 밀립니다. 검토할 사람은 바쁘고, 놓친 실수는 나중에 장애로 돌아옵니다.</p>
-      <p class="role-lead" style="margin-top:12px">COGI는 이 검토를 <b>AI가 먼저 해 주는 서비스</b>입니다. 개발자가 코드를 올리면 AI가 문제를 짚어 주고, 그 결과를 계속 쌓아 <b>어떤 실수가 반복되는지</b> 팀·개인별 통계로 보여 줍니다. 매주 리포트도 메일로 보냅니다.</p>
-      <p class="role-lead" style="margin-top:12px">여기까지는 "쓸 만한 기능"입니다. 문제는 그다음이었습니다. AI를 부를 때마다 <b>실제 비용이 나가고</b>, 월 구독료를 받으려면 <b>돈이 오가는 흐름</b>을 책임져야 합니다. 제가 맡은 부분이 정확히 이 지점이었습니다.</p>
+      <p class="role-lead">코드 리뷰는 배우는 사람에게 가장 빠른 피드백이지만, 리뷰해 줄 사람이 없으면 받을 수 없습니다. COGI는 코드나 GitHub PR을 올리면 <b>AI가 대신 리뷰</b>하고, 반복해서 지적된 약점을 <b>팀·개인별 통계</b>로 되돌려줍니다.</p>
+      <p class="role-lead" style="margin-top:12px">AI를 부를 때마다 실제 비용이 나가고, 월 구독료를 받으려면 돈이 오가는 흐름을 책임져야 합니다. 제가 맡은 부분이 정확히 이 지점이었습니다. AI 리뷰 로직 자체는 다른 팀원이 담당했습니다.</p>
     </section>
     <section class="dp-sec rv">
       <h2>내 역할</h2>
       <p class="role-lead">사용자가 <b>처음 써 보고 → 돈을 내고 → 운영자가 관리하는</b> 흐름을 맡았습니다. 기능을 만드는 일보다, <b>잘못됐을 때 무슨 일이 벌어지는지</b>를 막는 일이 대부분이었습니다.</p>
       <ul class="role-list">
-        <li><b>가입 전 무료 체험</b> 안 써 보면 결제하지 않고, 그냥 열어 두면 사용료가 샙니다. 둘 사이의 선을 정하는 일이었습니다.</li>
-        <li><b>구독 결제</b> 매달 자동으로 결제되게 만들고, <b>한 명의 실패가 다른 사람에게 번지지 않도록</b> 막았습니다.</li>
-        <li><b>관리 기능</b> 운영자가 회원·공지·약관을 다루고 AI 사용량을 확인하는 화면을 만들었습니다. 회원이 늘수록 느려지던 통계도 함께 손봤습니다.</li>
+        <li><b>결제·구독</b> TossPayments 빌링키 기반 정기 결제와 플랜 변경·해지 예약·크레딧 차감을 만들었습니다. 스케줄러가 여러 구독자를 한꺼번에 결제할 때 한 건의 실패가 다른 구독자에게 번지지 않도록 결제를 건별로 나눠 처리합니다.</li>
+        <li><b>비로그인 체험</b> 가입하지 않아도 AI 리뷰를 써 볼 수 있게 열되, 24시간에 3회까지만 쓰도록 Redis로 횟수를 제한했습니다.</li>
+        <li><b>관리자 콘솔</b> 운영자가 회원·공지·통계를 다루는 기능을 만들고, 긴급 공지 메일 발송을 맡았습니다.</li>
       </ul>
     </section>
 
@@ -73,99 +72,83 @@
       <div class="arch">
         <div class="arch__col"><div class="lb">사용자 화면</div><div class="node">웹 화면<small>회원 · 비회원 · 운영자</small></div></div>
         <div class="arch__col"><div class="lb">신원 확인</div><div class="node">로그인 검증<small>소셜 로그인 · 권한 확인</small></div><div class="node mine">비회원 표식<small>브라우저 쿠키</small></div></div>
-        <div class="arch__col"><div class="lb">기능</div><div class="node mine">무료 체험</div><div class="node mine">구독 결제</div><div class="node mine">운영 관리</div><div class="node">AI 검토 · 로그인</div></div>
-        <div class="arch__col"><div class="lb">저장 · 외부</div><div class="node">데이터베이스</div><div class="node mine">임시 저장소<small>체험 횟수</small></div><div class="node mine">카드 결제사</div><div class="node">AI · 메일</div></div>
+        <div class="arch__col"><div class="lb">기능</div><div class="node mine">비로그인 체험</div><div class="node mine">구독 결제</div><div class="node mine">관리자 콘솔</div><div class="node">AI 리뷰 · 로그인</div></div>
+        <div class="arch__col"><div class="lb">저장 · 외부</div><div class="node mine">MariaDB<small>결제 시도 · 메일 작업</small></div><div class="node mine">Redis<small>체험 횟수</small></div><div class="node mine">TossPayments</div><div class="node">AI · 메일</div></div>
       </div>
-      <p class="role-lead" style="margin-top:20px">아래는 실제 코드가 기능별로 나뉘어 있는 폴더 구조입니다. 색이 들어간 줄이 제가 만든 부분입니다.</p>
-      <div class="tree"><span class="d">backend/…/idu/sba/backend</span>
-├─ <span class="d">domain</span>
-│  ├─ <span class="me">guest</span>        <span class="cmt"># 가입 전 무료 체험 (담당)</span>
-│  ├─ <span class="me">payment</span>      <span class="cmt"># 구독 결제 (담당)</span>
-│  │  └─ scheduler   <span class="cmt"># 매일 밤 자동 결제 실행</span>
-│  ├─ <span class="me">admin</span>        <span class="cmt"># 운영자 관리 기능 (담당)</span>
-│  ├─ auth         <span class="cmt"># 로그인</span>
-│  └─ review       <span class="cmt"># AI 코드 검토</span>
-└─ <span class="d">global</span>
-   ├─ security     <span class="cmt"># 로그인·권한 공통 처리</span>
-   └─ mail         <span class="cmt"># 메일 발송</span></div>
+      <p class="role-lead" style="margin-top:20px">실제 코드가 기능별로 나뉘어 있는 패키지 구조입니다. 색이 들어간 줄이 제가 맡은 부분입니다.</p>
+      <div class="tree"><span class="d">src/main/java/idu/sba/backend</span>
+├─ auth      <span class="cmt"># 로그인, 소셜 로그인</span>
+├─ <span class="me">guest</span>     <span class="cmt"># 비로그인 체험 (횟수 제한)</span>
+├─ <span class="me">payment</span>   <span class="cmt"># 구독·결제, 자동 결제</span>
+├─ review    <span class="cmt"># AI 코드 리뷰, 사용량 기록</span>
+├─ <span class="me">admin</span>     <span class="cmt"># 관리자 (회원·공지·통계)</span>
+└─ global    <span class="cmt"># 공통 설정, 예외 처리</span></div>
     </section>
 
     <section class="dp-sec rv">
-      <span class="dp-eyebrow">Trouble Shooting</span>
-      <h2>가입 전 무료 체험 — 열어 두면 비용이 새고, 막으면 아무도 안 씁니다</h2>
+      <span class="dp-eyebrow">Trouble Shooting 01</span>
+      <h2>승인 여부를 모르는 결제를 실패 처리하는 문제</h2>
       <div class="star">
-        <div class="star__i"><span class="k">상황</span><p>가입하기 전에는 AI 검토가 쓸 만한지 확인할 방법이 없었습니다. 그렇다고 아무나 무제한으로 쓰게 두면, AI를 부를 때마다 드는 <b>사용료를 통제할 수 없었습니다.</b></p></div>
-        <div class="star__i"><span class="k">해결</span><p>브라우저에 임시 표식(쿠키)을 하나 남겨 "같은 사람"인지 구분하고, 그 표식별로 사용 횟수를 세었습니다. 이 횟수는 <b>24시간이 지나면 자동으로 지워지는 저장소</b>에 보관했습니다. 사람이 아니라 브라우저를 구분하는 방식이라 완벽한 차단이 아니라 <b>비용이 새는 것을 막는 장치</b>입니다.</p></div>
-        <div class="star__i res"><span class="k">결과</span><p>회원가입 없이도 체험할 수 있게 열면서, 한 브라우저당 <b>처음 쓴 시각부터 24시간 동안 3번</b>까지만 AI를 부르도록 제한했습니다.</p></div>
+        <div class="star__i"><span class="k">문제</span><p>정기결제 요청이 타임아웃되면, 실제로는 승인됐어도 <b>실패로 보고 구독을 FREE로 강등</b>할 수 있었습니다.</p></div>
+        <div class="star__i"><span class="k">해결</span><p>결제 시도를 토스 호출 전에 DB에 먼저 기록하고, <b>같은 회차는 같은 주문번호로만</b> 청구하게 했습니다. 결과를 모르면 강등하지 않고 주문번호로 토스에 조회해 확정하며, 카드 거절처럼 확실히 거절된 결제만 강등합니다.</p></div>
+        <div class="star__i res"><span class="k">결과</span><p>8개 장애 시나리오 테스트, 실제 DB 롤백 테스트 2개, 응답 유실 100건 실험에서 <b>잘못된 FREE 강등과 중복 청구가 0건</b>이었습니다.</p></div>
       </div>
       <h3 class="sub">Trade-off</h3>
+      <p class="role-lead" style="margin-bottom:14px">돈이 오가는 곳이라 중복 청구와 승인된 사용자의 강등은 반드시 막고, 처리 지연과 수동 확인은 감수하기로 했습니다.</p>
       <ol class="tro">
-        <li><span class="mk">1</span><div><div class="h"><span class="no">X</span>회원마다 이름을 따로 조회 (기존)</div><p><b>회원이 100명이면 조회도 100번</b>, 늘수록 느려집니다.</p></div></li>
-        <li><span class="mk">2</span><div><div class="h"><span class="no">X</span>통계 표에 이름을 복사해 저장</div><p>조회는 한 번이지만 <b>이름을 바꾸면 옛 이름이 남습니다.</b></p></div></li>
-        <li class="pick"><span class="mk">3</span><div><div class="h"><span class="yes">O</span>필요한 이름을 모아 한 번에 조회</div><p><b>회원이 늘어도 조회는 한 번</b>이고, 이름은 회원 정보 한 곳에만 둡니다.</p></div></li>
+        <li><span class="mk">1</span><div><div class="h"><span class="no">X</span>즉시 실패 처리</div><p>응답이 없는 것과 거절된 것을 구분하지 못해 <b>승인된 결제도 강등</b>합니다.</p></div></li>
+        <li><span class="mk">2</span><div><div class="h"><span class="no">X</span>새 주문번호로 재청구</div><p>앞선 요청이 이미 승인됐다면 <b>두 번 청구</b>됩니다.</p></div></li>
+        <li class="pick"><span class="mk">3</span><div><div class="h"><span class="yes">O</span>같은 회차는 같은 주문번호 + 결제 조회</div><p>승인 여부를 확인한 뒤에만 확정해 <b>둘 다 막습니다.</b> 대신 시도 기록과 조회가 추가됩니다.</p></div></li>
       </ol>
-
-      <h3 class="sub">처리 흐름</h3>
-      <div class="flow">
-        <span class="step">비회원 요청</span><span class="ar">›</span>
-        <span class="step">브라우저 표식 확인</span><span class="ar">›</span>
-        <span class="step">남은 횟수 검사 <b>24시간 3회</b></span><span class="ar">›</span>
-        <span class="step">AI 검토 실행</span><span class="ar">›</span>
-        <span class="step">사용 기록 저장</span>
-      </div>
-      <ul class="role-list" style="margin-top:20px">
-        <li>비회원은 로그인 정보가 없으므로, 브라우저에 24시간짜리 표식(쿠키)을 남겨 구분합니다. 표식이 없으면 새로 발급합니다.</li>
-        <li>비회원에게는 <b>더 저렴한 AI 모델</b>을 쓰도록 고정해 비용을 한 번 더 낮췄습니다.</li>
-        <li>사용 기록 저장이 실패해도 <b>사용자가 받는 검토 결과는 정상으로 나가도록</b> 분리했습니다.</li>
+      <h3 class="sub">남은 한계</h3>
+      <ul class="role-list">
+        <li>확정되지 않은 건과 요청 오류 건은 사람이 직접 확인해야 합니다.</li>
       </ul>
-
     </section>
 
     <section class="dp-sec rv">
-      <span class="dp-eyebrow">Trouble Shooting</span>
-      <h2>구독 결제 — 한 명의 카드 실패가 전원의 결제를 되돌렸습니다</h2>
+      <span class="dp-eyebrow">Trouble Shooting 02</span>
+      <h2>비로그인 체험 요청이 횟수를 잘못 소모하는 문제</h2>
       <div class="star">
-        <div class="star__i"><span class="k">상황</span><p>매일 밤 12시에 이번 달 구독료를 내야 할 사람들을 모아 한꺼번에 카드 결제를 겁니다. 이때 <b>한 사람의 카드가 한도 초과 등으로 실패하면 그 줄 전체가 멈춰</b>, 나머지 사람들의 결제까지 되돌아갔습니다.</p></div>
-        <div class="star__i"><span class="k">해결</span><p>결제를 <b>사람 단위로 따로 처리</b>하도록 나눴습니다. 한 명이 실패해도 그 사람만 실패로 기록되고 나머지는 그대로 진행됩니다. 처음 구독할 때 결제가 실패하면 구독 자체를 만들지 않습니다. 여기서 되돌리는 것은 <b>우리 서비스에 저장된 기록</b>이며, 카드사에 이미 승인된 결제를 취소하는 것과는 다른 동작입니다.</p></div>
-        <div class="star__i res"><span class="k">결과</span><p>결제에 실패한 사람만 무료 요금제로 내려가고, 나머지 사람들의 결제는 정상으로 진행됩니다. <b>돈은 안 냈는데 유료 회원이 되는 상태</b>도 생기지 않습니다. (서버 1대로 운영하는 기준)</p></div>
+        <div class="star__i"><span class="k">문제</span><p>한도를 넘어 거절된 요청도 Redis 카운터를 올렸습니다. 그래서 AI 실패로 횟수를 돌려받아도 카운터가 여전히 한도를 넘어 있어, <b>다음 체험이 막혔습니다.</b></p></div>
+        <div class="star__i"><span class="k">해결</span><p>Redis 스크립트로 <b>한도 확인·증가·만료 설정을 한 번에</b> 처리해, 거절된 요청은 횟수를 늘리지 않게 했습니다. AI 실패 시 횟수 반환은 같은 24시간 기간 안에서만 되도록 제한했습니다.</p></div>
+        <div class="star__i res"><span class="k">결과</span><p>동시 요청 40건에서 Redis와 DB 모두 <b>정확히 3건만 허용</b>해, 정확성은 같았고 차이는 운영 부담이었습니다.</p></div>
       </div>
       <h3 class="sub">Trade-off</h3>
+      <p class="role-lead" style="margin-bottom:14px">AI 비용 상한과 체험 3회 보장을 함께 지키려면 한도 확인·증가·만료가 한 번에 처리돼야 했고, 그 조건을 채운다면 새로 만들어 운영할 것이 적은 쪽을 고르기로 했습니다.</p>
       <ol class="tro">
-        <li><span class="mk">1</span><div><div class="h"><span class="no">X</span>기존 방식 유지 — 전체를 한 묶음으로 처리</div><p>결제 대상 전원을 하나의 묶음으로 처리하면 코드는 단순합니다. 하지만 <b>한 사람의 카드가 실패하는 순간 그날 처리한 전원의 결과가 되돌아갑니다.</b> 실제로 이 문제가 발생해 바꾸게 됐습니다.</p></div></li>
-        <li><span class="mk">2</span><div><div class="h"><span class="no">X</span>실패는 무시하고 계속 진행</div><p>중단은 막을 수 있지만, <b>누가 왜 실패했는지 남지 않습니다.</b> 돈을 못 받았는데 유료 회원으로 남는 상태가 생겨 제외했습니다.</p></div></li>
-        <li class="pick"><span class="mk">3</span><div><div class="h"><span class="yes">O</span>한 사람의 결제를 각각 하나의 묶음으로 처리</div><p>실패한 사람만 되돌리고 <b>나머지 사람의 결제 결과는 그대로 저장됩니다.</b> 실패한 사람은 무료 요금제로 내리고 기록을 남겨, 나중에 원인을 추적할 수 있습니다.</p></div></li>
+        <li><span class="mk">1</span><div><div class="h"><span class="no">X</span>DB에 횟수 저장</div><p>한 번에 처리는 되지만, Redis에 있던 카운터를 옮겨야 하고 <b>만료된 행을 지우는 배치</b>도 새로 만들어야 합니다.</p></div></li>
+        <li><span class="mk">2</span><div><div class="h"><span class="no">X</span>Redis에서 증가 후 한도 검사 (기존)</div><p>증가와 검사가 따로라 <b>거절될 요청도 횟수를 먼저 늘립니다.</b></p></div></li>
+        <li class="pick"><span class="mk">3</span><div><div class="h"><span class="yes">O</span>Redis 원자적 처리</div><p>쓰던 Redis 그대로 <b>스크립트 하나로 한 번에</b> 처리하고, 만료는 TTL에 맡겨 배치가 필요 없습니다.</p></div></li>
       </ol>
-
-      <h3 class="sub">처리 흐름</h3>
-      <div class="flow">
-        <span class="step">매일 밤 12시 실행</span><span class="ar">›</span>
-        <span class="step">결제일 된 사람 조회</span><span class="ar">›</span>
-        <span class="step"><b>한 명씩 따로</b> 결제</span><span class="ar">›</span>
-        <span class="step">실패한 사람만 무료 전환</span>
-      </div>
-      <ul class="role-list" style="margin-top:20px">
-        <li>처음 구독할 때는 카드를 등록하고 바로 1회 결제합니다. 이 결제가 실패하면 <b>구독 기록도 만들지 않고 되돌립니다.</b></li>
-        <li>이미 구독 중인데 또 구독되는 것을 막고, <b>등록된 카드가 정말 본인 것인지</b> 확인하고, 필수 약관 동의를 검사합니다.</li>
-        <li>요금제를 바꾸면 남은 일수만큼 계산해 기록으로 남깁니다.</li>
+      <h3 class="sub">남은 한계</h3>
+      <ul class="role-list">
+        <li>Redis가 내려가면 체험 요청은 받지 않고 503으로 응답합니다.</li>
+        <li>DB 방식보다 개별 사용 이력을 조회하기 어렵습니다.</li>
       </ul>
-
     </section>
 
     <section class="dp-sec rv">
-      <span class="dp-eyebrow">Trouble Shooting</span>
-      <h2>운영자 관리 — 회원이 늘수록 통계 화면이 느려졌습니다</h2>
+      <span class="dp-eyebrow">Trouble Shooting 03</span>
+      <h2>서버가 종료되면 긴급 공지 메일 작업이 사라지는 문제</h2>
       <div class="star">
-        <div class="star__i"><span class="k">상황</span><p>운영자가 회원·공지·약관·AI 사용량을 직접 다뤄야 했습니다. 그런데 사용량 통계 화면은 <b>회원이 100명이면 이름을 100번 따로 조회</b>하는 방식이라, 회원이 늘수록 느려지는 구조였습니다.</p></div>
-        <div class="star__i"><span class="k">해결</span><p>관리 기능은 운영자 권한이 있어야만 열리도록 잠갔습니다. 이름 조회는 <b>한 번에 몰아서</b> 가져오도록 바꿨고, 전체 공지 메일은 사용자를 기다리게 하지 않도록 뒤에서 따로 보내게 했습니다.</p></div>
-        <div class="star__i res"><span class="k">결과</span><p>운영자가 아니면 접근이 차단되고, 회원 수만큼 늘어나던 이름 조회가 <b>한 번</b>으로 줄었습니다. 메일 발송은 화면 응답을 붙잡지 않습니다.</p></div>
+        <div class="star__i"><span class="k">문제</span><p>기존 @Async 방식은 응답은 빠르지만, 메모리에서 대기 중인 메일 작업이 <b>서버가 종료되면 사라지는</b> 구조였습니다.</p></div>
+        <div class="star__i"><span class="k">해결</span><p>공지 생성과 메일 작업 저장을 <b>하나의 트랜잭션</b>으로 묶었습니다. 조건부 UPDATE로 한 시점에 한 작업자만 작업을 가져가고, 중단된 작업은 5분 임대가 끝난 뒤 다시 처리합니다.</p></div>
+        <div class="star__i res"><span class="k">결과</span><p>별도 JVM으로 재시작한 뒤에도 <b>대기 작업 2건이 남아 있는 것</b>을 확인했습니다.</p></div>
       </div>
       <h3 class="sub">Trade-off</h3>
+      <p class="role-lead" style="margin-bottom:14px">긴급 공지는 늦더라도 빠짐없이 가는 것이 먼저였고, 4인 팀이라 이미 쓰는 MariaDB·Redis 외에 구성 요소를 늘리지 않으려 했습니다.</p>
       <ol class="tro">
-        <li><span class="mk">1</span><div><div class="h"><span class="no">X</span>기존 방식 유지 — 회원마다 이름을 따로 조회</div><p>코드는 가장 단순하지만 <b>회원이 100명이면 조회를 100번</b> 합니다. 회원이 늘수록 통계 화면이 느려지는 구조라 바꿨습니다.</p></div></li>
-        <li><span class="mk">2</span><div><div class="h"><span class="no">X</span>통계 표에 이름을 복사해 함께 저장</div><p>조회는 한 번으로 끝나지만, <b>회원이 이름을 바꾸면 통계에 옛 이름이 그대로 남습니다.</b> 같은 정보를 두 곳에 두는 부담이 생겨 제외했습니다.</p></div></li>
-        <li class="pick"><span class="mk">3</span><div><div class="h"><span class="yes">O</span>필요한 이름을 모아 한 번에 조회</div><p>통계에 필요한 회원을 먼저 추린 뒤 <b>그 목록을 한 번에 넘겨 이름을 가져옵니다.</b> 회원 수가 늘어도 조회 횟수는 늘지 않고, 이름은 회원 정보 한 곳에만 둡니다.</p></div></li>
+        <li><span class="mk">1</span><div><div class="h"><span class="no">X</span>요청 안에서 바로 메일 발송</div><p>수신자 수만큼 관리자가 기다리고, 중간에 실패하면 <b>어디까지 갔는지 모릅니다.</b></p></div></li>
+        <li><span class="mk">2</span><div><div class="h"><span class="no">X</span>기존 @Async 유지</div><p>대기 작업이 메모리에만 있어 <b>서버를 재시작하면 사라집니다.</b></p></div></li>
+        <li><span class="mk">3</span><div><div class="h"><span class="no">X</span>메시지 브로커 도입</div><p>유실은 막지만 브로커를 새로 운영해야 해, <b>수신자 100명 규모엔 과합니다.</b></p></div></li>
+        <li class="pick"><span class="mk">4</span><div><div class="h"><span class="yes">O</span>DB에 메일 작업 저장</div><p>공지와 작업이 한 트랜잭션에 남아 <b>유실이 없고</b>, 쓰던 DB만으로 재시도합니다.</p></div></li>
       </ol>
-
+      <h3 class="sub">감수한 것</h3>
+      <ul class="role-list">
+        <li>수신자 100명 기준 공지 등록 p95가 약 <b>28~30ms에서 75~83ms</b>로 늘었습니다. (로컬 측정)</li>
+        <li>발송 직후 상태 저장에 실패하면 같은 메일이 중복으로 갈 수 있습니다. <b>유실보다 중복을 감수했습니다.</b></li>
+      </ul>
     </section>
 
     <section class="dp-sec rv">
@@ -180,10 +163,10 @@
     <section class="dp-sec rv">
       <h2>사용한 기술</h2>
       <div class="dp-tags">
-        <span class="tag">Spring Boot</span><span class="tag">Spring Security</span><span class="tag">JWT · OAuth2</span><span class="tag">Spring Data JPA</span><span class="tag">Spring AI</span><span class="tag">LLM 연동 (Claude · OpenAI · Gemini)</span><span class="tag">Redis</span><span class="tag">Toss Payments</span><span class="tag">MariaDB</span><span class="tag">React</span>
+        <span class="tag">Java</span><span class="tag">Spring Boot</span><span class="tag">Spring Security</span><span class="tag">Spring Data JPA</span><span class="tag">MariaDB</span><span class="tag">Redis</span><span class="tag">TossPayments</span>
       </div>
       <div class="dp-links">
-        <a class="btn btn--p" href="https://github.com/Leeuswa/COGI" target="_blank" rel="noopener">Repository 보기</a>
+        <a class="btn btn--p" href="https://github.com/Jihwan0210/COGI" target="_blank" rel="noopener">Repository 보기</a>
       </div>
     </section>
   </div>

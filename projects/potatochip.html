@@ -4,7 +4,7 @@
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>PotatoChip · 유지환</title>
-<meta name="description" content="PotatoChip - 못난이 농산물 마켓플레이스. 팀장이자 상품 도메인 담당."/>
+<meta name="description" content="PotatoChip - 못난이 농작물 마켓플레이스. 팀장이자 상품 도메인 오너."/>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
@@ -23,18 +23,18 @@
 <main class="wrap">
 
   <section class="dp-hero">
-    <p class="dp-kind rv">못난이 농산물 마켓플레이스 · 팀장</p>
+    <p class="dp-kind rv">못난이 농작물 마켓플레이스 · 팀장 / 상품 도메인 오너</p>
     <h1 class="rv">PotatoChip</h1>
-    <p class="dp-lead rv">모양이 예쁘지 않다는 이유로 버려지는 농산물을, 농가가 소비자에게 직접 파는 온라인 장터입니다. 저는 팀장이자 <b>상품 등록부터 장바구니까지</b>를 맡았습니다.</p>
+    <p class="dp-lead rv">상품성이 낮다는 이유로 버려지는 농작물을 판매자와 구매자가 직접 거래하는 서비스입니다. 5인 팀의 팀장으로 <b>상품·재고, 장바구니, 배포</b>를 맡았습니다.</p>
     <div class="dp-meta rv">
-      <div class="m"><div class="k">맡은 일</div><div class="v">팀장 · 상품과 장바구니</div></div>
+      <div class="m"><div class="k">맡은 일</div><div class="v">상품·재고 · 장바구니 · 배포 자동화 · 팀 리딩</div></div>
       <div class="m"><div class="k">팀 구성</div><div class="v">5인 팀 · 팀장</div></div>
-      <div class="m"><div class="k">기간</div><div class="v">2026.05 ~ 06</div></div>
-      <div class="m"><div class="k">주요 기술</div><div class="v">Java · Spring Boot</div></div>
+      <div class="m"><div class="k">기간</div><div class="v">2026.05 ~ 2026.06</div></div>
+      <div class="m"><div class="k">주요 기술</div><div class="v">Spring Boot · MariaDB · Docker · AWS</div></div>
     </div>
     <div class="dp-live rv">
       <span class="k">배포 링크</span>
-      <a class="dp-live__btn" href="https://uglycrop.duckdns.org/" target="_blank" rel="noopener">https://uglycrop.duckdns.org/<svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><path d="M15 3h6v6"/><path d="M10 14 21 3"/></svg></a>
+      <a class="dp-live__btn" href="https://uglycrop.duckdns.org/" target="_blank" rel="noopener">uglycrop.duckdns.org<svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><path d="M15 3h6v6"/><path d="M10 14 21 3"/></svg></a>
       <div class="dp-live__accs">
         <span class="dp-live__acc"><span class="role">구매자</span> <code>user4@example.com</code> · <code>password</code></span>
         <span class="dp-live__acc"><span class="role">판매자</span> <code>user3@example.com</code> · <code>password</code></span>
@@ -54,102 +54,113 @@
   <div class="dp-secs">
     <section class="dp-sec rv">
       <h2>프로젝트 소개</h2>
-      <p class="role-lead">맛에는 문제가 없지만 크기나 모양이 기준에 못 미쳐 팔리지 못하는 농산물이 많습니다. 이런 농산물을 농가가 중간 유통 없이 소비자에게 직접 파는 온라인 장터입니다. 교육 과정의 팀 프로젝트로 개발했습니다.</p>
+      <p class="role-lead">못난이 농작물은 맛에 문제가 없는데도 크기나 모양 때문에 유통 과정에서 버려집니다. 농가는 팔 곳이 없고 소비자는 싸게 살 길이 없어, <b>판매자와 구매자를 직접 잇는 것</b>이 목표였습니다. 대우능력개발원 교육 과정의 팀 프로젝트입니다.</p>
+      <p class="role-lead" style="margin-top:12px">마감임박 할인처럼 판매자가 가격을 내리는 일이 잦은 서비스라, <b>가격이 언제 확정되는지</b>가 핵심 문제였습니다.</p>
     </section>
     <section class="dp-sec rv">
       <h2>내 역할</h2>
-      <p class="role-lead">팀장으로 일정과 협업 방식을 정하면서, <b>상품 등록·검색·장바구니 기능</b>을 직접 만들었습니다.</p>
+      <p class="role-lead">팀장으로 협업 방식을 정하면서, <b>상품·재고와 장바구니</b>를 직접 만들고 배포를 맡았습니다.</p>
       <ul class="role-list">
-        <li><b>상품 기능</b> 상품 등록·수정·삭제, 본인 상품만 고칠 수 있는 권한 검사, 카테고리·검색어로 찾는 기능을 만들었습니다.</li>
-        <li><b>AI 등록 도우미</b> 사진만 올리면 AI가 사진을 보고 상품 제목과 설명 초안을 대신 써 주는 기능을 붙였습니다.</li>
-        <li><b>장바구니</b> 담은 순간의 가격을 그대로 유지하는 구조를 만들었습니다. 제 작업 범위는 여기까지이고, 주문·결제는 다른 팀원이 이어받았습니다.</li>
-        <li><b>부가 기능</b> 직접 수령할 위치를 지도로 보여 주는 기능과, 기간별로 많이 팔린 상품 순위를 집계하는 기능을 만들었습니다.</li>
-        <li><b>팀 리딩</b> 각자 작업한 코드를 겹치지 않게 합치는 규칙을 정하고, 서로 코드를 확인한 뒤 합치도록 운영했습니다. 일정과 문서도 총괄했습니다.</li>
+        <li><b>상품</b> 상품 도메인과 판매자 소유권 검증을 구현하고, 상품 사진에서 제목·설명 초안을 채우는 기능을 개발했습니다.</li>
+        <li><b>재고·가격</b> 재고 초과 판매를 조건부 UPDATE로 막고, 장바구니·주문·상품 화면이 같은 가격 계산을 쓰도록 통일했습니다.</li>
+        <li><b>배포</b> 파일 저장을 인터페이스로 분리해 개발 환경은 로컬 디스크, 운영 환경은 S3를 쓰도록 하고, Docker로 EC2에 배포했습니다.</li>
+        <li><b>팀 리딩</b> 작은 PR과 develop 최신화 규칙으로 충돌을 관리하고, 일정과 담당 기능을 공유 문서로 정리했습니다.</li>
       </ul>
     </section>
 
     <section class="dp-sec rv">
       <h2>전체 구조</h2>
-      <p class="role-lead">왼쪽에서 오른쪽으로 요청이 흘러갑니다. 색이 들어간 칸이 제가 맡은 부분입니다.</p>
-      <div class="arch">
-        <div class="arch__col"><div class="lb">사용자 화면</div><div class="node">웹 화면<small>서버가 직접 그려 보내는 방식</small></div></div>
-        <div class="arch__col"><div class="lb">신원 확인</div><div class="node">로그인 검증<small>본인 확인 · 권한</small></div></div>
-        <div class="arch__col"><div class="lb">기능</div><div class="node mine">상품<small>등록 · 권한 · 검색</small></div><div class="node mine">장바구니<small>담은 가격 유지</small></div><div class="node">주문 · 관리자</div><div class="node">게시판 · 알림</div></div>
-        <div class="arch__col"><div class="lb">저장 · 외부</div><div class="node">데이터베이스</div><div class="node mine">AI<small>사진 분석</small></div><div class="node mine">지도 서비스</div><div class="node">클라우드 서버</div></div>
-      </div>
-      <p class="mono" style="margin-top:12px;color:var(--ink3)">색이 들어간 칸이 제가 맡은 상품·장바구니 기능입니다. 주문·결제부터는 다른 팀원이 이어받았습니다.</p>
+      <p class="role-lead">실제 코드가 기능별로 나뉘어 있는 패키지 구조입니다. 색이 들어간 줄이 제가 맡은 부분입니다.</p>
+      <div class="tree"><span class="d">src/main/java/com/example/potatochip</span>
+├─ <span class="me">product</span>       <span class="cmt"># 상품 등록·수정, 판매자 확인, 검색</span>
+├─ <span class="me">cart</span>          <span class="cmt"># 장바구니, 현재가 계산</span>
+├─ order         <span class="cmt"># 주문·결제, 재고 차감</span>
+├─ auth          <span class="cmt"># 로그인, 권한</span>
+├─ admin         <span class="cmt"># 관리자 (회원·상품 관리)</span>
+└─ notification  <span class="cmt"># 알림</span></div>
     </section>
 
     <section class="dp-sec rv">
-      <h2>상품 등록과 검색</h2>
-      <p class="role-lead">농가가 상품을 올리고, 구매자가 원하는 조건으로 찾아 들어오는 구간입니다.</p>
-      <div class="flow">
-        <span class="step">사진 올리기</span><span class="ar">›</span>
-        <span class="step"><b>AI가 제목·설명 초안</b> 작성</span><span class="ar">›</span>
-        <span class="step">판매자 확인 후 등록</span><span class="ar">›</span>
-        <span class="step">카테고리·검색어로 찾기</span><span class="ar">›</span>
-        <span class="step">수령 위치 지도</span>
-      </div>
-      <ul class="role-list" style="margin-top:20px">
-        <li>판매자 대부분이 농가라, 상품 설명을 쓰는 단계에서 등록을 포기하는 경우가 많았습니다. 사진만 올리면 <b>AI가 사진을 보고 제목과 설명 초안</b>을 채워 주고, 판매자는 확인하고 고치기만 하면 되도록 만들었습니다.</li>
-        <li>AI가 쓴 글은 <b>초안일 뿐</b>이라 바로 저장하지 않고 입력창에 채워만 둡니다. 판매자가 고친 내용이 항상 우선입니다.</li>
-        <li><b>본인 상품만 수정·삭제</b>할 수 있게 막았습니다. 화면에서 보내오는 "나는 판매자다"라는 정보는 조작될 수 있어 믿지 않고, <b>로그인한 사람과 저장된 상품 주인을 서버에서 직접 대조</b>합니다. "판매자인가"와 "이 상품의 주인인가"는 다른 질문이라 두 가지를 따로 검사합니다.</li>
-        <li>구매자는 작물 종류와 산지로 찾는 경우가 많아, 카테고리와 검색어를 함께 걸 수 있는 필터를 만들었습니다.</li>
-        <li>직접 찾아가 받는 거래가 많아 <b>지도 서비스</b>를 연결해 상품별 수령 위치를 지도로 보여 줍니다.</li>
-        <li>화면 수가 많지 않고 검색 포털에 잘 노출돼야 해서, <b>서버가 화면을 직접 그려 보내는 방식</b>을 골랐습니다.</li>
-      </ul>
-      <h3 class="sub">확인한 것과 남은 한계</h3>
-      <ul class="role-list">
-        <li><b>확인 방법</b> 위에 있는 테스트 계정으로 로그인해 다른 판매자의 상품을 고치려고 하면 서버가 거부합니다.</li>
-        <li><b>미검증</b> 비로그인 상태나 관리자 계정까지 포함한 모든 경우를 자동 테스트로 고정해 두지는 않았습니다. 다음 과제입니다.</li>
-        <li><b>한계</b> AI 초안 만들기가 실패하면 빈 입력창이 뜨는데, 다시 시도하라는 안내는 넣지 않았습니다.</li>
-      </ul>
-    </section>
-
-    <section class="dp-sec rv">
-      <h2>장바구니 — 담아 둔 금액이 바뀌던 문제</h2>
+      <span class="dp-eyebrow">Trouble Shooting 01</span>
+      <h2>재고보다 많은 주문이 성립하는 문제</h2>
       <div class="star">
-        <div class="star__i"><span class="k">상황</span><p>장바구니가 상품의 <b>현재 가격을 그때그때 가져오는</b> 방식이었습니다. 그래서 구매자가 담아 둔 사이에 판매자가 가격을 올리면, <b>장바구니에서 본 금액과 실제 결제 금액이 달라졌습니다.</b></p></div>
-        <div class="star__i"><span class="k">해결</span><p>장바구니에 담는 순간의 가격을 <b>사진 찍듯 따로 저장</b>해 두고, 합계와 주문 금액을 모두 그 값으로 계산하게 바꿨습니다.</p></div>
-        <div class="star__i res"><span class="k">결과</span><p>판매자가 가격을 바꿔도 이미 담긴 상품의 금액은 그대로입니다. 장바구니에 보이는 금액과 <b>결제 단계로 넘어가는 금액이 어긋나지 않습니다.</b></p></div>
+        <div class="star__i"><span class="k">문제</span><p>재고를 확인한 뒤 차감하는 두 단계 구조라, 주문이 몰리면 여러 요청이 같은 재고를 보고 각자 차감했습니다. 재고 차감 로직만 떼어 2,000건을 동시에 요청하니 <b>1,722건이 초과 판매</b>됐습니다.</p></div>
+        <div class="star__i"><span class="k">해결</span><p>재고 차감을 "재고가 있을 때만 빼라"는 <b>조건부 UPDATE 한 번</b>으로 바꾸고, 바뀐 행이 0개면 주문을 취소했습니다. 실제 주문 흐름에서 같은 상품 동시 주문 200건으로 다시 테스트하니 180건이 DB 충돌 오류로 실패해, 주문 메서드의 격리 수준을 <b>READ COMMITTED</b>로 바꿨습니다. 이때 덮어쓰기 위험이 생긴 포인트·쿠폰도 조건부 UPDATE로 바꿨습니다.</p></div>
+        <div class="star__i res"><span class="k">결과</span><p>초과 판매가 <b>1,722건에서 0건</b>이 됐고, 동시 주문 <b>200건이 모두 성공</b>했습니다.</p></div>
       </div>
-      <h3 class="sub">구현 상세</h3>
-      <div class="flow">
-        <span class="step">장바구니에 담기</span><span class="ar">›</span>
-        <span class="step"><b>그 시점 가격</b> 따로 저장</span><span class="ar">›</span>
-        <span class="step">합계 금액 계산</span><span class="ar">›</span>
-        <span class="step">주문 단계로 전달</span>
-      </div>
-      <ul class="role-list" style="margin-top:20px">
-        <li>상품 가격을 그때그때 불러오면 변경에 그대로 끌려갑니다. 그래서 장바구니 항목이 <b>담은 시점의 금액을 자기가 직접 들고 있도록</b> 만들었습니다.</li>
-        <li>제 작업 범위는 <b>장바구니 합계 계산까지</b>이고, 이후 주문·결제는 이 저장된 금액을 그대로 받아 쓰도록 형식을 맞춰 넘겼습니다. 구조는 팀과 함께 정하고, 실제 구현은 제가 했습니다.</li>
-        <li>합계 금액은 <b>서버에서 다시 계산</b>합니다. 화면에서 보내온 금액을 그대로 믿으면 값을 조작해 싸게 살 수 있기 때문입니다.</li>
-      </ul>
+      <h3 class="sub">Trade-off</h3>
+      <p class="role-lead" style="margin-bottom:14px">초과 판매 0건이 전제이고, 그 안에서 재고가 남았는데 거절되는 주문이 없는지와 처리량을 봤습니다. 세 방식은 같은 조건(로컬 MariaDB, 2,000건을 스레드 50개로, 3회 중앙값)에서 비교했습니다.</p>
+      <ol class="tro">
+        <li><span class="mk">1</span><div><div class="h"><span class="no">X</span>낙관적 락 (버전 비교 + 재시도)</div><p>초과 판매는 막지만 재시도가 폭증해, <b>재고가 남았는데도 366건이 실패</b>합니다.</p></div></li>
+        <li><span class="mk">2</span><div><div class="h"><span class="no">X</span>비관적 락</div><p>초과 판매는 없지만 뒤 요청이 잠금을 기다려 <b>192건/초로 느려집니다.</b></p></div></li>
+        <li class="pick"><span class="mk">3</span><div><div class="h"><span class="yes">O</span>조건부 UPDATE</div><p>확인과 차감이 쿼리 한 번이라 <b>초과 판매 0건, 300건/초로 가장 빠릅니다.</b></p></div></li>
+      </ol>
       <h3 class="sub">남은 한계</h3>
       <ul class="role-list">
-        <li><b>정책 미정</b> 장바구니에 몇 달씩 담겨 있던 상품의 가격을 언제까지 지켜 줄지, 품절된 상품을 주문 단계에서 어떻게 처리할지는 아직 정하지 않았습니다. 저장한 금액에 유효기간을 두는 방향으로 검토 중입니다.</li>
-        <li><b>한계</b> 가격이 바뀌었다는 표시가 없어, 담아 둔 금액과 지금 판매가가 다르다는 사실이 구매자에게 보이지 않습니다.</li>
+        <li>같은 상품에 주문이 몰리면 차례를 기다리는 시간은 남습니다.</li>
       </ul>
     </section>
 
     <section class="dp-sec rv">
-      <h2>팀 리딩 — 코드가 사라지던 문제</h2>
+      <span class="dp-eyebrow">Trouble Shooting 02</span>
+      <h2>주문할수록 결제가 느려지는 문제</h2>
       <div class="star">
-        <div class="star__i"><span class="k">상황</span><p>여러 명이 같은 프로젝트를 고칠 때는 각자 <b>복사본에서 작업한 뒤 원본에 합칩니다.</b> 그런데 팀원들이 기능을 다 끝낼 때까지 합치지 않고 미뤘습니다. 오래 들고 있던 작업이 한꺼번에 올라오니 <b>같은 파일을 서로 다르게 고친 충돌이 대량으로 났고</b>, 급하게 정리하다 <b>다른 팀원의 코드가 덮여 사라지는 일</b>까지 있었습니다.</p></div>
-        <div class="star__i"><span class="k">해결</span><p>합치는 단위를 <b>기능 하나 크기로 잘게 쪼개고</b>, 작업을 시작하기 전과 합치기 직전에 <b>원본의 최신 내용을 먼저 받아 오도록</b> 규칙을 세웠습니다. 여러 명이 함께 건드리는 파일은 담당자를 정해 한 사람에게 모으고, 올라온 요청은 <b>그날 안에 확인하고 합쳐</b> 작업이 오래 묵지 않게 했습니다.</p></div>
-        <div class="star__i res"><span class="k">결과</span><p>충돌이 마지막에 몰리지 않고 <b>각자 작업하는 중에 미리 드러나</b> 푸는 시간이 줄었고, 합친 뒤 기능이 사라지는 사고도 없어졌습니다. 이후 프로젝트에도 같은 방식을 그대로 썼습니다.</p></div>
+        <div class="star__i"><span class="k">문제</span><p>주문 1건마다 판매 랭킹 전체를 다시 계산했습니다. 팔린 상품이 300개면 <b>주문 1건에 1.2초(쿼리 918개)</b>가 걸렸습니다.</p></div>
+        <div class="star__i"><span class="k">해결</span><p>랭킹 계산을 주문 처리에서 빼고, <b>@Scheduled</b>로 이전 계산이 끝난 뒤 1분 간격으로 다시 계산하게 했습니다.</p></div>
+        <div class="star__i res"><span class="k">결과</span><p>주문 1건 처리 시간이 <b>1,240ms에서 49ms</b>로(쿼리 918개 → 13개), 동시 주문 처리량이 <b>초당 2.3건에서 41.2건</b>으로 늘었습니다.</p></div>
       </div>
-      <h3 class="sub">구현 상세</h3>
+      <h3 class="sub">Trade-off</h3>
+      <p class="role-lead" style="margin-bottom:14px">랭킹은 참고 정보라 조금 늦어도 되지만 주문은 느려지면 안 됩니다. 그래서 주문 처리에서 랭킹 계산을 완전히 떼어낼 수 있는지를 봤습니다.</p>
+      <ol class="tro">
+        <li><span class="mk">1</span><div><div class="h"><span class="no">X</span>주문 시 판매 수 +1</div><p>주문 처리에 쓰기가 남고, <b>기간 지난 판매 빼기와 취소 반영</b>을 따로 만들어야 합니다.</p></div></li>
+        <li><span class="mk">2</span><div><div class="h"><span class="no">X</span>주문 후 비동기 계산</div><p>응답은 빨라지지만 <b>주문마다 전체를 다시 계산하는 부하</b>는 그대로입니다.</p></div></li>
+        <li class="pick"><span class="mk">3</span><div><div class="h"><span class="yes">O</span>주기적 계산</div><p>주문과 완전히 분리되고, 계산은 <b>주문 수와 상관없이 1분에 한 번</b>입니다.</p></div></li>
+      </ol>
+      <h3 class="sub">감수한 것</h3>
       <ul class="role-list">
-        <li>기능 하나마다 작업 공간을 따로 만들고, 원본에는 <b>확인 요청을 거쳐야만</b> 합칠 수 있게 했습니다.</li>
-        <li>합치기 전에 최신 내용을 먼저 받아 오게 해서, 충돌은 <b>확인하는 사람이 아니라 코드를 쓴 본인이</b> 자기 작업 공간에서 풀도록 했습니다.</li>
-        <li>여러 명이 건드리는 공통 파일은 담당자 한 명에게 변경을 모으고, 5인의 일정과 진행 상황을 문서로 공유하며 기능별 담당을 나눴습니다.</li>
+        <li>랭킹이 최대 1분 남짓 늦게 반영됩니다. 랭킹은 실시간일 필요가 없다고 판단했습니다.</li>
       </ul>
-      <h3 class="sub">배포 — 어디까지 했는지</h3>
+    </section>
+
+    <section class="dp-sec rv">
+      <span class="dp-eyebrow">Trouble Shooting 03</span>
+      <h2>할인이 끝나도 할인가로 팔리는 문제</h2>
+      <div class="star">
+        <div class="star__i"><span class="k">문제</span><p>할인 기간을 확인하지 않아 <b>끝난 할인도 할인가로</b> 팔렸습니다. 장바구니는 담을 때 가격으로 고정돼 있어, 담은 뒤 시작된 할인이 반영되지 않았습니다.</p></div>
+        <div class="star__i"><span class="k">해결</span><p>"오늘이 할인 기간인가"를 판단하는 <b>currentPrice() 하나</b>를 만들고, 장바구니·주문·상품 화면이 모두 이 메서드를 쓰도록 바꿨습니다. 가격 정렬 쿼리에도 같은 기간 조건을 넣었고, 서버가 UTC 기준이라 날짜가 최대 9시간 어긋나서 <b>한국 시간 기준으로 고정</b>했습니다.</p></div>
+        <div class="star__i res"><span class="k">결과</span><p>할인 전·중·후, 종료일 당일, 할인가 미설정 등 가격 계산 규칙을 <b>단위 테스트 7개</b>로 검증했습니다.</p></div>
+      </div>
+      <h3 class="sub">Trade-off</h3>
+      <p class="role-lead" style="margin-bottom:14px">가격은 장바구니·주문·상품 화면·정렬에서 모두 쓰이므로 같은 시각엔 어디서 보든 같은 가격이어야 했습니다.</p>
+      <ol class="tro">
+        <li><span class="mk">1</span><div><div class="h"><span class="no">X</span>담을 때 가격 고정</div><p>담은 뒤 시작된 할인은 빠지고, <b>끝난 할인은 그대로 적용</b>됩니다.</p></div></li>
+        <li><span class="mk">2</span><div><div class="h"><span class="no">X</span>할인 시작·종료일에 가격 변경 예약 작업</div><p>작업이 늦거나 실패하면 <b>틀린 가격이 남고</b>, 알아채기도 어렵습니다.</p></div></li>
+        <li class="pick"><span class="mk">3</span><div><div class="h"><span class="yes">O</span>필요할 때 계산</div><p>저장해 둔 가격이 없어 <b>어긋날 일이 없습니다.</b> 대신 조회할 때마다 기간을 비교합니다.</p></div></li>
+      </ol>
+      <h3 class="sub">남은 한계</h3>
       <ul class="role-list">
-        <li>상품 사진은 개발 중에는 내 컴퓨터에, 실제 서비스에서는 <b>아마존 파일 보관소(S3)</b>에 저장하도록 나눴습니다. 서버 안에 직접 보관하면 서버를 다시 띄울 때 사진이 사라지거나, 서버가 여러 대일 때 서로 보이지 않기 때문입니다.</li>
-        <li>프로그램과 실행 환경을 통째로 묶어(Docker) 클라우드 서버 한 대에 올렸습니다. <b>서버 1대 운영</b>이며, 접속이 몰릴 때 여러 대로 나눠 받는 구성은 적용하지 않았습니다.</li>
-        <li><b>미측정</b> 서버 1대가 몇 명까지 감당하는지 재 보지 않아, 언제 서버를 늘려야 할지는 아직 판단하지 않았습니다.</li>
+        <li>정렬 쿼리에도 같은 규칙이 있어서, 규칙을 바꾸면 코드와 쿼리 두 곳을 고쳐야 합니다.</li>
+      </ul>
+    </section>
+
+    <section class="dp-sec rv">
+      <h2>팀 리딩 — 작은 PR 규칙으로 충돌을 푼 경험</h2>
+      <div class="star">
+        <div class="star__i"><span class="k">상황</span><p>팀원들이 각자 작업을 오래 쌓아 두었다가 한 번에 큰 PR로 올리다 보니, 그사이 develop에 반영된 변경과 <b>충돌이 겹겹이 쌓였습니다.</b> 충돌을 푸는 시간이 기능 개발 시간을 넘어서기 시작했고, 누가 어떤 기능을 어디까지 만들었는지도 파악하기 어려웠습니다.</p></div>
+        <div class="star__i"><span class="k">해결</span><p>원인이 브랜치 전략이 아니라 <b>PR의 크기와 시점</b>에 있다고 판단했습니다. 기능 단위를 잘게 나눠 작업이 끝나는 즉시 PR을 올리고, 작업 전에는 반드시 develop을 최신화한 뒤 브랜치를 만들도록 규칙을 정했고, 제가 먼저 작은 단위로 PR을 올려 기준을 보여줬습니다.</p></div>
+        <div class="star__i res"><span class="k">결과</span><p>충돌이 생겨도 PR 하나 크기 안에서 바로 풀 수 있었고, 팀은 기간 안에 기능을 합쳐 배포까지 마쳤습니다. 저장소에 남은 <b>55개 PR 가운데 35개</b>를 제가 머지했습니다.</p></div>
+      </div>
+      <h3 class="sub">돌아보며</h3>
+      <ul class="role-list">
+        <li>규칙을 정하고 제 몫을 하는 데서 멈췄고, 왜 안 올라오는지 물어보고 막힌 곳을 같이 푸는 일은 거의 못 했습니다. 다시 한다면 PR을 올리라고 말하기 전에 <b>뭐가 막혔는지부터 묻겠습니다.</b></li>
+      </ul>
+    </section>
+
+    <section class="dp-sec rv">
+      <h2>배포</h2>
+      <ul class="role-list">
+        <li>파일 저장을 <b>인터페이스로 분리</b>해 개발 환경은 로컬 디스크, 운영 환경은 S3를 쓰도록 했습니다.</li>
+        <li>Docker와 nginx로 AWS EC2에 배포했습니다.</li>
       </ul>
     </section>
 
@@ -165,7 +176,7 @@
     <section class="dp-sec rv">
       <h2>사용한 기술</h2>
       <div class="dp-tags">
-        <span class="tag">Java</span><span class="tag">Spring Boot</span><span class="tag">Spring AI</span><span class="tag">LLM Vision 이미지 분석</span><span class="tag">Spring Data JPA</span><span class="tag">Thymeleaf</span><span class="tag">MariaDB</span><span class="tag">Kakao Map API</span><span class="tag">AWS EC2</span><span class="tag">Docker</span>
+        <span class="tag">Java</span><span class="tag">Spring Boot</span><span class="tag">Spring Security</span><span class="tag">Spring Data JPA</span><span class="tag">MariaDB</span><span class="tag">Docker</span><span class="tag">AWS EC2</span><span class="tag">S3</span><span class="tag">nginx</span>
       </div>
       <div class="dp-links">
         <a class="btn btn--p" href="https://github.com/Jihwan0210/PotatoChip" target="_blank" rel="noopener">Repository 보기</a>
